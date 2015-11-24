@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Example Title</title>
+</h:head>
+<h:body>
+
+	<h:dataTable value="#{carBean.getAllCars()}" var="car">
+		<h:column>
+			<f:facet name="header">Model</f:facet>
+			<h:outputText value="#{car.model}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">Vehicle Type</f:facet>
+			<h:outputText value="#{car.vehicleType}" />
+		</h:column>
+
+	</h:dataTable>
+</h:body>
+</html>
