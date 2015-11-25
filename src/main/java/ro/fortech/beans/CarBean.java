@@ -1,5 +1,6 @@
 package ro.fortech.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -16,7 +17,7 @@ public class CarBean {
 	@Inject 
 	private CarService carService;
 	
-	private List<Car> cars;
+	private List<Car> cars ;
 	
 	public List<Car> getAllCars(){
 		return carService.getCars();
