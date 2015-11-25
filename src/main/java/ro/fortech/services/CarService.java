@@ -10,7 +10,7 @@ import ro.fortech.model.Car;
 @Stateless
 public class CarService {
 
-	
+	private List<Car> cars = new ArrayList<>();
 
 	public List<Car> getCars() {
 		return initCarList();
@@ -18,7 +18,7 @@ public class CarService {
 
 	
 	private List<Car> initCarList(){
-		List<Car> cars = new ArrayList<Car>();
+		
 		Car car = new Car();
 		car.setCarLocation("Germania");
 		car.setCarPrice(3000);
