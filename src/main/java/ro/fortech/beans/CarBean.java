@@ -16,8 +16,19 @@ public class CarBean {
 	@Inject 
 	private CarService carService;
 	
+	private List<Car> cars;
+	
 	public List<Car> getAllCars(){
 		return carService.getCars();
+	}
+
+	public List<Car> getCars() {
+		cars=carService.getCars();
+		return cars;
+	}
+
+	public void setCars(List<Car> cars) {
+		this.cars = cars;
 	}
 	
 }

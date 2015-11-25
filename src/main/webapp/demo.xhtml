@@ -9,7 +9,7 @@
 </h:head>
 <h:body>
 
-	<h:dataTable value="#{carBean.getAllCars()}" var="car">
+	<h:dataTable value="#{carBean.cars}" var="car">
 		<h:column>
 			<f:facet name="header">Model</f:facet>
 			<h:outputText value="#{car.model}" />
