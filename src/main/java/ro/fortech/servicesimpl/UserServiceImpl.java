@@ -42,5 +42,29 @@ public class UserServiceImpl implements UserService{
 		users.add(user1);
 		users.add(user2);
 	}
+
+	@Override
+	public User getCar(int idUser) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(int idUser) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(User car) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void insert(User car) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
