@@ -17,35 +17,42 @@ public class UserBean {
 
 	@Inject
 	private UserService userService;
-	
+
 	private boolean isUsernameValid;
 	private boolean isPasswordValid;
 	private boolean validationComplete;
-	
+
 	public String checkIfUserPresent(String username, String password) {
 		List<User> users = userService.getUsers();
 		for (User user : users) {
 			if (user.getUsername().equals(username)) {
 				this.isUsernameValid = true;
-				if(user.getPassword().equals(password)){
-					this.isPasswordValid = true;	
-				}	
+				if (user.getPassword().equals(password)) {
+					this.isPasswordValid = true;
+				}
+			} else if (user.getPassword().equals(password)) {
+				this.isPasswordValid = true;
+				if (user.getUsername().equals(username)) {
+					this.isUsernameValid = true;
+				}
 			}
-			
+
 		}
-		
-		if(!isUsernameValid){
-			FacesContext.getCurrentInstance().addMessage("myform:username", new FacesMessage("Invalid", "Invalid Username"));
+
+		if (!isUsernameValid) {
+			FacesContext.getCurrentInstance().addMessage("myform:username",
+					new FacesMessage("Invalid", "Invalid Username"));
 		}
-		if(!isPasswordValid){
-			FacesContext.getCurrentInstance().addMessage("myform:password", new FacesMessage("Invalid", "Invalid Password"));	
+		if (!isPasswordValid) {
+			FacesContext.getCurrentInstance().addMessage("myform:password",
+					new FacesMessage("Invalid", "Invalid Password"));
 		}
-		
-		if(isUsernameValid && isPasswordValid){
+
+		if (isUsernameValid && isPasswordValid) {
 			this.validationComplete = true;
 			return "index";
 		}
-		
+
 		return "login";
 	}
 
