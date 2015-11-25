@@ -1,5 +1,6 @@
 package ro.fortech.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -9,7 +10,7 @@ import ro.fortech.model.User;
 @Stateless
 public class UserService {
 
-	private List<User> users;
+	private List<User> users = new ArrayList<>();
 
 	public List<User> getUsers() {
 		initUserList();
