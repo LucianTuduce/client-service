@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html   xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://xmlns.jcp.org/jsf/passthrough" 
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:b="http://bootsfaces.net/ui">
 <h:head>
 	<!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> -->
@@ -18,21 +18,82 @@
 	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-		<script type="text/javascript" src="resources/js/app.js"></script>
-	
+	<script type="text/javascript"
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+	<script type="text/javascript" src="resources/js/app.js"></script>
+
 </h:head>
 <h:body p:ng-app="login">
 
-	<div ng-include="'header.html'"></div>
+	<!-- 	<div ng-include="'header.html'"></div> -->
 
+	<div>
 
-	<div class="container sign-in-up">
-		
-		
+		<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><img class="site-logo"
+					alt="website logo" src="resources/logo.jpg" /></a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a href="#">Link1 <span class="sr-only">(current)</span></a></li>
+					<li><a href="#">Link2</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">Dropdown <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="#">Separated link</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="#">One more separated link</a></li>
+						</ul></li>
+
+					<li><a href="#">Link3</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">Dropdown <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="#">Separated flink</a></li>
+						</ul></li>
+				</ul>
+				<!-- Search the site -->
+				<ul class="nav navbar-nav navbar-right">
+					<form class="navbar-form" role="search">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search" />
+						</div>
+
+						<button type="submit" class="btn btn-default">Submit</button>
+					</form>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid --> </nav>
+
 	</div>
 
 
-	
+	<div class="container sign-in-up"></div>
+
+
+
 </h:body>
 </html>
