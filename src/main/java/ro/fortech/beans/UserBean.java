@@ -29,11 +29,13 @@ public class UserBean {
 				this.isUsernameValid = true;
 				if (user.getPassword().equals(password)) {
 					this.isPasswordValid = true;
+					break;
 				}
 			} else if (user.getPassword().equals(password)) {
 				this.isPasswordValid = true;
 				if (user.getUsername().equals(username)) {
 					this.isUsernameValid = true;
+					break;
 				}
 			}
 
