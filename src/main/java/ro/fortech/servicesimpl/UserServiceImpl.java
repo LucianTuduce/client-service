@@ -56,13 +56,13 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void update(User car) {
+	public void update(User user) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void insert(User car) {
+	public void insert(User user) {
 		// TODO Auto-generated method stub
 		
 	}
