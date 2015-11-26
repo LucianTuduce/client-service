@@ -5,8 +5,25 @@
 }
 
 .navbar-brand {
-	padding: 0px 0px;
+	padding-top: 5px;
 }
+
+
+@media (min-width: 768px)
+{
+.navbar-nav>li>a {
+padding-top: 5px;
+}
+}
+
+@media (max-width: 767px)
+{
+.navbar-nav>li>a {
+padding-top: 5px;
+max-width: 150px;
+}
+}
+
 
 .dropdown-submenu {
     position:relative;
