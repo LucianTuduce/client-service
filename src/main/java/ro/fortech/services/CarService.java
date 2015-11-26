@@ -13,5 +13,5 @@ public interface CarService {
 	
 	public void update(Car car);
 	
-	public void insert(Car car);
+	public void saveCar(Car car);
 }
