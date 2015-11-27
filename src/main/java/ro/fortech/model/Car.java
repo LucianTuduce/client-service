@@ -9,7 +9,7 @@ public class Car {
 	private int carYear;
 	private String carLocation;
 	private int carPrice;
-	
+	private String vin;
 	
 	public String getVehicleType() {
 		return vehicleType;
@@ -52,6 +52,12 @@ public class Car {
 	}
 	public void setCarPrice(int carPrice) {
 		this.carPrice = carPrice;
+	}
+	public String getVin() {
+		return vin;
+	}
+	public void setVin(String vin) {
+		this.vin = vin;
 	}
 	
 }

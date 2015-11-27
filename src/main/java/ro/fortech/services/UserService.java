@@ -11,8 +11,8 @@ public interface UserService {
 
 	public void delete(int idUser);
 
-	public void update(User car);
+	public void update(User user);
 
-	public void insert(User car);
+	public void insert(User user);
 
 }
