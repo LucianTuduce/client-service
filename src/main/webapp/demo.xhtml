@@ -8,18 +8,23 @@
 	<title>Example Title</title>
 </h:head>
 <h:body>
+	<h:form>
 
-	<h:dataTable value="#{carBean.cars}" var="car">
-		<h:column>
-			<f:facet name="header">Model</f:facet>
-			<h:outputText value="#{car.model}" />
-		</h:column>
+		<h:dataTable value="#{vehicleBean.cars}" var="car">
 
-		<h:column>
-			<f:facet name="header">Vehicle Type</f:facet>
-			<h:outputText value="#{car.vehicleType}" />
-		</h:column>
+			<h:column>
+				<f:facet name="header">Model</f:facet>
+				<h:outputText value="#{car.model}" />
+			</h:column>
 
-	</h:dataTable>
+			<h:column>
+				<f:facet name="header">Vehicle Type</f:facet>
+				<h:outputText value="#{car.vehicleType}" />
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
+
+
 </h:body>
 </html>
