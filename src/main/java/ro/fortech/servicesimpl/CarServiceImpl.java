@@ -13,13 +13,13 @@ import ro.fortech.services.CarService;
 public class CarServiceImpl implements CarService{
 
 	@Override
-	public List<Car> getCars() {
+	public List<Vehicle> getCars() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Car getCar(int idCar) {
+	public Vehicle getCar(int idCar) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -31,14 +31,13 @@ public class CarServiceImpl implements CarService{
 	}
 
 	@Override
-	public void update(Car car) {
+	public void update(Vehicle car) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-//	@EJB(beanName = "CarServiceImpl")
-	public void saveCar(Car car) {
+	public void saveCar(Vehicle car) {
 		// TODO Auto-generated method stub
 		
 	}
