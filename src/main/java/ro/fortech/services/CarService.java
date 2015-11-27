@@ -2,16 +2,16 @@ package ro.fortech.services;
 
 import java.util.List;
 
-import ro.fortech.model.Car;
+import ro.fortech.model.Vehicle;
 
 public interface CarService {
-	public List<Car> getCars();
+	public List<Vehicle> getCars();
 	
-	public Car getCar(int idCar);
+	public Vehicle getCar(int idCar);
 	
 	public void delete(int idCar);
 	
-	public void update(Car car);
+	public void update(Vehicle car);
 	
-	public void saveCar(Car car);
+	public void saveCar(Vehicle car);
 }

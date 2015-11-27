@@ -2,19 +2,19 @@ package ro.fortech.servicesimpl;
 
 import java.util.List;
 
-import ro.fortech.model.Car;
+import ro.fortech.model.Vehicle;
 import ro.fortech.services.CarService;
 
 public class CarServiceImpl implements CarService{
 
 	@Override
-	public List<Car> getCars() {
+	public List<Vehicle> getCars() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Car getCar(int idCar) {
+	public Vehicle getCar(int idCar) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -26,13 +26,13 @@ public class CarServiceImpl implements CarService{
 	}
 
 	@Override
-	public void update(Car car) {
+	public void update(Vehicle car) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void saveCar(Car car) {
+	public void saveCar(Vehicle car) {
 		// TODO Auto-generated method stub
 		
 	}

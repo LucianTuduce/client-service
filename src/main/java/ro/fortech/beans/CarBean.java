@@ -5,29 +5,31 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
-import ro.fortech.model.Car;
+import ro.fortech.model.Vehicle;
 import ro.fortech.services.CarService;
 
 @ManagedBean
 @RequestScoped
 public class CarBean {
 
-	@Inject 
+	@Inject
+	@Named("fakeCar")
 	private CarService carService;
 	
-	private List<Car> cars ;
+	private List<Vehicle> cars ;
 	
-	public List<Car> getAllCars(){
+	public List<Vehicle> getAllCars(){
 		return carService.getCars();
 	}
 
-	public List<Car> getCars() {
+	public List<Vehicle> getCars() {
 		cars=carService.getCars();
 		return cars;
 	}
 
-	public void setCars(List<Car> cars) {
+	public void setCars(List<Vehicle> cars) {
 		this.cars = cars;
 	}
 	
