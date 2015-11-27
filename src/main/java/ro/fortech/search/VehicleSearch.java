@@ -1,12 +1,13 @@
 package ro.fortech.search;
 
+import ro.fortech.type.FuelType;
 import ro.fortech.type.VehicleType;
 
 public class VehicleSearch {
 
 	private String fin;
 	private String model;
-	private String fuelType;
+	private FuelType fuelType;
 	private int minCapacity;
 	private int maxCapacity;
 	private int minYear;
@@ -29,12 +30,7 @@ public class VehicleSearch {
 	public void setModel(String model) {
 		this.model = model;
 	}
-	public String getFuelType() {
-		return fuelType;
-	}
-	public void setFuelType(String fuelType) {
-		this.fuelType = fuelType;
-	}
+	
 	public int getMinCapacity() {
 		return minCapacity;
 	}
@@ -82,6 +78,12 @@ public class VehicleSearch {
 	}
 	public void setVehicleType(VehicleType vehicleType) {
 		this.vehicleType = vehicleType;
+	}
+	public FuelType getFuelType() {
+		return fuelType;
+	}
+	public void setFuelType(FuelType fuelType) {
+		this.fuelType = fuelType;
 	}
 	
 	

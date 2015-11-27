@@ -15,14 +15,10 @@ import ro.fortech.type.VehicleType;
 @Named("fakeVehicleServiceImpl")
 public class FakeVehicleServiceImpl implements VehicleService{
 
-	private List<Vehicle> Vehicles = new ArrayList<>();
-
-	public List<Vehicle> getVehicles() {
-		return initVehicleList();
-	}
 	
-	private List<Vehicle> initVehicleList(){
-		
+	@Override
+	public List<Vehicle> initVehicleList(){
+		List<Vehicle> vehicles = new ArrayList<>();
 		Vehicle vehicle = new Vehicle();
 		vehicle.setFin("GR3847UC32");
 		vehicle.setModel("Volskwagen Passat");
@@ -83,16 +79,36 @@ public class FakeVehicleServiceImpl implements VehicleService{
 		vehicle5.setPrice(73000);
 		vehicle5.setVehicleType(VehicleType.TRUCK);
 		
-		Vehicles.add(vehicle);
-		Vehicles.add(vehicle1);
-		Vehicles.add(vehicle2);
-		Vehicles.add(vehicle3);
-		Vehicles.add(vehicle4);
-		Vehicles.add(vehicle5);
-		return Vehicles;
+		vehicles.add(vehicle);
+		vehicles.add(vehicle1);
+		vehicles.add(vehicle2);
+		vehicles.add(vehicle3);
+		vehicles.add(vehicle4);
+		vehicles.add(vehicle5);
+		return vehicles;
 	}
 
 
+	@Override
+	public List<Vehicle> generateRandomVehicles(int vehicleCount){
+		Vehicle vehicle = null;
+		List<Vehicle> vehicles = new ArrayList<>();
+		for(int i=0;i<=vehicleCount;i++){
+			vehicle = new Vehicle();
+			vehicle.setFin("GR3847UC32"+i);
+			vehicle.setModel("Volskwagen Passat"+i);
+			vehicle.setFuelType(FuelType.DIESEL);
+			vehicle.setEngineCapacity(1990+i);
+			vehicle.setYear(2003+i);
+			vehicle.setLocation("Germania"+i);
+			vehicle.setPrice(3000+i);
+			vehicle.setVehicleType(VehicleType.CAR);
+			vehicles.add(vehicle);
+		}
+		
+		return vehicles;
+	}
+	
 	@Override
 	public Vehicle getVehicle(int idVehicle) {
 		// TODO Auto-generated method stub
@@ -116,6 +132,13 @@ public class FakeVehicleServiceImpl implements VehicleService{
 	@Override
 	public void saveVehicle(Vehicle Vehicle) {
 		System.out.println("Insert into fake DB successful");
+	}
+
+
+	@Override
+	public void setVehicles(List<Vehicle> vehicles) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
