@@ -4,14 +4,14 @@ import java.util.List;
 
 import ro.fortech.model.Vehicle;
 
-public interface CarService {
-	public List<Vehicle> getCars();
+public interface VehicleService {
+	public List<Vehicle> getVehicles();
 	
-	public Vehicle getCar(int idCar);
+	public Vehicle getVehicle(int idCar);
 	
 	public void delete(int idCar);
 	
 	public void update(Vehicle car);
 	
-	public void saveCar(Vehicle car);
+	public void saveVehicle(Vehicle car);
 }

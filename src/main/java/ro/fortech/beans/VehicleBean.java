@@ -8,40 +8,26 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import ro.fortech.model.Vehicle;
-import ro.fortech.services.CarService;
+import ro.fortech.services.VehicleService;
 
 @ManagedBean
 @RequestScoped
-public class CarBean {
+public class VehicleBean {
 
-<<<<<<< Upstream, based on origin/master
 	@Inject 
-	@Named("fakeCarServiceImpl")
-	private CarService fakeCarService;
-=======
-	@Inject
-	@Named("fakeCar")
-	private CarService carService;
->>>>>>> 1350786 Updated Car mdel class, created search class
+	@Named("fakeVehicleServiceImpl")
+	private VehicleService fakeCarService;
+
 	
 	private List<Vehicle> cars ;
 	
-<<<<<<< Upstream, based on origin/master
-	public List<Car> getAllCars(){
-		return fakeCarService.getCars();
-=======
+
 	public List<Vehicle> getAllCars(){
-		return carService.getCars();
->>>>>>> 1350786 Updated Car mdel class, created search class
+		return fakeCarService.getVehicles();
 	}
 
-<<<<<<< Upstream, based on origin/master
-	public List<Car> getCars() {
-		cars=fakeCarService.getCars();
-=======
 	public List<Vehicle> getCars() {
-		cars=carService.getCars();
->>>>>>> 1350786 Updated Car mdel class, created search class
+		cars=fakeCarService.getVehicles();
 		return cars;
 	}
 

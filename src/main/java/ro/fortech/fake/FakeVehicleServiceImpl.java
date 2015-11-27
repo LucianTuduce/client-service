@@ -6,115 +6,116 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 
-import ro.fortech.model.Car;
-import ro.fortech.services.CarService;
+import ro.fortech.model.Vehicle;
+import ro.fortech.services.VehicleService;
+import ro.fortech.type.FuelType;
+import ro.fortech.type.VehicleType;
 
 @Stateless
-@Named("fakeCarServiceImpl")
-public class FakeCarServiceImpl implements CarService{
+@Named("fakeVehicleServiceImpl")
+public class FakeVehicleServiceImpl implements VehicleService{
 
-	private List<Car> cars = new ArrayList<>();
+	private List<Vehicle> Vehicles = new ArrayList<>();
 
-	public List<Car> getCars() {
-		return initCarList();
+	public List<Vehicle> getVehicles() {
+		return initVehicleList();
 	}
 	
-	private List<Vehicle> initCarList(){
+	private List<Vehicle> initVehicleList(){
 		
-		Vehicle car = new Vehicle();
-		car.setFin("GR3847UC32");
-		car.setModel("Volskwagen Passat");
-		car.setFuelType(FuelType.DIESEL);
-		car.setEngineCapacity(1990);
-		car.setYear(2003);
-		car.setLocation("Germania");
-		car.setPrice(3000);
-		car.setVehicleType(VehicleType.CAR);
+		Vehicle vehicle = new Vehicle();
+		vehicle.setFin("GR3847UC32");
+		vehicle.setModel("Volskwagen Passat");
+		vehicle.setFuelType(FuelType.DIESEL);
+		vehicle.setEngineCapacity(1990);
+		vehicle.setYear(2003);
+		vehicle.setLocation("Germania");
+		vehicle.setPrice(3000);
+		vehicle.setVehicleType(VehicleType.CAR);
 		
-		Vehicle car1 = new Vehicle();
-		car1.setFin("RO5347UK34");
-		car1.setModel("Dacia Logan");
-		car1.setFuelType(FuelType.GASOLINE);
-		car1.setEngineCapacity(1400);
-		car1.setYear(2005);
-		car1.setLocation("Romania");
-		car1.setPrice(4500);
-		car1.setVehicleType(VehicleType.CAR);
+		Vehicle vehicle1 = new Vehicle();
+		vehicle1.setFin("RO5347UK34");
+		vehicle1.setModel("Dacia Logan");
+		vehicle1.setFuelType(FuelType.GASOLINE);
+		vehicle1.setEngineCapacity(1400);
+		vehicle1.setYear(2005);
+		vehicle1.setLocation("Romania");
+		vehicle1.setPrice(4500);
+		vehicle1.setVehicleType(VehicleType.CAR);
 		
-		Vehicle car2 = new Vehicle();
-		car2.setFin("RO3847UC32");
-		car2.setModel("Volskwagen Transporter");
-		car2.setFuelType(FuelType.DIESEL);
-		car2.setEngineCapacity(2500);
-		car2.setYear(2008);
-		car2.setLocation("Romania");
-		car2.setPrice(7450);
-		car2.setVehicleType(VehicleType.VAN);
+		Vehicle vehicle2 = new Vehicle();
+		vehicle2.setFin("RO3847UC32");
+		vehicle2.setModel("Volskwagen Transporter");
+		vehicle2.setFuelType(FuelType.DIESEL);
+		vehicle2.setEngineCapacity(2500);
+		vehicle2.setYear(2008);
+		vehicle2.setLocation("Romania");
+		vehicle2.setPrice(7450);
+		vehicle2.setVehicleType(VehicleType.VAN);
 		
-		Vehicle car3 = new Vehicle();
-		car3.setFin("GR7897FG56");
-		car3.setModel("Mercedes Sprinter");
-		car3.setFuelType(FuelType.DIESEL);
-		car3.setEngineCapacity(3100);
-		car3.setYear(2009);
-		car3.setLocation("Germania");
-		car3.setPrice(11560);
-		car3.setVehicleType(VehicleType.VAN);
+		Vehicle vehicle3 = new Vehicle();
+		vehicle3.setFin("GR7897FG56");
+		vehicle3.setModel("Mercedes Sprinter");
+		vehicle3.setFuelType(FuelType.DIESEL);
+		vehicle3.setEngineCapacity(3100);
+		vehicle3.setYear(2009);
+		vehicle3.setLocation("Germania");
+		vehicle3.setPrice(11560);
+		vehicle3.setVehicleType(VehicleType.VAN);
 		
-		Vehicle car4 = new Vehicle();
-		car4.setFin("RO3337PK21");
-		car4.setModel("Volvo Truck");
-		car4.setFuelType(FuelType.DIESEL);
-		car4.setEngineCapacity(5500);
-		car4.setYear(2013);
-		car4.setLocation("Romania");
-		car4.setPrice(53000);
-		car4.setVehicleType(VehicleType.TRUCK);
+		Vehicle vehicle4 = new Vehicle();
+		vehicle4.setFin("RO3337PK21");
+		vehicle4.setModel("Volvo Truck");
+		vehicle4.setFuelType(FuelType.DIESEL);
+		vehicle4.setEngineCapacity(5500);
+		vehicle4.setYear(2013);
+		vehicle4.setLocation("Romania");
+		vehicle4.setPrice(53000);
+		vehicle4.setVehicleType(VehicleType.TRUCK);
 		
-		Vehicle car5 = new Vehicle();
-		car5.setFin("GR8887PL90");
-		car5.setModel("Mercedes Truck");
-		car5.setFuelType(FuelType.DIESEL);
-		car5.setEngineCapacity(5700);
-		car5.setYear(2013);
-		car5.setLocation("Germania");
-		car5.setPrice(73000);
-		car5.setVehicleType(VehicleType.TRUCK);
+		Vehicle vehicle5 = new Vehicle();
+		vehicle5.setFin("GR8887PL90");
+		vehicle5.setModel("Mercedes Truck");
+		vehicle5.setFuelType(FuelType.DIESEL);
+		vehicle5.setEngineCapacity(5700);
+		vehicle5.setYear(2013);
+		vehicle5.setLocation("Germania");
+		vehicle5.setPrice(73000);
+		vehicle5.setVehicleType(VehicleType.TRUCK);
 		
-		cars.add(car);
-		cars.add(car1);
-		cars.add(car2);
-		cars.add(car3);
-		cars.add(car4);
-		cars.add(car5);
-		return cars;
+		Vehicles.add(vehicle);
+		Vehicles.add(vehicle1);
+		Vehicles.add(vehicle2);
+		Vehicles.add(vehicle3);
+		Vehicles.add(vehicle4);
+		Vehicles.add(vehicle5);
+		return Vehicles;
 	}
 
 
 	@Override
-	public Vehicle getCar(int idCar) {
+	public Vehicle getVehicle(int idVehicle) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
 	@Override
-	public void delete(int idCar) {
+	public void delete(int idVehicle) {
 		System.out.println("Delete from fake DB successful");
 		
 	}
 
 
 	@Override
-	public void update(Vehicle car) {
+	public void update(Vehicle Vehicle) {
 		System.out.println("Update into fake DB successful");
 		
 	}
 
 	@Override
-	public void saveCar(Vehicle car) {
+	public void saveVehicle(Vehicle Vehicle) {
 		System.out.println("Insert into fake DB successful");
 	}
-	
 	
 }
