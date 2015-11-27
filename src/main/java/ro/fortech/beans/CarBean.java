@@ -5,6 +5,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import ro.fortech.model.Car;
 import ro.fortech.services.CarService;
@@ -14,16 +15,17 @@ import ro.fortech.services.CarService;
 public class CarBean {
 
 	@Inject 
-	private CarService carService;
+	@Named("fakeCarServiceImpl")
+	private CarService fakeCarService;
 	
 	private List<Car> cars ;
 	
 	public List<Car> getAllCars(){
-		return carService.getCars();
+		return fakeCarService.getCars();
 	}
 
 	public List<Car> getCars() {
-		cars=carService.getCars();
+		cars=fakeCarService.getCars();
 		return cars;
 	}
 

@@ -2,9 +2,14 @@ package ro.fortech.servicesimpl;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.inject.Named;
+
 import ro.fortech.model.Car;
 import ro.fortech.services.CarService;
 
+@Stateless
+@Named("carServiceImpl")
 public class CarServiceImpl implements CarService{
 
 	@Override
@@ -32,6 +37,7 @@ public class CarServiceImpl implements CarService{
 	}
 
 	@Override
+//	@EJB(beanName = "CarServiceImpl")
 	public void saveCar(Car car) {
 		// TODO Auto-generated method stub
 		

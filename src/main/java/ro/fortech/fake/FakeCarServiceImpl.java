@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.inject.Named;
 
 import ro.fortech.model.Car;
 import ro.fortech.services.CarService;
 
 @Stateless
+@Named("fakeCarServiceImpl")
 public class FakeCarServiceImpl implements CarService{
 
 	private List<Car> cars = new ArrayList<>();
@@ -94,6 +96,7 @@ public class FakeCarServiceImpl implements CarService{
 	}
 
 	@Override
+//	@EJB(beanName = "FakeCarServiceImpl")
 	public void saveCar(Car car) {
 		System.out.println("Insert into fake DB successful");
 	}
