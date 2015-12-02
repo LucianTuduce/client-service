@@ -4,11 +4,10 @@
 
     <head>
         <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> -->
-        <title>My first JSF app</title>
+        <title>UVS Client - REST</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
         <link rel="stylesheet" href="resources/css/site.css" />
-        
     </head>
 
     <body>
@@ -20,18 +19,17 @@
                 <a class="navbar-brand text-center" href="index.xhtml"><span class="glyphicon glyphicon-home"></span><br/>Home</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="btn-group">
-                        <a id="VehicleType" href="#" class="btn dropdown-toggle text-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <li class="dropdown">
+                        <a id="VehicleType" href="#" class="dropdown-toggle text-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <span class="glyphicon glyphicon-home"></span><span class="caret"></span>
                             <br/>Vehicle Type
                         </a>
                         <ul id="VehicleChoice" class="dropdown-menu" data-toggle="buttons">
                             <li><a href="#">Personal</a></li>
                             <li><a href="#">Commercial</a></li>
-                            <li><a href="#">Truck</a></li>                            
+                            <li><a href="#">Truck</a></li>
                         </ul>
                     </li>
                     <li>
@@ -55,22 +53,23 @@
                 </ul>
                 <!-- Search the site -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Country/Language <span class="caret"></span></a>
-                        <ul class="dropdown-menu ">
-                            <li class="dropdown-submenu pull-left"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Romania</a>
-                                <ul class="dropdown-menu">
+                    <li class="dropdown"><a href="#" class="dropdown-toggle text-center" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> <b class="caret"></b><br/>Country/Language</a>  
+                        <ul class="dropdown-menu">
+                            <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Germany</a>
+                                <ul class="dropdown-menu dropdown-left location-choice">
+                                    <li><a href="#">German</a></li>
                                     <li><a href="#">English</a></li>
-                                    <li><a href="#">Romanian</a></li>
                                 </ul>
                             </li>
-                            <li class="dropdown-submenu "><a href="#" class="dropdown-toggle" data-toggle="dropdown">Germany</a>
-                                <ul class="dropdown-menu">
+                            <li class="divider"></li>
+                            <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Romania</a>
+                                <ul class="dropdown-menu dropdown-left location-choice ">
+                                    <li><a href="#">Romanian</a></li>
                                     <li><a href="#">English</a></li>
-                                    <li><a href="#">German</a></li>
                                 </ul>
                             </li>
                         </ul>
-                    </li>
+                    </li>                    
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -169,15 +168,10 @@
                 </tr>
             </table>
         </div>
-
-
-
-
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
         <script type="text/javascript" src="resources/js/app.js"></script>
-
     </body>
 
     </html>

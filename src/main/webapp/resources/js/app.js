@@ -1,5 +1,10 @@
 
+
+
+
+
 var VehicleTypeVar="";
+var CountryVar="";
 
 $("#VehicleChoice li a").click(function(){
   $("#VehicleType:first-child").html('<span class="glyphicon glyphicon-home"></span><span class="caret"></span><br/>'+$(this).text()); 
@@ -8,8 +13,17 @@ $("#VehicleChoice li a").click(function(){
 });
 
 
+$(".location-choice li a").click(function(){
+  $(".location-choice:first-child").html('<span class="glyphicon glyphicon-globe"></span><span class="caret"></span><br/>'+$(this).text()); 
+
+  VehicleTypeVar = $(this).text(); 
+});
+
+
 angular.module('UVSClient', [])
-    .controller('Main', function() {})
+    .controller('Header', function() {
+
+    })
 
 	.controller('CarSearchController', function($scope, $http) {
 	$scope.cars = [];
@@ -27,7 +41,7 @@ angular.module('UVSClient', [])
         	engineCapacityMax: $scope.CapacityMax,
         	yearMin: $scope.YearMin,
         	yearMax: $scope.YearMax,
-        	location: $scope.carLocation,
+        	location: $scope.CountryVar,
         	priceMin: $scope.PriceMin,
         	priceMax: $scope.PriceMax,
         	vehicleType: VehicleTypeVar
