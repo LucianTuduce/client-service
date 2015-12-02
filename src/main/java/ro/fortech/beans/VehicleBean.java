@@ -2,15 +2,13 @@ package ro.fortech.beans;
 
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import ro.fortech.model.Vehicle;
-import ro.fortech.search.VehicleSearch;
+import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.services.VehicleSearchService;
 import ro.fortech.services.VehicleService;
 import ro.fortech.type.FuelType;
