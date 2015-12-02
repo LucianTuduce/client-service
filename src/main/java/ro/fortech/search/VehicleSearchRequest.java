@@ -3,7 +3,12 @@ package ro.fortech.search;
 import ro.fortech.type.FuelType;
 import ro.fortech.type.VehicleType;
 
-public class VehicleSearch {
+/**
+ * Vehicle search model class. This class is used in order
+ * to filter the vehicles based on the class parameters. 
+ *
+ */
+public class VehicleSearchRequest {
 
 	private String fin;
 	private String model;
@@ -13,8 +18,8 @@ public class VehicleSearch {
 	private int minYear;
 	private int maxYear;
 	private String location;
-	private int priceMin;
-	private int priceMax;
+	private int minPrice;
+	private int maxPrice;
 	private VehicleType vehicleType;
 	
 	
@@ -61,17 +66,17 @@ public class VehicleSearch {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public int getPriceMin() {
-		return priceMin;
+	public int getMinPrice() {
+		return minPrice;
 	}
-	public void setPriceMin(int priceMin) {
-		this.priceMin = priceMin;
+	public void setMinPrice(int minPrice) {
+		this.minPrice = minPrice;
 	}
-	public int getPriceMax() {
-		return priceMax;
+	public int getMaxPrice() {
+		return maxPrice;
 	}
-	public void setPriceMax(int priceMax) {
-		this.priceMax = priceMax;
+	public void setMaxPrice(int maxPrice) {
+		this.maxPrice = maxPrice;
 	}
 	public VehicleType getVehicleType() {
 		return vehicleType;

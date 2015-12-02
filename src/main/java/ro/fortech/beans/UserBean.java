@@ -11,6 +11,11 @@ import javax.inject.Inject;
 import ro.fortech.model.User;
 import ro.fortech.services.UserService;
 
+/**
+ * Class used to check the user credentials with the ones that are present in
+ * the database.
+ *
+ */
 @ManagedBean
 @RequestScoped
 public class UserBean {
@@ -22,6 +27,18 @@ public class UserBean {
 	private boolean isPasswordValid;
 	private boolean validationComplete;
 
+	/**
+	 * Check the credentials that are provided in the JSF page in order to
+	 * authenticate a user.
+	 * 
+	 * @param username
+	 *            - the user username for the account
+	 * @param password
+	 *            - the user password for the account
+	 * @return - a string that will redirect to the index page if the account is
+	 *         good or will keep the user on the same page if the account is
+	 *         invalid
+	 */
 	public String checkIfUserPresent(String username, String password) {
 		List<User> users = userService.getUsers();
 		for (User user : users) {
