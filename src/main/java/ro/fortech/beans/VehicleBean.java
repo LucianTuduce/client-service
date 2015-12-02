@@ -61,7 +61,6 @@ public class VehicleBean {
 		return cars;
 	}
 
-
 	private String fin;
 	private String model;
 	private String fuelType;
