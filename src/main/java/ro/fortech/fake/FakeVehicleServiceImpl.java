@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.inject.Named;
 
 import ro.fortech.model.Vehicle;
+import ro.fortech.search.VehicleSearch;
 import ro.fortech.services.VehicleService;
 import ro.fortech.type.FuelType;
 import ro.fortech.type.VehicleType;
@@ -116,6 +117,12 @@ public class FakeVehicleServiceImpl implements VehicleService{
 	@Override
 	public void saveVehicle(Vehicle Vehicle) {
 		System.out.println("Insert into fake DB successful");
+	}
+
+	@Override
+	public List<Vehicle> getSearchVehicle(VehicleSearch vehicleSearch) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
