@@ -3,6 +3,10 @@ package ro.fortech.model;
 import ro.fortech.type.FuelType;
 import ro.fortech.type.VehicleType;
 
+/**
+ * Vehicle model class.
+ *
+ */
 public class Vehicle {
 
 	private String fin;

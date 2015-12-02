@@ -16,26 +16,32 @@ import ro.fortech.services.VehicleService;
 import ro.fortech.type.FuelType;
 import ro.fortech.type.VehicleType;
 
-@ManagedBean(name = "vehicleBean")
-@SessionScoped
+/**
+ * Class used to obtain the vehicles from the database in order to display them
+ * on the JSF page. Also the cars can be filtered obtained by performing a
+ * search on some values.
+ *
+ */
+@ManagedBean
+@RequestScoped
 public class VehicleBean {
-
 
 	@Inject
 	@Named("fakeVehicleServiceImpl")
 	private VehicleService fakeCarService;
 
 	@Inject
+	@Named("searchServiceUtils")
+	private VehicleSearchService searchServiceUtils;
+
+	@Inject
+	@Named("vehicleSearchServiceImpl")
 	private VehicleSearchService searchService;
 
 	private List<Vehicle> cars;
 
-//	public List<Vehicle> getAllCars() {
-//		return fakeCarService.getVehicles();
-//	}
-
 	public List<Vehicle> getCars() {
-		VehicleSearch search = new VehicleSearch();
+		VehicleSearchRequest search = new VehicleSearchRequest();
 		search.setFin(" ");
 		search.setModel(" ");
 		search.setFuelType(FuelType.DIESEL);
@@ -44,17 +50,19 @@ public class VehicleBean {
 		search.setMinYear(2002);
 		search.setMaxYear(20090);
 		search.setLocation("Germany");
-		search.setPriceMax(0);
-		search.setPriceMin(0);
+		search.setMinPrice(0);
+		search.setMaxPrice(0);
 		search.setVehicleType(VehicleType.DEFAULT);
-		fakeCarService.initVehicleList();
 		long startTime = System.nanoTime();
-		cars = searchService.getSearchWithColections(search);
+		cars = fakeCarService.getVehicles(search);
+		// cars = searchService.getSearch(search);
 		long endTime = System.nanoTime();
 		long duration = (endTime - startTime);
-		System.out.println("Execution: " + duration / 1000000 + " nanoseconds, car size is "+ cars.size());
+		System.out.println("Execution: " + duration / 1000000
+				+ " nanoseconds, car size is " + cars.size());
 		return cars;
 	}
+
 
 	private String fin;
 	private String model;
@@ -68,9 +76,7 @@ public class VehicleBean {
 	private int priceMax;
 	private VehicleType vehicleType;
 	private List<Vehicle> listVechicles;
-	
-	@EJB(beanName="fakeVehicleServiceImpl")
-	private VehicleService vehicleSearch;
+
 	
 	public String searchVechicle(){
 		

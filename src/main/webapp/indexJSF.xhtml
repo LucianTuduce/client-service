@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-    <html ng-app="UVSClient" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://xmlns.jcp.org/jsf/passthrough" xmlns:b="http://bootsfaces.net/ui">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html ng-app="UVSClient" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:b="http://bootsfaces.net/ui">
 
-    <head>
-        <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> -->
-        <title>My first JSF app</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
-        <link rel="stylesheet" href="resources/css/site.css" />
-        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-        <script type="text/javascript" src="resources/js/app.js"></script>
-    </head>
+<head>
+<!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> -->
+<title>My first JSF app</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
+<link rel="stylesheet" href="resources/css/site.css" />
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+<script type="text/javascript" src="resources/js/app.js"></script>
+</head>
 
+<<<<<<< Upstream, based on origin/master
     <body>
         <nav class="navbar navbar-inverse">
             <div class="navbar-header">
@@ -176,5 +185,191 @@
             </table>
         </div>
     </body>
+=======
+<body>
+	<nav class="navbar navbar-inverse">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle collapsed"
+			data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+			aria-expanded="false">
+			<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span>
+			<span class="icon-bar"></span> <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand text-center" href="index.xhtml"><span
+			class="glyphicon glyphicon-home"></span><br />Home</a>
+	</div>
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+			<li class="dropdown"><a href="#"
+				class="dropdown-toggle text-center" data-toggle="dropdown"
+				role="button" aria-haspopup="true" aria-expanded="false"> <span
+					class="glyphicon glyphicon-home"></span><span class="caret"></span>
+					<br />Vehicle Type
+			</a>
+				<ul class="dropdown-menu" data-toggle="buttons">
+					<button class="btn btn-default">
+						<input type="radio" name="options" />Option One
+					</button>
+					<button class="btn btn-default">
+						<input type="radio" name="options" />Option Two
+					</button>
+					<button class="btn btn-default">
+						<input type="radio" name="options" />Option Three
+					</button>
+					<li><a href="#">Bus</a></li>
+				</ul></li>
+			<li><a href="#" class="dropdown-toggle text-center"
+				data-toggle="dropdown" role="button" aria-haspopup="true"
+				aria-expanded="false"> <span class="glyphicon glyphicon-search"></span><span
+					class="caret"></span> <br />Search
+			</a></li>
+			<li><a class="" href="#"><span
+					class="glyphicon glyphicon-road"></span><br />Link2</a></li>
+			<li><a class="text-center" href="#"><span
+					class="glyphicon glyphicon-road"></span><br />Link3</a></li>
+			<!--                <li class="dropdown"><a href="#" class="dropdown-toggle" -->
+			<!--                    data-toggle="dropdown" role="button" aria-haspopup="true" -->
+			<!--                    aria-expanded="false">Dropdown <span class="caret"></span></a> -->
+			<!--                    <ul class="dropdown-menu"> -->
+			<!--                        <li><a href="#">Action</a></li> -->
+			<!--                        <li><a href="#">Another action</a></li> -->
+			<!--                        <li><a href="#">Something else here</a></li> -->
+			<!--                        <li role="separator" class="divider"></li> -->
+			<!--                        <li><a href="#">Separated flink</a></li> -->
+			<!--                    </ul></li> -->
+		</ul>
+		<!-- Search the site -->
+		<ul class="nav navbar-nav navbar-right">
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
+				data-toggle="dropdown" role="button" aria-haspopup="true"
+				aria-expanded="false">Country/Language <span class="caret"></span></a>
+				<ul class="dropdown-menu ">
+					<li class="dropdown-submenu pull-left"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown">Romania</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">English</a></li>
+							<li><a href="#">Romanian</a></li>
+						</ul></li>
+					<li class="dropdown-submenu "><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown">Germany</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">English</a></li>
+							<li><a href="#">German</a></li>
+						</ul></li>
+				</ul></li>
+		</ul>
+	</div>
+	<!-- /.navbar-collapse --> <!-- /.container-fluid --> </nav>
+	<div class="col-sm-4">
+		<div class="col-sm-12">
+			<h3>Search</h3>
+			<form ng-controller="CarSearchController">
+				<div class="form-group">
+					<label class="col-sm-3 control-label">FIN</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" ng-model="FIN" />
 
-    </html>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-3 control-label">Model</label>
+					<div class="col-sm-9">
+						<select class="form-control" ng-model="model">
+							<option selected="selected" disabled="disabled">Choose
+								option</option>
+							<option value="Volvo">Volvo</option>
+							<option value="Saab">Saab</option>
+							<option value="Mercedes">Mercedes</option>
+							<option value="Audi">Audi</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-3 control-label">Fuel
+						Type</label>
+					<div class="col-sm-9">
+						<select class="form-control" ng-model="FuelType">
+							<option selected="selected" disabled="disabled">Choose
+								option</option>
+							<option value="Diesel">Diesel</option>
+							<option value="Petrol">Petrol</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Capacity</label>
+					<div class="col-sm-9">
+						<div class="col-sm-4">
+							<input type="text" class="form-control" placeholder="min"
+								ng-model="CapacityMin" />
+						</div>
+						cm<sup>3</sup> -
+						<div class="col-sm-4">
+							<input type="text" class="form-control" placeholder="max"
+								ng-model="CapacityMax" />
+						</div>
+						cm<sup>3</sup>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Year</label>
+					<div class="col-sm-9">
+						<div class="col-sm-4">
+							<input type="text" class="form-control" placeholder="min"
+								ng-model="YearMin" />
+						</div>
+						-
+						<div class="col-sm-4">
+							<input type="text" class="form-control" placeholder="max"
+								ng-model="YearMax" />
+						</div>
+					</div>
+				</div>
+>>>>>>> 8f07154 Created vehicle cache, save vehicle search and vehicle search history
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Price</label>
+					<div class="col-sm-9">
+						<div class="col-sm-4">
+							<input type="text" class="form-control" placeholder="min"
+								ng-model="PriceMin" />
+						</div>
+						-
+						<div class="col-sm-4">
+							<input type="text" class="form-control" placeholder="max"
+								ng-model="PriceMax" />
+						</div>
+					</div>
+				</div>
+
+				<button class="btn btn-primary" value="Search"
+					ng-click="search($event)">Search</button>
+			</form>
+		</div>
+		<div class="col-sm-12">
+			<h3>Search history</h3>
+		</div>
+	</div>
+	<div class="col-sm-8 table-responsive">
+		<table class="table">
+			<tr>
+				<th>FIN</th>
+				<th>Model</th>
+				<th>Fuel Type</th>
+				<th>Capacity</th>
+				<th>Year</th>
+				<th>Location(Country)</th>
+				<th>Price</th>
+			</tr>
+			<tr ng-repeat="car in cars">
+				<td>{{car.fin}}</td>
+				<td>{{car.model}}</td>
+				<td>{{car.fin}}</td>
+				<td><a href="#" ng-click="removeCar(data)"></a></td>
+			</tr>
+		</table>
+	</div>
+</body>
+
+</html>

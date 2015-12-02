@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User getCar(int idUser) {
+	public User getUser(int idUser) {
 		// TODO Auto-generated method stub
 		return null;
 	}
