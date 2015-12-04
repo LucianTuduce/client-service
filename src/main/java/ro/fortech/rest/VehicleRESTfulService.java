@@ -1,35 +1,23 @@
 package ro.fortech.rest;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 
-import ro.fortech.cache.SearchCache;
 import ro.fortech.cache.UserCache;
 import ro.fortech.cache.VehicleCache;
-import ro.fortech.history.SearchSave;
-import ro.fortech.model.User;
-import ro.fortech.model.Vehicle;
+import ro.fortech.credentials.LoginCredentials;
 import ro.fortech.search.VehicleSearchRequest;
-import ro.fortech.search.VehicleSearchResponse;
-import ro.fortech.services.VehicleSearchService;
-import ro.fortech.services.VehicleService;
-import ro.fortech.type.FuelType;
-import ro.fortech.type.VehicleType;
+import ro.fortech.validation.AccountCachingAndValidationService;
 
 @Path("/vehicle")
 @RequestScoped
@@ -40,176 +28,56 @@ public class VehicleRESTfulService {
 		System.out.println("Built: VehicleRESTfulService.");
 	}
 
-	@Context
-	private HttpServletRequest request;
-
-	@Inject
-	@Named("fakeVehicleServiceImpl")
-	private VehicleService fakeService;
-
-	@Inject
-	@Named("vehicleSearchServiceImpl")
-	private VehicleSearchService searchService;
-
 	@EJB
 	private VehicleCache cache;
 
 	@EJB
 	private UserCache userCache;
+	
+	@EJB
+	private AccountCachingAndValidationService cachingAndValidationService;
+	
+	@Context
+	private HttpServletResponse response;
 
-	@Inject
-	private SearchCache searchCache;
-
-	@GET
-	@Path("/search")
-	@Produces("application/json")
-	public VehicleSearchRequest getSearchCriteria() {
-		VehicleSearchRequest search = new VehicleSearchRequest();
-		search.setFin(" ");
-		search.setModel(" ");
-		search.setFuelType(FuelType.DIESEL);
-		search.setMinCapacity(1200);
-		search.setMaxCapacity(7500);
-		search.setMinYear(2002);
-		search.setMaxYear(20090);
-		search.setLocation("Germany");
-		search.setMinPrice(0);
-		search.setMaxPrice(0);
-		search.setVehicleType(VehicleType.DEFAULT);
-		return search;
-	}
-
-	@GET
-	@Path("/get/all/{number}")
-	@Produces("application/json")
-	public List<Vehicle> getVehicles(@PathParam("number") int number) {
-		VehicleSearchRequest search = new VehicleSearchRequest();
-		search.setFin(" ");
-		search.setModel(" ");
-		search.setFuelType(FuelType.DIESEL);
-		search.setMinCapacity(1200);
-		search.setMaxCapacity(7500);
-		search.setMinYear(2002);
-		search.setMaxYear(20090);
-		search.setLocation(" ");
-		search.setMinPrice(0);
-		search.setMaxPrice(0);
-		search.setVehicleType(VehicleType.DEFAULT);
-		return fakeService.getVehicles(search);
-	}
 
 	@POST
 	@Path("/users")
-	public void initUserCache() {
-		Map<String, User> map = new HashMap<>();
-		User user = null;
-		if (userCache.getUserCache() == null) {
-			for (int i = 0; i < 10; i++) {
-				user = new User();
-				user.setCountry("Romania" + i);
-				user.setId(1);
-				user.setUsername("user" + i);
-				user.setPassword("pass" + i);
-				map.put("username" + i, user);
-			}
-			userCache.setUserCache(map);
-		}
-		
+	public Response initUserCache() {
+		return cachingAndValidationService.initUsersInCacheMemory();
 	}
 
 	@POST
-	@Path("/filtered/{resultNumber}")
+	@Path("/filtered")
 	@Produces("application/json")
-	public VehicleSearchResponse getVehiclesBySearchCriteria(
-			@PathParam("resultNumber") int number, VehicleSearchRequest search) {
-		VehicleSearchResponse response = new VehicleSearchResponse();
-
-		System.out.println(request.getSession());
-		if (search.getLocation().equals(" ")
-				|| search.getVehicleType().getType().equals(" ")) {
-			response.setErrorMessage("Invalid location search or vehicle type. They are not provided! Check again after you provided them!");
-		} else {
-			List<Vehicle> vehicles = fakeService.getVehicles(search);
-			if (vehicles == null) {
-				response.setErrorMessage("Something went wrong, list is null");
-			} else {
-				response.setVehicleCount(vehicles.size());
-				response.setErrorMessage("All good !");
-				response.setVehicles(vehicles);
-			}
-		}
-		initUserSearchCache(search);
-
-		return response;
-	}
-
-	private void initUserSearchCache(VehicleSearchRequest search) {
-		List<VehicleSearchRequest> searchRequests = null;
-		if (searchCache.getSearchRequests() == null) {
-			searchRequests = new ArrayList<VehicleSearchRequest>();
-			searchRequests.add(search);
-			searchCache.setSearchRequests(searchRequests);
-		} else {
-			searchRequests = searchCache.getSearchRequests();
-			searchRequests.add(search);
-			searchCache.setSearchRequests(searchRequests);
-		}
+	public Response getVehiclesBySearchCriteria(@HeaderParam("Authorization") String accountToken, VehicleSearchRequest search) {
+		return cachingAndValidationService.validateUserforSearch(accountToken, search);
 	}
 
 	@GET
 	@Path("/search/history")
 	@Produces("application/json")
-	public List<VehicleSearchRequest> getSearchHistory() {
-
-		if (searchCache.getSearchRequests() == null) {
-			return new ArrayList<>();
-		} else {
-			return searchCache.getSearchRequests();
-		}
+	public Response getSearchHistory(@HeaderParam("Authorization") String accountToken) {
+		return cachingAndValidationService.validateUserForSearchHistory(accountToken);
 	}
 
 	@GET
-	@Path("/search/history/saved/{userID}")
+	@Path("/search/history/saved")
 	@Produces("application/json")
-	public List<SearchSave> getSerachSavedHistory(
-			@PathParam("userID") int userID) {
-		if (searchCache.getSearchSaveCache() == null) {
-			return new ArrayList<SearchSave>();
-		} else {
-			return searchCache.getSearchSaveCache().get(userID);
-		}
+	public Response getSerachSavedHistory(@HeaderParam("Authorization") String accountToken) {
+		return cachingAndValidationService.valiadateUserForSavedSearch(accountToken);
 	}
 
 	@POST
-	@Path("/search/history/save/{userID}/{name}")
+	@Path("/search/history/save/{saveName}")
 	@Produces("application/json")
-	public void saveSearchRequest(@PathParam("userID") int userID,
-			@PathParam("name") String name, VehicleSearchRequest search) {
-		updateUserSearchList(userID, name, search);
+	public Response saveSearchRequest(@HeaderParam("Authorization") String accountToken, @PathParam("saveName") String saveName, VehicleSearchRequest search) {
+		return cachingAndValidationService.validateUserForSavingSearchHistrory(accountToken, saveName, search);
 	}
 
-	private void updateUserSearchList(int userID, String name,
-			VehicleSearchRequest search) {
-		Map<Integer, List<SearchSave>> map = null;
-		List<SearchSave> searchSaves = null;
-		SearchSave searchSave = new SearchSave();
-		searchSave.setName(name);
-		searchSave.setRequest(search);
-		if (searchCache.getSearchSaveCache() == null) {
-			map = new HashMap<>();
-			searchSaves = new ArrayList<SearchSave>();
-			searchSaves.add(searchSave);
-			map.put(userID, searchSaves);
-			searchCache.setSearchSaveCache(map);
-		} else {
-			map = searchCache.getSearchSaveCache();
-			searchSaves = map.get(userID);
-			if (searchSaves == null) {
-				searchSaves = new ArrayList<>();
-			}
-			searchSaves.add(searchSave);
-			map.put(userID, searchSaves);
-			searchCache.setSearchSaveCache(map);
-		}
-	}
+	@POST
+	@Path("/token")
+	public Response getUserToken(LoginCredentials credentials) {
+		return cachingAndValidationService.generateUserToken(credentials);
+	}	
 }

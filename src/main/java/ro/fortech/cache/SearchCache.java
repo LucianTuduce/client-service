@@ -1,6 +1,7 @@
 package ro.fortech.cache;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,24 +21,23 @@ public class SearchCache implements Serializable {
 		System.out.println("Built: Stateful SearchCache.");
 	}
 
-	private Map<Integer, List<SearchSave>> searchSaveCache;
-	private List<VehicleSearchRequest> searchRequests;
+	private Map<String, List<SearchSave>> searchSaveCache = new HashMap<>();
+	private Map<String, List<VehicleSearchRequest>> searchRequests = new HashMap<>();
 
-	public List<VehicleSearchRequest> getSearchRequests() {
-		return searchRequests;
-	}
-
-	public void setSearchRequests(List<VehicleSearchRequest> searchRequests) {
-		this.searchRequests = searchRequests;
-	}
-
-	public Map<Integer, List<SearchSave>> getSearchSaveCache() {
+	public Map<String, List<SearchSave>> getSearchSaveCache() {
 		return searchSaveCache;
 	}
 
-	public void setSearchSaveCache(
-			Map<Integer, List<SearchSave>> searchSaveCache) {
+	public void setSearchSaveCache(Map<String, List<SearchSave>> searchSaveCache) {
 		this.searchSaveCache = searchSaveCache;
+	}
+
+	public Map<String, List<VehicleSearchRequest>> getSearchRequests() {
+		return searchRequests;
+	}
+
+	public void setSearchRequests(Map<String, List<VehicleSearchRequest>> searchRequests) {
+		this.searchRequests = searchRequests;
 	}
 
 }
