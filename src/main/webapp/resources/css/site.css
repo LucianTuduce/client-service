@@ -57,16 +57,4 @@
   -moz-border-radius: 6px 0 6px 6px;
   border-radius: 6px 0 6px 6px; }
 
-.dropdown-menu[data-placement="left"], .dropdown-submenu > [data-placement="left"].dropdown-left {
-  left: auto;
-  right: 0px; }
-
-.navbar .nav > li > .dropdown-menu[data-placement="left"]:before, .navbar .nav > li.dropdown-submenu > [data-placement="left"].dropdown-left:before {
-  left: auto;
-  right: 9px; }
-
-.navbar .nav > li > .dropdown-menu[data-placement="left"]:after, .navbar .nav > li.dropdown-submenu > [data-placement="left"].dropdown-left:after {
-  left: auto;
-  right: 10px; }
-
 /*# sourceMappingURL=site.css.map */
