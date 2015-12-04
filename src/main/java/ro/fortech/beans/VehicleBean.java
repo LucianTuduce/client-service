@@ -72,7 +72,6 @@ public class VehicleBean {
 	private int priceMin;
 	private int priceMax;
 	private VehicleType vehicleType;
-	private List<Vehicle> listVechicles;
 
 	
 	public String searchVechicle(){
