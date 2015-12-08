@@ -1,13 +1,9 @@
 package ro.fortech.beans;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import javax.faces.bean.SessionScoped;
 
 import ro.fortech.search.VehicleSearchRequest;
-import ro.fortech.services.VehicleSearchService;
-import ro.fortech.services.VehicleService;
 import ro.fortech.type.FuelType;
 import ro.fortech.type.VehicleType;
 
@@ -18,20 +14,8 @@ import ro.fortech.type.VehicleType;
  *
  */
 @ManagedBean(name = "searchVehicleBean")
-@RequestScoped
+@SessionScoped
 public class SearchVehicleBean {
-
-	@Inject
-	@Named("fakeVehicleServiceImpl")
-	private VehicleService fakeCarService;
-
-	@Inject
-	@Named("searchServiceUtils")
-	private VehicleSearchService searchServiceUtils;
-
-	@Inject
-	@Named("vehicleSearchServiceImpl")
-	private VehicleSearchService searchService;
 
 	private String searchFin;
 	private String searchModel;
@@ -72,30 +56,7 @@ public class SearchVehicleBean {
 
 		return searchRequest;
 	}
-	public VehicleService getFakeCarService() {
-		return fakeCarService;
-	}
-
-	public void setFakeCarService(VehicleService fakeCarService) {
-		this.fakeCarService = fakeCarService;
-	}
-
-	public VehicleSearchService getSearchServiceUtils() {
-		return searchServiceUtils;
-	}
-
-	public void setSearchServiceUtils(VehicleSearchService searchServiceUtils) {
-		this.searchServiceUtils = searchServiceUtils;
-	}
-
-	public VehicleSearchService getSearchService() {
-		return searchService;
-	}
-
-	public void setSearchService(VehicleSearchService searchService) {
-		this.searchService = searchService;
-	}
-
+	
 	public String getSearchFin() {
 		return searchFin;
 	}
