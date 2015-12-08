@@ -11,11 +11,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-import ro.fortech.cache.UserCache;
-import ro.fortech.cache.VehicleCache;
+import ro.fortech.caching.AccountCachingService;
 import ro.fortech.credentials.LoginCredentials;
 import ro.fortech.search.VehicleSearchRequest;
-import ro.fortech.validation.AccountCachingAndValidationService;
+import ro.fortech.search.response.SearchResponseService;
+import ro.fortech.validation.AccountValidationService;
 
 @Path("/vehicle")
 @RequestScoped
@@ -25,60 +25,80 @@ public class VehicleRESTfulService {
 	public void init() {
 		System.out.println("Built: VehicleRESTfulService.");
 	}
-
-	@EJB
-	private VehicleCache cache;
-
-	@EJB
-	private UserCache userCache;
 	
 	@EJB
-	private AccountCachingAndValidationService cachingAndValidationService;
+	private AccountValidationService accountValidation;
+	
+	@EJB
+	private AccountCachingService accountCachingService;
+	
+	@EJB
+	private SearchResponseService searchResponseService;
 
 	@POST
 	@Path("/users")
 	public Response initUserCache() {
-		return cachingAndValidationService.initUsersInCacheMemory();
+		return accountCachingService.initUsersInCacheMemory();
 	}
 
 	@POST
 	@Path("/filtered")
 	@Produces("application/json")
 	public Response getVehiclesBySearchCriteria(@HeaderParam("Authorization") String accountToken, VehicleSearchRequest search) {
-		return cachingAndValidationService.validateUserforSearch(accountToken, search);
+		if(accountValidation.isUserValid(accountToken)){
+			return searchResponseService.getFilteredVehiclesBySearchCriteria(accountToken, search);
+		}else {
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+		}
 	}
 
 	@GET
 	@Path("/search/history")
 	@Produces("application/json")
 	public Response getSearchHistory(@HeaderParam("Authorization") String accountToken) {
-		return cachingAndValidationService.validateUserForSearchHistory(accountToken);
+		if(accountValidation.isUserValid(accountToken)){
+			return searchResponseService.getUserSearchHistory(accountToken);
+		}else {
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+		}
 	}
 
 	@GET
 	@Path("/search/history/saved")
 	@Produces("application/json")
-	public Response getSerachSavedHistory(@HeaderParam("Authorization") String accountToken) {
-		return cachingAndValidationService.valiadateUserForSavedSearch(accountToken);
+	public Response getSearchSavedHistory(@HeaderParam("Authorization") String accountToken) {
+		if(accountValidation.isUserValid(accountToken)){
+			return searchResponseService.getUserSavedSearchHistory(accountToken);
+		}else {
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+		}
 	}
 
 	@POST
 	@Path("/search/history/save/{saveName}")
 	@Produces("application/json")
 	public Response saveSearchRequest(@HeaderParam("Authorization") String accountToken, @PathParam("saveName") String saveName, VehicleSearchRequest search) {
-		return cachingAndValidationService.validateUserForSavingSearchHistrory(accountToken, saveName, search);
+		if(accountValidation.isUserValid(accountToken)){
+			return searchResponseService.saveUserSearch(accountToken, saveName, search);
+		}else {
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+		}
 	}
 
 	@POST
 	@Path("/token")
 	public Response getUserToken(LoginCredentials credentials) {
-		return cachingAndValidationService.generateUserToken(credentials);
+		return searchResponseService.generateUserToken(credentials);
 	}
 	
 	@GET
 	@Path("/search/{fin}")
 	@Produces("application/json")
 	public Response getVehicleByFin(@PathParam("fin") String fin, @HeaderParam("Authorization") String accountToken){
-		return cachingAndValidationService.validateUserforVehicleEnhanceSearch(accountToken, fin);
+		if(accountValidation.isUserValid(accountToken)){
+			return searchResponseService.getVehicleEnhancedByFin(accountToken, fin);
+		}else {
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+		}
 	}
 }

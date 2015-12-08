@@ -25,12 +25,13 @@ public class VehicleRESTfulServiceTest {
 	private static final String VALID_USER_TOKEN = "QmFzaWMgdXNlcjA6cGFzczA=";
 	private static final String AUTHORIZATION = "Authorization";
 	
-	private static final String URL_INIT_USER_CACHE = "http://localhost:9080/client-service/rest/vehicle/users";
-	private static final String URL_CREATE_USER_UNIQUE_TOKEN_ACCOUNT_VALID = "http://localhost:9080/client-service/rest/vehicle/token";
+	private static final String URL_POST_INIT_USER_CACHE = "http://localhost:9080/client-service/rest/vehicle/users";
+	private static final String URL_POST_CREATE_USER_UNIQUE_TOKEN_ACCOUNT_VALID = "http://localhost:9080/client-service/rest/vehicle/token";
 	private static final String URL_GET_FILTERED_VEHICLE_LIST = "http://localhost:9080/client-service/rest/vehicle/filtered";
 	private static final String URL_GET_SEARCH_HISTORY = "http://localhost:9080/client-service/rest/vehicle/search/history";
-	private static final String URL_SAVE_SEARCH_HISTORY = "http://localhost:9080/client-service/rest/vehicle/search/history/save/demo";
+	private static final String URL_POST_SAVE_SEARCH_HISTORY = "http://localhost:9080/client-service/rest/vehicle/search/history/save/demo";
 	private static final String URL_GET_SAVE_SEARCH_HISTORY = "http://localhost:9080/client-service/rest/vehicle/search/history/saved";
+	private static final String URL_GET_ENHANCED_VEHICLE_BY_FIN = "http://localhost:9080/client-service/rest/vehicle/search/GR3847UC3218345";
 	
 	private HttpClient client;
 	private HttpPost postRequestInitUserCache;
@@ -39,16 +40,18 @@ public class VehicleRESTfulServiceTest {
 	private HttpGet getSearchHistory;
 	private HttpPost saveFilteredVehiclesSearch;
 	private HttpGet getSearchSavedHistory;
+	private HttpGet getEnhancedVehicle;
 	
 	@Before
 	public void init() {
 		client = HttpClientBuilder.create().build();
-		postRequestInitUserCache = new HttpPost(URL_INIT_USER_CACHE);
-		postUserCredentialsForToken = new HttpPost(URL_CREATE_USER_UNIQUE_TOKEN_ACCOUNT_VALID);
+		postRequestInitUserCache = new HttpPost(URL_POST_INIT_USER_CACHE);
+		postUserCredentialsForToken = new HttpPost(URL_POST_CREATE_USER_UNIQUE_TOKEN_ACCOUNT_VALID);
 		getFilteredVehicles = new HttpPost(URL_GET_FILTERED_VEHICLE_LIST);
 		getSearchHistory = new HttpGet(URL_GET_SEARCH_HISTORY);
-		saveFilteredVehiclesSearch = new HttpPost(URL_SAVE_SEARCH_HISTORY);
+		saveFilteredVehiclesSearch = new HttpPost(URL_POST_SAVE_SEARCH_HISTORY);
 		getSearchSavedHistory = new HttpGet(URL_GET_SAVE_SEARCH_HISTORY);
+		getEnhancedVehicle = new HttpGet(URL_GET_ENHANCED_VEHICLE_BY_FIN);
 	}
 	
 	
@@ -214,7 +217,7 @@ public class VehicleRESTfulServiceTest {
 	}
 	
 	@Test
-	public void getSerachSavedHistory_obtainedSearchHistory_successStatus200() {
+	public void getSearchSavedHistory_obtainedSearchHistory_successStatus200() {
 		HttpResponse response = null;
 		HttpEntity entity = null;
 		String content = null;
@@ -236,7 +239,7 @@ public class VehicleRESTfulServiceTest {
 	}
 	
 	@Test
-	public void getSerachSavedHistory_failToObtainSearchHistory_unauthorizedStatus401() {
+	public void getSearchSavedHistory_failToObtainSearchHistory_unauthorizedStatus401() {
 		HttpResponse response = null;
 		HttpEntity entity = null;
 		String content = null;
@@ -248,6 +251,42 @@ public class VehicleRESTfulServiceTest {
 			saveFilteredVehiclesSearch.setEntity(new StringEntity(Constants.VEHICLE_FILTER_CRITERIA));
 			client.execute(saveFilteredVehiclesSearch);
 			response = client.execute(getSearchSavedHistory);
+			entity = response.getEntity();
+			content = new BasicResponseHandler().handleEntity(entity);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		assertTrue(content.length() < 3);
+		assertEquals(401, response.getStatusLine().getStatusCode());
+	}
+	
+	@Test
+	public void getVehicleByFin_obtainedEnhancedVehicle_successStatus200() {
+		HttpResponse response = null;
+		HttpEntity entity = null;
+		String content = null;
+		getEnhancedVehicle.addHeader(CONTENT_TYPE, APPLICATION_JSON);
+		getEnhancedVehicle.addHeader(AUTHORIZATION, VALID_USER_TOKEN);
+		try {
+			response = client.execute(getEnhancedVehicle);
+			entity = response.getEntity();
+			content = new BasicResponseHandler().handleEntity(entity);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		assertTrue(content.length() > 3);
+		assertEquals(200, response.getStatusLine().getStatusCode());
+	}
+	
+	@Test
+	public void getVehicleByFin_failToBbtainEnhancedVehicle_unauthorizedStatus401() {
+		HttpResponse response = null;
+		HttpEntity entity = null;
+		String content = null;
+		getEnhancedVehicle.addHeader(CONTENT_TYPE, APPLICATION_JSON);
+		getEnhancedVehicle.addHeader(AUTHORIZATION, INVALID_USER_TOKEN);
+		try {
+			response = client.execute(getEnhancedVehicle);
 			entity = response.getEntity();
 			content = new BasicResponseHandler().handleEntity(entity);
 		} catch (IOException e) {
