@@ -1,6 +1,7 @@
 package ro.fortech.validation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -19,9 +20,12 @@ import ro.fortech.credentials.LoginCredentials;
 import ro.fortech.history.SearchSave;
 import ro.fortech.model.User;
 import ro.fortech.model.Vehicle;
+import ro.fortech.search.VehicleEnhanceSearchResponse;
 import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.search.VehicleSearchResponse;
+import ro.fortech.services.VehicleSearchService;
 import ro.fortech.services.VehicleService;
+import ro.fortech.vehicle.enhance.VehicleEnhanced;
 
 @Stateless
 public class AccountCachingAndValidationService {
@@ -48,6 +52,10 @@ public class AccountCachingAndValidationService {
 	@Named("fakeVehicleServiceImpl")
 	private VehicleService fakeService;
 	
+	
+	@Inject
+	@Named("vehicleSearchServiceImpl")
+	private VehicleSearchService vehicleSerachService;
 	
 	/**
 	 * Method used to initiate the user cache map.
@@ -168,7 +176,7 @@ public class AccountCachingAndValidationService {
 	
 	/**
 	 * 
-	 * @param accountToken
+	 * @param accountToken - 
 	 * @param search
 	 * @return
 	 */
@@ -204,4 +212,28 @@ public class AccountCachingAndValidationService {
 			searchCache.getSearchRequests().get(acountToken).add(search);
 		}
 	}
+	
+	public Response validateUserforVehicleEnhanceSearch(String accountToken, String fin) {
+		response.setHeader(AUTHORIZATION, accountToken);
+		if (!userCache.isUserActive(accountToken)) {
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+		} else {
+			VehicleEnhanceSearchResponse searchResponse = new VehicleEnhanceSearchResponse();
+			
+				VehicleEnhanced vehicle = vehicleSerachService.getVehicleByFin(fin, fakeService.getVehicles());
+				if (vehicle == null) {
+					searchResponse.setErrorMessage(SOMETHING_WENT_WRONG);
+				} else {
+					searchResponse.setVehicleEnhancedCount(1);
+					searchResponse.setErrorMessage(ALL_GOOD);				
+					searchResponse.setVehicleEnhanceds(Arrays.asList(vehicle));
+				}
+				 VehicleSearchRequest search = new VehicleSearchRequest();
+				 search.setFin(fin);
+			initUserSearchCache(search, accountToken);
+			return Response.status(Response.Status.OK).entity(searchResponse).build();
+		}
+	}
+	
+	
 }

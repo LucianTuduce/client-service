@@ -3,14 +3,12 @@ package ro.fortech.rest;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import ro.fortech.cache.UserCache;
@@ -36,10 +34,6 @@ public class VehicleRESTfulService {
 	
 	@EJB
 	private AccountCachingAndValidationService cachingAndValidationService;
-	
-	@Context
-	private HttpServletResponse response;
-
 
 	@POST
 	@Path("/users")
@@ -79,5 +73,12 @@ public class VehicleRESTfulService {
 	@Path("/token")
 	public Response getUserToken(LoginCredentials credentials) {
 		return cachingAndValidationService.generateUserToken(credentials);
-	}	
+	}
+	
+	@GET
+	@Path("/search/{fin}")
+	@Produces("application/json")
+	public Response getVehicleByFin(@PathParam("fin") String fin, @HeaderParam("Authorization") String accountToken){
+		return cachingAndValidationService.validateUserforVehicleEnhanceSearch(accountToken, fin);
+	}
 }

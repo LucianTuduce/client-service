@@ -18,4 +18,8 @@ public class LoginCredentials {
 		this.password = password;
 	}
 	
+	public String toString(){
+		return "{ \"username\": \""+username + "\",\n" + "\"password\": \"" + password + "\"}";
+	}
+	
 }

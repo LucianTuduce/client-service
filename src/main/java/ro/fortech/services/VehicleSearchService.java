@@ -4,6 +4,7 @@ import java.util.List;
 
 import ro.fortech.model.Vehicle;
 import ro.fortech.search.VehicleSearchRequest;
+import ro.fortech.vehicle.enhance.VehicleEnhanced;
 
 public interface VehicleSearchService {
 
@@ -16,4 +17,6 @@ public interface VehicleSearchService {
 	 */
 	List<Vehicle> getSearch(VehicleSearchRequest search, List<Vehicle> vehicles);
 
+	VehicleEnhanced getVehicleByFin(String fin, List<VehicleEnhanced> vehicleEnhanceds);
+	
 }
