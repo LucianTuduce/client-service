@@ -20,4 +20,21 @@ public enum FuelType {
 	public void setFuel(String fuel) {
 		this.fuel = fuel;
 	}
+	
+	public static FuelType getEnum(String s){
+		
+		if(DIESEL.name().equalsIgnoreCase(s)){
+			return DIESEL;
+		}
+		else if(GASOLINE.name().equalsIgnoreCase(s)){
+			return GASOLINE;
+		}
+		else if(LPG.name().equalsIgnoreCase(s)){
+			return LPG;
+		}
+		else if(DEFAULT.name().equalsIgnoreCase(s)){
+			return DEFAULT;
+		}
+		throw new IllegalArgumentException("No Enum specified for this string");
+	}
 }

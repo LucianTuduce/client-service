@@ -1,93 +1,72 @@
 package ro.fortech.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
 
 import ro.fortech.model.Vehicle;
-import ro.fortech.search.VehicleSearchRequest;
-import ro.fortech.services.VehicleSearchService;
-import ro.fortech.services.VehicleService;
 import ro.fortech.type.FuelType;
 import ro.fortech.type.VehicleType;
 
-/**
- * Class used to obtain the vehicles from the database in order to display them
- * on the JSF page. Also the cars can be filtered obtained by performing a
- * search on some values.
- *
- */
-@ManagedBean
+
+@ManagedBean(name = "vehicleBean")
 @RequestScoped
 public class VehicleBean {
 
-	@Inject
-	@Named("fakeVehicleServiceImpl")
-	private VehicleService fakeCarService;
-
-	@Inject
-	@Named("searchServiceUtils")
-	private VehicleSearchService searchServiceUtils;
-
-	@Inject
-	@Named("vehicleSearchServiceImpl")
-	private VehicleSearchService searchService;
-
-	private List<Vehicle> cars;
-
-	public List<Vehicle> getCars() {
-		VehicleSearchRequest search = new VehicleSearchRequest();
-		search.setFin(" ");
-		search.setModel(" ");
-		search.setFuelType(FuelType.DIESEL);
-		search.setMinCapacity(1200);
-		search.setMaxCapacity(7500);
-		search.setMinYear(2002);
-		search.setMaxYear(20090);
-		search.setLocation("Germany");
-		search.setMinPrice(0);
-		search.setMaxPrice(0);
-		search.setVehicleType(VehicleType.DEFAULT);
-		long startTime = System.nanoTime();
-		cars = fakeCarService.getVehicles(search);
-		// cars = searchService.getSearch(search);
-		long endTime = System.nanoTime();
-		long duration = (endTime - startTime);
-		System.out.println("Execution: " + duration / 1000000
-				+ " nanoseconds, car size is " + cars.size());
-		return cars;
-	}
-
+	@ManagedProperty(value="#{searchVehicleBean}")
+	SearchVehicleBean searchVehicleBean;
+		
 	private String fin;
 	private String model;
-	private String fuelType;
-	private int minCapacity;
-	private int maxCapacity;
-	private int minYear;
-	private int maxYear;
+	private FuelType fuelType;
+	private int engineCapacity;
+	private int year;
 	private String location;
-	private int priceMin;
-	private int priceMax;
+	private int price;
 	private VehicleType vehicleType;
-	private List<Vehicle> listVechicles;
+	private List<Vehicle> searchedVehicles;
+	
+	public String searchVechicle() {
 
-	
-	public String searchVechicle(){
+		searchedVehicles = new ArrayList<Vehicle>();
 		
-		System.out.println("dasndfwelkfae");
+		// List<Vehicle> vehicles = new ArrayList<Vehicle>();
+		// vehicles = fakeCarService.getVehicles(searchRequest);
+		// listVehicles = vehicles;
+
+		Vehicle vehicle6 = new Vehicle();
+		vehicle6.setFin("GR3847UC32");
+		vehicle6.setModel("Volskwagen Passat");
+		vehicle6.setFuelType(FuelType.DIESEL);
+		vehicle6.setEngineCapacity(1990);
+		vehicle6.setYear(2003);
+		vehicle6.setLocation("Germania");
+		vehicle6.setPrice(3000);
+		vehicle6.setVehicleType(VehicleType.CAR);
+
+		Vehicle vehicle1 = new Vehicle();
+		vehicle1.setFin("RO5347UK34");
+		vehicle1.setModel("Dacia Logan");
+		vehicle1.setFuelType(FuelType.GASOLINE);
+		vehicle1.setEngineCapacity(1400);
+		vehicle1.setYear(2005);
+		vehicle1.setLocation("Romania");
+		vehicle1.setPrice(4500);
+		vehicle1.setVehicleType(VehicleType.CAR);
+
+		searchedVehicles.add(vehicle1);
 		
-		return "login";
+		searchedVehicles.add(vehicle6);
+
+		return "success";
 	}
-	
-	
-	
+
 	public String getFin() {
 		return fin;
 	}
-	
 	public void setFin(String fin) {
 		this.fin = fin;
 	}
@@ -97,35 +76,23 @@ public class VehicleBean {
 	public void setModel(String model) {
 		this.model = model;
 	}
-	public String getFuelType() {
+	public FuelType getFuelType() {
 		return fuelType;
 	}
-	public void setFuelType(String fuelType) {
+	public void setFuelType(FuelType fuelType) {
 		this.fuelType = fuelType;
 	}
-	public int getMinCapacity() {
-		return minCapacity;
+	public int getEngineCapacity() {
+		return engineCapacity;
 	}
-	public void setMinCapacity(int minCapacity) {
-		this.minCapacity = minCapacity;
+	public void setEngineCapacity(int engineCapacity) {
+		this.engineCapacity = engineCapacity;
 	}
-	public int getMaxCapacity() {
-		return maxCapacity;
+	public int getYear() {
+		return year;
 	}
-	public void setMaxCapacity(int maxCapacity) {
-		this.maxCapacity = maxCapacity;
-	}
-	public int getMinYear() {
-		return minYear;
-	}
-	public void setMinYear(int minYear) {
-		this.minYear = minYear;
-	}
-	public int getMaxYear() {
-		return maxYear;
-	}
-	public void setMaxYear(int maxYear) {
-		this.maxYear = maxYear;
+	public void setYear(int year) {
+		this.year = year;
 	}
 	public String getLocation() {
 		return location;
@@ -133,17 +100,11 @@ public class VehicleBean {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public int getPriceMin() {
-		return priceMin;
+	public int getPrice() {
+		return price;
 	}
-	public void setPriceMin(int priceMin) {
-		this.priceMin = priceMin;
-	}
-	public int getPriceMax() {
-		return priceMax;
-	}
-	public void setPriceMax(int priceMax) {
-		this.priceMax = priceMax;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 	public VehicleType getVehicleType() {
 		return vehicleType;
@@ -151,5 +112,14 @@ public class VehicleBean {
 	public void setVehicleType(VehicleType vehicleType) {
 		this.vehicleType = vehicleType;
 	}
+
+	public List<Vehicle> getSearchedVehicles() {
+		return searchedVehicles;
+	}
+
+	public void setSearchedVehicles(List<Vehicle> searchedVehicles) {
+		this.searchedVehicles = searchedVehicles;
+	}
+	
 	
 }

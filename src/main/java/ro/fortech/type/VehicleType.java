@@ -20,4 +20,21 @@ public enum VehicleType {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	public static VehicleType getEnum(String s){
+		
+		if(TRUCK.name().equalsIgnoreCase(s)){
+			return TRUCK;
+		}
+		else if(CAR.name().equalsIgnoreCase(s)){
+			return CAR;
+		}
+		else if(VAN.name().equalsIgnoreCase(s)){
+			return VAN;
+		}
+		else if(DEFAULT.name().equalsIgnoreCase(s)){
+			return DEFAULT;
+		}
+		throw new IllegalArgumentException("No Enum specified for this string");
+	}
 }

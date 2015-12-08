@@ -152,6 +152,10 @@ public class FakeVehicleServiceImpl implements VehicleService {
 		if (cache.getVehicles() == null) {
 			System.out.println("List not init");
 			cache.setVehicles(generateRandomVehicles(1000000));
+			System.out.println(cache);
+			List<Vehicle> list = new ArrayList<>();
+			list = searchService.getSearch(request, cache.getVehicles());
+			System.err.println(list);
 			return searchService.getSearch(request, cache.getVehicles());
 		} else {
 			return searchService.getSearch(request, cache.getVehicles());
