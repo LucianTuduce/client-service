@@ -1,5 +1,6 @@
 package ro.fortech.cache;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +16,17 @@ public class UserCache {
 		System.out.println("Built: UserCache.");
 	}
 	
-	private Map<String, User> userCache;
+	private Map<String, User> userCache = new HashMap<>();
+	
+	private Map<String, User> userConfirmation = new HashMap<>();
+	
+	public Map<String, User> getUserConfirmation() {
+		return userConfirmation;
+	}
+
+	public void setUserConfirmation(Map<String, User> userConfirmation) {
+		this.userConfirmation = userConfirmation;
+	}
 
 	public Map<String, User> getUserCache() {
 		return userCache;
@@ -25,4 +36,15 @@ public class UserCache {
 		this.userCache = userCache;
 	}
 	
+	public User getUser(String key){
+		return userCache.get(key);
+	}
+	
+	public boolean isUserActive(String key){
+		if(userConfirmation.get(key) == null){
+			return false;
+		}else{
+			return true;
+		}
+	}
 }

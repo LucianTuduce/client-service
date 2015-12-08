@@ -15,6 +15,7 @@ import ro.fortech.model.Vehicle;
 import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.services.VehicleSearchService;
 import ro.fortech.services.VehicleService;
+import ro.fortech.vehicle.enhance.VehicleEnhanced;
 
 @Stateless
 @Named("searchServiceUtils")
@@ -88,6 +89,13 @@ public class FakeCollectionsUtilsSearcher implements VehicleSearchService{
 		});
 
 		return vehicles;
+	}
+
+	@Override
+	public VehicleEnhanced getVehicleByFin(String fin,
+			List<VehicleEnhanced> vehicleEnhanceds) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

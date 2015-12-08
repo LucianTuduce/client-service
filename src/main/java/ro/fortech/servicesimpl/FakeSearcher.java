@@ -13,6 +13,7 @@ import ro.fortech.model.Vehicle;
 import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.services.VehicleSearchService;
 import ro.fortech.services.VehicleService;
+import ro.fortech.vehicle.enhance.VehicleEnhanced;
 
 @Stateless
 @Named("vehicleSearchServiceImpl")
@@ -62,5 +63,15 @@ public class FakeSearcher implements VehicleSearchService {
 			}
 		}
 		return searchResultVehicles;
+	}
+
+	@Override
+	public VehicleEnhanced getVehicleByFin(String fin, List<VehicleEnhanced> vehicleEnhanceds) {
+		for (VehicleEnhanced vehicleEnhanced : vehicleEnhanceds) {
+			if (vehicleEnhanced.getVehicle().getFin().equals(fin)) {
+				return vehicleEnhanced;
+			}
+		}
+		return null;
 	}
 }

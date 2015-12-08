@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 
 import ro.fortech.model.Vehicle;
+import ro.fortech.vehicle.enhance.VehicleEnhanced;
 
 @Singleton
 public class VehicleCache {
@@ -16,6 +17,8 @@ public class VehicleCache {
 	}
 
 	private List<Vehicle> vehicles;
+	
+	private List<VehicleEnhanced> vehicleEnhanceds;
 
 	public List<Vehicle> getVehicles() {
 		return vehicles;
@@ -23,6 +26,14 @@ public class VehicleCache {
 
 	public void setVehicles(List<Vehicle> vehicles) {
 		this.vehicles = vehicles;
+	}
+
+	public List<VehicleEnhanced> getVehicleEnhanceds() {
+		return vehicleEnhanceds;
+	}
+
+	public void setVehicleEnhanceds(List<VehicleEnhanced> vehicleEnhanceds) {
+		this.vehicleEnhanceds = vehicleEnhanceds;
 	}
 
 }

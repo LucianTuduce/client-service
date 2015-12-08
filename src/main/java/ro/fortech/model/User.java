@@ -10,6 +10,7 @@ public class User {
 	private String username;
 	private String password;
 	private String  country;
+	
 	public String getUsername() {
 		return username;
 	}
