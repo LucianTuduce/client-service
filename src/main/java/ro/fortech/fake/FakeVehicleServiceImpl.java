@@ -47,7 +47,7 @@ public class FakeVehicleServiceImpl implements VehicleService {
 			vehicle.setFuelType(FuelType.DIESEL);
 			vehicle.setEngineCapacity(1990 + i);
 			vehicle.setYear(2003 + i);
-			vehicle.setLocation("Germania" + i);
+			vehicle.setLocation("Germany" + i);
 			vehicle.setPrice(3000 + i);
 			vehicle.setVehicleType(VehicleType.CAR);
 			vehicles.add(vehicle);
@@ -59,7 +59,7 @@ public class FakeVehicleServiceImpl implements VehicleService {
 		vehicle6.setFuelType(FuelType.DIESEL);
 		vehicle6.setEngineCapacity(1990);
 		vehicle6.setYear(2003);
-		vehicle6.setLocation("Germania");
+		vehicle6.setLocation("Germany");
 		vehicle6.setPrice(3000);
 		vehicle6.setVehicleType(VehicleType.CAR);
 
@@ -89,7 +89,7 @@ public class FakeVehicleServiceImpl implements VehicleService {
 		vehicle3.setFuelType(FuelType.DIESEL);
 		vehicle3.setEngineCapacity(3100);
 		vehicle3.setYear(2009);
-		vehicle3.setLocation("Germania");
+		vehicle3.setLocation("Germany");
 		vehicle3.setPrice(11560);
 		vehicle3.setVehicleType(VehicleType.VAN);
 
@@ -109,7 +109,7 @@ public class FakeVehicleServiceImpl implements VehicleService {
 		vehicle5.setFuelType(FuelType.DIESEL);
 		vehicle5.setEngineCapacity(5700);
 		vehicle5.setYear(2013);
-		vehicle5.setLocation("Germania");
+		vehicle5.setLocation("Germany");
 		vehicle5.setPrice(73000);
 		vehicle5.setVehicleType(VehicleType.TRUCK);
 
