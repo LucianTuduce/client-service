@@ -31,15 +31,20 @@ import ro.fortech.vehicle.enhance.VehicleEnhanced;
 @Stateless
 public class SearchResponseService {
 	
+	private static final int PROGRAMMERS_SOLUTION = 1;
+
+	private static final int MAGIC_NUMBER_2 = 2;
+
+	private static final int MAGIC_NUMBER_10 = 10;
+
 	@EJB
 	private UserCache userCache;
 	
 	@Inject
-	private SearchCache searchCache;
+	SearchCache searchCache;
 
-	@Inject
-	@Named("fakeVehicleServiceImpl")
-	private VehicleService fakeService;
+	@EJB(name = "fakeVehicleServiceImpl")
+	VehicleService fakeService;
 
 	@Inject
 	@Named("vehicleSearchServiceImpl")
@@ -120,21 +125,32 @@ public class SearchResponseService {
 	 */
 	public Response getFilteredVehiclesBySearchCriteria(String accountToken, VehicleSearchRequest search) {
 		VehicleSearchResponse searchResponse = new VehicleSearchResponse();
+		List<Vehicle> vehicles = null;
+		List<Vehicle> vehiclesPerPage = null;
 		if (search.getLocation().equals(Constants.DEFAULT_VALUE) || search.getVehicleType().getType().equals(Constants.DEFAULT_VALUE)) {
 			searchResponse.setErrorMessage(Constants.INVALID_LOCATION_SEARCH_OR_VEHICLE_TYPE);
 		} else {
-			List<Vehicle> vehicles = fakeService.getVehicles(search);
+			vehicles = fakeService.getVehicles(search);
 			if (vehicles == null) {
 				searchResponse.setErrorMessage(Constants.SOMETHING_WENT_WRONG);
 			} else {
-				searchResponse.setVehicleCount(vehicles.size());
+				int toIndex = (MAGIC_NUMBER_2*search.getPagination().getPageNumber() - PROGRAMMERS_SOLUTION) * MAGIC_NUMBER_10 + MAGIC_NUMBER_10;
+				int fromIndex = toIndex - MAGIC_NUMBER_2*MAGIC_NUMBER_10;
+				if(fromIndex > vehicles.size()){
+					vehiclesPerPage = new ArrayList<>();			
+				}else if(toIndex > vehicles.size()){
+					vehiclesPerPage = vehicles.subList(fromIndex, vehicles.size());
+				}else{
+					vehiclesPerPage = vehicles.subList(fromIndex, toIndex);
+				}
+				searchResponse.setVehicleCount(vehiclesPerPage.size());
 				searchResponse.setErrorMessage(Constants.ALL_GOOD);
-				searchResponse.setVehicles(vehicles);
+				searchResponse.setVehicles(vehiclesPerPage);
 			}
 		}
+		
 		initUserSearchCache(search, accountToken);
 		return Response.status(Response.Status.OK).entity(searchResponse).build();
-
 	}
 
 	private void initUserSearchCache(VehicleSearchRequest search, String acountToken) {

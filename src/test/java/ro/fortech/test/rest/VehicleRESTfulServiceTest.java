@@ -1,4 +1,4 @@
-package ro.fortech;
+package ro.fortech.test.rest;
 
 import static org.junit.Assert.*;
 

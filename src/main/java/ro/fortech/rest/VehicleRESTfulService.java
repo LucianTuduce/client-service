@@ -13,8 +13,11 @@ import javax.ws.rs.core.Response;
 
 import ro.fortech.caching.AccountCachingService;
 import ro.fortech.credentials.LoginCredentials;
+import ro.fortech.pagination.Pagination;
 import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.search.response.SearchResponseService;
+import ro.fortech.type.FuelType;
+import ro.fortech.type.VehicleType;
 import ro.fortech.validation.AccountValidationService;
 
 @Path("/vehicle")
@@ -41,6 +44,29 @@ public class VehicleRESTfulService {
 		return accountCachingService.initUsersInCacheMemory();
 	}
 
+	@GET
+	@Path("/req")
+	@Produces("application/json")
+	public VehicleSearchRequest geetReq(){
+		VehicleSearchRequest request = new VehicleSearchRequest();
+		Pagination pagination = new Pagination();
+		pagination.setElemetsPerPage(20);
+		pagination.setPageNumber(3);
+		request.setFin(" ");
+		request.setFuelType(FuelType.DEFAULT);
+		request.setLocation("Germany");
+		request.setMaxCapacity(0);
+		request.setMinCapacity(0);
+		request.setMaxPrice(0);
+		request.setMinPrice(0);
+		request.setVehicleType(VehicleType.CAR);
+		request.setMaxYear(0);
+		request.setMinYear(0);
+		request.setModel(" ");
+		request.setPagination(pagination);
+		return request;
+	}
+	
 	@POST
 	@Path("/filtered")
 	@Produces("application/json")

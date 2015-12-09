@@ -43,11 +43,11 @@ public class FakeVehicleServiceImpl implements VehicleService {
 		for (int i = 0; i <= vehicleCount; i++) {
 			vehicle = new Vehicle();
 			vehicle.setFin("GR3847UC32" + i);
-			vehicle.setModel("Volskwagen Passat" + i);
+			vehicle.setModel("Volskwagen Passat");
 			vehicle.setFuelType(FuelType.DIESEL);
 			vehicle.setEngineCapacity(1990 + i);
 			vehicle.setYear(2003 + i);
-			vehicle.setLocation("Germania" + i);
+			vehicle.setLocation("Germany");
 			vehicle.setPrice(3000 + i);
 			vehicle.setVehicleType(VehicleType.CAR);
 			vehicles.add(vehicle);
@@ -155,12 +155,8 @@ public class FakeVehicleServiceImpl implements VehicleService {
 	@Override
 	public List<Vehicle> getVehicles(VehicleSearchRequest request) {
 		if (cache.getVehicles() == null) {
-			System.out.println("List not init");
-			cache.setVehicles(generateRandomVehicles(1000000));
-			System.out.println(cache);
-			List<Vehicle> list = new ArrayList<>();
-			list = searchService.getSearch(request, cache.getVehicles());
-			System.err.println(list);
+			cache.setVehicles(generateRandomVehicles(1002));
+
 			return searchService.getSearch(request, cache.getVehicles());
 		} else {
 			return searchService.getSearch(request, cache.getVehicles());
