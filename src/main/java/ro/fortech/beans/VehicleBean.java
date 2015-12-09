@@ -51,7 +51,7 @@ public class VehicleBean {
 		searchVehicleBean.createSearchVechicle();
 		return "Success";
 	}
-	public String searchVechicle() {
+	public List<Vehicle> searchVechicle() {
 		
 		searchedVehicles = new ArrayList<Vehicle>();
 		VehicleSearchRequest searchRequest = searchVehicleBean.createSearchVechicle();
@@ -79,8 +79,8 @@ public class VehicleBean {
 //
 //		searchedVehicles.add(vehicle1);
 //		searchedVehicles.add(vehicle6);
-		
-		return "success";
+		System.out.println(searchedVehicles.size());
+		return searchedVehicles;
 	}
 
 	public SearchVehicleBean getSearchVehicleBean() {

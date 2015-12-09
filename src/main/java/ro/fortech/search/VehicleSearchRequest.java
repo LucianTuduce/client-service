@@ -97,7 +97,6 @@ public class VehicleSearchRequest {
 	}
 	public void setPagination(Pagination pagination) {
 		this.pagination = pagination;
-	}
-	
+	}	
 	
 }

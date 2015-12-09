@@ -32,27 +32,23 @@ public class SearchVehicleBean {
 	public VehicleSearchRequest createSearchVechicle() {
 
 		VehicleSearchRequest searchRequest = new VehicleSearchRequest();
-		searchRequest.setFin(searchFin);
-		FuelType fuelTypeEnum = FuelType.getEnum(this.searchVehicleType);
-		searchRequest.setFuelType(fuelTypeEnum);
-		if (searchLocation == null) {
-			searchLocation = "Romania";
-		}
+		searchRequest.setFin(" ");
+		System.out.println("Vehicle Type: "+searchVehicleType);
+		System.out.println("Location "+ searchLocation);
+		System.out.println("Model: "+ searchModel);
+		System.out.println("FuelTyp: "+searchFuelType);
+		
 		searchRequest.setLocation(searchLocation);
-		searchRequest.setMaxCapacity(searchMaxCapacity);
-		searchRequest.setMaxPrice(searchMaxPrice);
-		searchRequest.setMaxYear(searchMaxYear);
+		searchRequest.setMaxCapacity(30000);
+		searchRequest.setMaxPrice(40000);
+		searchRequest.setMaxYear(2015);
 		searchRequest.setMinCapacity(searchMinCapacity);
 		searchRequest.setMinPrice(searchMinPrice);
 		searchRequest.setMinYear(searchMinYear);
-		searchRequest.setModel(searchModel);
-		VehicleType vehicleTypeEnum;
-		if (searchVehicleType == null) {
-			vehicleTypeEnum = VehicleType.DEFAULT;
-		} else {
-			vehicleTypeEnum = VehicleType.getEnum(searchFuelType);
-		}
-		searchRequest.setVehicleType(vehicleTypeEnum);
+		searchRequest.setModel(" ");
+		searchRequest.setFuelType(FuelType.DEFAULT);
+		
+		searchRequest.setVehicleType(VehicleType.CAR);
 
 		return searchRequest;
 	}
@@ -144,5 +140,4 @@ public class SearchVehicleBean {
 	public void setSearchVehicleType(String searchVehicleType) {
 		this.searchVehicleType = searchVehicleType;
 	}
-
 }
