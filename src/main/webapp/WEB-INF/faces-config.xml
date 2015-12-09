@@ -19,7 +19,6 @@
 			<property-name>searchVehicleBean</property-name>
 			<value>#{searchVehicleBean}</value>
 		</managed-property>
-
 	</managed-bean>
 
 </faces-config>

@@ -35,7 +35,10 @@ public class VehicleBean {
 	@Inject
 	@Named("vehicleSearchServiceImpl")
 	private VehicleSearchService searchService;
-		
+	
+	@Inject
+	private HistorySearchCache historySearchCache;
+	
 	private String fin;
 	private String model;
 	private FuelType fuelType;
@@ -43,19 +46,28 @@ public class VehicleBean {
 	private int year;
 	private String location;
 	private int price;
+	public HistorySearchCache getHistorySearchCache() {
+		return historySearchCache;
+	}
+
+	public void setHistorySearchCache(HistorySearchCache historySearchCache) {
+		this.historySearchCache = historySearchCache;
+	}
+
 	private VehicleType vehicleType;
 	private List<Vehicle> searchedVehicles;
 	
 
-	public List<Vehicle> searchVechicle() {
+	public String searchVechicle() {
 
 		
 		searchedVehicles = new ArrayList<Vehicle>();
 		VehicleSearchRequest searchRequest = searchVehicleBean.createSearchVechicle();
+		historySearchCache.getSearchHistoryRequests().add(searchRequest);
 		searchedVehicles = fakeCarService.getVehicles(searchRequest);
-
-		System.out.println(searchedVehicles.size());
-		return searchedVehicles;
+		
+		//historySearchCache.getSearchHistoryRequests().add(searchRequest);
+		return "success";
 
 	}
 

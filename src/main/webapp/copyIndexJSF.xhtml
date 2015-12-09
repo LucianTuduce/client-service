@@ -14,13 +14,6 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
 <link rel="stylesheet" href="resources/css/site.css" />
 
-<script>
-	function showInput() {
-		var message_entered = document.getElementById("VehicleChoice").value;
-		console.log(message_entered);
-	}
-</script>
-
 </head>
 
 <body>
@@ -45,9 +38,9 @@
 						<br />Vehicle Type
 				</a> <h:selectOneMenu id="result" styleclass="dropdown-menu"
 						value="#{searchVehicleBean.searchVehicleType}">
-						<f:selectItem itemValue="Personal" itemLabel="Personal"></f:selectItem>
-						<f:selectItem itemValue="Commercial" itemLabel="Commercial"></f:selectItem>
-						<f:selectItem itemValue="Truck" itemLabel="Truck"></f:selectItem>
+						<f:selectItem itemValue="CAR" itemLabel="CAR"></f:selectItem>
+						<f:selectItem itemValue="VAN" itemLabel="VAN"></f:selectItem>
+						<f:selectItem itemValue="TRUCK" itemLabel="Truck"></f:selectItem>
 						<f:ajax event="change" update="@this" render="result" />
 					</h:selectOneMenu></li>
 				<li><a href="#" class="dropdown-toggle text-center"
@@ -102,6 +95,8 @@
 							<f:selectItem itemValue="Volvo" itemLabel="Model - Volvo" />
 							<f:selectItem itemValue="Saab" itemLabel="Model - Saab" />
 							<f:selectItem itemValue="Mercedes" itemLabel="Model - Mercedes" />
+							<f:selectItem itemValue="Volskwagen Passat" itemLabel="Model - Volskwagen Passat" />
+							<f:selectItem itemValue="Dacia Logan" itemLabel="Model - Dacia Logan" />
 						</h:selectOneMenu>
 					</div>
 				</div>
@@ -167,7 +162,6 @@
 	</div>
 
 	<div class="col-sm-8 table-responsive">
-
 		<h:dataTable value="#{vehicleBean.searchedVehicles}" var="vehicle" class="table table-striped">
 			<h:column>
 				<f:facet name="header">FIN</f:facet>
@@ -198,9 +192,26 @@
 				<f:facet name="header">Price</f:facet>
 				<h:outputText value="#{vehicle.price}" />
 			</h:column>
-
 		</h:dataTable>
 	</div>
+	
+	<div>
+		<h:dataTable value="#{vehicleBean.historySearchCache.searchHistoryRequests}" var="history" class="table table-striped">
+			<h:column>
+				<f:facet name="header">FIN</f:facet>
+				<h:outputText value="#{history.fin}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Model</f:facet>
+				<h:outputText value="#{history.model}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Location</f:facet>
+				<h:outputText value="#{history.location}" />
+			</h:column>
+		</h:dataTable>
+	</div>
+	
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
