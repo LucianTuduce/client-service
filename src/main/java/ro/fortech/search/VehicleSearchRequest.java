@@ -1,5 +1,6 @@
 package ro.fortech.search;
 
+import ro.fortech.pagination.Pagination;
 import ro.fortech.type.FuelType;
 import ro.fortech.type.VehicleType;
 
@@ -21,6 +22,7 @@ public class VehicleSearchRequest {
 	private int minPrice;
 	private int maxPrice;
 	private VehicleType vehicleType;
+	private Pagination pagination;
 	
 	
 	public String getFin() {
@@ -89,6 +91,12 @@ public class VehicleSearchRequest {
 	}
 	public void setFuelType(FuelType fuelType) {
 		this.fuelType = fuelType;
+	}
+	public Pagination getPagination() {
+		return pagination;
+	}
+	public void setPagination(Pagination pagination) {
+		this.pagination = pagination;
 	}
 	
 	
