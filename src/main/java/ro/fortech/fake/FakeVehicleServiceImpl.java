@@ -43,11 +43,11 @@ public class FakeVehicleServiceImpl implements VehicleService {
 		for (int i = 0; i <= vehicleCount; i++) {
 			vehicle = new Vehicle();
 			vehicle.setFin("GR3847UC32" + i);
-			vehicle.setModel("Volskwagen Passat" + i);
+			vehicle.setModel("Volskwagen Passat");
 			vehicle.setFuelType(FuelType.DIESEL);
 			vehicle.setEngineCapacity(1990 + i);
 			vehicle.setYear(2003 + i);
-			vehicle.setLocation("Germany" + i);
+			vehicle.setLocation("Germany");
 			vehicle.setPrice(3000 + i);
 			vehicle.setVehicleType(VehicleType.CAR);
 			vehicles.add(vehicle);
@@ -59,7 +59,7 @@ public class FakeVehicleServiceImpl implements VehicleService {
 		vehicle6.setFuelType(FuelType.DIESEL);
 		vehicle6.setEngineCapacity(1990);
 		vehicle6.setYear(2003);
-		vehicle6.setLocation("Germany");
+		vehicle6.setLocation("Germania");
 		vehicle6.setPrice(3000);
 		vehicle6.setVehicleType(VehicleType.CAR);
 
@@ -89,7 +89,7 @@ public class FakeVehicleServiceImpl implements VehicleService {
 		vehicle3.setFuelType(FuelType.DIESEL);
 		vehicle3.setEngineCapacity(3100);
 		vehicle3.setYear(2009);
-		vehicle3.setLocation("Germany");
+		vehicle3.setLocation("Germania");
 		vehicle3.setPrice(11560);
 		vehicle3.setVehicleType(VehicleType.VAN);
 
@@ -109,7 +109,7 @@ public class FakeVehicleServiceImpl implements VehicleService {
 		vehicle5.setFuelType(FuelType.DIESEL);
 		vehicle5.setEngineCapacity(5700);
 		vehicle5.setYear(2013);
-		vehicle5.setLocation("Germany");
+		vehicle5.setLocation("Germania");
 		vehicle5.setPrice(73000);
 		vehicle5.setVehicleType(VehicleType.TRUCK);
 
@@ -155,12 +155,8 @@ public class FakeVehicleServiceImpl implements VehicleService {
 	@Override
 	public List<Vehicle> getVehicles(VehicleSearchRequest request) {
 		if (cache.getVehicles() == null) {
-			System.out.println("List not init");
-			cache.setVehicles(generateRandomVehicles(1000000));
-			System.out.println(cache);
-			List<Vehicle> list = new ArrayList<>();
-			list = searchService.getSearch(request, cache.getVehicles());
-			System.err.println(list);
+			cache.setVehicles(generateRandomVehicles(1002));
+
 			return searchService.getSearch(request, cache.getVehicles());
 		} else {
 			return searchService.getSearch(request, cache.getVehicles());

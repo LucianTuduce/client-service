@@ -2,6 +2,8 @@ package ro.fortech.def.value;
 
 import java.util.Calendar;
 
+import ro.fortech.type.VehicleType;
+
 /**
  * This enum is used to define the default values for the search criteria if
  * none are provided by the user. Default value means that in filtering, the
@@ -21,7 +23,7 @@ public enum DefaultValues {
 	LOCATION_DEFAULT("Germany"),
 	MIN_PRICE_DEFAULT(0),
 	MAX_PRICE_DEFAULT(0),
-	VEHICLE_TYPE_DEFAULT(" ");
+	VEHICLE_TYPE_DEFAULT(VehicleType.CAR.getType());
 	// @formatter:on
 
 	private String def;

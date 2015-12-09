@@ -34,7 +34,7 @@ public class SearchHelper {
 		} else {
 			intermediateSearchVehicles = new ArrayList<>();
 			for (Vehicle vehicle : vehicles) {
-				if (vehicle.getModel().equals(search.getModel())) {
+				if (vehicle.getModel().equalsIgnoreCase(search.getModel())) {
 					intermediateSearchVehicles.add(vehicle);
 				}
 			}
@@ -59,7 +59,7 @@ public class SearchHelper {
 		} else {
 			intermediateSearchVehicles = new ArrayList<>();
 			for (Vehicle vehicle : vehicles) {
-				if (vehicle.getFuelType().equals(search.getFuelType())) {
+				if (vehicle.getFuelType().getFuel().equalsIgnoreCase(search.getFuelType().getFuel())) {
 					intermediateSearchVehicles.add(vehicle);
 				}
 			}
@@ -263,16 +263,12 @@ public class SearchHelper {
 	 */
 	public List<Vehicle> getVehiclesByVehicleType(List<Vehicle> vehicles, VehicleSearchRequest search) {
 		List<Vehicle> intermediateSearchVehicles = null;
-		if (search.getVehicleType().getType().equals(DefaultValues.VEHICLE_TYPE_DEFAULT.getDef())) {
-			intermediateSearchVehicles = new ArrayList<>(vehicles);
-		} else {
-			intermediateSearchVehicles = new ArrayList<>();
-			for (Vehicle vehicle : vehicles) {
-				if (vehicle.getVehicleType().equals(search.getVehicleType())) {
-					intermediateSearchVehicles.add(vehicle);
-				}
+		intermediateSearchVehicles = new ArrayList<>();
+		for (Vehicle vehicle : vehicles) {
+			if (vehicle.getVehicleType().getType().equals(search.getVehicleType().getType())) {
+				intermediateSearchVehicles.add(vehicle);
 			}
 		}
-		return intermediateSearchVehicles;
+	return intermediateSearchVehicles;
 	}
 }

@@ -1,13 +1,9 @@
 package ro.fortech.beans;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import javax.faces.bean.SessionScoped;
 
 import ro.fortech.search.VehicleSearchRequest;
-import ro.fortech.services.VehicleSearchService;
-import ro.fortech.services.VehicleService;
 import ro.fortech.type.FuelType;
 import ro.fortech.type.VehicleType;
 
@@ -18,20 +14,8 @@ import ro.fortech.type.VehicleType;
  *
  */
 @ManagedBean(name = "searchVehicleBean")
-@RequestScoped
+@SessionScoped
 public class SearchVehicleBean {
-
-	@Inject
-	@Named("fakeVehicleServiceImpl")
-	private VehicleService fakeCarService;
-
-	@Inject
-	@Named("searchServiceUtils")
-	private VehicleSearchService searchServiceUtils;
-
-	@Inject
-	@Named("vehicleSearchServiceImpl")
-	private VehicleSearchService searchService;
 
 	private String searchFin;
 	private String searchModel;
@@ -48,54 +32,27 @@ public class SearchVehicleBean {
 	public VehicleSearchRequest createSearchVechicle() {
 
 		VehicleSearchRequest searchRequest = new VehicleSearchRequest();
-		searchRequest.setFin(searchFin);
-		FuelType fuelTypeEnum = FuelType.getEnum(this.searchVehicleType);
-		searchRequest.setFuelType(fuelTypeEnum);
-		if (searchLocation == null) {
-			searchLocation = "Romania";
-		}
+		searchRequest.setFin(" ");
+		System.out.println("Vehicle Type: "+searchVehicleType);
+		System.out.println("Location "+ searchLocation);
+		System.out.println("Model: "+ searchModel);
+		System.out.println("FuelTyp: "+searchFuelType);
+		
 		searchRequest.setLocation(searchLocation);
-		searchRequest.setMaxCapacity(searchMaxCapacity);
-		searchRequest.setMaxPrice(searchMaxPrice);
-		searchRequest.setMaxYear(searchMaxYear);
+		searchRequest.setMaxCapacity(30000);
+		searchRequest.setMaxPrice(40000);
+		searchRequest.setMaxYear(2015);
 		searchRequest.setMinCapacity(searchMinCapacity);
 		searchRequest.setMinPrice(searchMinPrice);
 		searchRequest.setMinYear(searchMinYear);
-		searchRequest.setModel(searchModel);
-		VehicleType vehicleTypeEnum;
-		if (searchVehicleType == null) {
-			vehicleTypeEnum = VehicleType.DEFAULT;
-		} else {
-			vehicleTypeEnum = VehicleType.getEnum(searchFuelType);
-		}
-		searchRequest.setVehicleType(vehicleTypeEnum);
+		searchRequest.setModel(" ");
+		searchRequest.setFuelType(FuelType.DEFAULT);
+		
+		searchRequest.setVehicleType(VehicleType.CAR);
 
 		return searchRequest;
 	}
-	public VehicleService getFakeCarService() {
-		return fakeCarService;
-	}
-
-	public void setFakeCarService(VehicleService fakeCarService) {
-		this.fakeCarService = fakeCarService;
-	}
-
-	public VehicleSearchService getSearchServiceUtils() {
-		return searchServiceUtils;
-	}
-
-	public void setSearchServiceUtils(VehicleSearchService searchServiceUtils) {
-		this.searchServiceUtils = searchServiceUtils;
-	}
-
-	public VehicleSearchService getSearchService() {
-		return searchService;
-	}
-
-	public void setSearchService(VehicleSearchService searchService) {
-		this.searchService = searchService;
-	}
-
+	
 	public String getSearchFin() {
 		return searchFin;
 	}
@@ -183,5 +140,4 @@ public class SearchVehicleBean {
 	public void setSearchVehicleType(String searchVehicleType) {
 		this.searchVehicleType = searchVehicleType;
 	}
-
 }

@@ -6,8 +6,13 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import ro.fortech.model.Vehicle;
+import ro.fortech.search.VehicleSearchRequest;
+import ro.fortech.services.VehicleSearchService;
+import ro.fortech.services.VehicleService;
 import ro.fortech.type.FuelType;
 import ro.fortech.type.VehicleType;
 
@@ -18,6 +23,18 @@ public class VehicleBean {
 
 	@ManagedProperty(value="#{searchVehicleBean}")
 	SearchVehicleBean searchVehicleBean;
+	
+	@Inject
+	@Named("fakeVehicleServiceImpl")
+	private VehicleService fakeCarService;
+
+	@Inject
+	@Named("searchServiceUtils")
+	private VehicleSearchService searchServiceUtils;
+
+	@Inject
+	@Named("vehicleSearchServiceImpl")
+	private VehicleSearchService searchService;
 		
 	private String fin;
 	private String model;
@@ -29,39 +46,49 @@ public class VehicleBean {
 	private VehicleType vehicleType;
 	private List<Vehicle> searchedVehicles;
 	
-	public String searchVechicle() {
-
+	
+	public String Vechicl2e(){
+		searchVehicleBean.createSearchVechicle();
+		return "Success";
+	}
+	public List<Vehicle> searchVechicle() {
+		
 		searchedVehicles = new ArrayList<Vehicle>();
-		
-		// List<Vehicle> vehicles = new ArrayList<Vehicle>();
-		// vehicles = fakeCarService.getVehicles(searchRequest);
-		// listVehicles = vehicles;
+		VehicleSearchRequest searchRequest = searchVehicleBean.createSearchVechicle();
+		searchedVehicles = fakeCarService.getVehicles(searchRequest);
 
-		Vehicle vehicle6 = new Vehicle();
-		vehicle6.setFin("GR3847UC32");
-		vehicle6.setModel("Volskwagen Passat");
-		vehicle6.setFuelType(FuelType.DIESEL);
-		vehicle6.setEngineCapacity(1990);
-		vehicle6.setYear(2003);
-		vehicle6.setLocation("Germania");
-		vehicle6.setPrice(3000);
-		vehicle6.setVehicleType(VehicleType.CAR);
+//		Vehicle vehicle6 = new Vehicle();
+//		vehicle6.setFin("GR3847UC32");
+//		vehicle6.setModel("Volskwagen Passat");
+//		vehicle6.setFuelType(FuelType.DIESEL);
+//		vehicle6.setEngineCapacity(1990);
+//		vehicle6.setYear(2003);
+//		vehicle6.setLocation("Germania");
+//		vehicle6.setPrice(3000);
+//		vehicle6.setVehicleType(VehicleType.CAR);
+//
+//		Vehicle vehicle1 = new Vehicle();
+//		vehicle1.setFin("RO5347UK34");
+//		vehicle1.setModel("Dacia Logan");
+//		vehicle1.setFuelType(FuelType.GASOLINE);
+//		vehicle1.setEngineCapacity(1400);
+//		vehicle1.setYear(2005);
+//		vehicle1.setLocation("Romania");
+//		vehicle1.setPrice(4500);
+//		vehicle1.setVehicleType(VehicleType.CAR);
+//
+//		searchedVehicles.add(vehicle1);
+//		searchedVehicles.add(vehicle6);
+		System.out.println(searchedVehicles.size());
+		return searchedVehicles;
+	}
 
-		Vehicle vehicle1 = new Vehicle();
-		vehicle1.setFin("RO5347UK34");
-		vehicle1.setModel("Dacia Logan");
-		vehicle1.setFuelType(FuelType.GASOLINE);
-		vehicle1.setEngineCapacity(1400);
-		vehicle1.setYear(2005);
-		vehicle1.setLocation("Romania");
-		vehicle1.setPrice(4500);
-		vehicle1.setVehicleType(VehicleType.CAR);
+	public SearchVehicleBean getSearchVehicleBean() {
+		return searchVehicleBean;
+	}
 
-		searchedVehicles.add(vehicle1);
-		
-		searchedVehicles.add(vehicle6);
-
-		return "success";
+	public void setSearchVehicleBean(SearchVehicleBean searchVehicleBean) {
+		this.searchVehicleBean = searchVehicleBean;
 	}
 
 	public String getFin() {
@@ -120,6 +147,5 @@ public class VehicleBean {
 	public void setSearchedVehicles(List<Vehicle> searchedVehicles) {
 		this.searchedVehicles = searchedVehicles;
 	}
-	
 	
 }
