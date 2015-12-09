@@ -11,153 +11,44 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-inverse" ng-controller="HeaderController">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand text-center" href="index.xhtml"><span class="glyphicon glyphicon-home"></span><br/>Home</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a id="VehicleType" href="#" class="dropdown-toggle text-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <span class="glyphicon glyphicon-home"></span><span class="caret"></span>
-                            <br/>Vehicle Type
-                        </a>
-                        <ul id="VehicleChoice" class="dropdown-menu" data-toggle="buttons">
-                            <li><a href="#" ng-click="VehicleTypeSelect($event)">Personal</a></li>
-                            <li><a href="#" ng-click="VehicleTypeSelect($event)">Commercial</a></li>
-                            <li><a href="#" ng-click="VehicleTypeSelect($event)">Truck</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="dropdown-toggle text-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <span class="glyphicon glyphicon-search"></span><span class="caret"></span>
-                            <br/>Search
-                        </a>
-                    </li>
-                    <li><a class="" href="#"><span class="glyphicon glyphicon-road"></span><br/>Link2</a></li>
-                    <li><a class="text-center" href="#"><span class="glyphicon glyphicon-road"></span><br/>Link3</a></li>
-                   
-                </ul>
-                <!-- Search the site -->
-                <ul class="nav navbar-nav navbar-right">
-
-                    <li class="dropdown"><a id="Country" href="#" class="dropdown-toggle text-center" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> <b class="caret"></b><br/>Country/Language</a>  
-                        <ul class="dropdown-menu">
-                            <li class="dropdown dropdown-submenu"><a ng-click="CountrySelect($event)" href="#" class="dropdown-toggle" data-toggle="dropdown">Germany</a>
-                                <ul class="dropdown-menu dropdown-left"> <!-- open submenu on left-->
-                                    <li><a href="#">German</a></li>
-                                    <li><a href="#">English</a></li>
-                                </ul>
-                            </li>
-                            <li class="divider"></li>
-                            <li class="dropdown dropdown-submenu"><a ng-click="CountrySelect($event)" href="#" class="dropdown-toggle" data-toggle="dropdown">Romania</a>
-                                <ul class="dropdown-menu dropdown-left"> <!-- open submenu on left-->
-                                    <li><a href="#">Romanian</a></li>
-                                    <li><a href="#">English</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>                    
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-            <!-- /.container-fluid -->
-        </nav>
-        <div class="col-sm-4">
-            <div class="col-sm-12">
-                <h3>Search</h3>
-                <form ng-controller="CarSearchController">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">FIN</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" ng-model="FIN" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-3 control-label">Model</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" ng-model="model">
-                                <option selected="selected" disabled="disabled">Choose option</option>
-                                <option value="Volvo">Volvo</option>
-                                <option value="Saab">Saab</option>
-                                <option value="Mercedes">Mercedes</option>
-                                <option value="Audi">Audi</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-3 control-label">Fuel Type</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" ng-model="FuelType">
-                                <option selected="selected" disabled="disabled">Choose option</option>
-                                <option value="Diesel">Diesel</option>
-                                <option value="Petrol">Petrol</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Capacity</label>
-                        <div class="col-sm-9">
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" placeholder="min" ng-model="CapacityMin" />
-                            </div> cm<sup>3</sup> -
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" placeholder="max" ng-model="CapacityMax" />
-                            </div> cm<sup>3</sup>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Year</label>
-                        <div class="col-sm-9">
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" placeholder="min" ng-model="YearMin" />
-                            </div> -
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" placeholder="max" ng-model="YearMax" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Price</label>
-                        <div class="col-sm-9">
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" placeholder="min" ng-model="PriceMin" />
-                            </div> -
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" placeholder="max" ng-model="PriceMax" />
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary" value="Search" ng-click="search($event)">Search
-                    </button>
-                </form>
-            </div>
-            <div class="col-sm-12">
-                <h3>Search history</h3></div>
+        <div ng-include="'header.xhtml'">
         </div>
-        <div class="col-sm-8 table-responsive">
+        <div class="col-sm-5">
+            <h3>Search</h3>
+            <div class="" ng-include="'carsearch.xhtml'">
+            </div>
+            <h3>Search history</h3>
+            <div class=""> 
+            </div>
+        </div>
+        <div class="col-sm-7 table-responsive" ng-controller="CarResultController">
             <table class="table">
-                <tr>
+                <thead>
                     <th>FIN</th>
+                    <th>Vehicle Type</th>
                     <th>Model</th>
                     <th>Fuel Type</th>
                     <th>Capacity</th>
                     <th>Year</th>
                     <th>Location(Country)</th>
                     <th>Price</th>
-                </tr>
-                <tr ng-repeat="car in cars">
-                    <td>{{car.fin}}</td>
-                    <td>{{car.model}}</td>
-                    <td>{{car.fin}}</td>
-                    <td>
-                        <a href="#" ng-click="removeCar(data)"></a>
-                    </td>
-                </tr>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="car in cars">
+                        <td>{{car.fin}}</td>
+                        <td>{{car.vehicleType}}</td>
+                        <td>{{car.model}}</td>
+                        <td>{{car.fuelType}}</td>
+                        <td>{{car.engineCapacity}}</td>
+                        <td>{{car.year}}</td>
+                        <td>{{car.location}}</td>
+                        <td>{{car.price}}</td>
+                        <td>
+                            <a href="#" ng-click="removeCar(data)">Remove Car</a>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
         <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>

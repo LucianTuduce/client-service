@@ -46,14 +46,17 @@ public class VehicleBean {
 	private VehicleType vehicleType;
 	private List<Vehicle> searchedVehicles;
 	
-	
-	public String searchVechicle() {
+
+	public List<Vehicle> searchVechicle() {
+
 		
 		searchedVehicles = new ArrayList<Vehicle>();
 		VehicleSearchRequest searchRequest = searchVehicleBean.createSearchVechicle();
 		searchedVehicles = fakeCarService.getVehicles(searchRequest);
 
-		return "success";
+		System.out.println(searchedVehicles.size());
+		return searchedVehicles;
+
 	}
 
 	public SearchVehicleBean getSearchVehicleBean() {
