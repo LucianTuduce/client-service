@@ -2,7 +2,6 @@ package ro.fortech.beans;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
 import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.type.FuelType;
 import ro.fortech.type.VehicleType;
@@ -24,14 +23,18 @@ public class SearchVehicleBean {
 	private int searchMaxCapacity;
 	private int searchMinYear;
 	private int searchMaxYear;
-	private String searchLocation;
+	private String searchLocation="Germany";
 	private int searchMaxPrice;
 	private int searchMinPrice;
-	private String searchVehicleType;
+	private String searchVehicleType = "CAR";
 
 	public VehicleSearchRequest createSearchVechicle() {
 
 		VehicleSearchRequest searchRequest = new VehicleSearchRequest();
+
+		searchRequest.setFin(searchFin);
+		FuelType fuelTypeEnum = FuelType.getEnum(searchFuelType);
+
 		searchRequest.setFin(" ");
 		System.out.println("Vehicle Type: "+searchVehicleType);
 		System.out.println("Location "+ searchLocation);
@@ -45,6 +48,9 @@ public class SearchVehicleBean {
 		searchRequest.setMinCapacity(searchMinCapacity);
 		searchRequest.setMinPrice(searchMinPrice);
 		searchRequest.setMinYear(searchMinYear);
+		searchRequest.setModel(searchModel);
+		VehicleType vehicleTypeEnum = VehicleType.getEnum(searchVehicleType);
+		searchRequest.setVehicleType(vehicleTypeEnum);
 		searchRequest.setModel(" ");
 		searchRequest.setFuelType(FuelType.DEFAULT);
 		
