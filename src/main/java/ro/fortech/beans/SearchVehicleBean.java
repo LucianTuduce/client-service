@@ -2,6 +2,8 @@ package ro.fortech.beans;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
+import ro.fortech.def.value.DefaultValues;
 import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.type.FuelType;
 import ro.fortech.type.VehicleType;
@@ -23,23 +25,44 @@ public class SearchVehicleBean {
 	private int searchMaxCapacity;
 	private int searchMinYear;
 	private int searchMaxYear;
-	private String searchLocation="Germany";
+	private String searchLocation;
 	private int searchMaxPrice;
 	private int searchMinPrice;
-	private String searchVehicleType="CAR";
+	private String searchVehicleType;
 
 	public VehicleSearchRequest createSearchVechicle() {
 
 		VehicleSearchRequest searchRequest = new VehicleSearchRequest();
 		searchRequest.setFin(searchFin);
 		searchRequest.setLocation(searchLocation);
-		searchRequest.setMaxCapacity(searchMaxCapacity);
+		
+		if(searchMaxCapacity == 0){
+			searchRequest.setMaxCapacity(DefaultValues.MAX_CAPACITY_DEFAULT.getDefValue());	
+		}else{
+			searchRequest.setMaxCapacity(searchMaxCapacity);
+		}
+		
+		if(searchMinCapacity == 0){
+			searchRequest.setMinCapacity(DefaultValues.MIN_CAPACITY_DEFAULT.getDefValue());	
+		}else{
+			searchRequest.setMinCapacity(searchMinCapacity);
+		}
+		
+		if(searchMinYear == 0){
+			searchRequest.setMinYear(DefaultValues.MIN_YEAR_DEFAULT.getDefValue());
+		}else{
+			searchRequest.setMinYear(searchMinYear);
+		}
+		
+		if(searchMaxYear == 0){
+			searchRequest.setMaxYear(DefaultValues.MAX_YEAR_DEFAULT.getDefValue());
+		}else{
+			searchRequest.setMaxYear(searchMaxYear);
+		}
+		
 		searchRequest.setMaxPrice(searchMaxPrice);
-		searchRequest.setMaxYear(searchMaxYear);
-		searchRequest.setMinCapacity(searchMinCapacity);
 		searchRequest.setMinPrice(searchMinPrice);
-		searchRequest.setMinYear(searchMinYear);
-		searchRequest.setModel(searchModel);
+		searchRequest.setModel(" ");
 		searchRequest.setFuelType(FuelType.getEnum(searchFuelType));
 		searchRequest.setVehicleType(VehicleType.getEnum(searchVehicleType));
 

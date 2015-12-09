@@ -46,6 +46,7 @@ public class VehicleBean {
 	private int year;
 	private String location;
 	private int price;
+	
 	public HistorySearchCache getHistorySearchCache() {
 		return historySearchCache;
 	}
