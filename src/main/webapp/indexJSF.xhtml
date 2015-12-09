@@ -36,11 +36,11 @@
 				role="button" aria-haspopup="true" aria-expanded="false"> <span
 					class="glyphicon glyphicon-home"></span><span class="caret"></span>
 					<br />Vehicle Type
-			</a> <h:selectOneMenu id="VehicleChoice" styleclass="dropdown-menu"
-					value="#{searchVehicleBean.searchVehicleType}">
-					<f:selectItem itemValue="Personal" itemLabel="Personal"></f:selectItem>
-					<f:selectItem itemValue="Commercial" itemLabel="Commercial"></f:selectItem>
-					<f:selectItem itemValue="Truck" itemLabel="Truck"></f:selectItem>
+			</a> <h:selectOneMenu id="VehicleChoice" styleclass="dropdown-menu" value="#{searchVehicleBean.searchVehicleType}">
+					<f:selectItem itemValue="CAR" itemLabel="CAR"></f:selectItem>
+					<f:selectItem itemValue="VAN" itemLabel="VAN"></f:selectItem>
+					<f:selectItem itemValue="TRUCK" itemLabel="Truck"></f:selectItem>
+					<f:ajax event="change" update="@this" render="VehicleChoice"></f:ajax>
 				</h:selectOneMenu>
 				</li>
 				<li><a href="#" class="dropdown-toggle text-center"
@@ -56,22 +56,20 @@
 				
 				<!-- Search the site -->
 			
-				<li class="dropdown"><a id="VehicleType" href="#" class="dropdown-toggle text-center" data-toggle="dropdown"
+				<li class="dropdown"><a id="Location" href="#" class="dropdown-toggle text-center" data-toggle="dropdown"
 										role="button" aria-haspopup="true" aria-expanded="false"> <span
 						class="glyphicon glyphicon-home"></span><span class="caret"></span>
 						<br />Country/Location 
-					</a> <h:selectOneMenu styleclass="dropdown-menu" value="#{searchVehicleBean.searchLocation}">
+					</a> <h:selectOneMenu id="LocationContry" styleclass="dropdown-menu" value="#{searchVehicleBean.searchLocation}">
 							<f:selectItem itemValue="Germany" itemLabel="Germany"></f:selectItem>
 							<f:selectItem itemValue="Romania" itemLabel="Romania"></f:selectItem>
 							<f:selectItem itemValue="UK" itemLabel="UK"></f:selectItem>
+							<f:ajax event="change" update="@this" render="LocationContry"></f:ajax>
 						</h:selectOneMenu>
 				</li>
-		
-			
-				
-					
 	</div>
 	</h:form>
+	
 	<!-- /.navbar-collapse --> <!-- /.container-fluid --> </nav>
 	<!-- /.navbar-collapse -->
 	<!-- /.container-fluid -->
@@ -94,6 +92,8 @@
 							<f:selectItem itemValue="Volvo" itemLabel="Model - Volvo" />
 							<f:selectItem itemValue="Saab" itemLabel="Model - Saab" />
 							<f:selectItem itemValue="Mercedes" itemLabel="Model - Mercedes" />
+							<f:selectItem itemValue="Volskwagen Passat" itemLabel="Model - Volskwagen Passat" />
+							<f:selectItem itemValue="Dacia Logan" itemLabel="Model - Dacia Logan" />
 						</h:selectOneMenu>
 					</div>
 				</div>
@@ -105,6 +105,7 @@
 							value="#{searchVehicleBean.searchFuelType}">
 							<f:selectItem itemValue="Diesel" itemLabel="Diesel"/>
 							<f:selectItem itemValue="Gasoline" itemLabel="Gasoline" />
+							<f:selectItem itemValue="LPG" itemLabel="LPG"></f:selectItem>
 						</h:selectOneMenu>
 					</div>
 				</div>
@@ -153,48 +154,44 @@
 					</div>
 				</div>
 				<h:commandButton value="Search"
-					action="#{vehicleBean.searchVechicle()}" />
+					action="#{vehicleBean.searchVechicle()}">
+					</h:commandButton>
 			</h:form>
 		</div>
 	</div>
 	
 	<div class="col-sm-8 table-responsive">
 
-		<table class="table">
-			<tr>
-				<th>FIN</th>
-				<th>Model</th>
-				<th>Fuel Type</th>
-				<th>Capacity</th>
-				<th>Year</th>
-				<th>Location(Country)</th>
-				<th>Price</th>
-			</tr>
-		</table>
 		<h:dataTable value="#{vehicleBean.searchedVehicles}" var="vehicle"
 			styleClass="table" headerClass="table">
 			<h:column>
+			<f:facet name="header">FIN</f:facet>
 					#{vehicle.fin}
 				</h:column>
 			<h:column>
+				<f:facet name="header">Model</f:facet>
 					#{vehicle.model}
 				</h:column>
 			<h:column>
+				<f:facet name="header">Fuel Type</f:facet>
 					#{vehicle.fuelType}
 				</h:column>
 			<h:column>
+				<f:facet name="header">Capacity</f:facet>
 					#{vehicle.engineCapacity}
 				</h:column>
 			<h:column>
+				<f:facet name="header">Year</f:facet>
 					#{vehicle.year}
 				</h:column>
 			<h:column>
+				<f:facet name="header">Location(Country)</f:facet>
 					#{vehicle.location}
 				</h:column>
 			<h:column>
+				<f:facet name="header">Price</f:facet>
 					#{vehicle.price}
 				</h:column>
-
 		</h:dataTable>
 	</div>
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>

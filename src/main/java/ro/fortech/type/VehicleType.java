@@ -5,7 +5,7 @@ package ro.fortech.type;
  *
  */
 public enum VehicleType {
-	TRUCK("Truck"), CAR("Car"), VAN("Van"), DEFAULT(" ");
+	TRUCK("Truck"), CAR("Car"), VAN("Van"), DEFAULT("");
 
 	private String type;
 
@@ -32,7 +32,7 @@ public enum VehicleType {
 		else if(VAN.name().equalsIgnoreCase(s)){
 			return VAN;
 		}
-		else if(DEFAULT.name().equalsIgnoreCase(s)){
+		else if(s == null){
 			return DEFAULT;
 		}
 		throw new IllegalArgumentException("No Enum specified for this string");
