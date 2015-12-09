@@ -57,29 +57,6 @@ public class VehicleBean {
 		VehicleSearchRequest searchRequest = searchVehicleBean.createSearchVechicle();
 		searchedVehicles = fakeCarService.getVehicles(searchRequest);
 
-//		Vehicle vehicle6 = new Vehicle();
-//		vehicle6.setFin("GR3847UC32");
-//		vehicle6.setModel("Volskwagen Passat");
-//		vehicle6.setFuelType(FuelType.DIESEL);
-//		vehicle6.setEngineCapacity(1990);
-//		vehicle6.setYear(2003);
-//		vehicle6.setLocation("Germania");
-//		vehicle6.setPrice(3000);
-//		vehicle6.setVehicleType(VehicleType.CAR);
-//
-//		Vehicle vehicle1 = new Vehicle();
-//		vehicle1.setFin("RO5347UK34");
-//		vehicle1.setModel("Dacia Logan");
-//		vehicle1.setFuelType(FuelType.GASOLINE);
-//		vehicle1.setEngineCapacity(1400);
-//		vehicle1.setYear(2005);
-//		vehicle1.setLocation("Romania");
-//		vehicle1.setPrice(4500);
-//		vehicle1.setVehicleType(VehicleType.CAR);
-//
-//		searchedVehicles.add(vehicle1);
-//		searchedVehicles.add(vehicle6);
-		System.out.println(searchedVehicles.size());
 		return searchedVehicles;
 	}
 
