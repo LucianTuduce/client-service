@@ -34,7 +34,12 @@ public class SearchVehicleBean {
 
 		VehicleSearchRequest searchRequest = new VehicleSearchRequest();
 		searchRequest.setFin(searchFin);
-		searchRequest.setLocation(searchLocation);
+
+		if(searchLocation == null){
+			searchRequest.setLocation(DefaultValues.LOCATION_DEFAULT.getDef());
+		}else{
+			searchRequest.setLocation(searchLocation);
+		}
 		
 		if(searchMaxCapacity == 0){
 			searchRequest.setMaxCapacity(DefaultValues.MAX_CAPACITY_DEFAULT.getDefValue());	
@@ -62,10 +67,15 @@ public class SearchVehicleBean {
 		
 		searchRequest.setMaxPrice(searchMaxPrice);
 		searchRequest.setMinPrice(searchMinPrice);
-		searchRequest.setModel(" ");
+		searchRequest.setModel(searchModel);
 		searchRequest.setFuelType(FuelType.getEnum(searchFuelType));
-		searchRequest.setVehicleType(VehicleType.getEnum(searchVehicleType));
-
+		
+		if(searchVehicleType == null){
+			searchRequest.setVehicleType(VehicleType.getEnum(DefaultValues.VEHICLE_TYPE_DEFAULT.getDef()));
+		}else{
+			searchRequest.setVehicleType(VehicleType.getEnum(searchVehicleType));
+		}
+	
 		return searchRequest;
 
 	}

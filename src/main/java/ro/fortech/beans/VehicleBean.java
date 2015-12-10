@@ -46,15 +46,6 @@ public class VehicleBean {
 	private int year;
 	private String location;
 	private int price;
-	
-	public HistorySearchCache getHistorySearchCache() {
-		return historySearchCache;
-	}
-
-	public void setHistorySearchCache(HistorySearchCache historySearchCache) {
-		this.historySearchCache = historySearchCache;
-	}
-
 	private VehicleType vehicleType;
 	private List<Vehicle> searchedVehicles;
 	
@@ -67,11 +58,18 @@ public class VehicleBean {
 		historySearchCache.getSearchHistoryRequests().add(searchRequest);
 		searchedVehicles = fakeCarService.getVehicles(searchRequest);
 		
-		//historySearchCache.getSearchHistoryRequests().add(searchRequest);
 		return "success";
 
 	}
 
+	public HistorySearchCache getHistorySearchCache() {
+		return historySearchCache;
+	}
+
+	public void setHistorySearchCache(HistorySearchCache historySearchCache) {
+		this.historySearchCache = historySearchCache;
+	}
+	
 	public SearchVehicleBean getSearchVehicleBean() {
 		return searchVehicleBean;
 	}
