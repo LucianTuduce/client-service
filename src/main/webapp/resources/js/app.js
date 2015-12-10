@@ -120,15 +120,18 @@ angular.module('UVSClient', [])
 
 
 .controller('SearchHistoryController', function($scope, $rootScope, Scopes, $http) {
-    $http({
-        method: 'GET',
-        url: 'http://localhost:9080/client-service/rest/vehicle/search/history',
-        headers: {
-            'Authorization': 'QmFzaWMgdXNlcjA6cGFzczA='
-        }
-    }).then(function(response) {
-        $scope.searches = response.data;
-    });
+    $rootScope.$on("CallParentMethod", function() { //Listen for trigger
+
+        $http({
+            method: 'GET',
+            url: 'http://localhost:9080/client-service/rest/vehicle/search/history',
+            headers: {
+                'Authorization': 'QmFzaWMgdXNlcjA6cGFzczA='
+            }
+        }).then(function(response) {
+            $scope.searches = response.data;
+        });
+    })
 
 
 })
