@@ -1,0 +1,71 @@
+<form class="form-horizontal" ng-controller="CarSearchController">
+    <div class="form-group">
+        <div class="col-sm-3">
+            <label class="control-label">FIN</label>
+        </div>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" ng-model="FIN" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">
+            <label class="control-label">Model</label>
+        </div>
+        <div class="col-sm-9">
+            <select class="form-control" ng-model="model">
+                <option disabled="disabled" selected="selected">Choose option</option>
+                <option value="Volskwagen Passat">Volskwagen Passat</option>
+                <option value="Mercedes Sprinter">Mercedes Sprinter</option>
+                <option value="Dacia Logan">Dacia Logan</option>
+                <option value="Volvo Truck">Volvo Truck</option>
+                <option value="Volskwagen Transporter">Volskwagen Transporter</option>
+                <option value="Mercedes Truck">Mercedes Truck</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">
+            <label class="control-label">Fuel Type</label>
+        </div>
+        <div class="col-sm-9">
+            <select class="form-control" ng-model="FuelType">
+                <option selected="selected" disabled="disabled">Choose option</option>
+                <option value="DIESEL">Diesel</option>
+                <option value="GASOLINE">Gasoline</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group form-inline">
+        <div class="col-sm-3">
+            <label class="control-label">Capacity</label>
+        </div>
+        <div class="col-sm-9 ">
+            <input type="text" size="4" class="form-control" placeholder="min" ng-model="CapacityMin" />cm<sup>3</sup>-
+            <input type="text" size="4" class="form-control" placeholder="max" ng-model="CapacityMax" />cm<sup>3</sup>
+        </div>
+    </div>
+    <div class="form-group form-inline">
+        <div class="col-sm-3">
+            <label class=" control-label">Year</label>
+        </div>
+        <div class="col-sm-9">
+            <input type="text" size="4" class="form-control" placeholder="min" ng-model="YearMin" />-
+            <input type="text" size="4" class="form-control" placeholder="max" ng-model="YearMax" />
+        </div>
+    </div>
+    <div class="form-group form-inline">
+        <div class="col-sm-3">
+            <label class="control-label">Price</label>
+        </div>
+        <div class="col-sm-9">
+            <input type="text" size="4" class="form-control" placeholder="min" ng-model="PriceMin" />-
+            <input type="text" size="4" class="form-control" placeholder="max" ng-model="PriceMax" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12">
+        <button class="btn btn-primary" value="Search" ng-click="search($event)">Search
+        </button>
+    </div>
+    </div>
+</form>

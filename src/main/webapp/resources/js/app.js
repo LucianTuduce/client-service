@@ -1,27 +1,8 @@
-/* function for opening submenus */
-
-(function($) {
-    $(document).ready(function() {
-        $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            $(this).parent().siblings().removeClass('open');
-            $(this).parent().toggleClass('open');
-        });
-    });
-})(jQuery);
-
-
-
-
 angular.module('UVSClient', [])
 
-.run(function($rootScope) {
-    $rootScope.$on('scope.stored', function(event, data) {
-        console.log("scope.stored", data);
-    });
-})
+/*  */
 
+/* factory to connect controllers */
 .factory('Scopes', function($rootScope) {
     var mem = {};
     return {
@@ -68,70 +49,100 @@ angular.module('UVSClient', [])
     $scope.cars = [];
 
     $scope.search = function(event) {
+        var FINVar = $scope.FIN;
+        var modelVar = $scope.model;
+        var FuelTypeVar = $scope.FuelType;
+        var CapacityMinVar = $scope.CapacityMin;
+        var CapacityMaxVar = $scope.CapacityMax;
+        var YearMinVar = $scope.YearMin;
+        var YearMaxVar = $scope.YearMax;
+        var PriceMinVar = $scope.PriceMin;
+        var PriceMaxVar = $scope.PriceMax;
+
         if ($scope.FIN == undefined) {
-            $scope.FIN = " ";
+            FINVar = " ";
         }
         if ($scope.model == undefined) {
-            $scope.model = " ";
+            modelVar = " ";
         }
         if ($scope.FuelType == undefined) {
-            $scope.FuelType = "DEFAULT";
+            FuelTypeVar = "DEFAULT";
         }
         if ($scope.CapacityMin == undefined) {
-            $scope.CapacityMin = 0;
+            CapacityMinVar = 0;
         }
         if ($scope.CapacityMax == undefined) {
-            $scope.CapacityMax = 30000;
+            CapacityMaxVar = 30000;
         }
         if ($scope.YearMin == undefined) {
-            $scope.YearMin = 1900;
+            YearMinVar = 1900;
         }
         if ($scope.YearMax == undefined) {
-            $scope.YearMax = 2015;
+            YearMaxVar = 2015;
         }
         if ($scope.PriceMin == undefined) {
-            $scope.PriceMin = 0;
+            PriceMinVar = 0;
         }
         if ($scope.PriceMax == undefined) {
-            $scope.PriceMax = 0;
+            PriceMaxVar = 0;
         }
-
-
 
 
         $http.post('http://localhost:9080/client-service/rest/vehicle/filtered', {
-            fin: $scope.FIN,
-            model: $scope.model,
-            fuelType: $scope.FuelType,
-            minCapacity: $scope.CapacityMin,
-            maxCapacity: $scope.CapacityMax,
-            minYear: $scope.YearMin,
-            maxYear: $scope.YearMax,
+            fin: FINVar,
+            model: modelVar,
+            fuelType: FuelTypeVar,
+            minCapacity: CapacityMinVar,
+            maxCapacity: CapacityMaxVar,
+            minYear: YearMinVar,
+            maxYear: YearMaxVar,
             location: Scopes.get('HeaderController').Country,
-            minPrice: $scope.PriceMin,
-            maxPrice: $scope.PriceMax,
-            vehicleType: Scopes.get('HeaderController').vehicleType
+            minPrice: PriceMinVar,
+            maxPrice: PriceMaxVar,
+            vehicleType: Scopes.get('HeaderController').vehicleType,
+            pagination: {
+                pageNumber: 1,
+                elemetsPerPage: 20
+            }
         }, {
             headers: {
                 'Authorization': 'QmFzaWMgdXNlcjA6cGFzczA='
             }
         }).success(function(data) {
-            $scope.carsRetrieved = data.vehicles;            
-                $rootScope.$emit("CallParentMethod", {});
-            
+            $scope.carsRetrieved = data.vehicles;
+            $rootScope.$emit("CallParentMethod", {}); //trigger function on CarResultController
+
 
 
         });
     }
 })
 
+
+.controller('SearchHistoryController', function($scope, $rootScope, Scopes, $http) {
+    $http({
+        method: 'GET',
+        url: 'http://localhost:9080/client-service/rest/vehicle/search/history',
+        headers: {
+            'Authorization': 'QmFzaWMgdXNlcjA6cGFzczA='
+        }
+    }).then(function(response) {
+        $scope.searches = response.data;
+    });
+
+
+})
+
+
 .controller('CarResultController', function($scope, $rootScope, Scopes, $http) {
-    $rootScope.$on("CallParentMethod", function() {
+    $rootScope.$on("CallParentMethod", function() { //Listen for trigger
         $scope.cars = Scopes.get('CarSearchController').carsRetrieved;
         console.log($scope.cars);
     });
 
 
 })
+
+
 
 ;
