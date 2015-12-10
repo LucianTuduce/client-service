@@ -55,15 +55,7 @@ public class SearchResponseService {
 	private HttpServletResponse response;
 
 	public Response getUserSearchHistory(String accountToken) {
-		List<VehicleSearchRequest> searchRequests = searchCache.getSearchRequests().get(accountToken);
-		List<VehicleSearchRequest> splittedSearchRequests = null;
-		if(searchRequests.size()>5){
-			splittedSearchRequests = searchRequests.subList(searchRequests.size() - 5, searchRequests.size());
-		}else {
-			splittedSearchRequests = searchRequests.subList(0, searchRequests.size());
-		}
-		Collections.reverse(splittedSearchRequests);
-		return Response.status(Response.Status.OK).entity(splittedSearchRequests).build();
+		return Response.status(Response.Status.OK).entity(searchCache.getSearchRequests().get(accountToken)).build();
 	}
 
 	public Response getUserSavedSearchHistory(String accountToken) {
@@ -163,13 +155,22 @@ public class SearchResponseService {
 	}
 
 	private void initUserSearchCache(VehicleSearchRequest search, String acountToken) {
-		if (searchCache.getSearchRequests().get(acountToken) == null) {
-			List<VehicleSearchRequest> vehicleSearchRequests = new ArrayList<VehicleSearchRequest>();
-			vehicleSearchRequests.add(search);
-			searchCache.getSearchRequests().put(acountToken, vehicleSearchRequests);
-		} else {
-			searchCache.getSearchRequests().get(acountToken).add(search);
+		List<VehicleSearchRequest> searchRequests = searchCache.getSearchRequests().get(acountToken);
+		List<VehicleSearchRequest> splittedSearchRequests = null;
+		
+		if (searchRequests == null) {
+			searchRequests = new ArrayList<VehicleSearchRequest>();
+		} 
+			
+		searchRequests.add(search);
+		
+		if(searchRequests.size()>5){
+			splittedSearchRequests = searchRequests.subList(searchRequests.size() - 5, searchRequests.size());
+		}else {
+			splittedSearchRequests = searchRequests.subList(0, searchRequests.size());
 		}
+		Collections.reverse(splittedSearchRequests);
+		searchCache.getSearchRequests().put(acountToken, splittedSearchRequests);
 	}
 
 	public Response getVehicleEnhancedByFin(String accountToken, String fin) {
