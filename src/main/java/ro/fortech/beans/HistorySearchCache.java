@@ -32,10 +32,11 @@ public class HistorySearchCache implements Serializable{
 
 	public List<VehicleSearchRequest> getHistory(VehicleSearchRequest searchRequest) {
 		
-		if(searchHistory.size() == DefaultValues.HISTORY_SIZE.getDefValue()){
+		if(searchHistory.size() == DefaultValues.HISTORY_SIZE.getDefValue() ){
 			searchHistory = addToHistoryListToStart(searchHistory, searchRequest);
-		}else{
-			searchHistory.add(searchRequest);
+		}
+		else{
+			searchHistory.add(0,searchRequest);
 		}
 		return searchHistory;
 	}
