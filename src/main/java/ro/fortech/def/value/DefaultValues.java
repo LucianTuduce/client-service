@@ -23,7 +23,8 @@ public enum DefaultValues {
 	LOCATION_DEFAULT("Germany"),
 	MIN_PRICE_DEFAULT(0),
 	MAX_PRICE_DEFAULT(0),
-	VEHICLE_TYPE_DEFAULT(VehicleType.CAR.getType());
+	VEHICLE_TYPE_DEFAULT(VehicleType.CAR.getType()),
+	HISTORY_SIZE(5);
 	// @formatter:on
 
 	private String def;

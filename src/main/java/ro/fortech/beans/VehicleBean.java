@@ -55,7 +55,7 @@ public class VehicleBean {
 		
 		searchedVehicles = new ArrayList<Vehicle>();
 		VehicleSearchRequest searchRequest = searchVehicleBean.createSearchVechicle();
-		historySearchCache.getSearchHistoryRequests().add(searchRequest);
+		historySearchCache.getHistory(searchRequest);
 		searchedVehicles = fakeCarService.getVehicles(searchRequest);
 		
 		return "success";
