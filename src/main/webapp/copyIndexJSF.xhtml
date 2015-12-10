@@ -1,222 +1,195 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html ng-app="UVSClient" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    <html ng-app="UVSClient" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
-<head>
-<!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> -->
-<title>UVS Client - REST</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
-<link rel="stylesheet" href="resources/css/site.css" />
+    <head>
+        <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> -->
+        <title>UVS Client - REST</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="resources/css/site.css" />
+    </head>
 
-</head>
-
-<body>
-	<nav class="navbar navbar-inverse" ng-controller="HeaderController">
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle collapsed"
-			data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-			aria-expanded="false">
-			<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span>
-			<span class="icon-bar"></span> <span class="icon-bar"></span>
-		</button>
-		<a class="navbar-brand text-center" href="index.xhtml"><span
+    <body>
+        <nav class="navbar navbar-inverse" ng-controller="HeaderController">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span>
+                    <span class="icon-bar"></span> <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand text-center" href="index.xhtml"><span
 			class="glyphicon glyphicon-home"></span><br />Home</a>
-	</div>
-	<!-- Collect the nav links, forms, and other content for toggling --> <h:form>
-		<div class="collapse navbar-collapse">
-			<ul class="nav navbar-nav">
-				<li class="dropdown"><a id="VehicleType" href="#"
-					class="dropdown-toggle text-center" data-toggle="dropdown"
-					role="button" aria-haspopup="true" aria-expanded="false"> <span
-						class="glyphicon glyphicon-home"></span><span class="caret"></span>
-						<br />Vehicle Type
-				</a> <h:selectOneMenu id="result" styleclass="dropdown-menu"
-						value="#{searchVehicleBean.searchVehicleType}">
-						<f:selectItem itemValue="CAR" itemLabel="CAR"></f:selectItem>
-						<f:selectItem itemValue="VAN" itemLabel="VAN"></f:selectItem>
-						<f:selectItem itemValue="TRUCK" itemLabel="Truck"></f:selectItem>
-						<f:ajax event="change" update="@this" render="result" />
-					</h:selectOneMenu></li>
-				<li><a href="#" class="dropdown-toggle text-center"
-					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false"> <span class="glyphicon glyphicon-search"></span><span
-						class="caret"></span> <br />Search
-				</a></li>
-				<li><a class="" href="#"><span
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <h:form>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a id="VehicleType" href="#" class="dropdown-toggle text-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-home"></span><span class="caret"></span>
+                                <br />Vehicle Type
+                            </a>
+                            <h:selectOneMenu id="result" styleclass="dropdown-menu" value="#{searchVehicleBean.searchVehicleType}">
+                                <f:selectItem itemValue="CAR" itemLabel="CAR"></f:selectItem>
+                                <f:selectItem itemValue="VAN" itemLabel="VAN"></f:selectItem>
+                                <f:selectItem itemValue="TRUCK" itemLabel="Truck"></f:selectItem>
+                                <f:ajax event="change" update="@this" render="result" />
+                            </h:selectOneMenu>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-toggle text-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-search"></span><span class="caret"></span>
+                                <br />Search
+                            </a>
+                        </li>
+                        <li><a class="" href="#"><span
 						class="glyphicon glyphicon-road"></span><br />Link2</a></li>
-				<li><a class="text-center" href="#"><span
+                        <li><a class="text-center" href="#"><span
 						class="glyphicon glyphicon-road"></span><br />Link3</a></li>
-			</ul>
+                    </ul>
+                    <!-- Search the site -->
+                    <li class="dropdown">
+                        <a id="VehicleType" href="#" class="dropdown-toggle text-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-home"></span><span class="caret"></span>
+                            <br />Country/Location
+                        </a>
+                        <h:selectOneMenu id="country" styleclass="dropdown-menu" value="#{searchVehicleBean.searchLocation}">
+                            <f:selectItem itemValue="Germany" itemLabel="Germany"></f:selectItem>
+                            <f:selectItem itemValue="Romania" itemLabel="Romania"></f:selectItem>
+                            <f:selectItem itemValue="UK" itemLabel="UK"></f:selectItem>
+                            <f:ajax event="change" update="@this" render="country" />
+                        </h:selectOneMenu>
+                    </li>
+                </div>
+            </h:form>
+            <!-- /.navbar-collapse -->
+            <!-- /.container-fluid -->
+        </nav>
+        <!-- /.navbar-collapse -->
+        <!-- /.container-fluid -->
+        <div class="col-sm-4">
+            <div class="col-sm-12">
+                <h3>Search</h3>
+                <h:form>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">FIN</label>
+                        <div class="col-sm-9">
+                            <h:inputText value="#{searchVehicleBean.searchFin}" styleClass="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Model</label>
+                        <div class="col-sm-9">
+                            <h:selectOneMenu styleClass="form-control" value="#{searchVehicleBean.searchModel}">
+                                <f:selectItem itemValue="Volvo" itemLabel="Model - Volvo" />
+                                <f:selectItem itemValue="Saab" itemLabel="Model - Saab" />
+                                <f:selectItem itemValue="Mercedes" itemLabel="Model - Mercedes" />
+                                <f:selectItem itemValue="Volskwagen Passat" itemLabel="Model - Volskwagen Passat" />
+                                <f:selectItem itemValue="Dacia Logan" itemLabel="Model - Dacia Logan" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">Fuel Type
+                        </label>
+                        <div class="col-sm-9">
+                            <h:selectOneMenu styleClass="form-control" value="#{searchVehicleBean.searchFuelType}">
+                                <f:selectItem itemValue="Diesel" itemLabel="Diesel" />
+                                <f:selectItem itemValue="Gasoline" itemLabel="Gasoline" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Capacity</label>
+                        <div class="col-sm-9">
+                            <div class="col-sm-4">
+                                <h:inputText value="#{searchVehicleBean.searchMinCapacity}" class="form-control" p:placeholder="min" />
+                            </div>
+                            cm<sup>3</sup> -
+                            <div class="col-sm-4">
+                                <h:inputText value="#{searchVehicleBean.searchMaxCapacity}" class="form-control" p:placeholder="max" />
+                            </div>
+                            cm<sup>3</sup>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Year</label>
+                        <div class="col-sm-9">
+                            <div class="col-sm-4">
+                                <h:inputText value="#{searchVehicleBean.searchMinYear}" class="form-control" p:placeholder="min" />
+                            </div>
+                            -
+                            <div class="col-sm-4">
+                                <h:inputText value="#{searchVehicleBean.searchMaxYear}" class="form-control" p:placeholder="max" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Price</label>
+                        <div class="col-sm-9">
+                            <div class="col-sm-4">
+                                <h:inputText value="#{searchVehicleBean.searchMinPrice}" class="form-control" p:placeholder="min" />
+                            </div>
+                            -
+                            <div class="col-sm-4">
+                                <h:inputText value="#{searchVehicleBean.searchMaxPrice}" class="form-control" p:placeholder="max" />
+                            </div>
+                        </div>
+                    </div>
+                    <h:commandButton value="Search" action="#{vehicleBean.searchVechicle()}" />
+                </h:form>
+            </div>
+            <div>
+            <h:dataTable value="#{vehicleBean.historySearchCache.searchHistory}" var="history" class="table table-striped">
+                <h:column>
+                    <f:facet name="header">FIN</f:facet>
+                    <h:outputText value="#{history.fin}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Model</f:facet>
+                    <h:outputText value="#{history.model}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Location</f:facet>
+                    <h:outputText value="#{history.location}" />
+                </h:column>
+            </h:dataTable>
+        </div>
+        </div>
+        <div class="col-sm-8 table-responsive">
+            <h:dataTable value="#{vehicleBean.searchedVehicles}" var="vehicle" class="table table-striped">
+                <h:column>
+                    <f:facet name="header">FIN</f:facet>
+                    <h:outputText value="#{vehicle.fin}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Model</f:facet>
+                    <h:outputText value="#{vehicle.model}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Fuel type</f:facet>
+                    <h:outputText value="#{vehicle.fuelType}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Engine capacity</f:facet>
+                    <h:outputText value="#{vehicle.engineCapacity}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Year</f:facet>
+                    <h:outputText value="#{vehicle.year}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Location</f:facet>
+                    <h:outputText value="#{vehicle.location}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Price</f:facet>
+                    <h:outputText value="#{vehicle.price}" />
+                </h:column>
+            </h:dataTable>
+        </div>
+        
+        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+        <script type="text/javascript" src="resources/js/app.js"></script>
+    </body>
 
-			<!-- Search the site -->
-
-			<li class="dropdown"><a id="VehicleType" href="#"
-				class="dropdown-toggle text-center" data-toggle="dropdown"
-				role="button" aria-haspopup="true" aria-expanded="false"> <span
-					class="glyphicon glyphicon-home"></span><span class="caret"></span>
-					<br />Country/Location
-			</a> <h:selectOneMenu id="country" styleclass="dropdown-menu"
-					value="#{searchVehicleBean.searchLocation}">
-					<f:selectItem itemValue="Germany" itemLabel="Germany"></f:selectItem>
-					<f:selectItem itemValue="Romania" itemLabel="Romania"></f:selectItem>
-					<f:selectItem itemValue="UK" itemLabel="UK"></f:selectItem>
-					<f:ajax event="change" update="@this" render="country" />
-				</h:selectOneMenu></li>
-
-
-
-
-		</div>
-	</h:form> <!-- /.navbar-collapse --> <!-- /.container-fluid --> </nav>
-	<!-- /.navbar-collapse -->
-	<!-- /.container-fluid -->
-	<div class="col-sm-4">
-		<div class="col-sm-12">
-			<h3>Search</h3>
-			<h:form>
-				<div class="form-group">
-					<label class="col-sm-3 control-label">FIN</label>
-					<div class="col-sm-9">
-						<h:inputText value="#{searchVehicleBean.searchFin}"
-							styleClass="form-control" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-3 control-label">Model</label>
-					<div class="col-sm-9">
-						<h:selectOneMenu styleClass="form-control"
-							value="#{searchVehicleBean.searchModel}">
-							<f:selectItem itemValue="Volvo" itemLabel="Model - Volvo" />
-							<f:selectItem itemValue="Saab" itemLabel="Model - Saab" />
-							<f:selectItem itemValue="Mercedes" itemLabel="Model - Mercedes" />
-							<f:selectItem itemValue="Volskwagen Passat" itemLabel="Model - Volskwagen Passat" />
-							<f:selectItem itemValue="Dacia Logan" itemLabel="Model - Dacia Logan" />
-						</h:selectOneMenu>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-3 control-label">Fuel
-						Type</label>
-					<div class="col-sm-9">
-						<h:selectOneMenu styleClass="form-control"
-							value="#{searchVehicleBean.searchFuelType}">
-							<f:selectItem itemValue="Diesel" itemLabel="Diesel" />
-							<f:selectItem itemValue="Gasoline" itemLabel="Gasoline" />
-						</h:selectOneMenu>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-3 control-label">Capacity</label>
-					<div class="col-sm-9">
-						<div class="col-sm-4">
-							<h:inputText value="#{searchVehicleBean.searchMinCapacity}"
-								class="form-control" p:placeholder="min" />
-						</div>
-						cm<sup>3</sup> -
-						<div class="col-sm-4">
-							<h:inputText value="#{searchVehicleBean.searchMaxCapacity}"
-								class="form-control" p:placeholder="max" />
-						</div>
-						cm<sup>3</sup>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-3 control-label">Year</label>
-					<div class="col-sm-9">
-						<div class="col-sm-4">
-							<h:inputText value="#{searchVehicleBean.searchMinYear}"
-								class="form-control" p:placeholder="min" />
-						</div>
-						-
-						<div class="col-sm-4">
-							<h:inputText value="#{searchVehicleBean.searchMaxYear}"
-								class="form-control" p:placeholder="max" />
-						</div>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="col-sm-3 control-label">Price</label>
-					<div class="col-sm-9">
-						<div class="col-sm-4">
-							<h:inputText value="#{searchVehicleBean.searchMinPrice}"
-								class="form-control" p:placeholder="min" />
-						</div>
-						-
-						<div class="col-sm-4">
-							<h:inputText value="#{searchVehicleBean.searchMaxPrice}"
-								class="form-control" p:placeholder="max" />
-						</div>
-					</div>
-				</div>
-				<h:commandButton value="Search"
-					action="#{vehicleBean.searchVechicle()}" />
-			</h:form>
-		</div>
-	</div>
-
-	<div class="col-sm-8 table-responsive">
-		<h:dataTable value="#{vehicleBean.searchedVehicles}" var="vehicle" class="table table-striped">
-			<h:column>
-				<f:facet name="header">FIN</f:facet>
-				<h:outputText value="#{vehicle.fin}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Model</f:facet>
-				<h:outputText value="#{vehicle.model}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Fuel type</f:facet>
-				<h:outputText value="#{vehicle.fuelType}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Engine capacity</f:facet>
-				<h:outputText value="#{vehicle.engineCapacity}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Year</f:facet>
-				<h:outputText value="#{vehicle.year}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Location</f:facet>
-				<h:outputText value="#{vehicle.location}" />
-			</h:column>
-			<h:column>
-
-				<f:facet name="header">Price</f:facet>
-				<h:outputText value="#{vehicle.price}" />
-			</h:column>
-		</h:dataTable>
-	</div>
-	
-	<div>
-		<h:dataTable value="#{vehicleBean.historySearchCache.searchHistory}" var="history" class="table table-striped">
-			<h:column>
-				<f:facet name="header">FIN</f:facet>
-				<h:outputText value="#{history.fin}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Model</f:facet>
-				<h:outputText value="#{history.model}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Location</f:facet>
-				<h:outputText value="#{history.location}" />
-			</h:column>
-		</h:dataTable>
-	</div>
-	
-	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-	<script type="text/javascript" src="resources/js/app.js"></script>
-</body>
-</html>
+    </html>
