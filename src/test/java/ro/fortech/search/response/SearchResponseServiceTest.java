@@ -12,7 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ro.fortech.cache.SearchCache;
+import ro.fortech.cache.SavedSearchCache;
 import ro.fortech.fake.FakeVehicleServiceImpl;
 import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.search.response.SearchResponseService;
@@ -28,7 +28,7 @@ public class SearchResponseServiceTest {
 	private SearchResponseService searchResponseService;
 
 	@Mock
-	private SearchCache searchCache;
+	private SavedSearchCache searchCache;
 
 	@Mock
 	private VehicleSearchService vehicleSerachService;
@@ -52,7 +52,7 @@ public class SearchResponseServiceTest {
 		request.setMaxYear(0);
 		request.setMinYear(0);
 		VehicleService fakeService = Mockito.mock(FakeVehicleServiceImpl.class);
-		SearchCache searchCache = Mockito.mock(SearchCache.class);
+		SavedSearchCache searchCache = Mockito.mock(SavedSearchCache.class);
 		searchResponseService.searchCache = searchCache;
 		searchResponseService.fakeService = fakeService;
 		Mockito.when(searchResponseService.getFilteredVehiclesBySearchCriteria(" ",request)).thenReturn(Response.status(Response.Status.OK).build());

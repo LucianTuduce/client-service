@@ -2,7 +2,6 @@ package ro.fortech.search.response;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -15,7 +14,8 @@ import javax.ws.rs.core.Response;
 
 import org.apache.commons.codec.binary.Base64;
 
-import ro.fortech.cache.SearchCache;
+import ro.fortech.beans.HistorySearchCache;
+import ro.fortech.cache.SavedSearchCache;
 import ro.fortech.cache.UserCache;
 import ro.fortech.constants.Constants;
 import ro.fortech.credentials.LoginCredentials;
@@ -42,7 +42,10 @@ public class SearchResponseService {
 	private UserCache userCache;
 	
 	@Inject
-	SearchCache searchCache;
+	SavedSearchCache searchCache;
+	
+	@Inject
+	private HistorySearchCache historySearchCache;
 
 	@EJB(name = "fakeVehicleServiceImpl")
 	VehicleService fakeService;
@@ -55,7 +58,7 @@ public class SearchResponseService {
 	private HttpServletResponse response;
 
 	public Response getUserSearchHistory(String accountToken) {
-		return Response.status(Response.Status.OK).entity(searchCache.getSearchRequests().get(accountToken)).build();
+		return Response.status(Response.Status.OK).entity(historySearchCache.getSearchHistory()).build();
 	}
 
 	public Response getUserSavedSearchHistory(String accountToken) {
@@ -155,22 +158,7 @@ public class SearchResponseService {
 	}
 
 	private void initUserSearchCache(VehicleSearchRequest search, String acountToken) {
-		List<VehicleSearchRequest> searchRequests = searchCache.getSearchRequests().get(acountToken);
-		List<VehicleSearchRequest> splittedSearchRequests = null;
-		
-		if (searchRequests == null) {
-			searchRequests = new ArrayList<VehicleSearchRequest>();
-		} 
-			
-		searchRequests.add(search);
-		
-		if(searchRequests.size()>5){
-			splittedSearchRequests = searchRequests.subList(searchRequests.size() - 5, searchRequests.size());
-		}else {
-			splittedSearchRequests = searchRequests.subList(0, searchRequests.size());
-		}
-		Collections.reverse(splittedSearchRequests);
-		searchCache.getSearchRequests().put(acountToken, splittedSearchRequests);
+		historySearchCache.getHistory(search);
 	}
 
 	public Response getVehicleEnhancedByFin(String accountToken, String fin) {

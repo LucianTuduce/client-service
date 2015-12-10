@@ -17,6 +17,11 @@ public class HistorySearchCache implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private List<VehicleSearchRequest> searchHistory = new ArrayList<>();
 	
+	@PostConstruct
+	public void init(){
+		System.out.println("HistorySearchCache: is created");
+	}
+	
 	public List<VehicleSearchRequest> getSearchHistory() {
 		return searchHistory;
 	}
@@ -25,17 +30,11 @@ public class HistorySearchCache implements Serializable{
 		this.searchHistory = searchHistory;
 	}
 
-	@PostConstruct
-	public void init(){
-		System.out.println("HistorySearchCache: is created");
-	}
-
 	public List<VehicleSearchRequest> getHistory(VehicleSearchRequest searchRequest) {
 		
 		if(searchHistory.size() == DefaultValues.HISTORY_SIZE.getDefValue()){
 			searchHistory = addToHistoryListToStart(searchHistory, searchRequest);
-		}
-		else{
+		}else{
 			searchHistory.add(searchRequest);
 		}
 		return searchHistory;
