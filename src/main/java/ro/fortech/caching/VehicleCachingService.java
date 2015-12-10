@@ -1,4 +1,4 @@
-package ro.fortech.services;
+package ro.fortech.caching;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import ro.fortech.type.FuelType;
 import ro.fortech.type.VehicleType;
 
 @Stateless
-public class VehicleCacheService {
+public class VehicleCachingService {
 
 	
 	@EJB

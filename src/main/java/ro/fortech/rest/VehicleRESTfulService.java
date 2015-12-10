@@ -14,11 +14,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import ro.fortech.caching.AccountCachingService;
+import ro.fortech.caching.VehicleCachingService;
 import ro.fortech.credentials.LoginCredentials;
 import ro.fortech.model.Vehicle;
 import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.search.response.SearchResponseService;
-import ro.fortech.services.VehicleCacheService;
 import ro.fortech.services.VehicleService;
 import ro.fortech.validation.AccountValidationService;
 
@@ -44,7 +44,7 @@ public class VehicleRESTfulService {
 	private VehicleService fakeService;
 	
 	@EJB
-	private VehicleCacheService vehicleCacheService;
+	private VehicleCachingService vehicleCacheService;
 
 	@POST
 	@Path("/users")
