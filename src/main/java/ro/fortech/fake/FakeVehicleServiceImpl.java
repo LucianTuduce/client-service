@@ -142,8 +142,14 @@ public class FakeVehicleServiceImpl implements VehicleService {
 	}
 
 	@Override
-	public void saveVehicle(Vehicle Vehicle) {
-		System.out.println("Insert into fake DB successful");
+	public void saveVehicle(Vehicle vehicle) {
+		if(cache.getVehicles() == null){
+			List<Vehicle> vehicles = new ArrayList<>();
+			vehicles.add(vehicle);
+			cache.setVehicles(vehicles);
+		}else{
+			cache.getVehicles().add(vehicle);
+		}
 	}
 
 	@Override
@@ -156,7 +162,6 @@ public class FakeVehicleServiceImpl implements VehicleService {
 	public List<Vehicle> getVehicles(VehicleSearchRequest request) {
 		if (cache.getVehicles() == null) {
 			cache.setVehicles(generateRandomVehicles(1002));
-
 			return searchService.getSearch(request, cache.getVehicles());
 		} else {
 			return searchService.getSearch(request, cache.getVehicles());
@@ -225,12 +230,11 @@ public class FakeVehicleServiceImpl implements VehicleService {
 	@Override
 	public List<VehicleEnhanced> getVehicles() {
 		if (cache.getVehicleEnhanceds() == null) {
-			List<Vehicle> vehicles = generateRandomVehicles(1000000);
+			List<Vehicle> vehicles = generateRandomVehicles(1000);
 			cache.setVehicleEnhanceds(getAllVehiclesEnhanced(vehicles));
 			return cache.getVehicleEnhanceds();
 		} else {
 			return cache.getVehicleEnhanceds();
 		}
 	}
-
 }
