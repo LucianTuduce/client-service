@@ -2,6 +2,7 @@ package ro.fortech.search.response;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -54,7 +55,15 @@ public class SearchResponseService {
 	private HttpServletResponse response;
 
 	public Response getUserSearchHistory(String accountToken) {
-		return Response.status(Response.Status.OK).entity(searchCache.getSearchRequests().get(accountToken)).build();
+		List<VehicleSearchRequest> searchRequests = searchCache.getSearchRequests().get(accountToken);
+		List<VehicleSearchRequest> splittedSearchRequests = null;
+		if(searchRequests.size()>5){
+			splittedSearchRequests = searchRequests.subList(searchRequests.size() - 5, searchRequests.size());
+		}else {
+			splittedSearchRequests = searchRequests.subList(0, searchRequests.size());
+		}
+		Collections.reverse(splittedSearchRequests);
+		return Response.status(Response.Status.OK).entity(splittedSearchRequests).build();
 	}
 
 	public Response getUserSavedSearchHistory(String accountToken) {
