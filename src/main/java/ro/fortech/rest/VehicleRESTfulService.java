@@ -3,9 +3,11 @@ package ro.fortech.rest;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -13,9 +15,12 @@ import javax.ws.rs.core.Response;
 
 import ro.fortech.caching.AccountCachingService;
 import ro.fortech.credentials.LoginCredentials;
+import ro.fortech.model.Vehicle;
 import ro.fortech.pagination.Pagination;
 import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.search.response.SearchResponseService;
+import ro.fortech.services.VehicleCacheService;
+import ro.fortech.services.VehicleService;
 import ro.fortech.type.FuelType;
 import ro.fortech.type.VehicleType;
 import ro.fortech.validation.AccountValidationService;
@@ -37,6 +42,12 @@ public class VehicleRESTfulService {
 	
 	@EJB
 	private SearchResponseService searchResponseService;
+	
+	@EJB(name = "fakeVehicleServiceImpl")
+	private VehicleService fakeService;
+	
+	@EJB
+	private VehicleCacheService vehicleCacheService;
 
 	@POST
 	@Path("/users")
@@ -47,7 +58,7 @@ public class VehicleRESTfulService {
 	@GET
 	@Path("/req")
 	@Produces("application/json")
-	public VehicleSearchRequest geetReq(){
+	public VehicleSearchRequest getReq(){
 		VehicleSearchRequest request = new VehicleSearchRequest();
 		Pagination pagination = new Pagination();
 		pagination.setElemetsPerPage(20);
@@ -78,6 +89,15 @@ public class VehicleRESTfulService {
 		}
 	}
 
+	
+	@PUT
+	@Path("/cache/vehicles")
+	@Produces("aplication/json")
+	public Response initVehicleCache(){
+		vehicleCacheService.initVehicleCache();
+		return Response.status(Response.Status.OK).build();
+	}
+	
 	@GET
 	@Path("/search/history")
 	@Produces("application/json")
@@ -123,6 +143,18 @@ public class VehicleRESTfulService {
 	public Response getVehicleByFin(@PathParam("fin") String fin, @HeaderParam("Authorization") String accountToken){
 		if(accountValidation.isUserValid(accountToken)){
 			return searchResponseService.getVehicleEnhancedByFin(accountToken, fin);
+		}else {
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+		}
+	}
+	
+	@POST
+	@Path("/add")
+	@Consumes("application/json")
+	public Response addVehicle(@HeaderParam("Authorization") String accountToken, Vehicle vehicle){
+		if(accountValidation.isUserValid(accountToken)){
+			fakeService.saveVehicle(vehicle);
+			return Response.status(Response.Status.OK).build();
 		}else {
 			return Response.status(Response.Status.UNAUTHORIZED).build();
 		}
