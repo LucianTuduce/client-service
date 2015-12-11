@@ -57,16 +57,16 @@ public class VehicleBean implements Serializable{
 	
 	public String searchVechicle() {
 
+		
 		searchedVehicles = new ArrayList<Vehicle>();
-		VehicleSearchRequest searchRequest = searchVehicleBean
-				.createSearchVechicle();
-		historySearchCache.addSearchHistory("dsafasd", searchRequest);
-
+		VehicleSearchRequest searchRequest = searchVehicleBean.createSearchVechicle();
+		//TODO
+		historySearchCache.addHistorySearch("dsafasd", searchRequest);
 		searchedVehicles = fakeCarService.getVehicles(searchRequest);
-
+		
 		return "success";
-	}
 
+	}
 	public HistorySearchBean getHistorySearchBean() {
 		return historySearchBean;
 	}

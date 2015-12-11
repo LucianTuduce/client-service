@@ -1,6 +1,7 @@
 package ro.fortech.cache;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,21 +35,22 @@ public class HistorySearchCache implements Serializable{
 		this.searchHistory = searchHistory;
 	}
 
-
-	void addHistorySearch(String user, VehicleSearchRequest searchRequest) {
+	public void addHistorySearch(String user, VehicleSearchRequest searchRequest) {	
 		
-		if(searchHistory.get(user).size() == DefaultValues.HISTORY_SIZE.getDefValue() ){
-				addToHistoryListToStart(searchRequest, user);
-		}
-		else{
-			searchHistory.get(user).add(0,searchRequest);
+		if(searchHistory.get(user) == null){
+			List<VehicleSearchRequest> vehicleSearchRequests = new ArrayList<>();
+			vehicleSearchRequests.add(0, searchRequest);
+			searchHistory.put(user, vehicleSearchRequests);
+		}else if(searchHistory.get(user).size() < DefaultValues.HISTORY_SIZE.getDefValue()){
+			searchHistory.get(user).add(0, searchRequest);
+		}else if (searchHistory.get(user).size() == DefaultValues.HISTORY_SIZE.getDefValue() ){
+			addToHistoryListToStart(searchRequest, user);
 		}
 	}
 	
-	void  addToHistoryListToStart( VehicleSearchRequest searchRequest, String user){
+	private void addToHistoryListToStart(VehicleSearchRequest searchRequest, String user){
 		searchHistory.get(user).add(0,searchRequest);
-		searchHistory.get(user).remove(searchHistory.get(user).size()-1);
-		
+		searchHistory.get(user).remove(searchHistory.get(user).size()-1);		
 	}
 	
 }
