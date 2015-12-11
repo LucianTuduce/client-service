@@ -12,62 +12,75 @@
 
     <body>
         <nav class="navbar navbar-inverse" ng-controller="HeaderController">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span>
-                    <span class="icon-bar"></span> <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand text-center" href="index.xhtml"><span
-			class="glyphicon glyphicon-home"></span><br />Home</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <h:form>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a id="VehicleType" href="#" class="dropdown-toggle text-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-home"></span><span class="caret"></span>
-                                <br />Vehicle Type
-                            </a>
-                            <h:selectOneMenu id="result" styleclass="dropdown-menu" value="#{searchVehicleBean.searchVehicleType}">
-                                <f:selectItem itemValue="CAR" itemLabel="CAR"></f:selectItem>
-                                <f:selectItem itemValue="VAN" itemLabel="VAN"></f:selectItem>
-                                <f:selectItem itemValue="TRUCK" itemLabel="Truck"></f:selectItem>
-                                <f:ajax event="change" update="@this" render="result" />
-                            </h:selectOneMenu>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-toggle text-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-search"></span><span class="caret"></span>
-                                <br />Search
-                            </a>
-                        </li>
-                        <li><a class="" href="#"><span
-						class="glyphicon glyphicon-road"></span><br />Link2</a></li>
-                        <li><a class="text-center" href="#"><span
-						class="glyphicon glyphicon-road"></span><br />Link3</a></li>
-                    </ul>
-                    <!-- Search the site -->
-                    <li class="dropdown">
-                        <a id="VehicleType" href="#" class="dropdown-toggle text-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-home"></span><span class="caret"></span>
-                            <br />Country/Location
-                        </a>
-                        <h:selectOneMenu id="country" styleclass="dropdown-menu" value="#{searchVehicleBean.searchLocation}">
-                            <f:selectItem itemValue="Germany" itemLabel="Germany"></f:selectItem>
-                            <f:selectItem itemValue="Romania" itemLabel="Romania"></f:selectItem>
-                            <f:selectItem itemValue="UK" itemLabel="UK"></f:selectItem>
-                            <f:ajax event="change" update="@this" render="country" />
-                        </h:selectOneMenu>
-                    </li>
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span>
+                        <span class="icon-bar"></span> <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand text-center" href="#" onclick="window.location.reload(true);"><span class="glyphicon glyphicon-home"></span>
+                    <br/>Home
+                </a>
                 </div>
-            </h:form>
-            <!-- /.navbar-collapse -->
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <h:form>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle text-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-home"></span><span class="caret"></span>
+                                    <br/><span id="VehicleType">Vehicle Type</span>                                    
+                                </a>
+                                <h:selectOneMenu id="result" value="#{searchVehicleBean.searchVehicleType}">
+                                    <f:selectItem itemValue="CAR" itemLabel="CAR"></f:selectItem>
+                                    <f:selectItem itemValue="VAN" itemLabel="VAN"></f:selectItem>
+                                    <f:selectItem itemValue="TRUCK" itemLabel="Truck"></f:selectItem>
+                                    <f:ajax event="change" update="@this" render="result" />
+                                </h:selectOneMenu>
+                                
+                            </li>
+                            <li>
+                                <a href="#" class="dropdown-toggle text-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-search"></span><span class="caret"></span>
+                                    <br/>Search
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-toggle text-center text-left-xs" href="#"><span class="glyphicon glyphicon-road"></span>
+                                    <br/>Link2
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-toggle text-center text-left-xs" href="#"><span class="glyphicon glyphicon-road"></span>
+                                    <br/>Link3
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- Search the site -->
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle text-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-home"></span><span class="caret"></span>
+                                    <br/><span id="CountryLanguage">Country/Location</span>
+                                </a>                                
+                                    <h:selectOneMenu id="country" value="#{searchVehicleBean.searchLocation}">
+                                        <f:selectItem itemValue="Germany" itemLabel="Germany"></f:selectItem>
+                                        <f:selectItem itemValue="Romania" itemLabel="Romania"></f:selectItem>
+                                        <f:selectItem itemValue="UK" itemLabel="UK"></f:selectItem>
+                                        <f:ajax event="change" update="@this" render="country" />
+                                    </h:selectOneMenu>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </h:form>
+            </div>
             <!-- /.container-fluid -->
         </nav>
         <!-- /.navbar-collapse -->
         <!-- /.container-fluid -->
         <div class="col-sm-4">
-            <div class="col-sm-12">
-                <h3>Search</h3>
-                <h:form>
+            <h3>Search</h3>
+            <div class="well">                
+                <h:form styleClass="form-horizontal">
                     <div class="form-group">
                         <label class="col-sm-3 control-label">FIN</label>
                         <div class="col-sm-9">
@@ -75,84 +88,70 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-3 control-label">Model</label>
+                        <label class="col-sm-3 control-label">Model</label>
                         <div class="col-sm-9">
                             <h:selectOneMenu styleClass="form-control" value="#{searchVehicleBean.searchModel}">
+                                <f:selectItem itemValue=" " itemLabel=" " />
                                 <f:selectItem itemValue="Volskwagen Passat" itemLabel="Volskwagen Passat" />
                                 <f:selectItem itemValue="Mercedes Sprinter" itemLabel="Mercedes Sprinter" />
                                 <f:selectItem itemValue="Dacia Logan" itemLabel="Dacia Logan" />
                                 <f:selectItem itemValue="Volvo Truck" itemLabel="Volvo Truck" />
                                 <f:selectItem itemValue="Volskwagen Transporter" itemLabel="Volskwagen Transporter" />
-                                <f:selectItem itemValue="Mercedes Truck" itemLabel="Mercedes Truck" />                               
+                                <f:selectItem itemValue="Mercedes Truck" itemLabel="Mercedes Truck" />
                             </h:selectOneMenu>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-3 control-label">Fuel Type
+                        <label class="col-sm-3 control-label">Fuel Type
                         </label>
                         <div class="col-sm-9">
                             <h:selectOneMenu styleClass="form-control" value="#{searchVehicleBean.searchFuelType}">
+                                <f:selectItem itemValue=" " itemLabel=" " />
                                 <f:selectItem itemValue="Diesel" itemLabel="Diesel" />
                                 <f:selectItem itemValue="Gasoline" itemLabel="Gasoline" />
                             </h:selectOneMenu>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group form-inline">
                         <label class="col-sm-3 control-label">Capacity</label>
-                        <div class="col-sm-9">
-                            <div class="col-sm-4">
-                                <h:inputText value="#{searchVehicleBean.searchMinCapacity}" class="form-control" p:placeholder="min" />
-                            </div>
-                            cm<sup>3</sup> -
-                            <div class="col-sm-4">
-                                <h:inputText value="#{searchVehicleBean.searchMaxCapacity}" class="form-control" p:placeholder="max" />
-                            </div>
-                            cm<sup>3</sup>
+                        <div class="col-sm-9">                            
+                                <h:inputText value="#{searchVehicleBean.searchMinCapacity}" styleClass="form-control" size="4" p:placeholder="min" />cm<sup>3</sup> -                            
+                                <h:inputText value="#{searchVehicleBean.searchMaxCapacity}" styleClass="form-control" size="4" p:placeholder="max" />cm<sup>3</sup>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group form-inline">
                         <label class="col-sm-3 control-label">Year</label>
                         <div class="col-sm-9">
-                            <div class="col-sm-4">
-                                <h:inputText value="#{searchVehicleBean.searchMinYear}" class="form-control" p:placeholder="min" />
-                            </div>
-                            -
-                            <div class="col-sm-4">
-                                <h:inputText value="#{searchVehicleBean.searchMaxYear}" class="form-control" p:placeholder="max" />
-                            </div>
+                                <h:inputText value="#{searchVehicleBean.searchMinYear}" styleClass="form-control" size="4" p:placeholder="min" />-
+                                <h:inputText value="#{searchVehicleBean.searchMaxYear}" styleClass="form-control" size="4" p:placeholder="max" />
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group form-inline">
                         <label class="col-sm-3 control-label">Price</label>
                         <div class="col-sm-9">
-                            <div class="col-sm-4">
-                                <h:inputText value="#{searchVehicleBean.searchMinPrice}" class="form-control" p:placeholder="min" />
-                            </div>
-                            -
-                            <div class="col-sm-4">
-                                <h:inputText value="#{searchVehicleBean.searchMaxPrice}" class="form-control" p:placeholder="max" />
-                            </div>
+                                <h:inputText value="#{searchVehicleBean.searchMinPrice}" styleClass="form-control" size="4" p:placeholder="min" />-
+                                <h:inputText value="#{searchVehicleBean.searchMaxPrice}" styleClass="form-control" size="4" p:placeholder="max" />                           
                         </div>
                     </div>
-                    <h:commandButton value="Search" action="#{vehicleBean.searchVechicle()}" />
+                    <h:commandButton value="Search" styleClass="btn btn-primary" action="#{vehicleBean.searchVechicle()}" />
                 </h:form>
             </div>
             <div>
-            <h:dataTable value="#{historySearchBean.searchHistory}" var="history" class="table table-striped">
-                <h:column>
-                    <f:facet name="header">FIN</f:facet>
-                    <h:outputText value="#{history.fin}" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Model</f:facet>
-                    <h:outputText value="#{history.model}" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Location</f:facet>
-                    <h:outputText value="#{history.location}" />
-                </h:column>
-            </h:dataTable>
-        </div>
+                <h:dataTable value="#{historySearchBean.searchHistory}" var="history" class="table table-striped">
+                    <h:column>
+                        <f:facet name="header">FIN</f:facet>
+                        <h:outputText value="#{history.fin}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Model</f:facet>
+                        <h:outputText value="#{history.model}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Location</f:facet>
+                        <h:outputText value="#{history.location}" />
+                    </h:column>
+                </h:dataTable>
+            </div>
         </div>
         <div class="col-sm-8 table-responsive">
             <h:dataTable value="#{vehicleBean.searchedVehicles}" var="vehicle" class="table table-striped">
@@ -186,7 +185,6 @@
                 </h:column>
             </h:dataTable>
         </div>
-        
         <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
