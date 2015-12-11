@@ -62,7 +62,7 @@ public class SearchResponseService {
 	}
 
 	public Response getUserSavedSearchHistory(String accountToken) {
-		return Response.status(Response.Status.OK).entity(searchCache.getSearchSaveCache().get(accountToken)).build();
+		return Response.status(Response.Status.OK).entity(searchCache.getSearchSaveCache().get(decodeUserToken(accountToken))).build();
 	}
 
 	/**
@@ -74,18 +74,18 @@ public class SearchResponseService {
 	 */
 	public Response saveUserSearch(String accountToken, String saveName, VehicleSearchRequest search) {
 		List<SearchSave> searchSaves = null;
-
+		String decodedToken = decodeUserToken(accountToken);
 		SearchSave searchSave = new SearchSave();
 		searchSave.setName(saveName);
 		searchSave.setRequest(search);
-		if (searchCache.getSearchSaveCache().get(accountToken) == null) {
+		if (searchCache.getSearchSaveCache().get(decodedToken) == null) {
 			searchSaves = new ArrayList<>();
 			searchSaves.add(searchSave);
-			searchCache.getSearchSaveCache().put(accountToken, searchSaves);
+			searchCache.getSearchSaveCache().put(decodedToken, searchSaves);
 		} else {
-			searchCache.getSearchSaveCache().get(accountToken).add(searchSave);
+			searchCache.getSearchSaveCache().get(decodedToken).add(searchSave);
 		}
-		return Response.status(Response.Status.OK).entity(searchCache.getSearchSaveCache().get(accountToken)).build();
+		return Response.status(Response.Status.OK).entity(searchCache.getSearchSaveCache().get(decodedToken)).build();
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class SearchResponseService {
 		return encodedCredentials;
 	}
 	
-	public String decodeUserToken(String token){
+	private String decodeUserToken(String token){
 		byte[] decodedToken = Base64.decodeBase64(token);
 		String decodedTokenStringForm = new String(decodedToken);	
 		String[] splittedToken = decodedTokenStringForm.split("[\\s\\:]+");
@@ -166,7 +166,7 @@ public class SearchResponseService {
 	}
 
 	private void initUserSearchCache(VehicleSearchRequest search, String accountToken) {
-		historySearchCache.addHistorySearch(accountToken, search);
+		historySearchCache.addHistorySearch(decodeUserToken(accountToken), search);
 	}
 
 	public Response getVehicleEnhancedByFin(String accountToken, String fin) {
