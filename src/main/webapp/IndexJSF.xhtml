@@ -138,7 +138,7 @@
                 </h:form>
             </div>
             <div>
-            <h:dataTable value="#{vehicleBean.historySearchCache.searchHistory}" var="history" class="table table-striped">
+            <h:dataTable value="#{historySearchBean.searchHistory}" var="history" class="table table-striped">
                 <h:column>
                     <f:facet name="header">FIN</f:facet>
                     <h:outputText value="#{history.fin}" />
