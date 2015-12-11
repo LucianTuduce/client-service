@@ -48,7 +48,11 @@ public class SearchVehicleBean implements Serializable{
 		}else{
 			searchRequest.setVehicleType(VehicleType.getEnum(searchVehicleType));
 		}
-		searchRequest.setFin(searchFin);
+		if(searchFin == null){
+			searchRequest.setFin(DefaultValues.FIN_DEFAULT.getDef());
+		}else{
+			searchRequest.setFin(searchFin);
+		}
 		searchRequest.setModel(searchModel);
 		searchRequest.setFuelType(FuelType.getEnum(searchFuelType));
 		if(searchMaxCapacity == 0){

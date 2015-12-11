@@ -3,6 +3,7 @@ package ro.fortech.rest;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -11,11 +12,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import ro.fortech.caching.AccountCachingService;
 import ro.fortech.caching.VehicleCachingService;
-import ro.fortech.credentials.LoginCredentials;
 import ro.fortech.model.Vehicle;
 import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.search.response.SearchResponseService;
@@ -31,6 +32,9 @@ public class VehicleRESTfulService {
 		System.out.println("Built: VehicleRESTfulService.");
 	}
 	
+	@Context
+	private HttpServletRequest request;
+	
 	@EJB
 	private AccountValidationService accountValidation;
 	
@@ -45,12 +49,6 @@ public class VehicleRESTfulService {
 	
 	@EJB
 	private VehicleCachingService vehicleCacheService;
-
-	@POST
-	@Path("/users")
-	public Response initUserCache() {
-		return accountCachingService.initUsersInCacheMemory();
-	}
 
 	@POST
 	@Path("/filtered")
@@ -104,12 +102,6 @@ public class VehicleRESTfulService {
 		}
 	}
 
-	@POST
-	@Path("/token")
-	public Response getUserToken(LoginCredentials credentials) {
-		return searchResponseService.generateUserToken(credentials);
-	}
-	
 	@GET
 	@Path("/search/{fin}")
 	@Produces("application/json")

@@ -10,8 +10,10 @@ import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import ro.fortech.cache.HistorySearchCache;
 import ro.fortech.model.Vehicle;
 import ro.fortech.search.VehicleSearchRequest;
+import ro.fortech.services.VehicleSearchService;
 import ro.fortech.services.VehicleService;
 import ro.fortech.type.FuelType;
 import ro.fortech.type.VehicleType;
@@ -32,6 +34,17 @@ public class VehicleBean implements Serializable{
 	@Named("fakeVehicleServiceImpl")
 	private VehicleService fakeCarService;
 
+	@Inject
+	@Named("searchServiceUtils")
+	private VehicleSearchService searchServiceUtils;
+
+	@Inject
+	@Named("vehicleSearchServiceImpl")
+	private VehicleSearchService searchService;
+	
+	@Inject
+	private HistorySearchCache historySearchCache;
+
 	private String fin;
 	private String model;
 	private FuelType fuelType;
@@ -41,13 +54,14 @@ public class VehicleBean implements Serializable{
 	private int price;
 	private VehicleType vehicleType;
 	private List<Vehicle> searchedVehicles;
-
+	
 	public String searchVechicle() {
 
 		searchedVehicles = new ArrayList<Vehicle>();
 		VehicleSearchRequest searchRequest = searchVehicleBean
 				.createSearchVechicle();
-		historySearchBean.getHistory(searchRequest);
+		historySearchCache.addSearchHistory("dsafasd", searchRequest);
+
 		searchedVehicles = fakeCarService.getVehicles(searchRequest);
 
 		return "success";
@@ -61,6 +75,14 @@ public class VehicleBean implements Serializable{
 		this.historySearchBean = historySearchBean;
 	}
 
+	public HistorySearchCache getHistorySearchCache() {
+		return historySearchCache;
+	}
+
+	public void setHistorySearchCache(HistorySearchCache historySearchCache) {
+		this.historySearchCache = historySearchCache;
+	}
+	
 	public SearchVehicleBean getSearchVehicleBean() {
 		return searchVehicleBean;
 	}

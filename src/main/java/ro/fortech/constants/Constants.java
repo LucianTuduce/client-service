@@ -18,4 +18,6 @@ public class Constants {
 	public static final String ALL_GOOD = "All good !";
 	public static final String SOMETHING_WENT_WRONG = "Something went wrong, list is null";
 	
+	
+	
 }
