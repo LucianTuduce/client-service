@@ -34,9 +34,7 @@ public class HistorySearchCache implements Serializable{
 		this.searchHistory = searchHistory;
 	}
 
-
-	void addHistorySearch(String user, VehicleSearchRequest searchRequest) {
-		
+	public void addHistorySearch(String user, VehicleSearchRequest searchRequest) {	
 		if(searchHistory.get(user).size() == DefaultValues.HISTORY_SIZE.getDefValue() ){
 				addToHistoryListToStart(searchRequest, user);
 		}
@@ -45,7 +43,7 @@ public class HistorySearchCache implements Serializable{
 		}
 	}
 	
-	void  addToHistoryListToStart( VehicleSearchRequest searchRequest, String user){
+	private void addToHistoryListToStart(VehicleSearchRequest searchRequest, String user){
 		searchHistory.get(user).add(0,searchRequest);
 		searchHistory.get(user).remove(searchHistory.get(user).size()-1);
 		

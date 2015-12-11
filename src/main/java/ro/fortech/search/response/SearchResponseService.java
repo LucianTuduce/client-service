@@ -44,7 +44,7 @@ public class SearchResponseService {
 	@EJB
 	private SavedSearchCache searchCache;
 	
-	@Inject
+	@EJB
 	private HistorySearchCache historySearchCache;
 
 	@EJB(name = "fakeVehicleServiceImpl")
@@ -166,7 +166,7 @@ public class SearchResponseService {
 	}
 
 	private void initUserSearchCache(VehicleSearchRequest search, String accountToken) {
-		historySearchCache.addSearchHistory(accountToken, search);
+		historySearchCache.addHistorySearch(accountToken, search);
 	}
 
 	public Response getVehicleEnhancedByFin(String accountToken, String fin) {
