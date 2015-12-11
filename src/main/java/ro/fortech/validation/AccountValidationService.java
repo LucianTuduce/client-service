@@ -1,6 +1,5 @@
 package ro.fortech.validation;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletResponse;
@@ -18,11 +17,6 @@ public class AccountValidationService {
 	@Context
 	private HttpServletResponse response;
 
-	@PostConstruct
-	public void init() {
-		System.out.println("AccountValidationService: Stateless");
-	}
-	
 	/**
 	 * Method used to check if an user is present in the system, and if he is
 	 * then his search history will be displayed, search history which is

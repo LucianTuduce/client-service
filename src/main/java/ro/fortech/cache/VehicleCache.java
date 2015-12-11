@@ -13,7 +13,7 @@ public class VehicleCache {
 
 	@PostConstruct
 	public void init() {
-		System.out.println("VehicleCache: Singleton");
+		System.out.println("Built: Singleton VehicleCache.");
 	}
 
 	private List<Vehicle> vehicles;

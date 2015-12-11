@@ -23,7 +23,7 @@ public class HistorySearchCache implements Serializable{
 	
 	@PostConstruct
 	public void init(){
-		System.out.println("HistorySearchCache: singleton");
+		System.out.println("HistorySearchCache: is created");
 	}
 
 	public Map<String, List<VehicleSearchRequest>> getSearchHistory() {

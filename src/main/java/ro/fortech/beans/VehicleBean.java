@@ -4,14 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import ro.fortech.cache.HistorySearchCache;
 import ro.fortech.model.Vehicle;
 import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.services.VehicleSearchService;
@@ -34,16 +32,15 @@ public class VehicleBean implements Serializable{
 	@Inject
 	@Named("fakeVehicleServiceImpl")
 	private VehicleService fakeCarService;
-	
-	@EJB(beanName = "searchServiceUtils")
+
+	@Inject
+	@Named("searchServiceUtils")
 	private VehicleSearchService searchServiceUtils;
-	
-	@EJB(beanName = "vehicleSearchServiceImpl")
+
+	@Inject
+	@Named("vehicleSearchServiceImpl")
 	private VehicleSearchService searchService;
 	
-	@Inject
-	private HistorySearchCache historySearchCache;
-
 	private String fin;
 	private String model;
 	private FuelType fuelType;
@@ -59,8 +56,7 @@ public class VehicleBean implements Serializable{
 		
 		searchedVehicles = new ArrayList<Vehicle>();
 		VehicleSearchRequest searchRequest = searchVehicleBean.createSearchVechicle();
-		//TODO
-		historySearchCache.addHistorySearch("dsafasd", searchRequest);
+		historySearchBean.getHistory(searchRequest);
 		searchedVehicles = fakeCarService.getVehicles(searchRequest);
 		
 		return "success";
@@ -74,14 +70,6 @@ public class VehicleBean implements Serializable{
 		this.historySearchBean = historySearchBean;
 	}
 
-	public HistorySearchCache getHistorySearchCache() {
-		return historySearchCache;
-	}
-
-	public void setHistorySearchCache(HistorySearchCache historySearchCache) {
-		this.historySearchCache = historySearchCache;
-	}
-	
 	public SearchVehicleBean getSearchVehicleBean() {
 		return searchVehicleBean;
 	}

@@ -2,7 +2,7 @@ package ro.fortech.rest;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -24,8 +24,13 @@ import ro.fortech.services.VehicleService;
 import ro.fortech.validation.AccountValidationService;
 
 @Path("/vehicle")
-@Stateless
+@RequestScoped
 public class VehicleRESTfulService {
+
+	@PostConstruct
+	public void init() {
+		System.out.println("Built: VehicleRESTfulService.");
+	}
 	
 	@Context
 	private HttpServletRequest request;
@@ -39,18 +44,12 @@ public class VehicleRESTfulService {
 	@EJB
 	private SearchResponseService searchResponseService;
 	
-	@EJB(beanName = "fakeVehicleServiceImpl")
+	@EJB(name = "fakeVehicleServiceImpl")
 	private VehicleService fakeService;
 	
 	@EJB
 	private VehicleCachingService vehicleCacheService;
 
-
-	@PostConstruct
-	public void init() {
-		System.out.println("VehicleRESTfulService: Stateless");
-	}
-	
 	@POST
 	@Path("/filtered")
 	@Produces("application/json")
