@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.Singleton;
 
 import ro.fortech.history.SearchSave;
 
-@ApplicationScoped
+@Singleton
 public class SavedSearchCache implements Serializable {
 	
 	private static final long serialVersionUID = -4384690421304399293L;
