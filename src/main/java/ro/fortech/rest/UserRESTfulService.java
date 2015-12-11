@@ -1,6 +1,5 @@
 package ro.fortech.rest;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.HeaderParam;
@@ -31,12 +30,6 @@ public class UserRESTfulService {
 	@EJB
 	private HistorySearchCache historySearchCache;
 		
-	@PostConstruct
-	public void init() {
-		System.out.println("UserRESTfulService: Stateless");
-	}
-	
-	
 	@POST
 	@Path("/login")
 	public Response confirmUser(LoginCredentials credentials){

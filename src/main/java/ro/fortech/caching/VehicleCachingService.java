@@ -3,7 +3,6 @@ package ro.fortech.caching;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -14,14 +13,10 @@ import ro.fortech.type.VehicleType;
 
 @Stateless
 public class VehicleCachingService {
+
 	
 	@EJB
 	private VehicleCache vehicleCache;
-	
-	@PostConstruct
-	public void init() {
-		System.out.println("AccountCachingService: Stateless");
-	}
 	
 	public void initVehicleCache(){
 		Vehicle vehicle = null;
