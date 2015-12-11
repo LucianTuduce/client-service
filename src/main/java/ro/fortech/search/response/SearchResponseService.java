@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 
 import org.apache.commons.codec.binary.Base64;
 
-import ro.fortech.beans.HistorySearchCache;
+import ro.fortech.cache.HistorySearchCache;
 import ro.fortech.cache.SavedSearchCache;
 import ro.fortech.cache.UserCache;
 import ro.fortech.constants.Constants;
@@ -41,8 +41,8 @@ public class SearchResponseService {
 	@EJB
 	private UserCache userCache;
 	
-	@Inject
-	SavedSearchCache searchCache;
+	@EJB
+	private SavedSearchCache searchCache;
 	
 	@Inject
 	private HistorySearchCache historySearchCache;
@@ -93,16 +93,16 @@ public class SearchResponseService {
 	 * @param credentials
 	 * @return
 	 */
-	public Response generateUserToken(LoginCredentials credentials) {
+	public String generateAndGetUserToken(LoginCredentials credentials) {
 		String username = credentials.getUsername();
 		String password = credentials.getPassword();
-		String toEncode = Constants.BASIC_SECURITY_PREFIX + username + ":" + password;
+		String toEncode = Constants.BASIC_SECURITY_PREFIX +" "+ username + ":" + password;
 		String encodedCredentials = null;
 		byte[] token = null;
 		boolean isPresent = false;
 		User user = userCache.getUser(username);
 		if (user == null) {
-			return Response.status(Response.Status.UNAUTHORIZED).entity(Constants.Y_NO_HAVE_ACCOUNT).build();
+			return null;
 		} else if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
 			token = Base64.encodeBase64(toEncode.getBytes());
 			encodedCredentials = new String(token);
@@ -114,10 +114,18 @@ public class SearchResponseService {
 			}
 		}
 		if (!isPresent) {
-			return Response.status(Response.Status.UNAUTHORIZED).entity(Constants.Y_NO_HAVE_ACCOUNT).build();
+			return Constants.Y_NO_HAVE_ACCOUNT;
 		}
 		response.setHeader(Constants.AUTHORIZATION, encodedCredentials);
-		return Response.status(200).entity(Constants.USER_CONFIRMED).build();
+		return encodedCredentials;
+	}
+	
+	public String decodeUserToken(String token){
+		byte[] decodedToken = Base64.decodeBase64(token);
+		String decodedTokenStringForm = new String(decodedToken);	
+		String[] splittedToken = decodedTokenStringForm.split("[\\s\\:]+");
+		System.out.println(splittedToken[1]);
+		return splittedToken[1];
 	}
 
 	/**
@@ -157,8 +165,8 @@ public class SearchResponseService {
 		return Response.status(Response.Status.OK).entity(searchResponse).build();
 	}
 
-	private void initUserSearchCache(VehicleSearchRequest search, String acountToken) {
-		historySearchCache.getHistory(search);
+	private void initUserSearchCache(VehicleSearchRequest search, String accountToken) {
+		historySearchCache.addSearchHistory(accountToken, search);
 	}
 
 	public Response getVehicleEnhancedByFin(String accountToken, String fin) {

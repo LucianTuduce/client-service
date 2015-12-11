@@ -9,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import ro.fortech.cache.HistorySearchCache;
 import ro.fortech.model.Vehicle;
 import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.services.VehicleSearchService;
@@ -24,16 +25,20 @@ public class VehicleBean {
 	@ManagedProperty(value="#{searchVehicleBean}")
 	SearchVehicleBean searchVehicleBean;
 	
-	@ManagedProperty(value="#{historySearchBean}")
-	HistorySearchBean historySearchBean;
-	
 	@Inject
 	@Named("fakeVehicleServiceImpl")
 	private VehicleService fakeCarService;
 
 	@Inject
+	@Named("searchServiceUtils")
+	private VehicleSearchService searchServiceUtils;
+
+	@Inject
 	@Named("vehicleSearchServiceImpl")
 	private VehicleSearchService searchService;
+	
+	@Inject
+	private HistorySearchCache historySearchCache;
 	
 	private String fin;
 	private String model;
@@ -44,26 +49,29 @@ public class VehicleBean {
 	private int price;
 	private VehicleType vehicleType;
 	private List<Vehicle> searchedVehicles;
+	
 
 	public String searchVechicle() {
+
 		
 		searchedVehicles = new ArrayList<Vehicle>();
 		VehicleSearchRequest searchRequest = searchVehicleBean.createSearchVechicle();
-		historySearchBean.getHistory(searchRequest);
+		//TODO
+		historySearchCache.addSearchHistory("dsafasd", searchRequest);
 		searchedVehicles = fakeCarService.getVehicles(searchRequest);
 		
 		return "success";
 
 	}
 
-//	public HistorySearchCache getHistorySearchCache() {
-//		return historySearchCache;
-//	}
-//
-//	public void setHistorySearchCache(HistorySearchCache historySearchCache) {
-//		this.historySearchCache = historySearchCache;
-//	}
-//	
+	public HistorySearchCache getHistorySearchCache() {
+		return historySearchCache;
+	}
+
+	public void setHistorySearchCache(HistorySearchCache historySearchCache) {
+		this.historySearchCache = historySearchCache;
+	}
+	
 	public SearchVehicleBean getSearchVehicleBean() {
 		return searchVehicleBean;
 	}
