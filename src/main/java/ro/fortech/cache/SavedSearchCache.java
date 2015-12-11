@@ -17,7 +17,7 @@ public class SavedSearchCache implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		System.out.println("Built: ApplicationScoped SearchCache.");
+		System.out.println("SavedSearchCache: Singleton");
 	}
 
 	private Map<String, List<SearchSave>> searchSaveCache = new HashMap<>();

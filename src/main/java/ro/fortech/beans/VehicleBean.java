@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -33,13 +34,11 @@ public class VehicleBean implements Serializable{
 	@Inject
 	@Named("fakeVehicleServiceImpl")
 	private VehicleService fakeCarService;
-
-	@Inject
-	@Named("searchServiceUtils")
+	
+	@EJB(beanName = "searchServiceUtils")
 	private VehicleSearchService searchServiceUtils;
-
-	@Inject
-	@Named("vehicleSearchServiceImpl")
+	
+	@EJB(beanName = "vehicleSearchServiceImpl")
 	private VehicleSearchService searchService;
 	
 	@Inject

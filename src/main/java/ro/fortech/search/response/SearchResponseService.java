@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletResponse;
@@ -45,15 +46,20 @@ public class SearchResponseService {
 	@EJB
 	private HistorySearchCache historySearchCache;
 
-	@EJB(name = "fakeVehicleServiceImpl")
+	@EJB(beanName = "fakeVehicleServiceImpl")
 	private VehicleService fakeService;
 
-	@EJB(name = "vehicleSearchServiceImpl")
-	private VehicleSearchService vehicleSerachService;
+	@EJB(beanName = "vehicleSearchServiceImpl")
+	private VehicleSearchService searchService;
 	
 	@Context
 	private HttpServletResponse response;
 
+	@PostConstruct
+	public void init() {
+		System.out.println("SearchResponseService: Stateless");
+	}
+	
 	public Response getUserSearchHistory(String accountToken) {
 		return Response.status(Response.Status.OK).entity(historySearchCache.getSearchHistory()).build();
 	}
@@ -121,7 +127,6 @@ public class SearchResponseService {
 		byte[] decodedToken = Base64.decodeBase64(token);
 		String decodedTokenStringForm = new String(decodedToken);	
 		String[] splittedToken = decodedTokenStringForm.split("[\\s\\:]+");
-		System.out.println(splittedToken[1]);
 		return splittedToken[1];
 	}
 
@@ -169,7 +174,7 @@ public class SearchResponseService {
 	public Response getVehicleEnhancedByFin(String accountToken, String fin) {
 		VehicleEnhanceSearchResponse searchResponse = new VehicleEnhanceSearchResponse();
 
-		VehicleEnhanced vehicle = vehicleSerachService.getVehicleByFin(fin, fakeService.getVehicles());
+		VehicleEnhanced vehicle = searchService.getVehicleByFin(fin, fakeService.getVehicles());
 		if (vehicle == null) {
 			searchResponse.setErrorMessage(Constants.SOMETHING_WENT_WRONG);
 		} else {

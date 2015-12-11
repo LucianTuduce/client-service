@@ -3,6 +3,7 @@ package ro.fortech.servicesimpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 
 import ro.fortech.model.User;
@@ -11,6 +12,11 @@ import ro.fortech.services.UserService;
 @Stateless
 public class UserServiceImpl implements UserService{
 
+	@PostConstruct
+	public void init() {
+		System.out.println("UserServiceImpl: Stateless");
+	}
+	
 	private List<User> users = new ArrayList<>();
 
 	public List<User> getUsers() {

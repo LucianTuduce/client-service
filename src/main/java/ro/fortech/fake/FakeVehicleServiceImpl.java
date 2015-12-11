@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Named;
@@ -23,15 +24,21 @@ import ro.fortech.vehicle.enhance.VehicleEnhanced;
  * Class used to perform CRUD operation on the vehicles.
  *
  */
-@Stateless
+@Stateless(name = "fakeVehicleServiceImpl")
 @Named("fakeVehicleServiceImpl")
 public class FakeVehicleServiceImpl implements VehicleService {
 
-	@EJB(name = "vehicleSearchServiceImpl")
+	@EJB(beanName = "vehicleSearchServiceImpl")
 	private VehicleSearchService searchService;
 
 	@EJB
 	private VehicleCache cache;
+	
+	@PostConstruct
+	public void init() {
+		System.out.println("FakeVehicleServiceImpl: Stateless");
+	}
+	
 
 	private List<Vehicle> generateRandomVehicles(int vehicleCount) {
 		

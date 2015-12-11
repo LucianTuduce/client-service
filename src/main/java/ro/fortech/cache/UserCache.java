@@ -13,7 +13,7 @@ public class UserCache {
 
 	@PostConstruct
 	public void init() {
-		System.out.println("Built: UserCache.");
+		System.out.println("UserCache: Singleton");
 	}
 	
 	private Map<String, User> userCache = new HashMap<>();

@@ -1,5 +1,6 @@
 package ro.fortech.helpers;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 
 /**
@@ -10,6 +11,12 @@ import javax.ejb.Stateless;
 @Stateless
 public class SearchHelperUtils {
 
+	@PostConstruct
+	public void init() {
+		System.out.println("SearchHelperUtils: Stateless");
+	}
+	
+	
 	/**
 	 * Method used to check if the string values provided by the user and the
 	 * one that the car has are equal.

@@ -2,9 +2,9 @@ package ro.fortech.servicesimpl;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Named;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
@@ -17,15 +17,19 @@ import ro.fortech.services.VehicleSearchService;
 import ro.fortech.services.VehicleService;
 import ro.fortech.vehicle.enhance.VehicleEnhanced;
 
-@Stateless
-@Named("searchServiceUtils")
+@Stateless(name = "searchServiceUtils")
 public class FakeCollectionsUtilsSearcher implements VehicleSearchService{
 
-	@EJB(beanName = "FakeVehicleServiceImpl")
+	@EJB(beanName = "fakeVehicleServiceImpl")
 	private VehicleService vehicleService;
 
 	@EJB
 	private SearchHelperUtils searchHelperUtil;
+	
+	@PostConstruct
+	public void init() {
+		System.out.println("FakeCollectionsUtilsSearcher: Stateless");
+	}
 	
 	@Override
 	public List<Vehicle> getSearch(VehicleSearchRequest search, List<Vehicle> vehicles) {

@@ -3,6 +3,7 @@ package ro.fortech.helpers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 
 import ro.fortech.def.value.DefaultValues;
@@ -18,6 +19,12 @@ import ro.fortech.search.VehicleSearchRequest;
 @Stateless
 public class SearchHelper {
 
+	@PostConstruct
+	public void init() {
+		System.out.println("SearchHelper: Stateless");
+	}
+	
+	
 	/**
 	 * Method used to filter the vehicles based on their model
 	 * 
