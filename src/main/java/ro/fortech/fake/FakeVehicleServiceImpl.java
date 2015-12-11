@@ -6,7 +6,6 @@ import java.util.Random;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import ro.fortech.cache.VehicleCache;
@@ -28,8 +27,7 @@ import ro.fortech.vehicle.enhance.VehicleEnhanced;
 @Named("fakeVehicleServiceImpl")
 public class FakeVehicleServiceImpl implements VehicleService {
 
-	@Inject
-	@Named("vehicleSearchServiceImpl")
+	@EJB(name = "vehicleSearchServiceImpl")
 	private VehicleSearchService searchService;
 
 	@EJB
