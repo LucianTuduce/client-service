@@ -10,6 +10,12 @@
 		<managed-bean-class>ro.fortech.beans.SearchVehicleBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>historySearchBean</managed-bean-name>
+		<managed-bean-class>ro.fortech.beans.HistorySearchBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 
 	<managed-bean>
 		<managed-bean-name>vehicleBean</managed-bean-name>
@@ -18,6 +24,10 @@
 		<managed-property>
 			<property-name>searchVehicleBean</property-name>
 			<value>#{searchVehicleBean}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>historySearchBean</property-name>
+			<value>#{historySearchBean}</value>
 		</managed-property>
 	</managed-bean>
 

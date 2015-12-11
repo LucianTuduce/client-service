@@ -1,5 +1,7 @@
 package ro.fortech.beans;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -16,8 +18,10 @@ import ro.fortech.type.VehicleType;
  */
 @ManagedBean(name = "searchVehicleBean")
 @SessionScoped
-public class SearchVehicleBean {
+public class SearchVehicleBean implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	private String searchFin;
 	private String searchModel;
 	private String searchFuelType;
@@ -33,51 +37,68 @@ public class SearchVehicleBean {
 	public VehicleSearchRequest createSearchVechicle() {
 
 		VehicleSearchRequest searchRequest = new VehicleSearchRequest();
-		searchRequest.setFin(searchFin);
-
+		
 		if(searchLocation == null){
 			searchRequest.setLocation(DefaultValues.LOCATION_DEFAULT.getDef());
 		}else{
 			searchRequest.setLocation(searchLocation);
 		}
-		
-		if(searchMaxCapacity == 0){
-			searchRequest.setMaxCapacity(DefaultValues.MAX_CAPACITY_DEFAULT.getDefValue());	
-		}else{
-			searchRequest.setMaxCapacity(searchMaxCapacity);
-		}
-		
-		if(searchMinCapacity == 0){
-			searchRequest.setMinCapacity(DefaultValues.MIN_CAPACITY_DEFAULT.getDefValue());	
-		}else{
-			searchRequest.setMinCapacity(searchMinCapacity);
-		}
-		
-		if(searchMinYear == 0){
-			searchRequest.setMinYear(DefaultValues.MIN_YEAR_DEFAULT.getDefValue());
-		}else{
-			searchRequest.setMinYear(searchMinYear);
-		}
-		
-		if(searchMaxYear == 0){
-			searchRequest.setMaxYear(DefaultValues.MAX_YEAR_DEFAULT.getDefValue());
-		}else{
-			searchRequest.setMaxYear(searchMaxYear);
-		}
-		
-		searchRequest.setMaxPrice(searchMaxPrice);
-		searchRequest.setMinPrice(searchMinPrice);
-		searchRequest.setModel(searchModel);
-		searchRequest.setFuelType(FuelType.getEnum(searchFuelType));
-		
 		if(searchVehicleType == null){
 			searchRequest.setVehicleType(VehicleType.getEnum(DefaultValues.VEHICLE_TYPE_DEFAULT.getDef()));
 		}else{
 			searchRequest.setVehicleType(VehicleType.getEnum(searchVehicleType));
 		}
-	
+		searchRequest.setFin(searchFin);
+		searchRequest.setModel(searchModel);
+		searchRequest.setFuelType(FuelType.getEnum(searchFuelType));
+		if(searchMaxCapacity == 0){
+			searchRequest.setMaxCapacity(DefaultValues.MAX_CAPACITY_DEFAULT.getDefValue());	
+		}else{
+			searchRequest.setMaxCapacity(searchMaxCapacity);
+		}
+		if(searchMinCapacity == 0){
+			searchRequest.setMinCapacity(DefaultValues.MIN_CAPACITY_DEFAULT.getDefValue());	
+		}else{
+			searchRequest.setMinCapacity(searchMinCapacity);
+		}
+		if(searchMinYear == 0){
+			searchRequest.setMinYear(DefaultValues.MIN_YEAR_DEFAULT.getDefValue());
+		}else{
+			searchRequest.setMinYear(searchMinYear);
+		}
+		if(searchMaxYear == 0){
+			searchRequest.setMaxYear(DefaultValues.MAX_YEAR_DEFAULT.getDefValue());
+		}else{
+			searchRequest.setMaxYear(searchMaxYear);
+		}
+		if(searchMaxPrice == 0){
+			searchRequest.setMaxYear(DefaultValues.MAX_PRICE_DEFAULT.getDefValue());
+		}else{
+			searchRequest.setMaxYear(searchMaxPrice);
+		}
+		if(searchMinPrice == 0){
+			searchRequest.setMaxYear(DefaultValues.MIN_PRICE_DEFAULT.getDefValue());
+		}else{
+			searchRequest.setMaxYear(searchMinPrice);
+		}
+		
 		return searchRequest;
+	}
+	
+	public String getSearchVehicleType() {
+		return searchVehicleType;
+	}
 
+	public void setSearchVehicleType(String searchVehicleType) {
+		this.searchVehicleType = searchVehicleType;
+	}
+	
+	public String getSearchLocation() {
+		return searchLocation;
+	}
+
+	public void setSearchLocation(String searchLocation) {
+		this.searchLocation = searchLocation;
 	}
 	
 	public String getSearchFin() {
@@ -136,14 +157,6 @@ public class SearchVehicleBean {
 		this.searchMaxYear = searchMaxYear;
 	}
 
-	public String getSearchLocation() {
-		return searchLocation;
-	}
-
-	public void setSearchLocation(String searchLocation) {
-		this.searchLocation = searchLocation;
-	}
-
 	public int getSearchMaxPrice() {
 		return searchMaxPrice;
 	}
@@ -160,11 +173,4 @@ public class SearchVehicleBean {
 		this.searchMinPrice = searchMinPrice;
 	}
 
-	public String getSearchVehicleType() {
-		return searchVehicleType;
-	}
-
-	public void setSearchVehicleType(String searchVehicleType) {
-		this.searchVehicleType = searchVehicleType;
-	}
 }
