@@ -13,7 +13,6 @@ import ro.fortech.type.VehicleType;
 
 @Stateless
 public class VehicleCachingService {
-
 	
 	@EJB
 	private VehicleCache vehicleCache;

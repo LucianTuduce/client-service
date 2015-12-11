@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -48,10 +46,9 @@ public class SearchResponseService {
 	private HistorySearchCache historySearchCache;
 
 	@EJB(name = "fakeVehicleServiceImpl")
-	VehicleService fakeService;
+	private VehicleService fakeService;
 
-	@Inject
-	@Named("vehicleSearchServiceImpl")
+	@EJB(name = "vehicleSearchServiceImpl")
 	private VehicleSearchService vehicleSerachService;
 	
 	@Context
