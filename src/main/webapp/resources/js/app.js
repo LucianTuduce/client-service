@@ -24,22 +24,24 @@ angular.module('UVSClient', [])
     $scope.VehicleTypeSelect = function(event) {
         VehicleTypeVar = event.target.text;
         $scope.vehicleType = VehicleTypeVar;
-        var parentElement = angular.element(document.querySelector('#VehicleType:first-child'));
-        parentElement.html('<span class="glyphicon glyphicon-home"></span><span class="caret"></span><br/>' + VehicleTypeVar);
+        var parentElement = angular.element(document.querySelector('#VehicleType'));
+       // parentElement.html('<span class="glyphicon glyphicon-home"></span><span class="caret"></span><br/>' + VehicleTypeVar);
+        parentElement.html(VehicleTypeVar);
     };
 
     $scope.CountrySelect = function(event) {
         CountryVar = event.target.text;
         $scope.Country = CountryVar;
-        var parentElement = angular.element(document.querySelector('#Country:first-child'));
-        parentElement.html('<span class="glyphicon glyphicon-globe"></span><span class="caret"></span><br/>' + CountryVar);
+        var parentElement = angular.element(document.querySelector('#CountryLanguage'));
+        //parentElement.html('<span class="glyphicon glyphicon-globe"></span><span class="caret"></span><br/>' + CountryVar);
+        parentElement.html(CountryVar);
     };
 
     $scope.LanguageSelect = function(event) {
         LanguageVar = event.target.text;
         $scope.Language = LanguageVar;
-        var parentElement = angular.element(document.querySelector('#Country:first-child'));
-        parentElement.html('<span class="glyphicon glyphicon-globe"></span><span class="caret"></span><br/>' + LanguageVar);
+        var parentElement = angular.element(document.querySelector('#CountryLanguage'));
+        parentElement.html(LanguageVar);
 
     };
 })
