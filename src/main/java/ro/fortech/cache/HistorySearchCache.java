@@ -15,14 +15,17 @@ import ro.fortech.search.VehicleSearchRequest;
 @Singleton
 public class HistorySearchCache implements Serializable{
 	
-	@PostConstruct
-	public void init() {
-		System.out.println("HistorySearchCache: Singleton");
-	}
-	
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	private Map<String, List<VehicleSearchRequest>> searchHistory = new HashMap<>();
 	
+	@PostConstruct
+	public void init(){
+		System.out.println("HistorySearchCache: singleton");
+	}
+
 	public Map<String, List<VehicleSearchRequest>> getSearchHistory() {
 		return searchHistory;
 	}

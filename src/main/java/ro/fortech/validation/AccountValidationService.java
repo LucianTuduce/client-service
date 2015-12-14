@@ -12,18 +12,17 @@ import ro.fortech.constants.Constants;
 @Stateless
 public class AccountValidationService {
 
-	@PostConstruct
-	public void init() {
-		System.out.println("AccountValidationService: Stateless");
-	}
-	
-	
 	@EJB
 	private UserCache userCache;
 
 	@Context
 	private HttpServletResponse response;
 
+	@PostConstruct
+	public void init() {
+		System.out.println("AccountValidationService: Stateless");
+	}
+	
 	/**
 	 * Method used to check if an user is present in the system, and if he is
 	 * then his search history will be displayed, search history which is

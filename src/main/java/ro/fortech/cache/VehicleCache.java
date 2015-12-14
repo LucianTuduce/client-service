@@ -15,7 +15,7 @@ public class VehicleCache {
 	public void init() {
 		System.out.println("VehicleCache: Singleton");
 	}
-	
+
 	private List<Vehicle> vehicles;
 	
 	private List<VehicleEnhanced> vehicleEnhanceds;

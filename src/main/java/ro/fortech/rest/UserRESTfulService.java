@@ -19,11 +19,6 @@ import ro.fortech.validation.AccountValidationService;
 @Stateless
 public class UserRESTfulService {
 
-	@PostConstruct
-	public void init() {
-		System.out.println("UserRESTfulService: Stateless");
-	}
-	
 	@EJB
 	private AccountValidationService accountValidation;	
 	
@@ -36,6 +31,12 @@ public class UserRESTfulService {
 	@EJB
 	private HistorySearchCache historySearchCache;
 		
+	@PostConstruct
+	public void init() {
+		System.out.println("UserRESTfulService: Stateless");
+	}
+	
+	
 	@POST
 	@Path("/login")
 	public Response confirmUser(LoginCredentials credentials){

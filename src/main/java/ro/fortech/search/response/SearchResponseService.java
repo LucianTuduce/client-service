@@ -7,8 +7,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -33,17 +31,11 @@ import ro.fortech.vehicle.enhance.VehicleEnhanced;
 @Stateless
 public class SearchResponseService {
 	
-	
 	private static final int PROGRAMMERS_SOLUTION = 1;
 
 	private static final int MAGIC_NUMBER_2 = 2;
 
 	private static final int MAGIC_NUMBER_10 = 10;
-	
-	@PostConstruct
-	public void init() {
-		System.out.println("SearchResponseService: Stateless");
-	}
 
 	@EJB
 	private UserCache userCache;
@@ -54,16 +46,20 @@ public class SearchResponseService {
 	@EJB
 	private HistorySearchCache historySearchCache;
 
-	@EJB(name = "fakeVehicleServiceImpl")
-	VehicleService fakeService;
+	@EJB(beanName = "fakeVehicleServiceImpl")
+	private VehicleService fakeService;
 
-	@Inject
-	@Named("vehicleSearchServiceImpl")
-	private VehicleSearchService vehicleSerachService;
+	@EJB(beanName = "vehicleSearchServiceImpl")
+	private VehicleSearchService searchService;
 	
 	@Context
 	private HttpServletResponse response;
 
+	@PostConstruct
+	public void init() {
+		System.out.println("SearchResponseService: Stateless");
+	}
+	
 	public Response getUserSearchHistory(String accountToken) {
 		return Response.status(Response.Status.OK).entity(historySearchCache.getSearchHistory()).build();
 	}
@@ -178,7 +174,7 @@ public class SearchResponseService {
 	public Response getVehicleEnhancedByFin(String accountToken, String fin) {
 		VehicleEnhanceSearchResponse searchResponse = new VehicleEnhanceSearchResponse();
 
-		VehicleEnhanced vehicle = vehicleSerachService.getVehicleByFin(fin, fakeService.getVehicles());
+		VehicleEnhanced vehicle = searchService.getVehicleByFin(fin, fakeService.getVehicles());
 		if (vehicle == null) {
 			searchResponse.setErrorMessage(Constants.SOMETHING_WENT_WRONG);
 		} else {

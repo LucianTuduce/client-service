@@ -10,13 +10,13 @@ import ro.fortech.model.User;
 @Stateless
 public class AccountCachingService {
 	
+	@EJB
+	private UserCache userCache;
+	
 	@PostConstruct
 	public void init() {
 		System.out.println("AccountCachingService: Stateless");
 	}
-	
-	@EJB
-	private UserCache userCache;
 	
 	public void initUserCache() {
 		User user = null;

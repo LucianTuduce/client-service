@@ -13,12 +13,12 @@ import ro.fortech.history.SearchSave;
 @Singleton
 public class SavedSearchCache implements Serializable {
 	
+	private static final long serialVersionUID = -4384690421304399293L;
+
 	@PostConstruct
 	public void init() {
 		System.out.println("SavedSearchCache: Singleton");
 	}
-	
-	private static final long serialVersionUID = -4384690421304399293L;
 
 	private Map<String, List<SearchSave>> searchSaveCache = new HashMap<>();
 

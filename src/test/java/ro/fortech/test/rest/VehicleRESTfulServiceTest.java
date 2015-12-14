@@ -25,17 +25,14 @@ public class VehicleRESTfulServiceTest {
 	private static final String VALID_USER_TOKEN = "QmFzaWMgIHVzZXIwOnBhc3Mw";
 	private static final String AUTHORIZATION = "Authorization";
 	
-	private static final String URL_POST_INIT_USER_CACHE = "http://localhost:9080/client-service/rest/vehicle/users";
 	private static final String URL_POST_CREATE_USER_UNIQUE_TOKEN_ACCOUNT_VALID = "http://localhost:9080/client-service/rest/vehicle/token";
 	private static final String URL_GET_FILTERED_VEHICLE_LIST = "http://localhost:9080/client-service/rest/vehicle/filtered";
 	private static final String URL_GET_SEARCH_HISTORY = "http://localhost:9080/client-service/rest/vehicle/search/history";
 	private static final String URL_POST_SAVE_SEARCH_HISTORY = "http://localhost:9080/client-service/rest/vehicle/search/history/save/demo";
 	private static final String URL_GET_SAVE_SEARCH_HISTORY = "http://localhost:9080/client-service/rest/vehicle/search/history/saved";
 	private static final String URL_GET_ENHANCED_VEHICLE_BY_FIN = "http://localhost:9080/client-service/rest/vehicle/search/GR3847UC3218345";
-	private static final String URL_PUT_INIT_VEHICLE_CACHE = "http://localhost:9080/client-service/rest/vehicle/cache/vehicles";
 	
 	private HttpClient client;
-
 	private HttpPost postUserCredentialsForToken;
 	private HttpPost getFilteredVehicles;
 	private HttpGet getSearchHistory;

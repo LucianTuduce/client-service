@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Named;
 
 import ro.fortech.def.value.DefaultValues;
 import ro.fortech.helpers.SearchHelper;
@@ -16,22 +15,20 @@ import ro.fortech.services.VehicleSearchService;
 import ro.fortech.services.VehicleService;
 import ro.fortech.vehicle.enhance.VehicleEnhanced;
 
-@Stateless
-@Named("vehicleSearchServiceImpl")
+@Stateless(name = "vehicleSearchServiceImpl")
 public class FakeSearcher implements VehicleSearchService {
+
+	@EJB(beanName = "fakeVehicleServiceImpl")
+	private VehicleService vehicleService;
+
+	@EJB
+	private SearchHelper searchHelper;
 
 	@PostConstruct
 	public void init() {
 		System.out.println("FakeSearcher: Stateless");
 	}
 	
-	
-	@EJB(beanName = "FakeVehicleServiceImpl")
-	private VehicleService vehicleService;
-
-	@EJB
-	private SearchHelper searchHelper;
-
 	@Override
 	public List<Vehicle> getSearch(VehicleSearchRequest search, List<Vehicle> vehicles) {
 		List<Vehicle> intermediat1 = null;

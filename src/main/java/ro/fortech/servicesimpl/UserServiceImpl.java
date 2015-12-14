@@ -17,7 +17,6 @@ public class UserServiceImpl implements UserService{
 		System.out.println("UserServiceImpl: Stateless");
 	}
 	
-	
 	private List<User> users = new ArrayList<>();
 
 	public List<User> getUsers() {

@@ -14,14 +14,14 @@ import ro.fortech.type.VehicleType;
 
 @Stateless
 public class VehicleCachingService {
-
-	@PostConstruct
-	public void init() {
-		System.out.println("VehicleCachingService: Stateless");
-	}
 	
 	@EJB
 	private VehicleCache vehicleCache;
+	
+	@PostConstruct
+	public void init() {
+		System.out.println("AccountCachingService: Stateless");
+	}
 	
 	public void initVehicleCache(){
 		Vehicle vehicle = null;

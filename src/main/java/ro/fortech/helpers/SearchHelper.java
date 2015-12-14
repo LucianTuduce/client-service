@@ -24,6 +24,7 @@ public class SearchHelper {
 		System.out.println("SearchHelper: Stateless");
 	}
 	
+	
 	/**
 	 * Method used to filter the vehicles based on their model
 	 * 

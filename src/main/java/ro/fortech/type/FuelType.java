@@ -32,7 +32,7 @@ public enum FuelType {
 		else if(LPG.name().equalsIgnoreCase(s)){
 			return LPG;
 		}
-		else if(s.equalsIgnoreCase(" ")){
+		else if(s == " "){
 			return DEFAULT;
 		}
 		throw new IllegalArgumentException("No Enum specified for this string");
