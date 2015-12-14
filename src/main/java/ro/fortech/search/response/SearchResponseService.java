@@ -124,7 +124,6 @@ public class SearchResponseService {
 		byte[] decodedToken = Base64.decodeBase64(token);
 		String decodedTokenStringForm = new String(decodedToken);	
 		String[] splittedToken = decodedTokenStringForm.split("[\\s\\:]+");
-		System.out.println(splittedToken[1]);
 		return splittedToken[1];
 	}
 

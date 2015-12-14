@@ -22,7 +22,7 @@ public class VehicleRESTfulServiceTest {
 	private static final String APPLICATION_JSON = "application/json";
 	private static final String CONTENT_TYPE = "Content-Type";
 	private static final String INVALID_USER_TOKEN = "QmFzaWMgdXNlcjA6cGFzczA=1";
-	private static final String VALID_USER_TOKEN = "QmFzaWMgdXNlcjA6cGFzczA=";
+	private static final String VALID_USER_TOKEN = "QmFzaWMgIHVzZXIwOnBhc3Mw";
 	private static final String AUTHORIZATION = "Authorization";
 	
 	private static final String URL_POST_INIT_USER_CACHE = "http://localhost:9080/client-service/rest/vehicle/users";
@@ -35,55 +35,24 @@ public class VehicleRESTfulServiceTest {
 	private static final String URL_PUT_INIT_VEHICLE_CACHE = "http://localhost:9080/client-service/rest/vehicle/cache/vehicles";
 	
 	private HttpClient client;
-	private HttpPost postRequestInitUserCache;
+
 	private HttpPost postUserCredentialsForToken;
 	private HttpPost getFilteredVehicles;
 	private HttpGet getSearchHistory;
 	private HttpPost saveFilteredVehiclesSearch;
 	private HttpGet getSearchSavedHistory;
 	private HttpGet getEnhancedVehicle;
-	private HttpPut putRequestInitVehicleCache;
+
 	
 	@Before
 	public void init() {
 		client = HttpClientBuilder.create().build();
-		postRequestInitUserCache = new HttpPost(URL_POST_INIT_USER_CACHE);
-		putRequestInitVehicleCache = new HttpPut(URL_PUT_INIT_VEHICLE_CACHE);
 		postUserCredentialsForToken = new HttpPost(URL_POST_CREATE_USER_UNIQUE_TOKEN_ACCOUNT_VALID);
 		getFilteredVehicles = new HttpPost(URL_GET_FILTERED_VEHICLE_LIST);
 		getSearchHistory = new HttpGet(URL_GET_SEARCH_HISTORY);
 		saveFilteredVehiclesSearch = new HttpPost(URL_POST_SAVE_SEARCH_HISTORY);
 		getSearchSavedHistory = new HttpGet(URL_GET_SAVE_SEARCH_HISTORY);
 		getEnhancedVehicle = new HttpGet(URL_GET_ENHANCED_VEHICLE_BY_FIN);
-	}
-	
-	
-	@Test
-	public void initUserCache_userCacheInintiated_successStatus200() {
-		
-		postRequestInitUserCache.addHeader(CONTENT_TYPE, APPLICATION_JSON);
-		HttpResponse response = null;
-		try {
-			response = client.execute(postRequestInitUserCache);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		assertEquals(201, response.getStatusLine().getStatusCode());
-	}
-	
-	@Test
-	public void initVehicleCache_vehicleCacheInintiated_successStatus200() {
-		
-		putRequestInitVehicleCache.addHeader(CONTENT_TYPE, APPLICATION_JSON);
-		HttpResponse response = null;
-		try {
-			response = client.execute(putRequestInitVehicleCache);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		assertEquals(201, response.getStatusLine().getStatusCode());
 	}
 
 	@Test
