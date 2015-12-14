@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -32,11 +33,17 @@ import ro.fortech.vehicle.enhance.VehicleEnhanced;
 @Stateless
 public class SearchResponseService {
 	
+	
 	private static final int PROGRAMMERS_SOLUTION = 1;
 
 	private static final int MAGIC_NUMBER_2 = 2;
 
 	private static final int MAGIC_NUMBER_10 = 10;
+	
+	@PostConstruct
+	public void init() {
+		System.out.println("SearchResponseService: Stateless");
+	}
 
 	@EJB
 	private UserCache userCache;

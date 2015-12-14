@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -28,6 +29,12 @@ import ro.fortech.vehicle.enhance.VehicleEnhanced;
 @Named("fakeVehicleServiceImpl")
 public class FakeVehicleServiceImpl implements VehicleService {
 
+	@PostConstruct
+	public void init() {
+		System.out.println("FakeVehicleServiceImpl: Stateless");
+	}
+	
+	
 	@Inject
 	@Named("vehicleSearchServiceImpl")
 	private VehicleSearchService searchService;

@@ -2,6 +2,7 @@ package ro.fortech.servicesimpl;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Named;
@@ -21,6 +22,11 @@ import ro.fortech.vehicle.enhance.VehicleEnhanced;
 @Named("searchServiceUtils")
 public class FakeCollectionsUtilsSearcher implements VehicleSearchService{
 
+	@PostConstruct
+	public void init() {
+		System.out.println("FakeCollectionsUtilsSearcher: Stateless");
+	}
+	
 	@EJB(beanName = "FakeVehicleServiceImpl")
 	private VehicleService vehicleService;
 

@@ -1,5 +1,6 @@
 package ro.fortech.caching;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -8,6 +9,11 @@ import ro.fortech.model.User;
 
 @Stateless
 public class AccountCachingService {
+	
+	@PostConstruct
+	public void init() {
+		System.out.println("AccountCachingService: Stateless");
+	}
 	
 	@EJB
 	private UserCache userCache;

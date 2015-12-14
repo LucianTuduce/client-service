@@ -1,5 +1,6 @@
 package ro.fortech.validation;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,12 @@ import ro.fortech.constants.Constants;
 @Stateless
 public class AccountValidationService {
 
+	@PostConstruct
+	public void init() {
+		System.out.println("AccountValidationService: Stateless");
+	}
+	
+	
 	@EJB
 	private UserCache userCache;
 

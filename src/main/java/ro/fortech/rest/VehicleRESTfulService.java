@@ -29,7 +29,7 @@ public class VehicleRESTfulService {
 
 	@PostConstruct
 	public void init() {
-		System.out.println("Built: VehicleRESTfulService.");
+		System.out.println("VehicleRESTfulService: Stateless");
 	}
 	
 	@Context

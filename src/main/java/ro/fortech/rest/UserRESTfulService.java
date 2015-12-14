@@ -1,5 +1,6 @@
 package ro.fortech.rest;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.HeaderParam;
@@ -18,6 +19,11 @@ import ro.fortech.validation.AccountValidationService;
 @Stateless
 public class UserRESTfulService {
 
+	@PostConstruct
+	public void init() {
+		System.out.println("UserRESTfulService: Stateless");
+	}
+	
 	@EJB
 	private AccountValidationService accountValidation;	
 	

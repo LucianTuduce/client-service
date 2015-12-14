@@ -11,7 +11,7 @@ import ro.fortech.caching.VehicleCachingService;
 @Singleton
 @Startup
 public class CacheInitializator {
-
+	
 	@EJB
 	private VehicleCachingService vehicleCacheService;
 	
