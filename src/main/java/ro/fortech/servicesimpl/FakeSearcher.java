@@ -55,8 +55,9 @@ public class FakeSearcher implements VehicleSearchService {
 			intermediat2.clear();
 			intermediat2 = searchHelper.getVehiclesByVehicleType(intermediat1, search);
 			intermediat1.clear();
-
-			return intermediat2;
+			intermediat1 = searchHelper.getVehiclesByLocation(intermediat2, search);
+			intermediat2.clear();
+			return intermediat1;
 
 		} else {
 			for (Vehicle vehicleFin : vehicles) {

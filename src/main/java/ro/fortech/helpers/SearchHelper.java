@@ -190,14 +190,10 @@ public class SearchHelper {
 	 */
 	public List<Vehicle> getVehiclesByLocation(List<Vehicle> vehicles, VehicleSearchRequest search) {
 		List<Vehicle> intermediateSearchVehicles = null;
-		if (search.getLocation().equals(DefaultValues.LOCATION_DEFAULT.getDef())) {
-			intermediateSearchVehicles = new ArrayList<>(vehicles);
-		} else {
-			intermediateSearchVehicles = new ArrayList<>();
-			for (Vehicle vehicle : vehicles) {
-				if (vehicle.getLocation().equals(search.getLocation())) {
-					intermediateSearchVehicles.add(vehicle);
-				}
+		intermediateSearchVehicles = new ArrayList<>();
+		for (Vehicle vehicle : vehicles) {
+			if (vehicle.getLocation().equals(search.getLocation())) {
+				intermediateSearchVehicles.add(vehicle);
 			}
 		}
 		return intermediateSearchVehicles;
