@@ -56,7 +56,7 @@ public class VehicleRESTfulService {
 	@Produces("application/json")
 	public Response getVehiclesBySearchCriteria(@HeaderParam("Authorization") String accountToken, VehicleSearchRequest search) {
 		if(accountValidation.isUserValid(accountToken)){
-			return searchResponseService.getFilteredVehiclesBySearchCriteria(accountToken, search);
+			return Response.status(Response.Status.OK).entity(searchResponseService.getFilteredVehiclesBySearchCriteria(accountToken, search)).build();
 		}else {
 			return Response.status(Response.Status.UNAUTHORIZED).build();
 		}
@@ -75,7 +75,7 @@ public class VehicleRESTfulService {
 	@Produces("application/json")
 	public Response getSearchHistory(@HeaderParam("Authorization") String accountToken) {
 		if(accountValidation.isUserValid(accountToken)){
-			return searchResponseService.getUserSearchHistory(accountToken);
+			return Response.status(Response.Status.OK).entity(searchResponseService.getUserSearchHistory(accountToken)).build();
 		}else {
 			return Response.status(Response.Status.UNAUTHORIZED).build();
 		}
@@ -86,7 +86,7 @@ public class VehicleRESTfulService {
 	@Produces("application/json")
 	public Response getSearchSavedHistory(@HeaderParam("Authorization") String accountToken) {
 		if(accountValidation.isUserValid(accountToken)){
-			return searchResponseService.getUserSavedSearchHistory(accountToken);
+			return Response.status(Response.Status.OK).entity(searchResponseService.getUserSavedSearchHistory(accountToken)).build();
 		}else {
 			return Response.status(Response.Status.UNAUTHORIZED).build();
 		}
@@ -97,18 +97,18 @@ public class VehicleRESTfulService {
 	@Produces("application/json")
 	public Response saveSearchRequest(@HeaderParam("Authorization") String accountToken, @PathParam("saveName") String saveName, VehicleSearchRequest search) {
 		if(accountValidation.isUserValid(accountToken)){
-			return searchResponseService.saveUserSearch(accountToken, saveName, search);
+			return Response.status(Response.Status.OK).entity(searchResponseService.saveUserSearch(accountToken, saveName, search)).build();
 		}else {
 			return Response.status(Response.Status.UNAUTHORIZED).build();
 		}
 	}
 
 	@GET
-	@Path("/search/{fin}")
+	@Path("/enhanced/{fin}")
 	@Produces("application/json")
 	public Response getVehicleByFin(@PathParam("fin") String fin, @HeaderParam("Authorization") String accountToken){
 		if(accountValidation.isUserValid(accountToken)){
-			return searchResponseService.getVehicleEnhancedByFin(accountToken, fin);
+			return Response.status(Response.Status.OK).entity(searchResponseService.getVehicleEnhancedByFin(accountToken, fin)).build();
 		}else {
 			return Response.status(Response.Status.UNAUTHORIZED).build();
 		}

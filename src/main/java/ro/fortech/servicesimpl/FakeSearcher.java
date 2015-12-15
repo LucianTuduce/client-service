@@ -69,7 +69,7 @@ public class FakeSearcher implements VehicleSearchService {
 	}
 
 	@Override
-	public VehicleEnhanced getVehicleByFin(String fin, List<VehicleEnhanced> vehicleEnhanceds) {
+	public VehicleEnhanced getVehicleEnhancedByFin(String fin, List<VehicleEnhanced> vehicleEnhanceds) {
 		for (VehicleEnhanced vehicleEnhanced : vehicleEnhanceds) {
 			if (vehicleEnhanced.getVehicle().getFin().equals(fin)) {
 				return vehicleEnhanced;
