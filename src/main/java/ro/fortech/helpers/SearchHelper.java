@@ -112,13 +112,12 @@ public class SearchHelper {
 		List<Vehicle> intermediateSearchVehicles = null;
 		if (search.getMaxCapacity() == DefaultValues.MAX_CAPACITY_DEFAULT.getDefValue()) {
 			intermediateSearchVehicles = new ArrayList<>(vehicles);
-			vehicles.clear();
 		} else {
 			intermediateSearchVehicles = new ArrayList<>();
 			for (Vehicle vehicle : vehicles) {
 				if (vehicle.getEngineCapacity() <= search.getMaxCapacity()) {
 					intermediateSearchVehicles.add(vehicle);
-				}
+					}
 			}
 		}
 		return intermediateSearchVehicles;
