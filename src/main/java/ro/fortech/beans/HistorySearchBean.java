@@ -22,8 +22,7 @@ public class HistorySearchBean implements Serializable {
 	private HistorySearchCache historySearchCache;
 
 	private List<VehicleSearchRequest> searchHistory = new ArrayList<>();
-	HistorySearch historySearch;
-
+	
 	public List<VehicleSearchRequest> getSearchHistory() {
 		return searchHistory;
 	}

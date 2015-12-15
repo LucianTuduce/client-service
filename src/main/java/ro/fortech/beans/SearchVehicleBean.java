@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
+import org.apache.commons.lang3.StringUtils;
 import ro.fortech.def.value.DefaultValues;
 import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.type.FuelType;
@@ -18,10 +18,10 @@ import ro.fortech.type.VehicleType;
  */
 @ManagedBean(name = "searchVehicleBean")
 @SessionScoped
-public class SearchVehicleBean implements Serializable{
+public class SearchVehicleBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String searchFin;
 	private String searchModel;
 	private String searchFuelType;
@@ -37,75 +37,83 @@ public class SearchVehicleBean implements Serializable{
 	public VehicleSearchRequest createSearchVechicle() {
 
 		VehicleSearchRequest searchRequest = new VehicleSearchRequest();
-		
-		if(searchLocation == null){
+
+		if (StringUtils.isBlank(searchLocation)) {
 			searchRequest.setLocation(DefaultValues.LOCATION_DEFAULT.getDef());
-		}else{
+		} else {
 			searchRequest.setLocation(searchLocation);
 		}
-		
-		if(searchVehicleType == null){
-			searchRequest.setVehicleType(VehicleType.getEnum(DefaultValues.VEHICLE_TYPE_DEFAULT.getDef()));
-		}else{
-			searchRequest.setVehicleType(VehicleType.getEnum(searchVehicleType));
+
+		if (StringUtils.isBlank(searchVehicleType)) {
+			searchRequest.setVehicleType(VehicleType
+					.getEnum(DefaultValues.VEHICLE_TYPE_DEFAULT.getDef()));
+		} else {
+			searchRequest
+					.setVehicleType(VehicleType.getEnum(searchVehicleType));
 		}
-		
-		if(searchFin.equals("")){
+
+		if (StringUtils.isBlank(searchFin)) {
 			searchRequest.setFin(DefaultValues.FIN_DEFAULT.getDef());
-		}else{
+		} else {
 			searchRequest.setFin(searchFin);
 		}
-		
-		if(searchModel.equals(" ")){
+
+		if (StringUtils.isBlank(searchModel)) {
 			searchRequest.setModel(DefaultValues.MODEL_DEFAULT.getDef());
-		}else{
+		} else {
 			searchRequest.setModel(searchModel);
 		}
-		
-		if(searchFuelType.equals(" ")){
+
+		if (StringUtils.isBlank(searchFuelType)) {
 			searchRequest.setFuelType(FuelType.DEFAULT);
-		}else{
+		} else {
 			searchRequest.setFuelType(FuelType.getEnum(searchFuelType));
 		}
-			
-		if(searchMaxCapacity == 0){
-			searchRequest.setMaxCapacity(DefaultValues.MAX_CAPACITY_DEFAULT.getDefValue());	
-		}else{
+
+		if (searchMaxCapacity == 0) {
+			searchRequest.setMaxCapacity(DefaultValues.MAX_CAPACITY_DEFAULT
+					.getDefValue());
+		} else {
 			searchRequest.setMaxCapacity(searchMaxCapacity);
 		}
-		
-		if(searchMinCapacity == 0){
-			searchRequest.setMinCapacity(DefaultValues.MIN_CAPACITY_DEFAULT.getDefValue());	
-		}else{
+
+		if (searchMinCapacity == 0) {
+			searchRequest.setMinCapacity(DefaultValues.MIN_CAPACITY_DEFAULT
+					.getDefValue());
+		} else {
 			searchRequest.setMinCapacity(searchMinCapacity);
 		}
-		
-		if(searchMinYear == 0){
-			searchRequest.setMinYear(DefaultValues.MIN_YEAR_DEFAULT.getDefValue());
-		}else{
+
+		if (searchMinYear == 0) {
+			searchRequest.setMinYear(DefaultValues.MIN_YEAR_DEFAULT
+					.getDefValue());
+		} else {
 			searchRequest.setMinYear(searchMinYear);
 		}
-		
-		if(searchMaxYear == 0){
-			searchRequest.setMaxYear(DefaultValues.MAX_YEAR_DEFAULT.getDefValue());
-		}else{
+
+		if (searchMaxYear == 0) {
+			searchRequest.setMaxYear(DefaultValues.MAX_YEAR_DEFAULT
+					.getDefValue());
+		} else {
 			searchRequest.setMaxYear(searchMaxYear);
 		}
-		
-		if(searchMaxPrice == 0){
-			searchRequest.setMaxPrice(DefaultValues.MAX_PRICE_DEFAULT.getDefValue());
-		}else{
+
+		if (searchMaxPrice == 0) {
+			searchRequest.setMaxPrice(DefaultValues.MAX_PRICE_DEFAULT
+					.getDefValue());
+		} else {
 			searchRequest.setMaxPrice(searchMaxPrice);
 		}
-		
-		if(searchMinPrice == 0){
-			searchRequest.setMinPrice(DefaultValues.MIN_PRICE_DEFAULT.getDefValue());
-		}else{
+
+		if (searchMinPrice == 0) {
+			searchRequest.setMinPrice(DefaultValues.MIN_PRICE_DEFAULT
+					.getDefValue());
+		} else {
 			searchRequest.setMinPrice(searchMinPrice);
 		}
 		return searchRequest;
 	}
-	
+
 	public String getSearchVehicleType() {
 		return searchVehicleType;
 	}
@@ -113,7 +121,7 @@ public class SearchVehicleBean implements Serializable{
 	public void setSearchVehicleType(String searchVehicleType) {
 		this.searchVehicleType = searchVehicleType;
 	}
-	
+
 	public String getSearchLocation() {
 		return searchLocation;
 	}
@@ -121,7 +129,7 @@ public class SearchVehicleBean implements Serializable{
 	public void setSearchLocation(String searchLocation) {
 		this.searchLocation = searchLocation;
 	}
-	
+
 	public String getSearchFin() {
 		return searchFin;
 	}
