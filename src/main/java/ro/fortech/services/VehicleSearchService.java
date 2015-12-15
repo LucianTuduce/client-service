@@ -17,6 +17,6 @@ public interface VehicleSearchService {
 	 */
 	List<Vehicle> getSearch(VehicleSearchRequest search, List<Vehicle> vehicles);
 
-	VehicleEnhanced getVehicleEnhancedByFin(String fin, List<VehicleEnhanced> vehicleEnhanceds);
+	VehicleEnhanced getVehicleEnhancedByFin(String fin);
 	
 }

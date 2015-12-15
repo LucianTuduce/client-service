@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import ro.fortech.cache.VehicleCache;
 import ro.fortech.def.value.DefaultValues;
 import ro.fortech.helpers.SearchHelper;
 import ro.fortech.model.Vehicle;
@@ -23,6 +24,9 @@ public class FakeSearcher implements VehicleSearchService {
 
 	@EJB
 	private SearchHelper searchHelper;
+	
+	@EJB
+	private VehicleCache vehicleCache;
 
 	@PostConstruct
 	public void init() {
@@ -71,8 +75,8 @@ public class FakeSearcher implements VehicleSearchService {
 	}
 
 	@Override
-	public VehicleEnhanced getVehicleEnhancedByFin(String fin, List<VehicleEnhanced> vehicleEnhanceds) {
-		for (VehicleEnhanced vehicleEnhanced : vehicleEnhanceds) {
+	public VehicleEnhanced getVehicleEnhancedByFin(String fin) {
+		for (VehicleEnhanced vehicleEnhanced : vehicleCache.getVehicleEnhanceds()) {
 			if (vehicleEnhanced.getVehicle().getFin().equals(fin)) {
 				return vehicleEnhanced;
 			}

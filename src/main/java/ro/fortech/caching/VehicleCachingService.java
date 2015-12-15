@@ -20,7 +20,7 @@ public class VehicleCachingService {
 	
 	@PostConstruct
 	public void init() {
-		System.out.println("AccountCachingService: Stateless");
+		System.out.println("VehicleCachingService: Stateless");
 	}
 	
 	public void initVehicleCache(){

@@ -60,6 +60,6 @@ public interface VehicleService {
 	 */
 	List<Vehicle> getVehicles(VehicleSearchRequest request);
 	
-	List<VehicleEnhanced> getVehicles();
+	void saveVehicleEnhanced(VehicleEnhanced vehicleEnhanced);
 
 }
