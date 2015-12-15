@@ -9,7 +9,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -32,9 +31,7 @@ import ro.fortech.vehicle.enhance.VehicleEnhanced;
 public class SearchResponseService {
 	
 	private static final int PROGRAMMERS_SOLUTION = 1;
-
 	private static final int MAGIC_NUMBER_2 = 2;
-
 	private static final int MAGIC_NUMBER_10 = 10;
 
 	@EJB
@@ -60,12 +57,12 @@ public class SearchResponseService {
 		System.out.println("SearchResponseService: Stateless");
 	}
 	
-	public Response getUserSearchHistory(String accountToken) {
-		return Response.status(Response.Status.OK).entity(historySearchCache.getSearchHistory()).build();
+	public List<VehicleSearchRequest> getUserSearchHistory(String accountToken) {
+		return historySearchCache.getSearchHistory().get(decodeUserToken(accountToken));
 	}
 
-	public Response getUserSavedSearchHistory(String accountToken) {
-		return Response.status(Response.Status.OK).entity(searchCache.getSearchSaveCache().get(decodeUserToken(accountToken))).build();
+	public List<SearchSave> getUserSavedSearchHistory(String accountToken) {
+		return searchCache.getSearchSaveCache().get(decodeUserToken(accountToken));
 	}
 
 	/**
@@ -75,7 +72,7 @@ public class SearchResponseService {
 	 * @param search
 	 * @return
 	 */
-	public Response saveUserSearch(String accountToken, String saveName, VehicleSearchRequest search) {
+	public List<SearchSave> saveUserSearch(String accountToken, String saveName, VehicleSearchRequest search) {
 		List<SearchSave> searchSaves = null;
 		String decodedToken = decodeUserToken(accountToken);
 		SearchSave searchSave = new SearchSave();
@@ -88,7 +85,7 @@ public class SearchResponseService {
 		} else {
 			searchCache.getSearchSaveCache().get(decodedToken).add(searchSave);
 		}
-		return Response.status(Response.Status.OK).entity(searchCache.getSearchSaveCache().get(decodedToken)).build();
+		return searchCache.getSearchSaveCache().get(decodedToken);
 	}
 
 	/**
@@ -137,7 +134,7 @@ public class SearchResponseService {
 	 * @param search
 	 * @return
 	 */
-	public Response getFilteredVehiclesBySearchCriteria(String accountToken, VehicleSearchRequest search) {
+	public VehicleSearchResponse getFilteredVehiclesBySearchCriteria(String accountToken, VehicleSearchRequest search) {
 		VehicleSearchResponse searchResponse = new VehicleSearchResponse();
 		List<Vehicle> vehicles = null;
 		List<Vehicle> vehiclesPerPage = null;
@@ -164,17 +161,17 @@ public class SearchResponseService {
 		}
 		
 		initUserSearchCache(search, accountToken);
-		return Response.status(Response.Status.OK).entity(searchResponse).build();
+		return searchResponse;
 	}
 
 	private void initUserSearchCache(VehicleSearchRequest search, String accountToken) {
 		historySearchCache.addHistorySearch(decodeUserToken(accountToken), search);
 	}
 
-	public Response getVehicleEnhancedByFin(String accountToken, String fin) {
+	public VehicleEnhanceSearchResponse getVehicleEnhancedByFin(String accountToken, String fin) {
 		VehicleEnhanceSearchResponse searchResponse = new VehicleEnhanceSearchResponse();
 
-		VehicleEnhanced vehicle = searchService.getVehicleByFin(fin, fakeService.getVehicles());
+		VehicleEnhanced vehicle = searchService.getVehicleEnhancedByFin(fin, fakeService.getVehicles());
 		if (vehicle == null) {
 			searchResponse.setErrorMessage(Constants.SOMETHING_WENT_WRONG);
 		} else {
@@ -184,8 +181,7 @@ public class SearchResponseService {
 		}
 		VehicleSearchRequest search = new VehicleSearchRequest();
 		search.setFin(fin);
-		initUserSearchCache(search, accountToken);
-		return Response.status(Response.Status.OK).entity(searchResponse).build();
+		return searchResponse;
 	}
 	
 }

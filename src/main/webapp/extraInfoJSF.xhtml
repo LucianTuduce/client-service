@@ -1,58 +1,95 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
 <h:head />
 <body>
-<h:form>
+	<h:form>
 
-<h:dataTable value="#{enhancedVehicleBean.enhancedCars}" var="car">
+		<h:dataTable
+			value="#{enhancedVehicleBean.enhancedVehicle.vehicleEnhanceds}"
+			var="car">
 
-    <h:outputLabel value="FIN" />
-    <h:outputText value="#{car.vehicle.fin}" style="font-weight:bold" />
-    
-     <h:outputLabel value="Owner" />
-    <h:outputText value="#{car.owner}" style="font-weight:bold" />
-    
-     <h:outputLabel value="Dealer" />
-    <h:outputText value="#{car.dealer}" style="font-weight:bold" />
-    
-     <h:outputLabel value="Vehicle type" />
-    <h:outputText value="#{car.vehicle.vehicleType}" style="font-weight:bold" />
-    
-     <h:outputLabel value="Model" />
-    <h:outputText value="#{car.vehicle.model}" style="font-weight:bold" />
-    
-     <h:outputLabel value="Body weight" />
-    <h:outputText value="#{car.bodyWeight}" style="font-weight:bold" />
-    
-     <h:outputLabel value="Body height" />
-    <h:outputText value="#{car.bodyHeight}" style="font-weight:bold" />
-    
-     <h:outputLabel value="Body length" />
-    <h:outputText value="#{car.bodyLenght}" style="font-weight:bold" />
-    
-     <h:outputLabel value="Suspension" />
-    <h:outputText value="#{car.suspensionType}" style="font-weight:bold" />
-    
-     <h:outputLabel value="Tire condition" />
-    <h:outputText value="#{car.tireCondition}" style="font-weight:bold" />
-    
-     <h:outputLabel value="Fuel type" />
-    <h:outputText value="#{car.vehicle.fuelType}" style="font-weight:bold" />
-    
-     <h:outputLabel value="Capacity" />
-    <h:outputText value="#{car.vehicle.engineCapacity}" style="font-weight:bold" />
-    
-     <h:outputLabel value="Year" />
-    <h:outputText value="#{car.vehicle.year}" style="font-weight:bold" />
-    
-     <h:outputLabel value="Location(Country)" />
-    <h:outputText value="#{car.vehicle.location}" style="font-weight:bold" />
-    
-     <h:outputLabel value="Price" />
-    <h:outputText value="#{car.vehicle.price}" style="font-weight:bold" />
- </h:dataTable>
-</h:form>
+			<h:column>
+				<h:outputText value="FIN" style="font-weight:bold"/>
+				<br />
+				<h:outputText value="Owner" style="font-weight:bold"/>
+				<br />
+				<h:outputText value="Dealer" style="font-weight:bold"/>
+				<br />
+				<h:outputText value="Vehicle type" style="font-weight:bold"/>
+				<br />
+				<h:outputText value="Model" style="font-weight:bold"/>
+				<br />
+				<h:outputText value="Body weight" style="font-weight:bold"/>
+				<br />
+				<h:outputText value="Body height" style="font-weight:bold"/>
+				<br />
+				<h:outputText value="Body length" style="font-weight:bold"/>
+				<br />
+				<h:outputText value="Suspension" style="font-weight:bold"/>
+				<br />
+				<h:outputText value="Tire condition" style="font-weight:bold"/>
+				<br />
+				<h:outputText value="Fuel type" style="font-weight:bold"/>
+				<br />
+				<h:outputText value="Capacity" style="font-weight:bold"/>
+				<br />
+				<h:outputText value="Year" style="font-weight:bold"/>
+				<br />
+				<h:outputText value="Location(Country)" style="font-weight:bold"/>
+				<br />
+				<h:outputText value="Price" style="font-weight:bold"/>
+				<br />
+			</h:column>
+
+			<h:column>
+
+			</h:column>
+
+			<h:column>
+
+			</h:column>
+
+			<h:column>
+
+			</h:column>
+
+			<h:column>
+				<h:outputText value="#{car.vehicle.fin}" />
+				<br />
+				<h:outputText value="#{car.owner}" />
+				<br />
+				<h:outputText value="#{car.dealer}" />
+				<br />
+				<h:outputText value="#{car.vehicle.vehicleType}" />
+				<br />
+				<h:outputText value="#{car.vehicle.model}" />
+				<br />
+				<h:outputText value="#{car.bodyWeight}" />
+				<br />
+				<h:outputText value="#{car.bodyHeight}" />
+				<br />
+				<h:outputText value="#{car.bodyLenght}" />
+				<br />
+				<h:outputText value="#{car.suspensionType}" />
+				<br />
+				<h:outputText value="#{car.tireCondition}" />
+				<br />
+				<h:outputText value="#{car.vehicle.fuelType}" />
+				<br />
+				<h:outputText value="#{car.vehicle.engineCapacity}" />
+				<br />
+				<h:outputText value="#{car.vehicle.year}" />
+				<br />
+				<h:outputText value="#{car.vehicle.location}" />
+				<br />
+				<h:outputText value="#{car.vehicle.price}" />
+				<br />
+			</h:column>
+
+		</h:dataTable>
+	</h:form>
 </body>
 </html>

@@ -96,7 +96,7 @@ public class FakeCollectionsUtilsSearcher implements VehicleSearchService{
 	}
 
 	@Override
-	public VehicleEnhanced getVehicleByFin(String fin,
+	public VehicleEnhanced getVehicleEnhancedByFin(String fin,
 			List<VehicleEnhanced> vehicleEnhanceds) {
 		// TODO Auto-generated method stub
 		return null;

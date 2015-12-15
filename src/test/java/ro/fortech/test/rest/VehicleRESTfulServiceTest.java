@@ -30,7 +30,7 @@ public class VehicleRESTfulServiceTest {
 	private static final String URL_GET_SEARCH_HISTORY = "http://localhost:9080/client-service/rest/vehicle/search/history";
 	private static final String URL_POST_SAVE_SEARCH_HISTORY = "http://localhost:9080/client-service/rest/vehicle/search/history/save/demo";
 	private static final String URL_GET_SAVE_SEARCH_HISTORY = "http://localhost:9080/client-service/rest/vehicle/search/history/saved";
-	private static final String URL_GET_ENHANCED_VEHICLE_BY_FIN = "http://localhost:9080/client-service/rest/vehicle/search/GR3847UC3218345";
+	private static final String URL_GET_ENHANCED_VEHICLE_BY_FIN = "http://localhost:9080/client-service/rest/vehicle/enhanced/GR3847UC3218345";
 	
 	private HttpClient client;
 	private HttpPost postUserCredentialsForToken;
