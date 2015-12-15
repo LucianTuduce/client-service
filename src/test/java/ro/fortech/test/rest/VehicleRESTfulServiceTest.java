@@ -25,7 +25,7 @@ public class VehicleRESTfulServiceTest {
 	private static final String VALID_USER_TOKEN = "QmFzaWMgIHVzZXIwOnBhc3Mw";
 	private static final String AUTHORIZATION = "Authorization";
 	
-	private static final String URL_POST_CREATE_USER_UNIQUE_TOKEN_ACCOUNT_VALID = "http://localhost:9080/client-service/rest/vehicle/token";
+	private static final String URL_POST_CREATE_USER_UNIQUE_TOKEN_ACCOUNT_VALID = "http://localhost:9080/client-service/rest/user/login";
 	private static final String URL_GET_FILTERED_VEHICLE_LIST = "http://localhost:9080/client-service/rest/vehicle/filtered";
 	private static final String URL_GET_SEARCH_HISTORY = "http://localhost:9080/client-service/rest/vehicle/search/history";
 	private static final String URL_POST_SAVE_SEARCH_HISTORY = "http://localhost:9080/client-service/rest/vehicle/search/history/save/demo";
@@ -67,7 +67,7 @@ public class VehicleRESTfulServiceTest {
 			e.printStackTrace();
 		}
 		assertEquals(200, response.getStatusLine().getStatusCode());
-		assertEquals("Authorization: QmFzaWMgdXNlcjA6cGFzczA=", response.getAllHeaders()[1].toString());
+		assertEquals("Authorization: QmFzaWMgIHVzZXIwOnBhc3Mw", response.getAllHeaders()[1].toString());
 	}
 	
 	@Test
