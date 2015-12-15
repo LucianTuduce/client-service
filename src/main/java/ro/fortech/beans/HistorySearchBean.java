@@ -4,20 +4,26 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 
-import ro.fortech.def.value.DefaultValues;
+import ro.fortech.cache.HistorySearchCache;
+import ro.fortech.constants.Constants;
 import ro.fortech.search.VehicleSearchRequest;
 
 @ManagedBean(name = "historySearchBean")
 @SessionScoped
-public class HistorySearchBean implements Serializable{
-	
+public class HistorySearchBean implements Serializable {
+
 	private static final long serialVersionUID = 1L;
+
+	@EJB
+	private HistorySearchCache historySearchCache;
+
 	private List<VehicleSearchRequest> searchHistory = new ArrayList<>();
 	HistorySearch historySearch;
-	
+
 	public List<VehicleSearchRequest> getSearchHistory() {
 		return searchHistory;
 	}
@@ -26,21 +32,11 @@ public class HistorySearchBean implements Serializable{
 		this.searchHistory = searchHistory;
 	}
 
-	public List<VehicleSearchRequest> getHistory(VehicleSearchRequest searchRequest) {
-		
-		if(searchHistory.size() == DefaultValues.HISTORY_SIZE.getDefValue() ){
-			searchHistory = addToHistoryListToStart(searchHistory, searchRequest);
-		}
-		else{
-			searchHistory.add(0,searchRequest);
-		}
-		return searchHistory;
+	public void getHistory(VehicleSearchRequest searchRequest) {
+
+		historySearchCache.addHistorySearch(Constants.USER, searchRequest);
+		searchHistory = historySearchCache.getSearchHistory().get(Constants.USER);
+		System.out.println("dagre");
 	}
-	
-	public List<VehicleSearchRequest> addToHistoryListToStart(List<VehicleSearchRequest> list, VehicleSearchRequest searchRequest){
-		list.add(0,searchRequest);
-		list.remove(list.size()-1);
-		return list;
-	}
-	
+
 }

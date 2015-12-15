@@ -57,8 +57,7 @@ public class VehicleBean implements Serializable{
 		
 		searchedVehicles = new ArrayList<Vehicle>();
 		VehicleSearchRequest searchRequest = searchVehicleBean.createSearchVechicle();
-		//TODO
-		historySearchCache.addHistorySearch("dsafasd", searchRequest);
+		historySearchBean.getHistory(searchRequest);
 		searchedVehicles = fakeCarService.getVehicles(searchRequest);
 		
 		return "success";

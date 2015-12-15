@@ -51,21 +51,18 @@ public class SearchVehicleBean implements Serializable{
 		}
 		
 		if(searchFin.equals("")){
-			System.out.println("Sunt in def search fin");
 			searchRequest.setFin(DefaultValues.FIN_DEFAULT.getDef());
 		}else{
 			searchRequest.setFin(searchFin);
 		}
 		
 		if(searchModel.equals(" ")){
-			System.out.println("Sunt in def search model");
 			searchRequest.setModel(DefaultValues.MODEL_DEFAULT.getDef());
 		}else{
 			searchRequest.setModel(searchModel);
 		}
 		
 		if(searchFuelType.equals(" ")){
-			System.out.println("Sunt in def search fuel type");
 			searchRequest.setFuelType(FuelType.DEFAULT);
 		}else{
 			searchRequest.setFuelType(FuelType.getEnum(searchFuelType));
@@ -90,9 +87,7 @@ public class SearchVehicleBean implements Serializable{
 		}
 		
 		if(searchMaxYear == 0){
-			System.out.println(searchMaxYear);
 			searchRequest.setMaxYear(DefaultValues.MAX_YEAR_DEFAULT.getDefValue());
-			System.out.println(searchRequest.getMaxYear());
 		}else{
 			searchRequest.setMaxYear(searchMaxYear);
 		}
@@ -108,7 +103,6 @@ public class SearchVehicleBean implements Serializable{
 		}else{
 			searchRequest.setMinPrice(searchMinPrice);
 		}
-		
 		return searchRequest;
 	}
 	
