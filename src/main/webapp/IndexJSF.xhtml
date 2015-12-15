@@ -156,6 +156,7 @@
         </div>
         <div class="col-sm-8 table-responsive">
             <h3>Search Results</h3>
+            
             <h:dataTable value="#{vehicleBean.searchedVehicles}" var="vehicle" class="table table-striped">
                 <h:column>
                     <f:facet name="header">FIN</f:facet>
@@ -185,8 +186,25 @@
                     <f:facet name="header">Price</f:facet>
                     <h:outputText value="#{vehicle.price}" />
                 </h:column>
+                <h:column>
+                    <f:facet name="header">Extra info</f:facet>
+                    <h:form id="form">
+                    <h:commandButton value="Search" action="#{enhancedVehicleBean.searchForEnhancedVehicle()}">
+                    </h:commandButton> 
+                     </h:form>       
+                </h:column>
             </h:dataTable>
+            
+            
+           
         </div>
+<!--         <div> -->
+<!--         <h1> The BUTTON</h1> -->
+<!--         <h:form> -->
+<!--          <h:inputText value="#{enhancedVehicleBean.fin}"/> -->
+<!--           <h:commandButton value="Search" styleClass="btn btn-primary" action="#{enhancedVehicleBean.searchForEnhancedVehicle()}" /> -->
+<!--         </h:form> -->
+<!--         </div> -->
         <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
