@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+<h:head />
+<body>
+<h:form>
+
+<h:dataTable value="#{enhancedVehicleBean.enhancedCars}" var="car">
+
+    <h:outputLabel value="FIN" />
+    <h:outputText value="#{car.vehicle.fin}" style="font-weight:bold" />
+    
+     <h:outputLabel value="Owner" />
+    <h:outputText value="#{car.owner}" style="font-weight:bold" />
+    
+     <h:outputLabel value="Dealer" />
+    <h:outputText value="#{car.dealer}" style="font-weight:bold" />
+    
+     <h:outputLabel value="Vehicle type" />
+    <h:outputText value="#{car.vehicle.vehicleType}" style="font-weight:bold" />
+    
+     <h:outputLabel value="Model" />
+    <h:outputText value="#{car.vehicle.model}" style="font-weight:bold" />
+    
+     <h:outputLabel value="Body weight" />
+    <h:outputText value="#{car.bodyWeight}" style="font-weight:bold" />
+    
+     <h:outputLabel value="Body height" />
+    <h:outputText value="#{car.bodyHeight}" style="font-weight:bold" />
+    
+     <h:outputLabel value="Body length" />
+    <h:outputText value="#{car.bodyLenght}" style="font-weight:bold" />
+    
+     <h:outputLabel value="Suspension" />
+    <h:outputText value="#{car.suspensionType}" style="font-weight:bold" />
+    
+     <h:outputLabel value="Tire condition" />
+    <h:outputText value="#{car.tireCondition}" style="font-weight:bold" />
+    
+     <h:outputLabel value="Fuel type" />
+    <h:outputText value="#{car.vehicle.fuelType}" style="font-weight:bold" />
+    
+     <h:outputLabel value="Capacity" />
+    <h:outputText value="#{car.vehicle.engineCapacity}" style="font-weight:bold" />
+    
+     <h:outputLabel value="Year" />
+    <h:outputText value="#{car.vehicle.year}" style="font-weight:bold" />
+    
+     <h:outputLabel value="Location(Country)" />
+    <h:outputText value="#{car.vehicle.location}" style="font-weight:bold" />
+    
+     <h:outputLabel value="Price" />
+    <h:outputText value="#{car.vehicle.price}" style="font-weight:bold" />
+ </h:dataTable>
+</h:form>
+</body>
+</html>

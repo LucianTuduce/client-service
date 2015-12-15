@@ -14,7 +14,6 @@ import ro.fortech.search.VehicleSearchRequest;
  * Class used to filter the cars based on some values that are provided by the
  * user. The methods are called in the order that they are present in the class.
  * And the output of one is the input for the other in the calling class.
- *
  */
 @Stateless
 public class SearchHelper {
