@@ -1,5 +1,16 @@
 angular.module('UVSClient', [])
 
+
+
+.controller('LoginController', function($scope, $rootScope, Scopes, $http) {
+    $rootScope.$on("CallParentMethod", function() { //Listen for trigger
+        $scope.cars = Scopes.get('CarSearchController').carsRetrieved;
+        console.log($scope.cars);
+    });
+
+
+})
+
 /*  */
 
 /* factory to connect controllers */

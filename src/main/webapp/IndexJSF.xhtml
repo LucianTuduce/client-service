@@ -136,7 +136,8 @@
                     <h:commandButton value="Search" styleClass="btn btn-primary" action="#{vehicleBean.searchVechicle()}" />
                 </h:form>
             </div>
-            <div>
+            <h3>Search history</h3>
+            <div class="well">
                 <h:dataTable value="#{historySearchBean.searchHistory}" var="history" class="table table-striped">
                     <h:column>
                         <f:facet name="header">FIN</f:facet>
@@ -154,6 +155,7 @@
             </div>
         </div>
         <div class="col-sm-8 table-responsive">
+            <h3>Search Results</h3>
             <h:dataTable value="#{vehicleBean.searchedVehicles}" var="vehicle" class="table table-striped">
                 <h:column>
                     <f:facet name="header">FIN</f:facet>

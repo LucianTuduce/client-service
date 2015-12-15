@@ -1,139 +1,89 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    <html data-ng-app="UVSClient">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:b="http://bootsfaces.net/ui">
-<h:head>
-	<!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> -->
-	<title>My first JSF app</title>
+    <head>
+        <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> -->
+        <title>UVS Client demo</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="resources/css/site.css" />
+    </head>
 
-	<link rel="stylesheet"
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-	<link rel="stylesheet"
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
-	<link rel="stylesheet" href="resources/css/site.css" />
+    <body>
+        <div class="container sign-in-up" ng-controller="LoginController" ng-init="tab=1">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <a href="#"><img class="img-responsive center-block" alt="website logo" src="resources/logo.jpg" />
+                        <h1 class="text-center">Login</h1></a>
+                    <div class="text-center">
+                        <div class="btn-group">
+                            <form>
+                                <a href="#" class="big btn btn-danger" fragment="user" role="tab" data-toggle="tab" ng-click="tab=1">
+                                    <span class="glyphicon glyphicon-user"></span>Existing user
+                                </a>
+                                <a href="#" class="big btn btn-primary" fragment="new" role="tab" data-toggle="tab" ng-click="tab=2">
+                                    <span class="glyphicon glyphicon-user"></span>New user</a>
+                            </form>
+                        </div>
+                    </div> 
+                    <div class="tab-content">
+                        <div class="" id="user" ng-show="tab===1">
+                            <br />
+                            <form id="myform">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <div class="right-inner-addon">
+                                            <input type="text" id="username" class="form-control input-lg" placeholder="Username" />
+                                            <span class="error" for="username" id="newusername"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="right-inner-addon">
+                                            <input type="password" id="password" class="form-control input-lg" placeholder="Password" />
+                                            <span class="error" for="password" id="newpassword"></span>
+                                        </div>
+                                    </div>
+                                    <div class=" text-center">
+                                        <input type="submit" value="Login" class="btn btn-primary" />
+                                    </div>
+                                </fieldset>
+                            </form>
+                            <br />
+                        </div> 
+                        <div class="" id="new" ng-show="tab===2">
+                            <form>
+                                <br />
+                                <fieldset>
+                                    <div class="form-group">
+                                        <div class="right-inner-addon">
+                                            <input type="text" class="form-control input-lg" placeholder="Email Address" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="right-inner-addon">
+                                            <input type="password" class="form-control input-lg" placeholder="Password" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="right-inner-addon">
+                                            <input type="password" class="form-control input-lg" placeholder="Confirm Password" />
+                                        </div>
+                                    </div>
+                                    <div class=" text-center">
+                                        <input type="submit" value="Sign up" class="btn btn-primary" />
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+        <script type="text/javascript" src="resources/js/app.js"></script>
+    </body>
 
-	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-	<script type="text/javascript" src="resources/js/app.js"></script>
-
-</h:head>
-<h:body p:ng-app="login">
-		<div class="container sign-in-up">
-			<div class="row">
-				<div class="col-md-4 col-md-offset-4">
-					<a href="#"><img class="img-responsive center-block"
-						alt="website logo" src="resources/logo.jpg" />
-						<h1 class="text-center">Login</h1></a>
-
-					<div class="text-center">
-						<div class="btn-group">
-							<h:form>
-								<h:outputLink styleClass="big btn btn-danger" fragment="user"
-									role="tab" p:data-toggle="tab">
-									<span class="glyphicon glyphicon-user"></span>Existing user</h:outputLink>
-								<h:outputLink styleClass="big btn btn-primary" fragment="new"
-									role="tab" p:data-toggle="tab">
-									<span class="glyphicon glyphicon-user"></span>New user</h:outputLink>
-							</h:form>
-						</div>
-					</div>
-
-					<div class="tab-content">
-						<div class="tab-pane fade in active" id="user">
-							<br />
-							<h:form id="myform">
-								<fieldset>			
-									<div class="form-group">
-										<div class="right-inner-addon" ng-controller="Main">
-											<h:inputText id="username" styleClass="form-control input-lg"
-												p:placeholder="Username" binding="#{username}" />
-												 <h:message class="error" for="username" id="newusername" />
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="right-inner-addon">
-											<h:inputSecret id="password"  styleClass="form-control input-lg"
-												p:placeholder="Password" binding="#{password}" />
-												 <h:message class="error" for="password" id="newpassword" />
-										</div>
-									</div>
-									<div class=" text-center">
-										<h:commandButton value="Login"
-											action="#{userBean.checkIfUserPresent(username.value, password.value)}"
-											styleClass="btn btn-primary"></h:commandButton>
-									</div>
-								</fieldset>
-							</h:form>
-							<br />
-						</div>
-						<div class="tab-pane fade " id="new">
-							<br />
-							<fieldset>
-								<div class="form-group">
-									<div class="right-inner-addon">
-										<h:inputText styleClass="form-control input-lg"
-											p:placeholder="Email Address" />
-
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="right-inner-addon">
-										<h:inputSecret styleClass="form-control input-lg"
-											p:placeholder="Password" />
-
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="right-inner-addon">
-										<h:inputSecret styleClass="form-control input-lg"
-											p:placeholder="Confirm Password" />
-									</div>
-								</div>
-							</fieldset>
-							<hr />
-							<ul class="nav nav-tabs" role="tablist">
-								<li class="paywith">Pay with:</li>
-								<li class="active"><h:outputLink fragment="pp" role="tab"
-										p:data-toggle="tab">PayPal</h:outputLink></li>
-								<li><h:outputLink fragment="bc" role="tab"
-										p:data-toggle="tab">Bitcoin</h:outputLink></li>
-							</ul>
-							<div class="tab-content">
-								<div class="tab-pane fade text-center" id="bc">
-									<h2>
-										RON 9<sup>,99</sup>/mo with
-									</h2>
-									<h:outputLink styleClass="q text-center" target="_blank"
-										value="https://www.bitcoin.com">What is BitCoin?</h:outputLink>
-									<br /> <br />
-									<button class="btn btn-primary btn-lg btn-block">
-										PAY RON 9<sup>,99</sup> USD WITH BITCOIN
-									</button>
-								</div>
-								<div class="tab-pane fade in active text-center" id="pp">
-									<h2>
-										RON 9<sup>,99</sup>/mo with
-									</h2>
-									<h:outputLink styleClass="q text-center" target="_blank"
-										value="https://www.paypal.com/ro/webapps/mpp/home">What is Paypal?</h:outputLink>
-									<br /> <br />
-									<button class="btn btn-primary btn-lg btn-block">
-										PAY RON 9<sup>,99</sup> USD WITH PAYPAL
-									</button>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-</h:body>
-</html>
+    </html>
