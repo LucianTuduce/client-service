@@ -36,7 +36,6 @@ public class HistorySearchBean implements Serializable {
 
 		historySearchCache.addHistorySearch(Constants.USER, searchRequest);
 		searchHistory = historySearchCache.getSearchHistory().get(Constants.USER);
-		System.out.println("dagre");
 	}
 
 }
