@@ -53,7 +53,6 @@ public class VehicleBean implements Serializable{
 	private List<Vehicle> searchedVehicles;
 	
 	public String searchVechicle() {
-
 		
 		searchedVehicles = new ArrayList<Vehicle>();
 		VehicleSearchRequest searchRequest = searchVehicleBean.createSearchVechicle();
