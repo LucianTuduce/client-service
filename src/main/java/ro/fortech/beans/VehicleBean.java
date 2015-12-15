@@ -8,7 +8,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.inject.Inject;
 
 import ro.fortech.cache.HistorySearchCache;
 import ro.fortech.model.Vehicle;
@@ -40,7 +39,7 @@ public class VehicleBean implements Serializable{
 	@EJB(beanName = "vehicleSearchServiceImpl")
 	private VehicleSearchService searchService;
 	
-	@Inject
+	@EJB
 	private HistorySearchCache historySearchCache;
 
 	private String fin;

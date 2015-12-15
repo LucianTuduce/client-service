@@ -43,47 +43,70 @@ public class SearchVehicleBean implements Serializable{
 		}else{
 			searchRequest.setLocation(searchLocation);
 		}
+		
 		if(searchVehicleType == null){
 			searchRequest.setVehicleType(VehicleType.getEnum(DefaultValues.VEHICLE_TYPE_DEFAULT.getDef()));
 		}else{
 			searchRequest.setVehicleType(VehicleType.getEnum(searchVehicleType));
 		}
-		if(searchFin == null){
+		
+		if(searchFin.equals("")){
+			System.out.println("Sunt in def search fin");
 			searchRequest.setFin(DefaultValues.FIN_DEFAULT.getDef());
 		}else{
 			searchRequest.setFin(searchFin);
 		}
-		searchRequest.setModel(searchModel);
-		searchRequest.setFuelType(FuelType.getEnum(searchFuelType));
+		
+		if(searchModel.equals(" ")){
+			System.out.println("Sunt in def search model");
+			searchRequest.setModel(DefaultValues.MODEL_DEFAULT.getDef());
+		}else{
+			searchRequest.setModel(searchModel);
+		}
+		
+		if(searchFuelType.equals(" ")){
+			System.out.println("Sunt in def search fuel type");
+			searchRequest.setFuelType(FuelType.DEFAULT);
+		}else{
+			searchRequest.setFuelType(FuelType.getEnum(searchFuelType));
+		}
+			
 		if(searchMaxCapacity == 0){
 			searchRequest.setMaxCapacity(DefaultValues.MAX_CAPACITY_DEFAULT.getDefValue());	
 		}else{
 			searchRequest.setMaxCapacity(searchMaxCapacity);
 		}
+		
 		if(searchMinCapacity == 0){
 			searchRequest.setMinCapacity(DefaultValues.MIN_CAPACITY_DEFAULT.getDefValue());	
 		}else{
 			searchRequest.setMinCapacity(searchMinCapacity);
 		}
+		
 		if(searchMinYear == 0){
 			searchRequest.setMinYear(DefaultValues.MIN_YEAR_DEFAULT.getDefValue());
 		}else{
 			searchRequest.setMinYear(searchMinYear);
 		}
+		
 		if(searchMaxYear == 0){
+			System.out.println(searchMaxYear);
 			searchRequest.setMaxYear(DefaultValues.MAX_YEAR_DEFAULT.getDefValue());
+			System.out.println(searchRequest.getMaxYear());
 		}else{
 			searchRequest.setMaxYear(searchMaxYear);
 		}
+		
 		if(searchMaxPrice == 0){
-			searchRequest.setMaxYear(DefaultValues.MAX_PRICE_DEFAULT.getDefValue());
+			searchRequest.setMaxPrice(DefaultValues.MAX_PRICE_DEFAULT.getDefValue());
 		}else{
-			searchRequest.setMaxYear(searchMaxPrice);
+			searchRequest.setMaxPrice(searchMaxPrice);
 		}
+		
 		if(searchMinPrice == 0){
-			searchRequest.setMaxYear(DefaultValues.MIN_PRICE_DEFAULT.getDefValue());
+			searchRequest.setMinPrice(DefaultValues.MIN_PRICE_DEFAULT.getDefValue());
 		}else{
-			searchRequest.setMaxYear(searchMinPrice);
+			searchRequest.setMinPrice(searchMinPrice);
 		}
 		
 		return searchRequest;
