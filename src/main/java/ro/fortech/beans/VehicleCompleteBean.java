@@ -1,17 +1,10 @@
 package ro.fortech.beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-
-import org.apache.commons.lang3.StringUtils;
-
-import ro.fortech.def.value.DefaultValues;
 import ro.fortech.model.Vehicle;
-import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.services.VehicleService;
 import ro.fortech.type.FuelType;
 import ro.fortech.type.SuspensionType;
