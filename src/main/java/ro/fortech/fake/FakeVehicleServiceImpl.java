@@ -52,6 +52,7 @@ public class FakeVehicleServiceImpl implements VehicleService {
 	@Override
 	public void saveVehicle(Vehicle vehicle) {
 		cache.getVehicles().add(vehicle);
+		System.out.println("vehicle added to chache");
 	}
 
 	@Override
@@ -67,6 +68,7 @@ public class FakeVehicleServiceImpl implements VehicleService {
 	
 	@Override
 	public void saveVehicleEnhanced(VehicleEnhanced vehicleEnhanced) {
-		cache.getVehicleEnhanceds().add(vehicleEnhanced);	
+		cache.getVehicleEnhanceds().add(vehicleEnhanced);
+		System.out.println("Enhanced Vehicle added to cache");
 	}
 }

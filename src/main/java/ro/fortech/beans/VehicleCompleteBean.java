@@ -47,7 +47,9 @@ public class VehicleCompleteBean implements Serializable {
 	public String addVehicle() {
 		
 		createVehicleEnhanced();
+		fakeCarService.saveVehicle(vehicleEnhanced.getVehicle());
 		fakeCarService.saveVehicleEnhanced(vehicleEnhanced);
+
 		return "success";
 	}
 	

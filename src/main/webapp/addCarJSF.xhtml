@@ -95,9 +95,9 @@
 		<!--Second column-->
 		<div class = "col-sm-6 form-horizontal">
 			<div class="form-group">
-				<label class="col-sm-3 control-label">Country</label>
+				<label class="col-sm-3 control-label">Fuel Type</label>
 				<div class="col-sm-9">
-					<h:selectOneMenu value="#{addVehicleBean.vehicleType}" styleClass="form-control">
+					<h:selectOneMenu value="#{addVehicleBean.fuelType}" styleClass="form-control">
 						<f:selectItem itemValue=" " itemLabel=" " />
           	          <f:selectItem itemValue="Diesel" itemLabel="Diesel" />
           	          <f:selectItem itemValue="Gasoline" itemLabel="Gasoline" />
@@ -133,21 +133,27 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-3 control-label">Suspension</label>
-			<div class="col-sm-9">
-				<h:inputText value="#{addVehicleBean.suspensionType}"
-					styleClass="form-control" />
+				<label class="col-sm-3 control-label">Suspension</label>
+				<div class="col-sm-9">
+					<h:selectOneMenu value="#{addVehicleBean.suspensionType}" styleClass="form-control">
+						<f:selectItem itemValue="SWING_AXLE" itemLabel="SWING_AXLE" />
+          	          <f:selectItem itemValue="TRAILING_LINK" itemLabel="TRAILING_LINK" />
+          	          <f:selectItem itemValue="MAC_PHERSON" itemLabel="MAC_PHERSON" />
+					</h:selectOneMenu>
+				</div>
 			</div>
-		</div>
 		<div class="form-group">
-			<label class="col-sm-3 control-label">Tire Condition</label>
-			<div class="col-sm-9">
-				<h:inputText value="#{addVehicleBean.tireCondition}"
-					styleClass="form-control" />
+				<label class="col-sm-3 control-label">Tire Condition</label>
+				<div class="col-sm-9">
+					<h:selectOneMenu value="#{addVehicleBean.tireCondition}" styleClass="form-control">
+						<f:selectItem itemValue="USED" itemLabel="USED" />
+          	          <f:selectItem itemValue="NEW" itemLabel="NEW" />
+          	          <f:selectItem itemValue="SLIGHTY_USED" itemLabel="SLIGHTY_USED" />
+					</h:selectOneMenu>
+				</div>
 			</div>
 		</div>
-		</div>
-		
+		<h:commandButton value="Add" styleClass="btn btn-primary" action="#{addVehicleBean.addVehicle()}" />
 	</h:form>
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
