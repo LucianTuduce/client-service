@@ -1,34 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
-	version="2.0">
-
-	<managed-bean>
-		<managed-bean-name>searchVehicleBean</managed-bean-name>
-		<managed-bean-class>ro.fortech.beans.SearchVehicleBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	
-	<managed-bean>
-		<managed-bean-name>historySearchBean</managed-bean-name>
-		<managed-bean-class>ro.fortech.beans.HistorySearchBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-
-	<managed-bean>
-		<managed-bean-name>vehicleBean</managed-bean-name>
-		<managed-bean-class>ro.fortech.beans.VehicleBean</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-		<managed-property>
-			<property-name>searchVehicleBean</property-name>
-			<value>#{searchVehicleBean}</value>
-		</managed-property>
-		<managed-property>
-			<property-name>historySearchBean</property-name>
-			<value>#{historySearchBean}</value>
-		</managed-property>
-	</managed-bean>
-
+<faces-config version="2.1" xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+  <managed-bean>
+    <managed-bean-name>searchVehicleBean</managed-bean-name>
+    <managed-bean-class>ro.fortech.beans.SearchVehicleBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>historySearchBean</managed-bean-name>
+    <managed-bean-class>ro.fortech.beans.HistorySearchBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean>
+    <managed-bean-name>vehicleBean</managed-bean-name>
+    <managed-bean-class>ro.fortech.beans.VehicleBean</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <managed-property>
+      <property-name>searchVehicleBean</property-name>
+      <value>#{searchVehicleBean}</value>
+    </managed-property>
+    <managed-property>
+      <property-name>historySearchBean</property-name>
+      <value>#{historySearchBean}</value>
+    </managed-property>
+  </managed-bean>
 </faces-config>

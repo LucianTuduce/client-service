@@ -10,7 +10,12 @@
 <h:body>
 	<h:form>
 
-		<h:dataTable value="#{vehicleBean.cars}" var="car">
+		<h:dataTable value="#{dummyBean.vehicles}" var="car">
+
+			<h:column>
+				<f:facet name="header">FIN</f:facet>
+				<h:outputText value="#{car.fin}" />
+			</h:column>
 
 			<h:column>
 				<f:facet name="header">Model</f:facet>
@@ -20,6 +25,13 @@
 			<h:column>
 				<f:facet name="header">Vehicle Type</f:facet>
 				<h:outputText value="#{car.vehicleType}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Info</f:facet>
+				<h:commandButton value="Info" action="#{dummyBean.ceva(car)}">
+
+				</h:commandButton>
 			</h:column>
 
 		</h:dataTable>
