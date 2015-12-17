@@ -24,7 +24,12 @@ public enum DefaultValues {
 	MIN_PRICE_DEFAULT(0),
 	MAX_PRICE_DEFAULT(0),
 	VEHICLE_TYPE_DEFAULT(VehicleType.CAR.getType()),
-	HISTORY_SIZE(5);
+	HISTORY_SIZE(5),
+	BODY_HEIGHT(0),
+	BODY_WEIGHT(0),
+	BODY_LENGHT(0),
+	DEALER(" "),
+	OWNER(" ");
 	// @formatter:on
 
 	private String def;

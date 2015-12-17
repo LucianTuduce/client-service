@@ -27,71 +27,86 @@
 		</div>
 		
 		<div class="form-group">
-			<label class="col-sm-3 control-label">Owner</label>
+			<label class="col-sm-3 control-label">Owner Name</label>
 			<div class="col-sm-9">
-				<h:inputText value="#{addVehicleBean.owner}"
-					styleClass="form-control" />
+				<h:inputText id="ownerInput" value="#{addVehicleBean.owner}"
+					styleClass="form-control" required="true" requiredMessage = "Owner is required">
+					<f:validator validatorId="notNullValidator"/>
+				</h:inputText>
+				<h:message for="ownerInput"  errorStyle="color:red; display:block" />
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-3 control-label">Dealer</label>
+			<label class="col-sm-3 control-label">Dealer Name</label>
 			<div class="col-sm-9">
-				<h:inputText value="#{addVehicleBean.dealer}"
-					styleClass="form-control" />
+				<h:inputText id="dealerInput" value="#{addVehicleBean.dealer}"
+					styleClass="form-control" required="true" requiredMessage = "Dealer is required">
+					<f:validator validatorId="notNullValidator"/>
+				</h:inputText>
+				<h:message for="dealerInput"  errorStyle="color:red; display:block" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">Country</label>
 			<div class="col-sm-9">
-				<h:selectOneMenu id="country" value="#{addVehicleBean.location}" styleClass="form-control">
+				<h:selectOneMenu id="country" value="#{addVehicleBean.location}" styleClass="form-control" required="true" requiredMessage = "Country is required">
+					<f:selectItem itemValue=" " itemLabel=" " />
 					<f:selectItem itemValue="Germany" itemLabel="Germany"></f:selectItem>
 					<f:selectItem itemValue="Romania" itemLabel="Romania"></f:selectItem>
 					<f:ajax event="change" update="@this" render="country" />
+					<f:validator validatorId="notNullValidator"/>
 				</h:selectOneMenu>
+				<h:message for="country"  errorStyle="color:red; display:block" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">Vehicle Type</label>
 			<div class="col-sm-9">
 				<h:selectOneMenu id="vehicleType"
-					value="#{addVehicleBean.vehicleType}" styleClass="form-control">
+					value="#{addVehicleBean.vehicleType}" styleClass="form-control" required="true" requiredMessage = "Vehicle Type is required">
+					<f:selectItem itemValue=" " itemLabel=" " />
 					<f:selectItem itemValue="CAR" itemLabel="CAR"></f:selectItem>
 					<f:selectItem itemValue="VAN" itemLabel="VAN"></f:selectItem>
 					<f:selectItem itemValue="TRUCK" itemLabel="Truck"></f:selectItem>
 					<f:ajax event="change" update="@this" render="vehicleType" />
+					<f:validator validatorId="notNullValidator"/>
 				</h:selectOneMenu>
+				<h:message for="vehicleType"  errorStyle="color:red; display:block" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">Model</label>
 			<div class="col-sm-9">
-				<h:selectOneMenu styleClass="form-control"
-					value="#{addVehicleBean.model}">
+				<h:selectOneMenu id="modelInput" styleClass="form-control" value="#{addVehicleBean.model}" required="true" requiredMessage = "Vehicle model is required">
 					<f:selectItem itemValue=" " itemLabel=" " />
-					<f:selectItem itemValue="Volskwagen Passat"
-						itemLabel="Volskwagen Passat" />
-					<f:selectItem itemValue="Mercedes Sprinter"
-						itemLabel="Mercedes Sprinter" />
+					<f:selectItem itemValue="Volskwagen Passat" itemLabel="Volskwagen Passat" />
+					<f:selectItem itemValue="Mercedes Sprinter" itemLabel="Mercedes Sprinter" />
 					<f:selectItem itemValue="Dacia Logan" itemLabel="Dacia Logan" />
 					<f:selectItem itemValue="Volvo Truck" itemLabel="Volvo Truck" />
-					<f:selectItem itemValue="Volskwagen Transporter"
-						itemLabel="Volskwagen Transporter" />
+					<f:selectItem itemValue="Volskwagen Transporter" itemLabel="Volskwagen Transporter" />
 					<f:selectItem itemValue="Mercedes Truck" itemLabel="Mercedes Truck" />
+					<f:validator validatorId="notNullValidator"/>
 				</h:selectOneMenu>
+				<h:message for="modelInput"  errorStyle="color:red; display:block" />
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-3 control-label">Year</label>
+			<label class="col-sm-3 control-label">Fabrication year</label>
 			<div class="col-sm-9">
-				<h:inputText value="#{addVehicleBean.year}"
-					styleClass="form-control" />
+				<h:inputText id= "yearInput" value="#{addVehicleBean.year}" styleClass="form-control" required="true" converterMessage="Must be a number" >
+					<f:validator validatorId="notNumberValidator"/>
+				</h:inputText>
+				<h:message for="yearInput"  errorStyle="color:red; display:block" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">Price</label>
 			<div class="col-sm-9">
-				<h:inputText value="#{addVehicleBean.price}"
-					styleClass="form-control" />
+				<h:inputText id = "priceInput" value="#{addVehicleBean.price}"
+					styleClass="form-control" required="true" requiredMessage = "Price is required" converterMessage="Must be a number">
+					<f:validator validatorId="notNumberValidator"/>
+				</h:inputText>
+				<h:message for="priceInput"  errorStyle="color:red; display:block" />
 			</div>
 		</div>
 		</div>
@@ -101,59 +116,79 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">Fuel Type</label>
 				<div class="col-sm-9">
-					<h:selectOneMenu value="#{addVehicleBean.fuelType}" styleClass="form-control">
+					<h:selectOneMenu id = "fuelTypeInput" value="#{addVehicleBean.fuelType}" styleClass="form-control"  required="true" requiredMessage = "Fuel Type is required">
 						<f:selectItem itemValue=" " itemLabel=" " />
           	          <f:selectItem itemValue="Diesel" itemLabel="Diesel" />
           	          <f:selectItem itemValue="Gasoline" itemLabel="Gasoline" />
+          	          <f:validator validatorId="notNullValidator"/>
 					</h:selectOneMenu>
+					<h:message for="fuelTypeInput"  errorStyle="color:red; display:block" />
 				</div>
 			</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">Capacity</label>
 			<div class="col-sm-9">
-				<h:inputText value="#{addVehicleBean.engineCapacity}"
-					styleClass="form-control" />
+				<h:inputText id = "capacityInut" value="#{addVehicleBean.engineCapacity}"
+					styleClass="form-control"  required="true" requiredMessage = "Capacity is required" converterMessage="Must be a number" >
+						<f:validator validatorId="notNumberValidator"/>
+					</h:inputText>
+					<h:message for="capacityInut"  errorStyle="color:red; display:block" />
 			</div>
 		</div>	
 		<div class="form-group">
 			<label class="col-sm-3 control-label">Weight</label>
 			<div class="col-sm-9">
-				<h:inputText value="#{addVehicleBean.bodyWeight}"
-					styleClass="form-control" />
-			</div>
+					<h:inputText id="weightInput" value="#{addVehicleBean.bodyWeight}"
+						styleClass="form-control"  required="true" requiredMessage = "Weight is required" converterMessage="Must be a number" >
+						<f:validator validatorId="notNumberValidator"/>
+					</h:inputText>
+					<h:message for="weightInput"  errorStyle="color:red; display:block" />
+				</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">Height</label>
 			<div class="col-sm-9">
-				<h:inputText value="#{addVehicleBean.bodyHeight}"
-					styleClass="form-control" />
+				<h:inputText id = "heightInput" value="#{addVehicleBean.bodyHeight}"
+					styleClass="form-control"  required="true" requiredMessage = "Height is required" converterMessage="Must be a number" >
+					<f:validator validatorId="notNumberValidator"/>
+					</h:inputText>
+					<h:message for="heightInput"  errorStyle="color:red; display:block" />
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-3 control-label">Lenght</label>
 			<div class="col-sm-9">
-				<h:inputText value="#{addVehicleBean.bodyLenght}"
-					styleClass="form-control" />
+				<h:inputText id = "lenghtInput" value="#{addVehicleBean.bodyLenght}"
+					styleClass="form-control"  required="true" requiredMessage = "Lenght is required" converterMessage="Must be a number" >
+					<f:validator validatorId="notNumberValidator"/>
+					</h:inputText>
+					<h:message for="lenghtInput"  errorStyle="color:red; display:block" />
 			</div>
 		</div>
 		<div class="form-group">
 				<label class="col-sm-3 control-label">Suspension</label>
 				<div class="col-sm-9">
-					<h:selectOneMenu value="#{addVehicleBean.suspensionType}" styleClass="form-control">
+					<h:selectOneMenu id = "suspensionInput" value="#{addVehicleBean.suspensionType}" styleClass="form-control"  required="true" requiredMessage = "Suspension is required">
+						<f:selectItem itemValue=" " itemLabel=" " />
 						<f:selectItem itemValue="SWING_AXLE" itemLabel="SWING_AXLE" />
-          	          <f:selectItem itemValue="TRAILING_LINK" itemLabel="TRAILING_LINK" />
-          	          <f:selectItem itemValue="MAC_PHERSON" itemLabel="MAC_PHERSON" />
+          	          	<f:selectItem itemValue="TRAILING_LINK" itemLabel="TRAILING_LINK" />
+          	        	  <f:selectItem itemValue="MAC_PHERSON" itemLabel="MAC_PHERSON" />
+          	       	   <f:validator validatorId="notNullValidator"/>
 					</h:selectOneMenu>
+					<h:message for="suspensionInput"  errorStyle="color:red; display:block" />
 				</div>
 			</div>
 		<div class="form-group">
 				<label class="col-sm-3 control-label">Tire Condition</label>
 				<div class="col-sm-9">
-					<h:selectOneMenu value="#{addVehicleBean.tireCondition}" styleClass="form-control">
+					<h:selectOneMenu id = "tireInput" value="#{addVehicleBean.tireCondition}" styleClass="form-control"  required="true" requiredMessage = "Tire condition is required">
+						<f:selectItem itemValue=" " itemLabel=" " />
 						<f:selectItem itemValue="USED" itemLabel="USED" />
-          	          <f:selectItem itemValue="NEW" itemLabel="NEW" />
-          	          <f:selectItem itemValue="SLIGHTY_USED" itemLabel="SLIGHTY_USED" />
+          	       	    <f:selectItem itemValue="NEW" itemLabel="NEW" />
+          	        	<f:selectItem itemValue="SLIGHTY_USED" itemLabel="SLIGHTY_USED" />
+						<f:validator validatorId="notNullValidator"/>
 					</h:selectOneMenu>
+					<h:message for="tireInput"  errorStyle="color:red; display:block" />
 				</div>
 			</div>
 		</div>
