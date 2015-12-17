@@ -7,6 +7,7 @@ import javax.ejb.Startup;
 
 import ro.fortech.caching.AccountCachingService;
 import ro.fortech.caching.VehicleCachingService;
+import ro.fortech.caching.VehicleEnhanceCachingService;
 
 @Singleton
 @Startup
@@ -18,11 +19,15 @@ public class CacheInitializator {
 	@EJB
 	private AccountCachingService accountCachingService;
 	
+	@EJB
+	private VehicleEnhanceCachingService vehicleEnhanceCacheService;
+	
 	@PostConstruct
 	public void initCache(){
 		System.out.println("CacheInitializator: startup class");		
 		accountCachingService.initUserCache();
 		vehicleCacheService.initVehicleCache();
+		vehicleEnhanceCacheService.initVehiclesEnhancedCache();
 	}
 	
 }

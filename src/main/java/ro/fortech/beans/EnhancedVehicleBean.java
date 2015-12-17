@@ -1,8 +1,8 @@
 package ro.fortech.beans;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 import ro.fortech.search.VehicleEnhanceSearchResponse;
 import ro.fortech.search.response.SearchResponseService;
@@ -18,14 +18,15 @@ public class EnhancedVehicleBean {
 	private String fin;
 
 	public VehicleEnhanceSearchResponse getEnhancedVehicle() {
-		searchForEnhancedVehicle();
 		return enhancedVehicle;
 	}
 
-	public void searchForEnhancedVehicle() {
+	public String searchForEnhancedVehicle() {
+		System.out.println("The fin value is "+ fin);
 		//VehicleEnhanceSearchResponse response = searchResponseService.getVehicleEnhancedByFin("alandala", fin); 
 		VehicleEnhanceSearchResponse response = searchResponseService.getVehicleEnhancedByFin("alandala", "RO5347UK34"); 
 		this.enhancedVehicle = response;
+		return "extraInfoJSF";
 	}
 
 	public String getFin() {

@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import ro.fortech.cache.VehicleCache;
 import ro.fortech.def.value.DefaultValues;
 import ro.fortech.helpers.SearchHelper;
 import ro.fortech.model.Vehicle;
@@ -23,6 +24,9 @@ public class FakeSearcher implements VehicleSearchService {
 
 	@EJB
 	private SearchHelper searchHelper;
+	
+	@EJB
+	private VehicleCache vehicleCache;
 
 	@PostConstruct
 	public void init() {
@@ -36,7 +40,11 @@ public class FakeSearcher implements VehicleSearchService {
 		List<Vehicle> searchResultVehicles = new ArrayList<>();
 
 		if (search.getFin().equals(DefaultValues.FIN_DEFAULT.getDef())) {
-			intermediat1 = searchHelper.getVehiclesByModel(vehicles, search);
+			intermediat1 = searchHelper.getVehiclesByLocation(vehicles, search);
+			intermediat2 = searchHelper.getVehiclesByModel(intermediat1, search);
+			intermediat1.clear();
+			intermediat1 = searchHelper.getVehiclesByVehicleType(intermediat2, search);
+			intermediat2.clear();
 			intermediat2 = searchHelper.getVehiclesByFuelType(intermediat1, search);
 			intermediat1.clear();
 			intermediat1 = searchHelper.getVehiclesByMinEngineCapacity(intermediat2, search);
@@ -47,21 +55,15 @@ public class FakeSearcher implements VehicleSearchService {
 			intermediat2.clear();
 			intermediat2 = searchHelper.getVehiclesByMaxBuildYear(intermediat1, search);
 			intermediat1.clear();
-			intermediat1 = searchHelper.getVehiclesByLocation(intermediat2, search);
+			intermediat1 = searchHelper.getVehiclesByMinSellPrice(intermediat2, search);
 			intermediat2.clear();
-			intermediat2 = searchHelper.getVehiclesByMinSellPrice(intermediat1, search);
+			intermediat2 = searchHelper.getVehiclesByMaxSellPrice(intermediat1, search);
 			intermediat1.clear();
-			intermediat1 = searchHelper.getVehiclesByMaxSellPrice(intermediat2, search);
-			intermediat2.clear();
-			intermediat2 = searchHelper.getVehiclesByVehicleType(intermediat1, search);
-			intermediat1.clear();
-			intermediat1 = searchHelper.getVehiclesByLocation(intermediat2, search);
-			intermediat2.clear();
-			return intermediat1;
+			return intermediat2;
 
 		} else {
 			for (Vehicle vehicleFin : vehicles) {
-				if (vehicleFin.getFin().equals(search.getFin())) {
+				if (vehicleFin.getFin().equals(search.getFin()) && vehicleFin.getLocation().equals(search.getLocation())) {
 					searchResultVehicles.add(vehicleFin);
 					break;
 				}
@@ -71,8 +73,8 @@ public class FakeSearcher implements VehicleSearchService {
 	}
 
 	@Override
-	public VehicleEnhanced getVehicleEnhancedByFin(String fin, List<VehicleEnhanced> vehicleEnhanceds) {
-		for (VehicleEnhanced vehicleEnhanced : vehicleEnhanceds) {
+	public VehicleEnhanced getVehicleEnhancedByFin(String fin) {
+		for (VehicleEnhanced vehicleEnhanced : vehicleCache.getVehicleEnhanceds()) {
 			if (vehicleEnhanced.getVehicle().getFin().equals(fin)) {
 				return vehicleEnhanced;
 			}

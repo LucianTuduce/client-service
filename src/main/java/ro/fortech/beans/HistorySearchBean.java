@@ -22,8 +22,7 @@ public class HistorySearchBean implements Serializable {
 	private HistorySearchCache historySearchCache;
 
 	private List<VehicleSearchRequest> searchHistory = new ArrayList<>();
-	HistorySearch historySearch;
-
+	
 	public List<VehicleSearchRequest> getSearchHistory() {
 		return searchHistory;
 	}
@@ -36,7 +35,6 @@ public class HistorySearchBean implements Serializable {
 
 		historySearchCache.addHistorySearch(Constants.USER, searchRequest);
 		searchHistory = historySearchCache.getSearchHistory().get(Constants.USER);
-		System.out.println("dagre");
 	}
 
 }

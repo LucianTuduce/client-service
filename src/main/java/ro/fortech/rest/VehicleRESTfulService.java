@@ -17,11 +17,11 @@ import javax.ws.rs.core.Response;
 
 import ro.fortech.caching.AccountCachingService;
 import ro.fortech.caching.VehicleCachingService;
-import ro.fortech.model.Vehicle;
 import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.search.response.SearchResponseService;
 import ro.fortech.services.VehicleService;
 import ro.fortech.validation.AccountValidationService;
+import ro.fortech.vehicle.enhance.VehicleEnhanced;
 
 @Path("/vehicle")
 @Stateless
@@ -44,7 +44,6 @@ public class VehicleRESTfulService {
 	
 	@EJB
 	private VehicleCachingService vehicleCacheService;
-
 
 	@PostConstruct
 	public void init() {
@@ -117,9 +116,10 @@ public class VehicleRESTfulService {
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
-	public Response addVehicle(@HeaderParam("Authorization") String accountToken, Vehicle vehicle){
+	public Response addVehicle(@HeaderParam("Authorization") String accountToken, VehicleEnhanced vehicle){
 		if(accountValidation.isUserValid(accountToken)){
-			fakeService.saveVehicle(vehicle);
+			fakeService.saveVehicleEnhanced(vehicle);
+			fakeService.saveVehicle(vehicle.getVehicle());
 			return Response.status(Response.Status.OK).build();
 		}else {
 			return Response.status(Response.Status.UNAUTHORIZED).build();

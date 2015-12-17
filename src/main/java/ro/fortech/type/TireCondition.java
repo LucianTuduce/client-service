@@ -16,4 +16,18 @@ public enum TireCondition {
 	public void setTireCondition(String tireCondition) {
 		this.tireCondition = tireCondition;
 	}
+	
+	public static TireCondition getEnum(String s){
+		
+		if(USED.name().equalsIgnoreCase(s)){
+			return USED;
+		}
+		else if(NEW.name().equalsIgnoreCase(s)){
+			return NEW;
+		}
+		else if(SLIGHTY_USED.name().equalsIgnoreCase(s)){
+			return SLIGHTY_USED;
+		}
+		throw new IllegalArgumentException("No Enum specified for this string");
+	}
 }

@@ -171,7 +171,7 @@ public class SearchResponseService {
 	public VehicleEnhanceSearchResponse getVehicleEnhancedByFin(String accountToken, String fin) {
 		VehicleEnhanceSearchResponse searchResponse = new VehicleEnhanceSearchResponse();
 
-		VehicleEnhanced vehicle = searchService.getVehicleEnhancedByFin(fin, fakeService.getVehicles());
+		VehicleEnhanced vehicle = searchService.getVehicleEnhancedByFin(fin);
 		if (vehicle == null) {
 			searchResponse.setErrorMessage(Constants.SOMETHING_WENT_WRONG);
 		} else {
