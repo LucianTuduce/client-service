@@ -58,7 +58,7 @@
                     <th>Year</th>
                     <th>Location(Country)</th>
                     <th>Price</th>
-                    <th></th>
+                    
                 </thead>
                 <tbody>
                     <tr data-ng-repeat="car in cars">
@@ -70,10 +70,7 @@
                         <td>{{car.engineCapacity}}</td>
                         <td>{{car.year}}</td>
                         <td>{{car.location}}</td>
-                        <td>{{car.price}}</td>
-                        <td>
-                            <a href="#" ng-click="removeCar(data)">Remove Car</a>
-                        </td>
+                        <td>{{car.price}}</td>                        
                     </tr>
                 </tbody>
             </table>

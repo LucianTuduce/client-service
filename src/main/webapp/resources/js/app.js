@@ -3,12 +3,23 @@ angular.module('UVSClient', [])
 
 
 .controller('LoginController', function($scope, $rootScope, Scopes, $http) {
-    $rootScope.$on("CallParentMethod", function() { //Listen for trigger
-        $scope.cars = Scopes.get('CarSearchController').carsRetrieved;
-        console.log($scope.cars);
-    });
-
-
+    $scope.login = function(event) {
+        var usernameVar = $scope.username;
+        var passwordVar = $scope.password;
+        $http.post('http://localhost:9080/client-service/rest/user/login', {
+                username: usernameVar,
+                password: passwordVar
+            })
+            .success(function(data, status) {
+                console.log("success")
+            })
+            .error(function(data, status, headers, config) {
+                if (status == 401) {
+                    alert('not auth.');
+                }
+                $scope.posts = {};
+            });
+    };
 })
 
 /*  */
@@ -36,7 +47,7 @@ angular.module('UVSClient', [])
         VehicleTypeVar = event.target.text;
         $scope.vehicleType = VehicleTypeVar;
         var parentElement = angular.element(document.querySelector('#VehicleType'));
-       // parentElement.html('<span class="glyphicon glyphicon-home"></span><span class="caret"></span><br/>' + VehicleTypeVar);
+        // parentElement.html('<span class="glyphicon glyphicon-home"></span><span class="caret"></span><br/>' + VehicleTypeVar);
         parentElement.html(VehicleTypeVar);
     };
 
@@ -133,16 +144,16 @@ angular.module('UVSClient', [])
 
 
 .controller('SearchHistoryController', function($scope, $rootScope, Scopes, $http) {
-$http({
-            method: 'GET',
-            url: 'http://localhost:9080/client-service/rest/vehicle/search/history',
-            headers: {
-                'Authorization': 'QmFzaWMgdXNlcjA6cGFzczA='
-            }
-        }).then(function(response) {
-            $scope.searches = response.data;
-        });
-    
+    $http({
+        method: 'GET',
+        url: 'http://localhost:9080/client-service/rest/vehicle/search/history',
+        headers: {
+            'Authorization': 'QmFzaWMgdXNlcjA6cGFzczA='
+        }
+    }).then(function(response) {
+        $scope.searches = response.data;
+    });
+
     $rootScope.$on("CallParentMethod", function() { //Listen for trigger
         $http({
             method: 'GET',

@@ -3,13 +3,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
-<h:head />
+
+<h:head> 
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="resources/css/site.css" />
+ </h:head>
 <body>
 	<h:form>
 
 		<h:dataTable
 			value="#{enhancedVehicleBean.enhancedVehicle.vehicleEnhanceds}"
-			var="car">
+			var="car" class="table table-stripped">
 
 			<h:column>
 				<h:outputText value="FIN" style="font-weight:bold"/>

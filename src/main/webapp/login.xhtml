@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-    <html data-ng-app="UVSClient">
+    <html data-ng-app="BasicHttpAuthExample">
 
     <head>
         <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> -->
@@ -30,22 +30,22 @@
                     <div class="tab-content">
                         <div class="" id="user" ng-show="tab===1">
                             <br />
-                            <form id="myform">
+                            <form id="myform"  role="form">
                                 <fieldset>
                                     <div class="form-group">
                                         <div class="right-inner-addon">
-                                            <input type="text" id="username" class="form-control input-lg" placeholder="Username" />
+                                            <input type="text" id="username" class="form-control input-lg" placeholder="Username" ng-model="username" />
                                             <span class="error" for="username" id="newusername"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="right-inner-addon">
-                                            <input type="password" id="password" class="form-control input-lg" placeholder="Password" />
+                                            <input type="password" id="password" class="form-control input-lg" placeholder="Password" ng-model="password" />
                                             <span class="error" for="password" id="newpassword"></span>
                                         </div>
                                     </div>
                                     <div class=" text-center">
-                                        <input type="submit" value="Login" class="btn btn-primary" />
+                                        <button  value="Login" class="btn btn-primary" ng-click="login()">Login</button>
                                     </div>
                                 </fieldset>
                             </form>
@@ -71,7 +71,7 @@
                                         </div>
                                     </div>
                                     <div class=" text-center">
-                                        <input type="submit" value="Sign up" class="btn btn-primary" />
+                                        <input type="submit" value="Sign up" class="btn btn-primary"  />
                                     </div>
                                 </fieldset>
                             </form>
@@ -83,7 +83,12 @@
         <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-        <script type="text/javascript" src="resources/js/app.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
+        <script type="text/javascript" src=" https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-cookies.min.js"></script>
+        <script type="text/javascript" src=" https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-sanitize.min.js"></script>
+       
+        <script type="text/javascript" src="resources/js/loginApp.js"></script>
+    <!-- <script type="text/javascript" src="resources/js/app.js"></script> -->
     </body>
 
     </html>

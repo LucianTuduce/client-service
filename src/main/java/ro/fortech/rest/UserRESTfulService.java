@@ -44,7 +44,7 @@ public class UserRESTfulService {
 		if(!accountValidation.isUserValid(accountToken)){
 			return Response.status(Response.Status.UNAUTHORIZED).entity(Constants.Y_NO_HAVE_ACCOUNT).build();
 		}else{
-			return Response.status(Response.Status.OK).entity("User confirmed").build();
+			return Response.status(Response.Status.OK).build();
 		}
 	}
 	
