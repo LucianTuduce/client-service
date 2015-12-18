@@ -2,9 +2,10 @@ package ro.fortech.beans;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.ejb.Stateless;
+
 import org.apache.commons.lang3.StringUtils;
+
 import ro.fortech.def.value.DefaultValues;
 import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.type.FuelType;
@@ -16,9 +17,8 @@ import ro.fortech.type.VehicleType;
  * search on some values.
  *
  */
-@ManagedBean(name = "searchVehicleBean")
-@SessionScoped
-public class SearchVehicleBean implements Serializable {
+@Stateless
+public class SearchRequestService implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

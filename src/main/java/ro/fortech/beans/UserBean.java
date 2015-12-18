@@ -3,10 +3,10 @@ package ro.fortech.beans;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import ro.fortech.model.User;
 import ro.fortech.services.UserService;
@@ -16,7 +16,7 @@ import ro.fortech.services.UserService;
  * the database.
  *
  */
-@ManagedBean
+@Named
 @RequestScoped
 public class UserBean {
 

@@ -5,15 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedBean;
+import javax.ejb.Stateless;
 
 import ro.fortech.cache.HistorySearchCache;
 import ro.fortech.constants.Constants;
 import ro.fortech.search.VehicleSearchRequest;
 
-@ManagedBean(name = "historySearchBean")
-@SessionScoped
+@Stateless
 public class HistorySearchBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -31,7 +29,7 @@ public class HistorySearchBean implements Serializable {
 		this.searchHistory = searchHistory;
 	}
 
-	public void getHistory(VehicleSearchRequest searchRequest) {
+	public void addToHistorySearch(VehicleSearchRequest searchRequest) {
 
 		historySearchCache.addHistorySearch(Constants.USER, searchRequest);
 		searchHistory = historySearchCache.getSearchHistory().get(Constants.USER);
