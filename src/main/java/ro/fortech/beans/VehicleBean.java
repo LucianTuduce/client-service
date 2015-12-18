@@ -1,102 +1,77 @@
 package ro.fortech.beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.inject.Inject;
+import javax.inject.Named;
 
-import ro.fortech.cache.HistorySearchCache;
 import ro.fortech.model.Vehicle;
 import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.services.VehicleSearchService;
 import ro.fortech.services.VehicleService;
+import ro.fortech.vehicle.enhance.VehicleEnhanced;
 
-@ManagedBean
+
+@Named
 @ViewScoped
-public class VehicleBean implements Serializable{
+public class VehicleBean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 8372021854454208604L;
 
-	@ManagedProperty(value = "#{searchVehicleBean}")
-	SearchVehicleBean searchVehicleBean;
-
-	@ManagedProperty(value = "#{historySearchBean}")
-	HistorySearchBean historySearchBean;
-
-	
-	@EJB(beanName ="fakeVehicleServiceImpl")
+	@EJB(beanName = "fakeVehicleServiceImpl")
 	private VehicleService fakeCarService;
-	
+
 	@EJB(beanName = "searchServiceUtils")
 	private VehicleSearchService searchServiceUtils;
-	
-	@EJB(beanName = "vehicleSearchServiceImpl")
-	private VehicleSearchService searchService;
+
+	@EJB
+	private HistorySearchBean historySearchBean;
+
+	@EJB
+	private VehicleSerachResult searchedVehicleBean;
 	
 	@EJB
-	private HistorySearchCache historySearchCache;
+	private SearchRequestService searchVehicleBean;
 	
-	@Inject
-	private EnhancedVehicleBean bean;
-
+	@EJB
+	private EnhancedSearchResult enhancedVehicleBean;
+	
+	private List<VehicleSearchRequest> searchHistory;
 	private List<Vehicle> searchedVehicles;
-	private Vehicle selectedVehicle = new Vehicle();
-	private boolean edit;
-	
-	public void searchVechicle() {
-		searchedVehicles = new ArrayList<Vehicle>();
-		VehicleSearchRequest searchRequest = searchVehicleBean.createSearchVechicle();
-		historySearchBean.getHistory(searchRequest);
-		searchedVehicles = fakeCarService.getVehicles(searchRequest);
-	}
-	
-	public String ceva(Vehicle data){
-		System.out.println("Sunt in metoda ceva si "+ data.getFin());
-		return "extraInfo";
-	}
-	
-	public void simpleDo(){
-		System.out.println("In dummy method");
-		//return "login";
-	}
-	
-	public void edit(Vehicle selectedVehicle){
-		this.setSelectedVehicle(selectedVehicle);
-		System.out.println("here GG");
-		edit = true;
-		//return "extraInfo";
-	}
-	
-	public HistorySearchBean getHistorySearchBean() {
-		return historySearchBean;
-	}
+	private List<VehicleEnhanced> vehicleEnhanceds;
 
-	public void setHistorySearchBean(HistorySearchBean historySearchBean) {
-		this.historySearchBean = historySearchBean;
-	}
-
-	public HistorySearchCache getHistorySearchCache() {
-		return historySearchCache;
-	}
-
-	public void setHistorySearchCache(HistorySearchCache historySearchCache) {
-		this.historySearchCache = historySearchCache;
-	}
-	
-	public SearchVehicleBean getSearchVehicleBean() {
+	public SearchRequestService getSearchVehicleBean() {
 		return searchVehicleBean;
 	}
 
-	public void setSearchVehicleBean(SearchVehicleBean searchVehicleBean) {
+	public void setSearchVehicleBean(SearchRequestService searchVehicleBean) {
 		this.searchVehicleBean = searchVehicleBean;
 	}
 
+	public void searchVechicle() {
+		
+		VehicleSearchRequest searchRequest = searchVehicleBean.createSearchVechicle();
+		historySearchBean.addToHistorySearch(searchRequest);
+		searchedVehicleBean.setSearchedVehicles(fakeCarService.getVehicles(searchRequest));
+	}
+
+	public String searchForEnhancedVehicle(Vehicle vehicle) {
+		return enhancedVehicleBean.searchForEnhancedVehicle(vehicle);
+	}
+
+	public List<VehicleSearchRequest> getSearchHistory() {
+		this.searchHistory = historySearchBean.getSearchHistory();
+		return searchHistory;
+	}
+
+	public void setSearchHistory(List<VehicleSearchRequest> searchHistory) {
+		this.searchHistory = searchHistory;
+	}
+
 	public List<Vehicle> getSearchedVehicles() {
+		this.searchedVehicles = searchedVehicleBean.getSearchedVehicles();
 		return searchedVehicles;
 	}
 
@@ -104,24 +79,11 @@ public class VehicleBean implements Serializable{
 		this.searchedVehicles = searchedVehicles;
 	}
 
-	public Vehicle getSelectedVehicle() {
-		return selectedVehicle;
+	public List<VehicleEnhanced> getVehicleEnhanceds() {
+		return vehicleEnhanceds;
 	}
 
-	public void setSelectedVehicle(Vehicle selectedVehicle) {
-		this.selectedVehicle = selectedVehicle;
+	public void setVehicleEnhanceds(List<VehicleEnhanced> vehicleEnhanceds) {
+		this.vehicleEnhanceds = vehicleEnhanceds;
 	}
-
-	public boolean isEdit() {
-        return edit;
-    }
-
-	public EnhancedVehicleBean getBean() {
-		return bean;
-	}
-
-	public void setBean(EnhancedVehicleBean bean) {
-		this.bean = bean;
-	}
-	
 }
