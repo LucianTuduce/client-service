@@ -21,36 +21,27 @@ angular.module('UVSClientApp')
     }]);
 
 
-
 angular.module('UVSClientApp')
-    .controller('HeaderController', function ($scope, $rootScope, Scopes) {
+    .controller('HeaderController', ['$scope', 'Scopes', 'CarSearchService', function ($scope, Scopes, CarSearchService) {
         Scopes.store('HeaderController', $scope);
-
-        var VehicleTypeVar = "";
+        $scope.VehicleType= "Vehicle Type";
+        $scope.CountryLanguage="Country/Language"
+        //var VehicleTypeVar = "";
         var CountryVar = "";
         var LanguageVar = "";
         $scope.VehicleTypeSelect = function (event) {
-            VehicleTypeVar = event.target.text;
-            $scope.vehicleType = VehicleTypeVar;
-            var parentElement = angular.element(document.querySelector('#VehicleType'));            
-            parentElement.html(VehicleTypeVar);
+            $scope.VehicleType = event.target.text;                       
         };
 
         $scope.CountrySelect = function (event) {
-            CountryVar = event.target.text;
-            $scope.Country = CountryVar;
-            var parentElement = angular.element(document.querySelector('#CountryLanguage'));            
-            parentElement.html(CountryVar);
+            $scope.CountryLanguage = event.target.text;
+            $scope.Country = event.target.text; //only to pass on the the POST request
         };
 
         $scope.LanguageSelect = function (event) {
-            LanguageVar = event.target.text;
-            $scope.Language = LanguageVar;
-            var parentElement = angular.element(document.querySelector('#CountryLanguage'));
-            parentElement.html(LanguageVar);
-
+            $scope.CountryLanguage += "/" + event.target.text; //keep the country, add the language          
         };
-    });
+    }]);
 
 
 angular.module('UVSClientApp')
@@ -59,7 +50,7 @@ angular.module('UVSClientApp')
         $scope.cars = [];
 
         $scope.search = function () {
-            CarSearchService.CarSearch($scope.FIN, $scope.model, $scope.FuelType, $scope.CapacityMin, $scope.CapacityMax, $scope.YearMin, $scope.YearMax, $scope.PriceMin, $scope.PriceMax, Scopes.get('HeaderController').Country, Scopes.get('HeaderController').vehicleType, function (response, status, headers, config) {
+            CarSearchService.CarSearch($scope.FIN, $scope.model, $scope.FuelType, $scope.CapacityMin, $scope.CapacityMax, $scope.YearMin, $scope.YearMax, $scope.PriceMin, $scope.PriceMax, Scopes.get('HeaderController').Country, Scopes.get('HeaderController').VehicleType, function (response, status, headers, config) {
                 if (status == 200) {
                      console.log("Car Search Result success");
                     //$scope.carsRetrieved = response.vehicles;
@@ -70,8 +61,6 @@ angular.module('UVSClientApp')
         };
            }]);
         
- 
-
 
 
 angular.module('UVSClientApp')
