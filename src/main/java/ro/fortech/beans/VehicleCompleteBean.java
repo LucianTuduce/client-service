@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -53,6 +54,7 @@ public class VehicleCompleteBean implements Serializable {
 			return "fail";
 		}
 		
+		FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "IndexJSF.xhtml");
 		return "success";
 
 	}
@@ -192,7 +194,7 @@ public class VehicleCompleteBean implements Serializable {
 		else{
 			vehicleEnhanced.setTireCondition(TireCondition.getEnum(tireCondition));
 		}
-		return verifyInfoFormUI = false;
+		return verifyInfoFormUI;
 	}
 
 	public String getFin() {
