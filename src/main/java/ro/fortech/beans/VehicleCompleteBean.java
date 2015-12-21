@@ -43,61 +43,92 @@ public class VehicleCompleteBean implements Serializable {
 
 	public String addVehicle() {
 		
-		createVehicleEnhanced();
-		fakeCarService.saveVehicle(vehicleEnhanced.getVehicle());
-		fakeCarService.saveVehicleEnhanced(vehicleEnhanced);
-
+		boolean verifyInfoFormUI = createVehicleEnhanced();
+		
+		if(verifyInfoFormUI){
+			fakeCarService.saveVehicle(vehicleEnhanced.getVehicle());
+			fakeCarService.saveVehicleEnhanced(vehicleEnhanced);
+		}
+		else{
+			return "fail";
+		}
+		
 		return "success";
+
 	}
 	
-	public void createVehicleEnhanced(){
+	public boolean createVehicleEnhanced(){
 		
 		Vehicle vehicle = new Vehicle();
+		boolean verifyInfoFormUI= true;
+		
 		if(StringUtils.isBlank(fin)){
-			vehicle.setFin(DefaultValues.FIN_DEFAULT.getDef());
+			//vehicle.setFin(DefaultValues.FIN_DEFAULT.getDef());
+			this.fin = "Must be filled";
+			verifyInfoFormUI = false;
 		}
 		else{
 			vehicle.setFin(fin);
 		}
 		
-		if(StringUtils.isBlank(fin)){
-			vehicle.setLocation(DefaultValues.LOCATION_DEFAULT.getDef());
+		if(StringUtils.isBlank(location)){
+			//vehicle.setLocation(DefaultValues.LOCATION_DEFAULT.getDef());
+			this.location = "Must be filled";
+			verifyInfoFormUI = false;
 		}
 		else{
 			vehicle.setLocation(location);
 		}
+		
 		if(StringUtils.isNumeric(engineCapacity)){
 			vehicle.setEngineCapacity(Integer.parseInt(engineCapacity));
 		}
 		else{
-			vehicle.setEngineCapacity(DefaultValues.MIN_CAPACITY_DEFAULT.getDefValue());
+			this.engineCapacity = "Must be a number";
+			verifyInfoFormUI = false;
+			//vehicle.setEngineCapacity(DefaultValues.MIN_CAPACITY_DEFAULT.getDefValue());
 		}
+		
 		if(StringUtils.isBlank(fuelType)){
-			vehicle.setFuelType(FuelType.getEnum(DefaultValues.FUEL_TYPE_DEFAULT.getDef()));
+			//vehicle.setFuelType(FuelType.getEnum(DefaultValues.FUEL_TYPE_DEFAULT.getDef()));
+			this.fuelType = "Must be filled";
+			verifyInfoFormUI = false;
 		}
 		else{
 			vehicle.setFuelType(FuelType.getEnum(fuelType));
 		}
+		
 		if(StringUtils.isBlank(model)){
-			vehicle.setModel(DefaultValues.MODEL_DEFAULT.getDef());
+			//vehicle.setModel(DefaultValues.MODEL_DEFAULT.getDef());
+			this.model = "Must be filled";
+			verifyInfoFormUI = false;
 		}
 		else{
 			vehicle.setModel(model);
 		}
-		if(StringUtils.isBlank(price)){
-			vehicle.setPrice(DefaultValues.MIN_PRICE_DEFAULT.getDefValue());
+		
+		if(!StringUtils.isNumeric(price)){
+			//vehicle.setPrice(DefaultValues.MIN_PRICE_DEFAULT.getDefValue());
+			this.price = "Must be a number";
+			verifyInfoFormUI = false;
 		}
 		else{
 			vehicle.setPrice(Integer.parseInt(price));
 		}
-		if(StringUtils.isBlank(year)){
-			vehicle.setPrice(DefaultValues.MIN_YEAR_DEFAULT.getDefValue());
+		
+		if(!StringUtils.isNumeric(year)){
+			//vehicle.setPrice(DefaultValues.MIN_YEAR_DEFAULT.getDefValue());
+			this.year = "Must be a number";
+			verifyInfoFormUI = false;
 		}
 		else{
 			vehicle.setYear(Integer.parseInt(year));
 		}
+		
 		if(StringUtils.isBlank(vehicleType)){
-			vehicle.setVehicleType(VehicleType.getEnum(DefaultValues.VEHICLE_TYPE_DEFAULT.getDef()));
+			//vehicle.setVehicleType(VehicleType.getEnum(DefaultValues.VEHICLE_TYPE_DEFAULT.getDef()));
+			this.vehicleType = "Must be filled";
+			verifyInfoFormUI = false;
 		}
 		else{
 			vehicle.setVehicleType(VehicleType.getEnum(vehicleType));
@@ -105,50 +136,63 @@ public class VehicleCompleteBean implements Serializable {
 			
 		vehicleEnhanced.setVehicle(vehicle);
 		
-		if(StringUtils.isBlank(bodyHeight)){
-			vehicleEnhanced.setBodyHeight(DefaultValues.BODY_HEIGHT.getDef());
+		if(!StringUtils.isNumeric(bodyHeight)){
+			//vehicleEnhanced.setBodyHeight(DefaultValues.BODY_HEIGHT.getDef());
+			this.bodyHeight = "Must be a number";
+			verifyInfoFormUI = false;
 		}
 		else{
 			vehicleEnhanced.setBodyHeight(bodyHeight);
 		}
-		if(StringUtils.isBlank(bodyLenght)){
-			vehicleEnhanced.setBodyLenght(DefaultValues.BODY_LENGHT.getDef());
+		if(!StringUtils.isNumeric(bodyLenght)){
+			//vehicleEnhanced.setBodyLenght(DefaultValues.BODY_LENGHT.getDef());
+			this.bodyLenght = "Must be a number";
+			verifyInfoFormUI = false;
 		}
 		else{
 			vehicleEnhanced.setBodyLenght(bodyLenght);
 		}
-		if(StringUtils.isBlank(bodyWeight)){
-			vehicleEnhanced.setBodyWeight(DefaultValues.BODY_WEIGHT.getDef());
+		if(!StringUtils.isNumeric(bodyWeight)){
+			//vehicleEnhanced.setBodyWeight(DefaultValues.BODY_WEIGHT.getDef());
+			this.bodyWeight = "Must be a number";
+			verifyInfoFormUI = false;
 		}
 		else{
 			vehicleEnhanced.setBodyWeight(bodyWeight);
 		}
 		if(StringUtils.isBlank(dealer)){
-			vehicleEnhanced.setDealer(DefaultValues.DEALER.getDef());
+			//vehicleEnhanced.setDealer(DefaultValues.DEALER.getDef());
+			this.dealer = "Must be filled";
+			verifyInfoFormUI = false;
 		}
 		else{
 			vehicleEnhanced.setDealer(dealer);
 		}
 		if(StringUtils.isBlank(owner)){
-			vehicleEnhanced.setOwner(DefaultValues.OWNER.getDef());
+			//vehicleEnhanced.setOwner(DefaultValues.OWNER.getDef());
+			this.owner = "Must be filled";
+			verifyInfoFormUI = false;
 		}
 		else{
 			vehicleEnhanced.setOwner(owner);
 		}
 		if(StringUtils.isBlank(suspensionType)){
-			vehicleEnhanced.setSuspensionType(SuspensionType.SWING_AXLE);
+			//vehicleEnhanced.setSuspensionType(SuspensionType.SWING_AXLE);
+			this.suspensionType = "Must be filled";
+			verifyInfoFormUI = false;
 		}
 		else{
 			vehicleEnhanced.setSuspensionType(SuspensionType.getEnum(suspensionType));
 		}
-		if(StringUtils.isBlank(suspensionType)){
-			vehicleEnhanced.setTireCondition(TireCondition.NEW);
+		if(StringUtils.isBlank(tireCondition)){
+			//vehicleEnhanced.setTireCondition(TireCondition.NEW);
+			this.tireCondition = "Must be filled";
+			verifyInfoFormUI = false;
 		}
 		else{
 			vehicleEnhanced.setTireCondition(TireCondition.getEnum(tireCondition));
 		}
-		
-	
+		return verifyInfoFormUI = false;
 	}
 
 	public String getFin() {

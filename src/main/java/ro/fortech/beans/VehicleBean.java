@@ -50,11 +50,13 @@ public class VehicleBean implements Serializable {
 		this.searchVehicleBean = searchVehicleBean;
 	}
 
-	public void searchVechicle() {
+	public String searchVechicle() {
 		
 		VehicleSearchRequest searchRequest = searchVehicleBean.createSearchVechicle();
 		historySearchBean.addToHistorySearch(searchRequest);
 		searchedVehicleBean.setSearchedVehicles(fakeCarService.getVehicles(searchRequest));
+		
+		return "succes";
 	}
 
 	public String searchForEnhancedVehicle(Vehicle vehicle) {

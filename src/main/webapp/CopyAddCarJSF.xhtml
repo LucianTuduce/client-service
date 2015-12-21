@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+		 <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> -->
+        <title>UVS Client - REST</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="resources/css/site.css" />
+</h:head>
+
+<h:body>
+	<h:form>
+	<!--First column-->
+		<div class = "col-sm-6 form-horizontal">
+		<div class="form-group">
+			<label class="col-sm-3 control-label">FIN</label>
+			<div class="col-sm-9">
+				<h:inputText id = "finInput" value="#{addVehicleBean.fin}"
+					styleClass="form-control">
+				</h:inputText>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-3 control-label">Owner Name</label>
+			<div class="col-sm-9">
+				<h:inputText id="ownerInput" value="#{addVehicleBean.owner}"
+					styleClass="form-control">
+					
+				</h:inputText>
+				
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">Dealer Name</label>
+			<div class="col-sm-9">
+				<h:inputText id="dealerInput" value="#{addVehicleBean.dealer}"
+					styleClass="form-control" >
+					
+				</h:inputText>
+		
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">Country</label>
+			<div class="col-sm-9">
+				<h:selectOneMenu id="country" value="#{addVehicleBean.location}" styleClass="form-control" >
+					<f:selectItem itemValue=" " itemLabel=" " />
+					<f:selectItem itemValue="Germany" itemLabel="Germany"></f:selectItem>
+					<f:selectItem itemValue="Romania" itemLabel="Romania"></f:selectItem>
+					<f:ajax event="change" update="@this" render="country" />
+					
+				</h:selectOneMenu>
+				
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">Vehicle Type</label>
+			<div class="col-sm-9">
+				<h:selectOneMenu id="vehicleType"
+					value="#{addVehicleBean.vehicleType}" styleClass="form-control" >
+					<f:selectItem itemValue=" " itemLabel=" " />
+					<f:selectItem itemValue="CAR" itemLabel="CAR"></f:selectItem>
+					<f:selectItem itemValue="VAN" itemLabel="VAN"></f:selectItem>
+					<f:selectItem itemValue="TRUCK" itemLabel="Truck"></f:selectItem>
+					<f:ajax event="change" update="@this" render="vehicleType" />
+				
+				</h:selectOneMenu>
+				
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">Model</label>
+			<div class="col-sm-9">
+				<h:selectOneMenu id="modelInput" styleClass="form-control" value="#{addVehicleBean.model}" >
+					<f:selectItem itemValue=" " itemLabel=" " />
+					<f:selectItem itemValue="Volskwagen Passat" itemLabel="Volskwagen Passat" />
+					<f:selectItem itemValue="Mercedes Sprinter" itemLabel="Mercedes Sprinter" />
+					<f:selectItem itemValue="Dacia Logan" itemLabel="Dacia Logan" />
+					<f:selectItem itemValue="Volvo Truck" itemLabel="Volvo Truck" />
+					<f:selectItem itemValue="Volskwagen Transporter" itemLabel="Volskwagen Transporter" />
+					<f:selectItem itemValue="Mercedes Truck" itemLabel="Mercedes Truck" />
+					
+				</h:selectOneMenu>
+				
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">Fabrication year</label>
+			<div class="col-sm-9">
+				<h:inputText id= "yearInput" value="#{addVehicleBean.year}" styleClass="form-control" >
+				
+				</h:inputText>
+			
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">Price</label>
+			<div class="col-sm-9">
+				<h:inputText id = "priceInput" value="#{addVehicleBean.price}"
+					styleClass="form-control" >
+					
+				</h:inputText>
+				
+			</div>
+		</div>
+		</div>
+		
+		<!--Second column-->
+		<div class = "col-sm-6 form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-3 control-label">Fuel Type</label>
+				<div class="col-sm-9">
+					<h:selectOneMenu id = "fuelTypeInput" value="#{addVehicleBean.fuelType}" styleClass="form-control">
+						<f:selectItem itemValue=" " itemLabel=" " />
+          	          <f:selectItem itemValue="Diesel" itemLabel="Diesel" />
+          	          <f:selectItem itemValue="Gasoline" itemLabel="Gasoline" />
+          	         
+					</h:selectOneMenu>
+					
+				</div>
+			</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">Capacity</label>
+			<div class="col-sm-9">
+				<h:inputText id = "capacityInut" value="#{addVehicleBean.engineCapacity}"
+					styleClass="form-control" >
+						
+					</h:inputText>
+				
+			</div>
+		</div>	
+		<div class="form-group">
+			<label class="col-sm-3 control-label">Weight</label>
+			<div class="col-sm-9">
+					<h:inputText id="weightInput" value="#{addVehicleBean.bodyWeight}"
+						styleClass="form-control">
+						
+					</h:inputText>
+				
+				</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">Height</label>
+			<div class="col-sm-9">
+				<h:inputText id = "heightInput" value="#{addVehicleBean.bodyHeight}"
+					styleClass="form-control"  >
+				
+					</h:inputText>
+					
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">Lenght</label>
+			<div class="col-sm-9">
+				<h:inputText id = "lenghtInput" value="#{addVehicleBean.bodyLenght}"
+					styleClass="form-control">
+				
+					</h:inputText>
+					
+			</div>
+		</div>
+		<div class="form-group">
+				<label class="col-sm-3 control-label">Suspension</label>
+				<div class="col-sm-9">
+					<h:selectOneMenu id = "suspensionInput" value="#{addVehicleBean.suspensionType}" styleClass="form-control">
+						<f:selectItem itemValue=" " itemLabel=" " />
+						<f:selectItem itemValue="SWING_AXLE" itemLabel="SWING_AXLE" />
+          	          	<f:selectItem itemValue="TRAILING_LINK" itemLabel="TRAILING_LINK" />
+          	        	  <f:selectItem itemValue="MAC_PHERSON" itemLabel="MAC_PHERSON" />
+          	       	  
+					</h:selectOneMenu>
+					
+				</div>
+			</div>
+		<div class="form-group">
+				<label class="col-sm-3 control-label">Tire Condition</label>
+				<div class="col-sm-9">
+					<h:selectOneMenu id = "tireInput" value="#{addVehicleBean.tireCondition}" styleClass="form-control" >
+						<f:selectItem itemValue=" " itemLabel=" " />
+						<f:selectItem itemValue="USED" itemLabel="USED" />
+          	       	    <f:selectItem itemValue="NEW" itemLabel="NEW" />
+          	        	<f:selectItem itemValue="SLIGHTY_USED" itemLabel="SLIGHTY_USED" />
+					
+					</h:selectOneMenu>
+					
+				</div>
+			</div>
+		</div>
+		<h:commandButton value="Add" styleClass="btn btn-primary" action="#{addVehicleBean.addVehicle()}" />
+		
+	</h:form>
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+        <script type="text/javascript" src="resources/js/app.js"></script>
+
+</h:body>
+</html>
