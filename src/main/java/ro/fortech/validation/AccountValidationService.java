@@ -3,20 +3,14 @@ package ro.fortech.validation;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.Context;
 
 import ro.fortech.cache.UserCache;
-import ro.fortech.constants.Constants;
 
 @Stateless
 public class AccountValidationService {
 
 	@EJB
 	private UserCache userCache;
-
-	@Context
-	private HttpServletResponse response;
 
 	@PostConstruct
 	public void init() {
@@ -38,7 +32,6 @@ public class AccountValidationService {
 		if (!userCache.isUserActive(accountToken)) {
 			return false;
 		} else {
-			response.setHeader(Constants.AUTHORIZATION, accountToken);
 			return true;
 		}
 	}
