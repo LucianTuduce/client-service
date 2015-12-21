@@ -47,9 +47,10 @@ public class UserRESTfulService {
 	public Response confirmUser(LoginCredentials credentials){
 		String accountToken = searchResponseService.generateAndGetUserToken(credentials);
 		if(!accountValidation.isUserValid(accountToken)){
-			response.setHeader(Constants.AUTHORIZATION, accountToken);
+			
 			return Response.status(Response.Status.UNAUTHORIZED).entity(Constants.Y_NO_HAVE_ACCOUNT).build();
 		}else{
+			response.setHeader(Constants.AUTHORIZATION, accountToken);
 			return Response.status(Response.Status.OK).build();
 		}
 	}
