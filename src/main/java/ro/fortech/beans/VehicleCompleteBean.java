@@ -7,8 +7,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang3.StringUtils;
-
-import ro.fortech.def.value.DefaultValues;
 import ro.fortech.model.Vehicle;
 import ro.fortech.services.VehicleService;
 import ro.fortech.type.FuelType;
