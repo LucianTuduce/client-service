@@ -9,6 +9,11 @@ import ro.fortech.caching.AccountCachingService;
 import ro.fortech.caching.VehicleCachingService;
 import ro.fortech.caching.VehicleEnhanceCachingService;
 
+/**
+ * Class used to initiate the cache in the application. The cache is initiated
+ * at application server start.
+ *
+ */
 @Singleton
 @Startup
 public class CacheInitializator {

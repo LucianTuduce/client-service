@@ -4,6 +4,11 @@ import ro.fortech.model.Vehicle;
 import ro.fortech.type.SuspensionType;
 import ro.fortech.type.TireCondition;
 
+/**
+ * Class used as a model for the vehicle class. Here the vehicles has extra
+ * information that the user might want to see about that vehicle.
+ *
+ */
 public class VehicleEnhanced {
 
 	private String dealer;

@@ -25,6 +25,12 @@ import ro.fortech.services.VehicleSearchService;
 import ro.fortech.services.VehicleService;
 import ro.fortech.vehicle.enhance.VehicleEnhanced;
 
+/**
+ * Class used to handle the user request from the server and redirect them to
+ * the specific part of the application that is build in order to handle that
+ * request.
+ *
+ */
 @Stateless
 public class SearchResponseService {
 	
@@ -53,20 +59,40 @@ public class SearchResponseService {
 		System.out.println("SearchResponseService: Stateless");
 	}
 	
+	/**
+	 * Method used to get the search history for a specific user. The user is
+	 * identified by the method param.
+	 * 
+	 * @param accountToken
+	 *            - the token used to identify the user.
+	 * @return - the search history list of a user
+	 */
 	public List<VehicleSearchRequest> getUserSearchHistory(String accountToken) {
 		return historySearchCache.getSearchHistory().get(decodeUserToken(accountToken));
 	}
 
+	/**
+	 * Method used to get the search history that a user saved. The saved
+	 * history search of an used is obtain by the token.
+	 * 
+	 * @param accountToken
+	 *            - the token used to identify the user and his saved search
+	 * @return - the list of saved car searches
+	 */
 	public List<SearchSave> getUserSavedSearchHistory(String accountToken) {
 		return searchCache.getSearchSaveCache().get(decodeUserToken(accountToken));
 	}
 
 	/**
+	 * Method used to save a user search history.
 	 * 
 	 * @param accountToken
+	 *            - the token of the user that will make the search save
 	 * @param saveName
+	 *            - the name of the search save
 	 * @param search
-	 * @return
+	 *            - the search request that will be saved.
+	 * @return - should not return anything
 	 */
 	public List<SearchSave> saveUserSearch(String accountToken, String saveName, VehicleSearchRequest search) {
 		List<SearchSave> searchSaves = null;
@@ -85,9 +111,13 @@ public class SearchResponseService {
 	}
 
 	/**
+	 * Method used to generate an unique token for every account. Token on which
+	 * every user will be identified.
 	 * 
 	 * @param credentials
-	 * @return
+	 *            - the user credentials that will help in order to create the
+	 *            token
+	 * @return - the user encoded account token
 	 */
 	public String generateAndGetUserToken(LoginCredentials credentials) {
 		String username = credentials.getUsername();
@@ -116,6 +146,14 @@ public class SearchResponseService {
 		return encodedCredentials;
 	}
 	
+	/**
+	 * Method used to decode the user account token.
+	 * 
+	 * @param token
+	 *            - the encoded account token
+	 * @return - the decoded token, more exactly the username that was used in
+	 *         order to create this token
+	 */
 	public String decodeUserToken(String token){
 		byte[] decodedToken = Base64.decodeBase64(token);
 		String decodedTokenStringForm = new String(decodedToken);	
@@ -124,11 +162,18 @@ public class SearchResponseService {
 	}
 
 	/**
+	 * Method used top create the user vehicle search response. The response
+	 * consist of a message telling the status of the response, the vehicles
+	 * obtained by applying the filter and the total number of vehicles
+	 * obtained.
 	 * 
 	 * @param accountToken
-	 *            -
+	 *            - the user token that will the application if the request can
+	 *            be made or not, that is the user must be valid in order to
+	 *            make a search
 	 * @param search
-	 * @return
+	 *            - the search criteria used to filter the vehicles.
+	 * @return - the search response after applying the the login
 	 */
 	public VehicleSearchResponse getFilteredVehiclesBySearchCriteria(String accountToken, VehicleSearchRequest search) {
 		VehicleSearchResponse searchResponse = new VehicleSearchResponse();
@@ -162,11 +207,19 @@ public class SearchResponseService {
 
 	
 	/**
+	 * Method used top create the user vehicle search response. The response
+	 * consist of a message telling the status of the response, the vehicles
+	 * obtained by applying the filter and the total number of vehicles
+	 * obtained. The difference from the one above is that this method will not
+	 * make a pagination.
 	 * 
 	 * @param accountToken
-	 *            -
+	 *            - the user token that will the application if the request can
+	 *            be made or not, that is the user must be valid in order to
+	 *            make a search
 	 * @param search
-	 * @return
+	 *            - the search criteria used to filter the vehicles.
+	 * @return - the search response after applying the the login
 	 */
 	public VehicleSearchResponse getFilteredVehiclesBySearchCriteriaWithoutPagination(String accountToken, VehicleSearchRequest search) {
 		VehicleSearchResponse searchResponse = new VehicleSearchResponse();
@@ -191,7 +244,14 @@ public class SearchResponseService {
 		historySearchCache.addHistorySearch(decodeUserToken(accountToken), search);
 	}
 
-	public VehicleEnhanceSearchResponse getVehicleEnhancedByFin(String accountToken, String fin) {
+	/**
+	 * Method used to get extra information about a car based on its fin.
+	 * 
+	 * @param fin
+	 *            - the fin used to identify a car
+	 * @return - the car with the provided fin and extra information about it
+	 */
+	public VehicleEnhanceSearchResponse getVehicleEnhancedByFin(String fin) {
 		VehicleEnhanceSearchResponse searchResponse = new VehicleEnhanceSearchResponse();
 
 		VehicleEnhanced vehicle = searchService.getVehicleEnhancedByFin(fin);

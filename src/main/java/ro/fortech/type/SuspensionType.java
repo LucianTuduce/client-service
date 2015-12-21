@@ -1,5 +1,9 @@
 package ro.fortech.type;
 
+/**
+ * Enumeration used to show the type of suspensions that a car can have.
+ *
+ */
 public enum SuspensionType {
 	SWING_AXLE("swing axle"), TRAILING_LINK("trailing link"), MAC_PHERSON("MacPherson");
 	

@@ -1,7 +1,7 @@
 package ro.fortech.type;
 
 /**
- * Enum used to define the types of cars that are present in the database
+ * Enumeration used to define the types of cars that are present in the database
  *
  */
 public enum VehicleType {
