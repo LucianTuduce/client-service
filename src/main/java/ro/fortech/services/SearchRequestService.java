@@ -1,4 +1,4 @@
-package ro.fortech.beans;
+package ro.fortech.services;
 
 import java.io.Serializable;
 

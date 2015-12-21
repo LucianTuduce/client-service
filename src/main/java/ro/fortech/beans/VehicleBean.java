@@ -14,7 +14,9 @@ import ro.fortech.constants.Constants;
 import ro.fortech.model.Vehicle;
 import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.search.VehicleSearchResponse;
+import ro.fortech.search.VehicleSearchResult;
 import ro.fortech.search.response.SearchResponseService;
+import ro.fortech.services.SearchRequestService;
 import ro.fortech.validation.AccountValidationService;
 import ro.fortech.vehicle.enhance.VehicleEnhanced;
 
@@ -25,7 +27,7 @@ public class VehicleBean implements Serializable {
 	private static final long serialVersionUID = 8372021854454208604L;
 
 	@EJB
-	private VehicleSerachResult searchedVehicleBean;
+	private VehicleSearchResult searchedVehicleBean;
 	
 	@EJB
 	private SearchRequestService searchVehicleBean;

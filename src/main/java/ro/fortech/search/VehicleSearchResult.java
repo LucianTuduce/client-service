@@ -1,4 +1,4 @@
-package ro.fortech.beans;
+package ro.fortech.search;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +10,7 @@ import ro.fortech.model.Vehicle;
 
 
 @Stateless
-public class VehicleSerachResult {
+public class VehicleSearchResult {
 
 	private Map<String ,List<Vehicle>> searchedVehicles = new HashMap<String, List<Vehicle>>();
 
