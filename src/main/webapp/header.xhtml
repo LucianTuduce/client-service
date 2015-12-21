@@ -14,7 +14,7 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle text-center text-left-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <span class="glyphicon glyphicon-home"></span><span class="caret"></span>
-                        <br/><span id="VehicleType">Vehicle Type</span>
+                        <br/><span id="VehicleType" ng-model="VehicleType">{{VehicleType}}</span>
                     </a>
                     <ul id="VehicleChoice" class="dropdown-menu" data-toggle="buttons">
                         <li><a ng-click="VehicleTypeSelect($event)">CAR</a></li>
@@ -23,11 +23,11 @@
                     </ul>
                 </li>
                 <li>
-                    <a class="dropdown-toggle text-center text-left-xs" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span class="glyphicon glyphicon-search"></span><span class="caret"></span>
-                        <br/>Search
-                    </a>
-                </li>
+                                <a href="" class="dropdown-toggle text-center" role="button" aria-haspopup="true" aria-expanded="false" onclick='window.open("./addCar.xhtml", "", "left=20%,top=20%,width=1025,height=500,toolbar=1,resizable=0")'>
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                    <br/>Add car
+                                </a>
+                            </li>
                 <li>
                     <a class="dropdown-toggle text-center text-left-xs" ><span class="glyphicon glyphicon-road"></span>
                         <br/><span>Link2</span>
@@ -43,25 +43,31 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a  class="dropdown-toggle text-center text-left-xs" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span><b class="caret"></b>
-                    <br/><span id="CountryLanguage">Country/Language</span>
+                    <br/><span id="CountryLanguage" ng-model="CountryLanguage">{{CountryLanguage}}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="dropdown dropdown-submenu"><a ng-click="CountrySelect($event)" href="#" class="dropdown-toggle" data-toggle="dropdown">Germany</a>
                             <ul class="dropdown-menu dropdown-left">
                                 <!-- open submenu on left-->
-                                <li><a>German</a></li>
-                                <li><a>English</a></li>
+                                <li><a ng-click="LanguageSelect($event)">German</a></li>
+                                <li><a ng-click="LanguageSelect($event)">English</a></li>
                             </ul>
                         </li>
                         <li class="divider"></li>
                         <li class="dropdown dropdown-submenu"><a ng-click="CountrySelect($event)" href="#" class="dropdown-toggle" data-toggle="dropdown">Romania</a>
                             <ul class="dropdown-menu dropdown-left">
                                 <!-- open submenu on left-->
-                                <li><a >Romanian</a></li>
-                                <li><a >English</a></li>
+                                <li><a ng-click="LanguageSelect($event)">Romanian</a></li>
+                                <li><a ng-click="LanguageSelect($event)">English</a></li>
                             </ul>
                         </li>
                     </ul>
+                </li>
+                <li class="dropdown">
+                    <a  class="dropdown-toggle text-center text-left-xs" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span>
+                    <br/><span >Logout</span>
+                    </a>
+                    
                 </li>
             </ul>
         </div>

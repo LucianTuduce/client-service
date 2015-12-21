@@ -19,6 +19,10 @@ angular.module('loginApp', [
             controller: 'HeaderController',
             templateUrl: 'index.xhtml'
         })
+        .when('/close', {
+            controller: 'AddCarController',
+            templateUrl: 'resources/js/windowclose.xhtml'
+        })
   
         .otherwise({ redirectTo: '/' });
 }]);
