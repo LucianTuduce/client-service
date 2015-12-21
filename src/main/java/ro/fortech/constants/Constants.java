@@ -16,9 +16,6 @@ public class Constants {
 	public static final String USER_CONFIRMED = "User confirmed";
 	public static final String INVALID_LOCATION_SEARCH_OR_VEHICLE_TYPE = "Invalid location search or vehicle type. They are not provided! Check again after you provided them!";
 	public static final String ALL_GOOD = "All good !";
-	public static final String SOMETHING_WENT_WRONG = "Something went wrong, list is null";
-	public static final String USER = "user0";
-	
-	
+	public static final String SOMETHING_WENT_WRONG = "Something went wrong, list is null";	
 	
 }

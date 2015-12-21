@@ -1,6 +1,8 @@
 package ro.fortech.beans;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Stateless;
 
@@ -10,13 +12,15 @@ import ro.fortech.model.Vehicle;
 @Stateless
 public class VehicleSerachResult {
 
-	private List<Vehicle> searchedVehicles;
+	private Map<String ,List<Vehicle>> searchedVehicles = new HashMap<String, List<Vehicle>>();
 
-	public List<Vehicle> getSearchedVehicles() {
+	public Map<String ,List<Vehicle>> getSearchedVehicles() {
 		return searchedVehicles;
 	}
 
-	public void setSearchedVehicles(List<Vehicle> searchedVehicles) {
+	public void setSearchedVehicles(Map<String ,List<Vehicle>> searchedVehicles) {
 		this.searchedVehicles = searchedVehicles;
-	}	
+	}
+
+	
 }

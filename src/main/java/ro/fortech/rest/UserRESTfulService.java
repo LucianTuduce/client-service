@@ -3,9 +3,11 @@ package ro.fortech.rest;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import ro.fortech.cache.HistorySearchCache;
@@ -30,6 +32,9 @@ public class UserRESTfulService {
 	
 	@EJB
 	private HistorySearchCache historySearchCache;
+	
+	@Context
+	private HttpServletResponse response;
 		
 	@PostConstruct
 	public void init() {
@@ -42,6 +47,7 @@ public class UserRESTfulService {
 	public Response confirmUser(LoginCredentials credentials){
 		String accountToken = searchResponseService.generateAndGetUserToken(credentials);
 		if(!accountValidation.isUserValid(accountToken)){
+			response.setHeader(Constants.AUTHORIZATION, accountToken);
 			return Response.status(Response.Status.UNAUTHORIZED).entity(Constants.Y_NO_HAVE_ACCOUNT).build();
 		}else{
 			return Response.status(Response.Status.OK).build();
@@ -51,8 +57,9 @@ public class UserRESTfulService {
 	@POST
 	@Path("/logout")
 	public Response invalidateUserSession(@HeaderParam("Authorization") String accountToken){
-		historySearchCache.getSearchHistory().remove(accountToken);
-		userCache.getUserConfirmation().remove(accountToken);			
+		String decodedAccountToken = searchResponseService.decodeUserToken(accountToken);
+		historySearchCache.getSearchHistory().remove(decodedAccountToken);
+		userCache.getUserConfirmation().remove(decodedAccountToken);			
 		return Response.status(Response.Status.OK).build();
 	}
 	
