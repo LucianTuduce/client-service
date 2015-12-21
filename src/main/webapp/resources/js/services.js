@@ -35,9 +35,9 @@ angular.module('UVSClientApp').factory('AuthenticationService', ['$http', '$root
 
 angular.module('UVSClientApp').factory('CarSearchService', ['$http', '$rootScope', '$timeout',
     function ($http, $rootScope, $timeout) {
-        var service = {};
+        var service = {};        
 
-        service.CarSearch = function (FINVar, modelVar, FuelTypeVar, CapacityMinVar, CapacityMaxVar, YearMinVar, YearMaxVar, PriceMinVar, PriceMaxVar, CountryVar, vehicleTypeVar, callback) {
+        service.CarSearch = function (FINVar, modelVar, FuelTypeVar, CapacityMinVar, CapacityMaxVar, YearMinVar, YearMaxVar, PriceMinVar, PriceMaxVar, CountryVar,VehicleTypeVar, callback) {
             if (FINVar == undefined || FINVar == '') {
                 FINVar = " ";
             }
@@ -65,6 +65,8 @@ angular.module('UVSClientApp').factory('CarSearchService', ['$http', '$rootScope
             if (PriceMaxVar == undefined || PriceMaxVar == '') {
                 PriceMaxVar = 0;
             }
+            
+            console.log(VehicleTypeVar);
 
             $http.post('http://localhost:9080/client-service/rest/vehicle/filtered', {
                 fin: FINVar,
@@ -78,7 +80,7 @@ angular.module('UVSClientApp').factory('CarSearchService', ['$http', '$rootScope
                 //location: Scopes.get('HeaderController').Country,
                 minPrice: PriceMinVar,
                 maxPrice: PriceMaxVar,
-                vehicleType: vehicleTypeVar,
+                vehicleType: VehicleTypeVar,
                 //vehicleType: Scopes.get('HeaderController').vehicleType,
                 pagination: {
                     pageNumber: 1,

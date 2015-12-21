@@ -54,7 +54,7 @@ public class VehicleCompleteBean implements Serializable {
 			return "fail";
 		}
 		
-		FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "IndexJSF.xhtml");
+		FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "resources/js/windowclose.xhtml");
 		return "success";
 
 	}
