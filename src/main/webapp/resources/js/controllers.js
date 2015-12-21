@@ -64,7 +64,7 @@ angular.module('UVSClientApp')
             AddCarService.AddCar($scope.FIN, $scope.OwnerName, $scope.DealerName, $scope.Country, $scope.VehicleType, $scope.Model, $scope.FabricationYear, $scope.Price, $scope.FuelType, $scope.Capacity, $scope.Weight, $scope.Height, $scope.Length, $scope.Suspension, $scope.TireCondition  , function (response, status, headers, config) {
                 if (status == 200) {
                     console.log("add car success");
-                    $location.path('/close');
+                    $location.path('/index');
                 } else {
                     console.log("add car error");
                 }
