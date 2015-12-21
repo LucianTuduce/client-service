@@ -15,9 +15,6 @@ import ro.fortech.search.VehicleSearchRequest;
 @Singleton
 public class HistorySearchCache implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Map<String, List<VehicleSearchRequest>> searchHistory = new HashMap<>();
 	
@@ -30,8 +27,7 @@ public class HistorySearchCache implements Serializable{
 		return searchHistory;
 	}
 
-	public void setSearchHistory(
-			Map<String, List<VehicleSearchRequest>> searchHistory) {
+	public void setSearchHistory(Map<String, List<VehicleSearchRequest>> searchHistory) {
 		this.searchHistory = searchHistory;
 	}
 
@@ -44,11 +40,11 @@ public class HistorySearchCache implements Serializable{
 		}else if(searchHistory.get(user).size() < DefaultValues.HISTORY_SIZE.getDefValue()){
 			searchHistory.get(user).add(0, searchRequest);
 		}else if (searchHistory.get(user).size() == DefaultValues.HISTORY_SIZE.getDefValue() ){
-			addToHistoryListToStart(searchRequest, user);
+			addToHistoryListStart(searchRequest, user);
 		}
 	}
 	
-	private void addToHistoryListToStart(VehicleSearchRequest searchRequest, String user){
+	private void addToHistoryListStart(VehicleSearchRequest searchRequest, String user){
 		searchHistory.get(user).add(0,searchRequest);
 		searchHistory.get(user).remove(searchHistory.get(user).size()-1);		
 	}

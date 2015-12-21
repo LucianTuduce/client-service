@@ -7,8 +7,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.Context;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -49,8 +47,6 @@ public class SearchResponseService {
 	@EJB(beanName = "vehicleSearchServiceImpl")
 	private VehicleSearchService searchService;
 	
-	@Context
-	private HttpServletResponse response;
 
 	@PostConstruct
 	public void init() {
@@ -116,11 +112,11 @@ public class SearchResponseService {
 		if (!isPresent) {
 			return Constants.Y_NO_HAVE_ACCOUNT;
 		}
-		response.setHeader(Constants.AUTHORIZATION, encodedCredentials);
+		
 		return encodedCredentials;
 	}
 	
-	private String decodeUserToken(String token){
+	public String decodeUserToken(String token){
 		byte[] decodedToken = Base64.decodeBase64(token);
 		String decodedTokenStringForm = new String(decodedToken);	
 		String[] splittedToken = decodedTokenStringForm.split("[\\s\\:]+");
@@ -164,6 +160,33 @@ public class SearchResponseService {
 		return searchResponse;
 	}
 
+	
+	/**
+	 * 
+	 * @param accountToken
+	 *            -
+	 * @param search
+	 * @return
+	 */
+	public VehicleSearchResponse getFilteredVehiclesBySearchCriteriaWithoutPagination(String accountToken, VehicleSearchRequest search) {
+		VehicleSearchResponse searchResponse = new VehicleSearchResponse();
+		List<Vehicle> vehicles = null;
+		if (search.getLocation().equals(Constants.DEFAULT_VALUE) || search.getVehicleType().getType().equals(Constants.DEFAULT_VALUE)) {
+			searchResponse.setErrorMessage(Constants.INVALID_LOCATION_SEARCH_OR_VEHICLE_TYPE);
+		} else {
+			vehicles = fakeService.getVehicles(search);
+			if (vehicles == null) {
+				searchResponse.setErrorMessage(Constants.SOMETHING_WENT_WRONG);
+			} else {
+				searchResponse.setErrorMessage(Constants.ALL_GOOD);
+				searchResponse.setVehicles(vehicles);
+			}
+		}
+		
+		initUserSearchCache(search, accountToken);
+		return searchResponse;
+	}
+	
 	private void initUserSearchCache(VehicleSearchRequest search, String accountToken) {
 		historySearchCache.addHistorySearch(decodeUserToken(accountToken), search);
 	}
@@ -179,8 +202,6 @@ public class SearchResponseService {
 			searchResponse.setErrorMessage(Constants.ALL_GOOD);
 			searchResponse.setVehicleEnhanceds(Arrays.asList(vehicle));
 		}
-		VehicleSearchRequest search = new VehicleSearchRequest();
-		search.setFin(fin);
 		return searchResponse;
 	}
 	
