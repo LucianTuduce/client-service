@@ -13,12 +13,12 @@ angular.module('loginApp', [
     $routeProvider
         .when('/', {
             controller: 'LoginController',
-            templateUrl: 'login.xhtml'
+            templateUrl: 'login.html'
         })
   
         .when('/index', {
             controller: 'HeaderController',
-            templateUrl: 'index.xhtml'
+            templateUrl: 'index.html'
         })
         .when('/close', {
             controller: 'AddCarController',
@@ -26,7 +26,7 @@ angular.module('loginApp', [
         })
     .when('/add', {
             controller: 'AddCarController',
-            templateUrl: 'addCar.xhtml'
+            templateUrl: 'addCar.html'
         })
   
         .otherwise({ redirectTo: '/' });

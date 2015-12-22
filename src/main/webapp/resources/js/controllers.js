@@ -121,17 +121,27 @@ angular.module('UVSClientApp')
 
 
 angular.module('UVSClientApp')
-    .controller('CarResultController', function ($scope, $rootScope) {
+    .controller('CarResultController',['$scope', '$rootScope', 'EnhancedVehicleService',  function ($scope, $rootScope, EnhancedVehicleService) {
         //load the search results once a new search is made
         $rootScope.$on("CarSearchMethod", function () { //Listen for trigger
             $scope.cars = $rootScope.carsRetrieved;
         });
     
-    $scope.CarInfo = function() {
+    $scope.CarInfo = function(FIN) {
+        EnhancedVehicleService.GetCarInfo(FIN, function (response, status, headers, config){
+             if (status == 200) {
+                    console.log("Car info success");
+                 console.log(response);
+                    //$scope.carsRetrieved = response.vehicles;
+                } else {
+                    console.log("Car info could not be retrieved");
+                }            
+        });
+        
         
     };
     
     
     
     
-    });
+    }]);

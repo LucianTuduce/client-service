@@ -174,6 +174,28 @@ angular.module('UVSClientApp').factory('SearchHistoryService', ['$http', '$rootS
         return service;
     }]);
 
+angular.module('UVSClientApp').factory('EnhancedVehicleService', ['$http', '$rootScope', '$timeout',
+    function ($http, $rootScope, $timeout) {
+        var service = {};
+
+        service.GetCarInfo = function (FINVar, callback) {
+            $http.get('http://localhost:9080/client-service/rest/vehicle/enhanced/'+FINVar)
+                .success(function (response, status, headers, config) {
+                callback(response, status, headers().authorization, config);                
+                //$rootScope.$emit("CarSearchMethod", {}); //trigger function on CarResultController
+
+            }).error(function (response, status, headers, config) {
+                callback(response, status, headers().authorization, config);
+            });
+            
+            
+            
+            
+           
+        };
+        return service;
+    }]);
+
 
 /* factory to connect controllers */
 angular.module('UVSClientApp').factory('Scopes', function ($rootScope) {

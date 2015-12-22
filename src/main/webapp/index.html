@@ -1,9 +1,9 @@
 <div>
-    <div ng-include="'header.xhtml'">
+    <div ng-include="'header.html'">
     </div>
     <div class="col-sm-5">
         <h3>Search</h3>
-        <div class="well" ng-include="'carsearch.xhtml'">
+        <div class="well" ng-include="'carsearch.html'">
         </div>
         <h3>Search history</h3>
         <div class="well table-responsive" ng-controller="SearchHistoryController">
@@ -29,7 +29,10 @@
         </div>
     </div>
     <div class="col-sm-7">
-        <div class="col-sm-12" ng-include="'addCar.xhtml'">
+        <div class="col-sm-12" ng-include="'addCar.html'">
+
+        </div>
+        <div class="col-sm-12" ng-include="'extraInfo.html'">
 
         </div>
         <div class="table-responsive col-sm-12" ng-controller="CarResultController">
