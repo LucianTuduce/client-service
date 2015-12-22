@@ -8,6 +8,10 @@ import javax.ejb.Singleton;
 
 import ro.fortech.model.User;
 
+/**
+ * Class used as a fake database, here all the users are stored.
+ *
+ */
 @Singleton
 public class UserCache {
 

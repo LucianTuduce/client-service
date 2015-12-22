@@ -1,5 +1,9 @@
 package ro.fortech.pagination;
 
+/**
+ * Class used to set the number of elements per page.
+ *
+ */
 public class Pagination {
 
 	private int pageNumber;

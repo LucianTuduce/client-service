@@ -21,6 +21,11 @@ import ro.fortech.services.VehicleService;
 import ro.fortech.validation.AccountValidationService;
 import ro.fortech.vehicle.enhance.VehicleEnhanced;
 
+/**
+ * REST service class used to establish connection between the WEB and the
+ * application login. This rest class is use for the vehicle part.
+ *
+ */
 @Path("/vehicle")
 @Stateless
 public class VehicleRESTfulService {
@@ -42,6 +47,17 @@ public class VehicleRESTfulService {
 		System.out.println("VehicleRESTfulService: Stateless");
 	}
 	
+	/**
+	 * Method used to get from the backed the filtered vehicles based on a
+	 * search criteria and send them to the front-end.
+	 * 
+	 * @param accountToken
+	 *            - the token of the account that is making the search
+	 * @param search
+	 *            - the search criteria that the vehicles will be filtered
+	 * @return - status 200 if the account is ok and all went good or 401 if the
+	 *         account is not valid
+	 */
 	@POST
 	@Path("/filtered")
 	@Produces("application/json")
@@ -53,7 +69,15 @@ public class VehicleRESTfulService {
 			return Response.status(Response.Status.UNAUTHORIZED).build();
 		}
 	}
-		
+	
+	/**
+	 * Method used to get from the back-end the search history for every user
+	 * based on the user token and sent it to the front-end.
+	 * 
+	 * @param accountToken
+	 *            - the user token used to get the search history
+	 * @return - the search history of an specific user
+	 */
 	@GET
 	@Path("/search/history")
 	@Produces("application/json")
@@ -66,6 +90,14 @@ public class VehicleRESTfulService {
 		}
 	}
 
+	/**
+	 * Method used to get from the back-end the user saved search history and
+	 * send it to the front-end.
+	 * 
+	 * @param accountToken
+	 *            - the token used to identify the each user
+	 * @return - the user search saved history that is identified by the token
+	 */
 	@GET
 	@Path("/search/history/saved")
 	@Produces("application/json")
@@ -78,6 +110,19 @@ public class VehicleRESTfulService {
 		}
 	}
 
+	/**
+	 * Method used to save the user search request.
+	 * 
+	 * @param accountToken
+	 *            - the token used to identify a user in order to get access to
+	 *            the application
+	 * @param saveName
+	 *            - the name of the saved search request
+	 * @param search
+	 *            - the search request that will be saved in the database
+	 * @return - 200 if it was saved successfully or 401 if the user is
+	 *         unauthorized.
+	 */
 	@POST
 	@Path("/search/history/save/{saveName}")
 	@Produces("application/json")
@@ -90,6 +135,18 @@ public class VehicleRESTfulService {
 		}
 	}
 
+	/**
+	 * Method used to get from the backed the extra information about a a
+	 * vehicle based on its fin.
+	 * 
+	 * @param fin
+	 *            - the id that will identify a car
+	 * @param accountToken
+	 *            - the token of the user that is making the request to the
+	 *            server
+	 * @return - 200 and the vehicle if the user is authorized or 401 if the
+	 *         user is unauthorized
+	 */
 	@GET
 	@Path("/enhanced/{fin}")
 	@Produces("application/json")
@@ -102,6 +159,17 @@ public class VehicleRESTfulService {
 		}
 	}
 	
+	/**
+	 * method used to get from the front end a new vehicle information and save
+	 * it in the database
+	 * 
+	 * @param accountToken
+	 *            - the token of the user that will be making the request to the
+	 *            server
+	 * @param vehicle
+	 *            - the vehicle that will be added in the system
+	 * @return 200 if all went ok or 401 if the user is unauthorized
+	 */
 	@POST
 	@Path("/add")
 	@Consumes("application/json")

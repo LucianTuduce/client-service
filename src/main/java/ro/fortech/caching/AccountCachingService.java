@@ -7,6 +7,10 @@ import javax.ejb.Stateless;
 import ro.fortech.cache.UserCache;
 import ro.fortech.model.User;
 
+/**
+ * Class used to initiate the user cache.
+ *
+ */
 @Stateless
 public class AccountCachingService {
 	

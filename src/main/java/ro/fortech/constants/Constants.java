@@ -1,5 +1,9 @@
 package ro.fortech.constants;
 
+/**
+ * Class used to define the constants that our application uses.
+ *
+ */
 public class Constants {
 
 	public static final String VEHICLE_FILTER_CRITERIA = "{ \"location\": \"Germany\",\n" + "\"vehicleType\": \"VAN\","+ 

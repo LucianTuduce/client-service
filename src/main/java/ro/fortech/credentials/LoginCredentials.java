@@ -1,5 +1,9 @@
 package ro.fortech.credentials;
 
+/**
+ * User credentials used for login
+ *
+ */
 public class LoginCredentials {
 
 	private String username;

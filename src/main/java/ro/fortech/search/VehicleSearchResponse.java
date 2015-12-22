@@ -4,6 +4,10 @@ import java.util.List;
 
 import ro.fortech.model.Vehicle;
 
+/**
+ * Class used to save the response of the REST service request to the application. 
+ *
+ */
 public class VehicleSearchResponse {
 
 	private int vehicleCount;
