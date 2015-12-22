@@ -12,6 +12,10 @@ import ro.fortech.model.Vehicle;
 import ro.fortech.type.FuelType;
 import ro.fortech.type.VehicleType;
 
+/**
+ * Class used to initiate the vehicle cache server. 
+ *
+ */
 @Stateless
 public class VehicleCachingService {
 	

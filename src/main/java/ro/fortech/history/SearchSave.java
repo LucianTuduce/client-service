@@ -2,6 +2,10 @@ package ro.fortech.history;
 
 import ro.fortech.search.VehicleSearchRequest;
 
+/**
+ * Class used as model for the vehicle search save
+ *
+ */
 public class SearchSave {
 
 	private String name;

@@ -12,6 +12,11 @@ import javax.ejb.Singleton;
 import ro.fortech.def.value.DefaultValues;
 import ro.fortech.search.VehicleSearchRequest;
 
+/**
+ * Class used as a fake database, here all the users search requests are
+ * stored
+ *
+ */
 @Singleton
 public class HistorySearchCache implements Serializable{
 	

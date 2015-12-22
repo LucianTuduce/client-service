@@ -8,6 +8,10 @@ import javax.ejb.Singleton;
 import ro.fortech.model.Vehicle;
 import ro.fortech.vehicle.enhance.VehicleEnhanced;
 
+/**
+ * Class used as a fake database, here all the vehicles are stored.
+ *
+ */
 @Singleton
 public class VehicleCache {
 

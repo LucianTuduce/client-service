@@ -10,6 +10,11 @@ import javax.ejb.Singleton;
 
 import ro.fortech.history.SearchSave;
 
+/**
+ * Class used as a fake database, here all the users saved search requests are
+ * stored
+ *
+ */
 @Singleton
 public class SavedSearchCache implements Serializable {
 	

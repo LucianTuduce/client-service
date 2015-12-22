@@ -41,6 +41,7 @@ public class VehicleBean implements Serializable {
 	@EJB
 	private SearchResponseService serachResponseService;
 	
+	
 	private List<VehicleSearchRequest> searchHistory;
 	private List<Vehicle> searchedVehicles;
 	private List<VehicleEnhanced> vehicleEnhanceds;
@@ -71,7 +72,7 @@ public class VehicleBean implements Serializable {
 		return enhancedVehicleBean.searchForEnhancedVehicle(vehicle);
 	}
 
-	public List<VehicleSearchRequest> getSearchHistory() {
+	public List<VehicleSearchRequest> getSearchHistory() throws IOException {
 		httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		String accountToken = (String) httpSession.getAttribute(Constants.AUTHORIZATION);
 		this.searchHistory = serachResponseService.getUserSearchHistory(accountToken);

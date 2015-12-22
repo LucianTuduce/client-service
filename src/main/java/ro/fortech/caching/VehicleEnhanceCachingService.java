@@ -14,6 +14,11 @@ import ro.fortech.type.SuspensionType;
 import ro.fortech.type.TireCondition;
 import ro.fortech.vehicle.enhance.VehicleEnhanced;
 
+/**
+ * Class used to initiate the vehicle enhanced cache service. here all the extra
+ * information about a car is provided to the application.
+ *
+ */
 @Stateless
 public class VehicleEnhanceCachingService {
 

@@ -7,7 +7,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
 
 import ro.fortech.cache.HistorySearchCache;
@@ -50,7 +49,6 @@ public class UserBean {
 	 *         good or will keep the user on the same page if the account is
 	 *         invalid
 	 * @throws IOException 
-	 * @throws ServletException 
 	 */
 	public String login(String username, String password) throws IOException{
 		System.out.println(username);

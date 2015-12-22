@@ -8,7 +8,10 @@ import javax.ejb.Stateless;
 
 import ro.fortech.model.Vehicle;
 
-
+/**
+ * Class used to hold the filtered vehicles for the JSF part of the application. 
+ *
+ */
 @Stateless
 public class VehicleSearchResult {
 
