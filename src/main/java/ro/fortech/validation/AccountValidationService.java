@@ -6,6 +6,11 @@ import javax.ejb.Stateless;
 
 import ro.fortech.cache.UserCache;
 
+/**
+ * Class used in oder to check if a user has confirmed his account. That is if
+ * the user has logged at least once.
+ *
+ */
 @Stateless
 public class AccountValidationService {
 
@@ -18,15 +23,12 @@ public class AccountValidationService {
 	}
 	
 	/**
-	 * Method used to check if an user is present in the system, and if he is
-	 * then his search history will be displayed, search history which is
-	 * present on each users session.
+	 * Method used to check if a user is present in the system. In order to
+	 * check if the user is present his token is used.
 	 * 
 	 * @param accountToken
-	 *            - the unique token generated for every account that an user
-	 *            will be identified
-	 * @return - the user search history list if account is present or an
-	 *         unauthorized attempt
+	 *            - the token used in order to identify the user
+	 * @return - true if the user id present or false if not
 	 */
 	public boolean isUserValid(String accountToken) {
 		if (!userCache.isUserActive(accountToken)) {

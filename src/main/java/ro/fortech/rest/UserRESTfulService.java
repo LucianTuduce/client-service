@@ -17,6 +17,10 @@ import ro.fortech.credentials.LoginCredentials;
 import ro.fortech.search.response.SearchResponseService;
 import ro.fortech.validation.AccountValidationService;
 
+/**
+ * Rest class used to identify the users that are using the aplication
+ *
+ */
 @Path("/user")
 @Stateless
 public class UserRESTfulService {
@@ -40,14 +44,21 @@ public class UserRESTfulService {
 	public void init() {
 		System.out.println("UserRESTfulService: Stateless");
 	}
-	
-	
+
+	/**
+	 * Method used in order to authenticate the user based on his credentials.
+	 * 
+	 * @param credentials
+	 *            - the users username and password that will be checked in
+	 *            order to see if the user account is valid.
+	 * @return - a response to the client that will tell it if the user is valid
+	 *         or not
+	 */
 	@POST
 	@Path("/login")
 	public Response confirmUser(LoginCredentials credentials){
 		String accountToken = searchResponseService.generateAndGetUserToken(credentials);
 		if(!accountValidation.isUserValid(accountToken)){
-			
 			return Response.status(Response.Status.UNAUTHORIZED).entity(Constants.Y_NO_HAVE_ACCOUNT).build();
 		}else{
 			response.setHeader(Constants.AUTHORIZATION, accountToken);
@@ -55,6 +66,13 @@ public class UserRESTfulService {
 		}
 	}
 	
+	/**
+	 * Method used to logout the user from the application.
+	 * 
+	 * @param accountToken
+	 *            - the user unique token that is used in order to identify him
+	 * @return - success status 200 that the user has logout from the server
+	 */
 	@POST
 	@Path("/logout")
 	public Response invalidateUserSession(@HeaderParam("Authorization") String accountToken){
@@ -63,5 +81,4 @@ public class UserRESTfulService {
 		userCache.getUserConfirmation().remove(decodedAccountToken);			
 		return Response.status(Response.Status.OK).build();
 	}
-	
 }

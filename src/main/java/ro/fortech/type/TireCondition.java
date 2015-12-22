@@ -1,5 +1,10 @@
 package ro.fortech.type;
 
+/**
+ * Enumeration used to show the types of tyre usage that are present in the
+ * application.
+ *
+ */
 public enum TireCondition {
 	USED("used"), NEW("new"), SLIGHTY_USED("slighty used");
 	

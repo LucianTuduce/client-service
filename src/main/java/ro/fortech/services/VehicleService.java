@@ -6,6 +6,10 @@ import ro.fortech.model.Vehicle;
 import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.vehicle.enhance.VehicleEnhanced;
 
+/**
+ * Used to perform CRUD operation on a vehicle type object.
+ *
+ */
 public interface VehicleService {
 
 	/**
@@ -59,7 +63,13 @@ public interface VehicleService {
 	 * @return - the list containing the vehicles that were generated
 	 */
 	List<Vehicle> getVehicles(VehicleSearchRequest request);
-	
+
+	/**
+	 * Method used to save extra information about a vehicle in the DB
+	 * 
+	 * @param vehicleEnhanced
+	 *            - the vehicle containing the vehicle and his extra information
+	 */
 	void saveVehicleEnhanced(VehicleEnhanced vehicleEnhanced);
 
 }

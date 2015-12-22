@@ -34,6 +34,14 @@ public class SearchRequestService implements Serializable {
 	private int searchMinPrice;
 	private String searchVehicleType;
 
+	/**
+	 * Method used to create the search criteria that will be used in order to
+	 * filter the vehicles in the JSF part of the application. The criteria is
+	 * build with the help of the class variables. These values are obtain from
+	 * the .xhtml page.
+	 * 
+	 * @return - the search criteria used for filtering the vehicles
+	 */
 	public VehicleSearchRequest createSearchVechicle() {
 
 		VehicleSearchRequest searchRequest = new VehicleSearchRequest();

@@ -16,6 +16,10 @@ import ro.fortech.services.VehicleSearchService;
 import ro.fortech.services.VehicleService;
 import ro.fortech.vehicle.enhance.VehicleEnhanced;
 
+/**
+ * Class used in order to filter the vehicles based on a search criteria.
+ *
+ */
 @Stateless(name = "vehicleSearchServiceImpl")
 public class FakeSearcher implements VehicleSearchService {
 
