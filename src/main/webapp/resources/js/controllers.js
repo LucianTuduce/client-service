@@ -132,16 +132,22 @@ angular.module('UVSClientApp')
              if (status == 200) {
                     console.log("Car info success");
                  console.log(response);
-                    //$scope.carsRetrieved = response.vehicles;
+                $scope.VehicleInfo = response.vehicleEnhanceds;
+                 $rootScope.$emit("CarExtraInfo", {}); //trigger function on CarResultController
                 } else {
                     console.log("Car info could not be retrieved");
                 }            
         });
-        
-        
-    };
-    
-    
-    
-    
+    };   
+    }]);
+
+
+
+
+angular.module('UVSClientApp')
+    .controller('CarExtraInfoController',['$scope', '$rootScope', 'Scopes', 'EnhancedVehicleService',  function ($scope, $rootScope, Scopes, EnhancedVehicleService) {
+        //load the search results once a new search is made
+        $rootScope.$on("CarExtraInfo", function () { //Listen for trigger
+            $scope.CarExtraInfo = Scopes.get('CarResultController').VehicleInfo; //get car extra info
+        });
     }]);
