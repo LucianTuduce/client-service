@@ -9,6 +9,10 @@ import javax.faces.validator.ValidatorException;
 
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * 
+ *
+ */
 @FacesValidator("notNullValidator")
 public class NotNullValidator implements Validator {
 

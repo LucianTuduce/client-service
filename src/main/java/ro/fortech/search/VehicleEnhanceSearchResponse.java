@@ -4,6 +4,10 @@ import java.util.List;
 
 import ro.fortech.vehicle.enhance.VehicleEnhanced;
 
+/**
+ * Class used to save the enhance vehicle search response obtained from the search request.
+ *
+ */
 public class VehicleEnhanceSearchResponse {
 
 	private int vehicleEnhancedCount;

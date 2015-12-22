@@ -9,11 +9,14 @@ import javax.faces.validator.ValidatorException;
 
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * 
+ *
+ */
 @FacesValidator("notNumberValidator")
 public class NotNumberValidator implements Validator{
 
-	public void validate(FacesContext context, UIComponent component,
-			Object value) throws ValidatorException {
+	public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 
 		String valueToBeChecked = String.valueOf(value);
 		
@@ -27,11 +30,8 @@ public class NotNumberValidator implements Validator{
 			valid = false;
 		}
 		
-		
 		if (!valid) {
-			FacesMessage message = new FacesMessage(
-					FacesMessage.SEVERITY_ERROR, "The field must be a number",
-					"The field must be a number");
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "The field must be a number", "The field must be a number");
 			throw new ValidatorException(message);
 		}
 	}
