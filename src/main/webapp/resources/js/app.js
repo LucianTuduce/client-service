@@ -1,7 +1,8 @@
-'use strict';
+//'use strict';
  
 // declare modules
 angular.module('UVSClientApp', []);
+
  
 angular.module('loginApp', [
     'UVSClientApp', 'ngRoute'
@@ -22,6 +23,10 @@ angular.module('loginApp', [
         .when('/close', {
             controller: 'AddCarController',
             templateUrl: 'resources/js/windowclose.xhtml'
+        })
+    .when('/add', {
+            controller: 'AddCarController',
+            templateUrl: 'addCar.xhtml'
         })
   
         .otherwise({ redirectTo: '/' });
