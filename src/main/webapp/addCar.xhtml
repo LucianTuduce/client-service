@@ -1,8 +1,8 @@
+<div ng-controller="AddCarController">
 
-
-    <div ng-controller="AddCarController">
-
-        <form ng-submit="addCar()">
+    <form ng-show="AddCarVar===1" ng-submit="addCar()">
+        
+            <h3>Add Car</h3>
             <!--First column-->
             <div class="col-sm-6 form-horizontal">
                 <div class="form-group">
@@ -141,21 +141,13 @@
                     </div>
                 </div>
             </div>
-<div class="col-sm-6 col-md-6 col-lg-6 form-horizontal">
-    <button type="submit" class="btn btn-primary"> Add Car</button>
-    <a class="btn btn-primary" href="#index" >Close</a>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <button type="submit" class="btn btn-primary"> Add Car</button>
+                <a class="btn btn-primary" ng-click="AddCarVar=0">Close</a>
+
+            </div>
+        
+
+    </form>
 
 </div>
-
-            
-        </form>
-
-       <!-- <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-        <script type="text/javascript" src="resources/js/app.js"></script>
-<script type="text/javascript" src="resources/js/controllers.js"></script>
-        <script type="text/javascript" src="resources/js/services.js"></script> -->
-    </div>
-
-  

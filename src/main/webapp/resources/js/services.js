@@ -48,8 +48,8 @@ angular.module('UVSClientApp').factory('AuthenticationService', ['$http', '$root
 
 
 
-angular.module('UVSClientApp').factory('AddCarService', ['$http', '$rootScope', '$timeout', 'AuthenticationService',
-    function ($http, $rootScope, $timeout, AuthenticationService) {
+angular.module('UVSClientApp').factory('AddCarService', ['$http', '$rootScope', '$timeout', 
+    function ($http, $rootScope, $timeout) {
         var service = {};
 
         service.AddCar = function (FIN, OwnerName, DealerName, Country, VehicleType, Model, FabricationYear, Price, FuelType, Capacity, Weight, Height, Length, Suspension, TireCondition, callback) {

@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
  
 // declare modules
 angular.module('UVSClientApp', []);
