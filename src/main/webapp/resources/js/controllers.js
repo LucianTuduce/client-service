@@ -3,7 +3,7 @@ angular.module('UVSClientApp')
     function ($scope, $rootScope, $location, AuthenticationService) {
             // reset login status
             AuthenticationService.ClearCredentials();
-        console.log("credentials reset");
+            console.log("credentials reset");
 
             $scope.login = function () {
                 //$scope.dataLoading = true;
@@ -23,7 +23,7 @@ angular.module('UVSClientApp')
 
 
 angular.module('UVSClientApp')
-    .controller('HeaderController', ['$scope',  '$rootScope', 'Scopes', 'CarSearchService', 'AuthenticationService', '$location', function ($scope,  $rootScope, Scopes, CarSearchService, AuthenticationService, $location) {
+    .controller('HeaderController', ['$scope', '$rootScope', 'Scopes', 'CarSearchService', 'AuthenticationService', '$location', function ($scope, $rootScope, Scopes, CarSearchService, AuthenticationService, $location) {
         Scopes.store('HeaderController', $scope);
         $scope.VehicleType = "Vehicle Type";
         $scope.CountryLanguage = "Country/Language"
@@ -42,9 +42,9 @@ angular.module('UVSClientApp')
         $scope.LanguageSelect = function (event) {
             $scope.CountryLanguage += "/" + event.target.text; //keep the country, add the language          
         };
-        
-        $scope.ShowAddCar = function() {
-            $rootScope.$emit("ShowAddCar", {});  
+
+        $scope.ShowAddCar = function () {
+            $rootScope.$emit("ShowAddCar", {});
         };
 
         $scope.logout = function () {
@@ -67,15 +67,15 @@ angular.module('UVSClientApp')
         $rootScope.$on("ShowAddCar", function () { //Listen for trigger
             $scope.AddCarVar = 1;
         });
-        
-        
+
+
         $scope.addCar = function () {
             //$scope.dataLoading = true;
-            AddCarService.AddCar($scope.FIN, $scope.OwnerName, $scope.DealerName, $scope.Country, $scope.VehicleType, $scope.Model, $scope.FabricationYear, $scope.Price, $scope.FuelType, $scope.Capacity, $scope.Weight, $scope.Height, $scope.Length, $scope.Suspension, $scope.TireCondition  , function (response, status, headers, config) {
+            AddCarService.AddCar($scope.FIN, $scope.OwnerName, $scope.DealerName, $scope.Country, $scope.VehicleType, $scope.Model, $scope.FabricationYear, $scope.Price, $scope.FuelType, $scope.Capacity, $scope.Weight, $scope.Height, $scope.Length, $scope.Suspension, $scope.TireCondition, function (response, status, headers, config) {
                 if (status == 200) {
                     console.log("add car success");
-                    $scope.AddCarVar=0;
-                    
+                    $scope.AddCarVar = 0;
+
                 } else {
                     console.log("add car error");
                 }
@@ -121,33 +121,52 @@ angular.module('UVSClientApp')
 
 
 angular.module('UVSClientApp')
-    .controller('CarResultController',['$scope', '$rootScope', 'EnhancedVehicleService',  function ($scope, $rootScope, EnhancedVehicleService) {
+    .controller('CarResultController', ['$scope', 'Scopes', '$rootScope', 'EnhancedVehicleService', function ($scope, Scopes, $rootScope, EnhancedVehicleService) {
         //load the search results once a new search is made
+        Scopes.store('CarResultController', $scope);
         $rootScope.$on("CarSearchMethod", function () { //Listen for trigger
             $scope.cars = $rootScope.carsRetrieved;
         });
-    
-    $scope.CarInfo = function(FIN) {
-        EnhancedVehicleService.GetCarInfo(FIN, function (response, status, headers, config){
-             if (status == 200) {
+
+        $scope.CarInfo = function (FIN) {
+            EnhancedVehicleService.GetCarInfo(FIN, function (response, status, headers, config) {
+                if (status == 200) {
                     console.log("Car info success");
-                 console.log(response);
-                $scope.VehicleInfo = response.vehicleEnhanceds;
-                 $rootScope.$emit("CarExtraInfo", {}); //trigger function on CarResultController
+                    console.log(response.vehicleEnhanceds);
+                    $scope.VehicleInfo = response.vehicleEnhanceds;
+                    $rootScope.$emit("CarExtraInfo", {}); //trigger function on CarResultController
                 } else {
                     console.log("Car info could not be retrieved");
-                }            
-        });
-    };   
+                }
+            });
+        };
     }]);
 
 
 
 
 angular.module('UVSClientApp')
-    .controller('CarExtraInfoController',['$scope', '$rootScope', 'Scopes', 'EnhancedVehicleService',  function ($scope, $rootScope, Scopes, EnhancedVehicleService) {
+    .controller('CarExtraInfoController', ['$scope', '$rootScope', 'Scopes', 'EnhancedVehicleService', function ($scope, $rootScope, Scopes, EnhancedVehicleService) {
         //load the search results once a new search is made
         $rootScope.$on("CarExtraInfo", function () { //Listen for trigger
             $scope.CarExtraInfo = Scopes.get('CarResultController').VehicleInfo; //get car extra info
+            $scope.CarStandardInfo = $scope.CarExtraInfo[0].vehicle;
+            console.log($scope.CarExtraInfo);
+            console.log($scope.CarStandardInfo);
+            $scope.fin = $scope.CarExtraInfo[0].vehicle.fin;
+            $scope.owner = $scope.CarExtraInfo[0].owner;
+            $scope.dealer = $scope.CarExtraInfo[0].dealer;
+            $scope.vehicleType = $scope.CarExtraInfo[0].vehicle.vehicleType;
+            $scope.model = $scope.CarExtraInfo[0].vehicle.model;
+            $scope.bodyWeight = $scope.CarExtraInfo[0].bodyWeight;
+            $scope.bodyHeight = $scope.CarExtraInfo[0].bodyHeight;
+            $scope.bodyLenght = $scope.CarExtraInfo[0].bodyLenght;
+            $scope.suspensionType = $scope.CarExtraInfo[0].suspensionType;
+            $scope.tireCondition = $scope.CarExtraInfo[0].tireCondition;
+            $scope.fuelType = $scope.CarExtraInfo[0].vehicle.fuelType;
+            $scope.engineCapacity = $scope.CarExtraInfo[0].vehicle.engineCapacity;
+            $scope.year = $scope.CarExtraInfo[0].vehicle.year;
+            $scope.location = $scope.CarExtraInfo[0].vehicle.location;
+            $scope.price = $scope.CarExtraInfo[0].vehicle.price;
         });
     }]);
