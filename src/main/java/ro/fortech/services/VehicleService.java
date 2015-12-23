@@ -67,9 +67,10 @@ public interface VehicleService {
 	/**
 	 * Method used to save extra information about a vehicle in the DB
 	 * 
-	 * @param vehicleEnhanced
+	 * @param vehicle
 	 *            - the vehicle containing the vehicle and his extra information
 	 */
-	void saveVehicleEnhanced(VehicleEnhanced vehicleEnhanced);
+	
+	void saveVehicleEnhanced(VehicleEnhanced vehicle);
 
 }

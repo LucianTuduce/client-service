@@ -183,4 +183,5 @@ public class VehicleRESTfulService {
 			return Response.status(Response.Status.UNAUTHORIZED).build();
 		}
 	}
+		
 }

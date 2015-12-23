@@ -31,7 +31,7 @@ public class VehicleCachingService {
 		Vehicle vehicle = null;
 		List<Vehicle> vehicles = new ArrayList<>();
 
-		for (int i = 0; i <= 1000; i++) {
+		for (int i = 0; i <= 10; i++) {
 			vehicle = new Vehicle();
 			vehicle.setFin("GR3847UC32" + i);
 			vehicle.setModel("Volskwagen Passat");

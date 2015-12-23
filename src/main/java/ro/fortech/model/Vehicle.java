@@ -1,5 +1,8 @@
 package ro.fortech.model;
 
+import javax.validation.constraints.NotNull;
+
+import ro.fortech.constraints.ConstraintUnicity;
 import ro.fortech.type.FuelType;
 import ro.fortech.type.VehicleType;
 
@@ -9,7 +12,10 @@ import ro.fortech.type.VehicleType;
  */
 public class Vehicle {
 
+	@NotNull
+	@ConstraintUnicity
 	private String fin;
+	
 	private String model;
 	private FuelType fuelType;
 	private int engineCapacity;
@@ -22,6 +28,8 @@ public class Vehicle {
 	public String getFin() {
 		return fin;
 	}
+	@NotNull
+	@ConstraintUnicity
 	public void setFin(String fin) {
 		this.fin = fin;
 	}
