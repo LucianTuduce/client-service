@@ -169,23 +169,29 @@ public class VehicleRESTfulService {
 	 *            server
 	 * @param vehicle
 	 *            - the vehicle that will be added in the system
-	 * @return 200 if all went ok or 401 if the user is unauthorized or 406 if the information are null or not ok
+	 * @return 200 if all went ok or 401 if the user is unauthorized or 406 if the information are null or not OK or 412 for FIN not unique
 	 */
 	@POST
 	@Path("/add")
 	@Consumes("application/json")
 	public Response addVehicle(@HeaderParam("Authorization") String accountToken, VehicleEnhanced vehicle){
 		Boolean validationVehicle = SaveVehicleValidation.validationForSaveVehicle(vehicle);
+		Boolean validationFIN = SaveVehicleValidation.validationFINSaveVehicle(vehicle.getVehicle().getFin());
 		if(accountValidation.isUserValid(accountToken)){
-			if(validationVehicle){
-				fakeService.saveVehicleEnhanced(vehicle);
-				fakeService.saveVehicle(vehicle.getVehicle());
-				response.setHeader(Constants.AUTHORIZATION, accountToken);
-				return Response.status(Response.Status.OK).build();
+			if(validationFIN){
+				if(validationVehicle){
+					fakeService.saveVehicleEnhanced(vehicle);
+					fakeService.saveVehicle(vehicle.getVehicle());
+					response.setHeader(Constants.AUTHORIZATION, accountToken);
+					return Response.status(Response.Status.OK).build();
+				}
+				else{
+					return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+				}
+			}else{
+				return Response.status(Response.Status.PRECONDITION_FAILED).build();
 			}
-			else{
-				return Response.status(Response.Status.NOT_ACCEPTABLE).build();
-			}
+			
 			
 		}else {
 			return Response.status(Response.Status.UNAUTHORIZED).build();

@@ -1,5 +1,8 @@
 package ro.fortech.validation;
 
+import ro.fortech.cache.VehicleCache;
+import javax.ejb.EJB;
+
 import org.apache.commons.lang3.StringUtils;
 
 import ro.fortech.model.Vehicle;
@@ -7,6 +10,8 @@ import ro.fortech.vehicle.enhance.VehicleEnhanced;
 
 public class SaveVehicleValidation {
 
+	@EJB
+	private static VehicleCache cache;
 	
 	public static boolean validationForSaveVehicle(VehicleEnhanced vehicleReceived){
 		
@@ -60,4 +65,18 @@ public class SaveVehicleValidation {
 		
 		return validation;
 	}
+	
+	public static boolean validationFINSaveVehicle(String value){
+		
+		Boolean unicity =  true;
+		
+		for(Vehicle vehicle: cache.getVehicles()){
+			if(vehicle.getFin().equals(value)){
+				unicity = false;
+			}
+		}
+		
+		return unicity;
+	}
+	
 }
