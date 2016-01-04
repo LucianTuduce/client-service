@@ -5,7 +5,6 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>FirstProject</display-name>
 	<welcome-file-list>
-		<welcome-file>loginJSF.xhtml</welcome-file>
 		<welcome-file>home.html</welcome-file>
 	</welcome-file-list>
 	<context-param>
