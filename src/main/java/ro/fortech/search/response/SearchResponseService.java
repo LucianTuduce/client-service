@@ -67,8 +67,23 @@ public class SearchResponseService {
 	 *            - the token used to identify the user.
 	 * @return - the search history list of a user
 	 */
-	public List<VehicleSearchRequest> getUserSearchHistory(String accountToken) {
-		return historySearchCache.getSearchHistory().get(decodeUserToken(accountToken));
+	public List<String> getUserSearchHistory(String accountToken) {
+		List<VehicleSearchRequest> searchHistory = historySearchCache.getSearchHistory().get(decodeUserToken(accountToken));
+		List<String> userSearchHistory = new ArrayList<String>();
+		String search = null;
+		
+		if(searchHistory == null){
+			return userSearchHistory;
+		}
+		for(VehicleSearchRequest request: searchHistory){
+			search = "FIN: "+request.getFin() + ", Location: " + request.getLocation() + ", Model: "
+					+ request.getModel() + ", Min_Capacity: " + request.getMinCapacity()
+					+ ", Max_Capacity: " + request.getMaxCapacity() + ", Min_Year: "
+					+ request.getMinYear() + ", Max_Year: " + request.getMaxYear() + ", Min_Price: "
+					+ request.getMinPrice() + ", Max_Price: " + request.getMaxPrice();
+			userSearchHistory.add(search);
+		}
+		return userSearchHistory;
 	}
 
 	/**

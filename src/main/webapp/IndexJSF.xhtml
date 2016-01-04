@@ -162,17 +162,9 @@
             <div class="well">
                 <h:dataTable value="#{vehicleBean.searchHistory}" var="history" class="table table-striped">
                     <h:column>
-                        <f:facet name="header">FIN</f:facet>
-                        <h:outputText value="#{history.fin}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Model</f:facet>
-                        <h:outputText value="#{history.model}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Location</f:facet>
-                        <h:outputText value="#{history.location}" />
-                    </h:column>
+                        <f:facet name="header">Search data</f:facet>
+                        <h:outputText value="#{history}" />
+                    </h:column>          
                 </h:dataTable>
             </div>
         </div>
