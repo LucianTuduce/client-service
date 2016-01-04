@@ -62,6 +62,7 @@ public class UserBean {
 	public String login(String username, String password) throws IOException{
 		System.out.println(username);
 		System.out.println(password);
+		clearFileds();
 		LoginCredentials credentials = new LoginCredentials();
 		credentials.setUsername(username);
 		credentials.setPassword(password);
