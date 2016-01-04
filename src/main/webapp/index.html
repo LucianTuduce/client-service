@@ -1,7 +1,7 @@
 <div>
     <div ng-include="'header.html'">
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-4">
         <h3>Search</h3>
         <div class="well" ng-include="'carsearch.html'">
         </div>
@@ -28,17 +28,16 @@
             </table>
         </div>
     </div>
-    <div class="col-sm-7">
+    <div class="col-sm-8">
         <div class="col-sm-12" ng-include="'addCar.html'">
-
-        </div>
-
-        <div class="col-sm-12" ng-include="'extraInfo.html'">
-
         </div>
 
         <div class="table-responsive col-sm-12" ng-controller="CarResultController">
             <h3>Search results</h3>
+            <div>
+                <div class="col-sm-12" ng-include="'extraInfo.html'">
+                </div>
+            </div>
             <table class="table">
                 <thead>
                     <th></th>
@@ -50,10 +49,11 @@
                     <th>Year</th>
                     <th>Location(Country)</th>
                     <th>Price</th>
+                    <th></th>
 
                 </thead>
                 <tbody>
-                    <tr data-ng-repeat="car in cars">
+                    <tr data-ng-repeat-start="car in cars">
                         <td> <a href="" class="btn btn-info" ng-click="CarInfo(car.fin)">Details</a></td>
                         <td>{{car.fin}}</td>
                         <td>{{car.vehicleType}}</td>
@@ -63,7 +63,12 @@
                         <td>{{car.year}}</td>
                         <td>{{car.location}}</td>
                         <td>{{car.price}}</td>
+
                     </tr>
+                    <tr data-ng-repeat-end>
+
+                    </tr>
+
                 </tbody>
             </table>
         </div>

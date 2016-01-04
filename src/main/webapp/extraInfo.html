@@ -1,48 +1,50 @@
+<div ng-controller="CarExtraInfoController">
+    <div ng-show="ExtraInfo===fin" class="">
 
-	<div ng-controller="CarExtraInfoController">
-        <!--<div ng-show="ExtraInfo===1"> -->
-            <div>
+        <strong><div class="col-md-3">
+            <div>FIN</div>
+            <div>Owner</div>
+            <div>Dealer</div>
+            <div>Vehicle Type</div>
+            <div>Model</div>
+            <div>Body Weight</div>
+            <div>Body Height</div>
+            <div>Body Length</div>
+        </div></strong>
 
-		<div class="col-md-6">
+        <div class="col-md-3">
+            <div>{{fin}}</div>
+            <div>{{owner}}</div>
+            <div>{{dealer}}</div>
+            <div>{{vehicleType}}</div>
+            <div>{{model}}</div>
+            <div>{{bodyWeight}}</div>
+            <div>{{bodyHeight}}</div>
+            <div>{{bodyLenght}}</div>
+        </div>
 
-			<div>FIN</div>
-			<div>Owner</div>
-			<div>Dealer</div>
-			<div>Vehicle Type</div>
-			<div>Model</div>
-			<div>Body Weight</div>
-			<div>Body Height</div>
-			<div>Body Length</div>
-			<div>Suspension</div>
-			<div>Tire Condition</div>
-			<div>Fuel Type</div>
-			<div>Capacity</div>
-			<div>Year</div>
-			<div>Location(Country)</div>
-			<div>Price</div>
-			<div></div>
+       <strong> <div class="col-md-3">
+            <div>Suspension</div>
+            <div>Tire Condition</div>
+            <div>Fuel Type</div>
+            <div>Capacity</div>
+            <div>Year</div>
+            <div>Location(Country)</div>
+            <div>Price</div>
+            <div></div>
+        </div></strong>
 
-		</div>
-		<div class="col-md-6">
-			<div>{{fin}}</div>
-			<div>{{owner}}</div>
-			<div>{{dealer}}</div>
-			<div>{{vehicleType}}</div>
-			<div>{{model}}</div>
-			<div>{{bodyWeight}}</div>
-			<div>{{bodyHeight}}</div>
-			<div>{{bodyLenght}}</div>
-			<div>{{suspensionType}}</div>
-			<div>{{tireCondition}}</div>
-			<div>{{fuelType}}</div>
-			<div>{{engineCapacity}}</div>
-			<div>{{year}}</div>
-			<div>{{location}}</div>
-			<div>{{price}}</div>
-			<div></div>
+        <div class="col-md-3">
+            <div>{{suspensionType}}</div>
+            <div>{{tireCondition}}</div>
+            <div>{{fuelType}}</div>
+            <div>{{engineCapacity}}</div>
+            <div>{{year}}</div>
+            <div>{{location}}</div>
+            <div>{{price}}</div>
+            <div></div>
+        </div>
+        <a class="btn btn-primary" ng-click="ExtraInfo='0'">Close</a>
+    </div>
 
-		</div>
-            </div>
-
-	</div>
-
+</div>

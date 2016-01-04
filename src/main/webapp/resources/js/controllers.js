@@ -147,6 +147,8 @@ angular.module('UVSClientApp')
 
 angular.module('UVSClientApp')
     .controller('CarExtraInfoController', ['$scope', '$rootScope', 'Scopes', 'EnhancedVehicleService', function ($scope, $rootScope, Scopes, EnhancedVehicleService) {
+         $scope.ExtraInfo = '0';
+        
         //load the search results once a new search is made
         $rootScope.$on("CarExtraInfo", function () { //Listen for trigger
             $scope.CarExtraInfo = Scopes.get('CarResultController').VehicleInfo; //get car extra info
@@ -168,5 +170,7 @@ angular.module('UVSClientApp')
             $scope.year = $scope.CarExtraInfo[0].vehicle.year;
             $scope.location = $scope.CarExtraInfo[0].vehicle.location;
             $scope.price = $scope.CarExtraInfo[0].vehicle.price;
+            
+            $scope.ExtraInfo = $scope.fin;
         });
     }]);
