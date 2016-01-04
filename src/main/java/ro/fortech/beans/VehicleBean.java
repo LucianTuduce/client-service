@@ -42,7 +42,7 @@ public class VehicleBean implements Serializable {
 	private SearchResponseService serachResponseService;
 	
 	
-	private List<VehicleSearchRequest> searchHistory;
+	private List<String> searchHistory;
 	private List<Vehicle> searchedVehicles;
 	private List<VehicleEnhanced> vehicleEnhanceds;
 	
@@ -72,14 +72,15 @@ public class VehicleBean implements Serializable {
 		return enhancedVehicleBean.searchForEnhancedVehicle(vehicle);
 	}
 
-	public List<VehicleSearchRequest> getSearchHistory() throws IOException {
+	public List<String> getSearchHistory() throws IOException {
 		httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		String accountToken = (String) httpSession.getAttribute(Constants.AUTHORIZATION);
 		this.searchHistory = serachResponseService.getUserSearchHistory(accountToken);
+		System.out.println(searchHistory);
 		return searchHistory;
 	}
 
-	public void setSearchHistory(List<VehicleSearchRequest> searchHistory) {
+	public void setSearchHistory(List<String> searchHistory) {
 		this.searchHistory = searchHistory;
 	}
 

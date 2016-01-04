@@ -13,7 +13,9 @@ import ro.fortech.cache.HistorySearchCache;
 import ro.fortech.cache.UserCache;
 import ro.fortech.constants.Constants;
 import ro.fortech.credentials.LoginCredentials;
+import ro.fortech.search.VehicleSearchResult;
 import ro.fortech.search.response.SearchResponseService;
+import ro.fortech.services.SearchRequestService;
 import ro.fortech.validation.AccountValidationService;
 
 /**
@@ -36,6 +38,13 @@ public class UserBean {
 	
 	@EJB
 	private HistorySearchCache historySearchCache;
+	
+	@EJB
+	private SearchRequestService searchRequestService;
+	
+	@EJB
+	private VehicleSearchResult searchResult;
+	
 	
 	/**
 	 * Check the credentials that are provided in the JSF page in order to
@@ -74,7 +83,23 @@ public class UserBean {
 		String decodedAccountToken = searchResponseService.decodeUserToken(accountToken);
 		historySearchCache.getSearchHistory().remove(decodedAccountToken);
 		userCache.getUserConfirmation().remove(decodedAccountToken);
+		searchResult.getSearchedVehicles().remove(decodedAccountToken);
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		clearFileds();
 		return "/loginJSF.xhtml?faces-redirect=true";
+	}
+	
+	private void clearFileds(){
+		searchRequestService.setSearchFin(null);
+		searchRequestService.setSearchFuelType(null);
+		searchRequestService.setSearchLocation(null);
+		searchRequestService.setSearchMaxCapacity(0);
+		searchRequestService.setSearchMinCapacity(0);
+		searchRequestService.setSearchMaxPrice(0);
+		searchRequestService.setSearchMinPrice(0);
+		searchRequestService.setSearchMaxYear(0);
+		searchRequestService.setSearchMinYear(0);
+		searchRequestService.setSearchModel(null);
+		searchRequestService.setSearchVehicleType(null);
 	}
 }
