@@ -19,6 +19,7 @@ import ro.fortech.search.VehicleSearchRequest;
 import ro.fortech.search.response.SearchResponseService;
 import ro.fortech.services.VehicleService;
 import ro.fortech.validation.AccountValidationService;
+import ro.fortech.validation.SaveVehicleValidation;
 import ro.fortech.vehicle.enhance.VehicleEnhanced;
 
 /**
@@ -174,13 +175,21 @@ public class VehicleRESTfulService {
 	@Path("/add")
 	@Consumes("application/json")
 	public Response addVehicle(@HeaderParam("Authorization") String accountToken, VehicleEnhanced vehicle){
+		Boolean validationVehicle = SaveVehicleValidation.validationForSaveVehicle(vehicle);
 		if(accountValidation.isUserValid(accountToken)){
-			fakeService.saveVehicleEnhanced(vehicle);
-			fakeService.saveVehicle(vehicle.getVehicle());
-			response.setHeader(Constants.AUTHORIZATION, accountToken);
-			return Response.status(Response.Status.OK).build();
+			if(validationVehicle){
+				fakeService.saveVehicleEnhanced(vehicle);
+				fakeService.saveVehicle(vehicle.getVehicle());
+				response.setHeader(Constants.AUTHORIZATION, accountToken);
+				return Response.status(Response.Status.OK).build();
+			}
+			else{
+				return Response.status(Response.Status.NO_CONTENT).build();
+			}
+			
 		}else {
 			return Response.status(Response.Status.UNAUTHORIZED).build();
 		}
 	}
+		
 }

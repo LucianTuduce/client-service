@@ -18,7 +18,6 @@ public class Vehicle {
 	private int price;
 	private VehicleType vehicleType;
 	
-	
 	public String getFin() {
 		return fin;
 	}

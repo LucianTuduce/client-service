@@ -23,8 +23,8 @@ public class VehicleCache {
 	private List<Vehicle> vehicles;
 	
 	private List<VehicleEnhanced> vehicleEnhanceds;
-
-	public List<Vehicle> getVehicles() {
+	
+		public List<Vehicle> getVehicles() {
 		return vehicles;
 	}
 

@@ -35,7 +35,7 @@ public class VehicleCompleteBean implements Serializable {
 	private String engineCapacity;
 	private String bodyWeight;
 	private String bodyHeight;
-	private String bodyLenght;
+	private String bodyLength;
 	private String suspensionType;
 	private String tireCondition;
 	private VehicleEnhanced vehicleEnhanced = new VehicleEnhanced();
@@ -144,13 +144,13 @@ public class VehicleCompleteBean implements Serializable {
 		else{
 			vehicleEnhanced.setBodyHeight(bodyHeight);
 		}
-		if(!StringUtils.isNumeric(bodyLenght)){
+		if(!StringUtils.isNumeric(bodyLength)){
 			//vehicleEnhanced.setBodyLenght(DefaultValues.BODY_LENGHT.getDef());
-			this.bodyLenght = "Must be a number";
+			this.bodyLength = "Must be a number";
 			verifyInfoFormUI = false;
 		}
 		else{
-			vehicleEnhanced.setBodyLenght(bodyLenght);
+			vehicleEnhanced.setBodyLenght(bodyLength);
 		}
 		if(!StringUtils.isNumeric(bodyWeight)){
 			//vehicleEnhanced.setBodyWeight(DefaultValues.BODY_WEIGHT.getDef());
@@ -291,12 +291,12 @@ public class VehicleCompleteBean implements Serializable {
 		this.bodyHeight = bodyHeight;
 	}
 
-	public String getBodyLenght() {
-		return bodyLenght;
+	public String getBodyLength() {
+		return bodyLength;
 	}
 
-	public void setBodyLenght(String bodyLenght) {
-		this.bodyLenght = bodyLenght;
+	public void setBodyLength(String bodyLenght) {
+		this.bodyLength = bodyLenght;
 	}
 
 	public String getSuspensionType() {
