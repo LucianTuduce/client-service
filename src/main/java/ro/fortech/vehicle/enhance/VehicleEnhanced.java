@@ -14,7 +14,7 @@ public class VehicleEnhanced {
 	private String dealer;
 	private String bodyWeight;
 	private String bodyHeight;
-	private String bodyLenght;
+	private String bodyLength;
 	private String owner;
 	private SuspensionType suspensionType;
 	private TireCondition tireCondition;
@@ -38,11 +38,11 @@ public class VehicleEnhanced {
 	public void setBodyHeight(String bodyHeight) {
 		this.bodyHeight = bodyHeight;
 	}
-	public String getBodyLenght() {
-		return bodyLenght;
+	public String getBodyLength() {
+		return bodyLength;
 	}
-	public void setBodyLenght(String bodyLenght) {
-		this.bodyLenght = bodyLenght;
+	public void setBodyLength(String bodyLength) {
+		this.bodyLength = bodyLength;
 	}
 	public String getOwner() {
 		return owner;

@@ -150,7 +150,7 @@ public class VehicleCompleteBean implements Serializable {
 			verifyInfoFormUI = false;
 		}
 		else{
-			vehicleEnhanced.setBodyLenght(bodyLength);
+			vehicleEnhanced.setBodyLength(bodyLength);
 		}
 		if(!StringUtils.isNumeric(bodyWeight)){
 			//vehicleEnhanced.setBodyWeight(DefaultValues.BODY_WEIGHT.getDef());

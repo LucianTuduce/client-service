@@ -60,25 +60,25 @@ public class VehicleEnhanceCachingService {
 			
 			if(other == 1){
 				vehicleEnhanced.setBodyHeight("160cm");
-				vehicleEnhanced.setBodyLenght("340cm");
+				vehicleEnhanced.setBodyLength("340cm");
 				vehicleEnhanced.setBodyWeight("1800kg");
 				vehicleEnhanced.setDealer("DAIMLER Romania");
 				vehicleEnhanced.setOwner("John Doe");
 			}else if(other == 2){
 				vehicleEnhanced.setBodyHeight("168cm");
-				vehicleEnhanced.setBodyLenght("400cm");
+				vehicleEnhanced.setBodyLength("400cm");
 				vehicleEnhanced.setBodyWeight("1950kg");
 				vehicleEnhanced.setDealer("DACIA Romania");
 				vehicleEnhanced.setOwner("John Doe Senior");
 			}else if(other == 3){
 				vehicleEnhanced.setBodyHeight("145cm");
-				vehicleEnhanced.setBodyLenght("320cm");
+				vehicleEnhanced.setBodyLength("320cm");
 				vehicleEnhanced.setBodyWeight("1400kg");
 				vehicleEnhanced.setDealer("PORSCHE Romania");
 				vehicleEnhanced.setOwner("John Doe Junior");
 			}else if(other == 4){
 				vehicleEnhanced.setBodyHeight("220cm");
-				vehicleEnhanced.setBodyLenght("540cm");
+				vehicleEnhanced.setBodyLength("540cm");
 				vehicleEnhanced.setBodyWeight("2800kg");
 				vehicleEnhanced.setDealer("RENAULT Romania");
 				vehicleEnhanced.setOwner("Vitezomanul Gica");

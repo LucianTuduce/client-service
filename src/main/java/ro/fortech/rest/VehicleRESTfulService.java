@@ -169,7 +169,7 @@ public class VehicleRESTfulService {
 	 *            server
 	 * @param vehicle
 	 *            - the vehicle that will be added in the system
-	 * @return 200 if all went ok or 401 if the user is unauthorized
+	 * @return 200 if all went ok or 401 if the user is unauthorized or 406 if the information are null or not ok
 	 */
 	@POST
 	@Path("/add")
@@ -184,7 +184,7 @@ public class VehicleRESTfulService {
 				return Response.status(Response.Status.OK).build();
 			}
 			else{
-				return Response.status(Response.Status.NO_CONTENT).build();
+				return Response.status(Response.Status.NOT_ACCEPTABLE).build();
 			}
 			
 		}else {
