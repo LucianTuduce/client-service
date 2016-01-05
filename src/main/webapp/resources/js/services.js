@@ -115,7 +115,7 @@ angular.module('UVSClientApp').factory('CarSearchService', ['$http', '$rootScope
                 YearMinVar = 1900;
             }
             if (YearMaxVar == undefined || YearMaxVar == '') {
-                YearMaxVar = 2015;
+                YearMaxVar = 2016;
             }
             if (PriceMinVar == undefined || PriceMinVar == '') {
                 PriceMinVar = 0;
