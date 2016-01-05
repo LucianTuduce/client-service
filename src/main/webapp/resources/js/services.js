@@ -176,7 +176,7 @@ angular.module('UVSClientApp').factory('CarSearchService', ['$http', '$rootScope
                 YearMinVar = 1900;
             }
             if (YearMaxVar == undefined || YearMaxVar == '') {
-                YearMaxVar = 2015;
+                YearMaxVar = 2016;
             }
             if (PriceMinVar == undefined || PriceMinVar == '') {
                 PriceMinVar = 0;
@@ -185,7 +185,6 @@ angular.module('UVSClientApp').factory('CarSearchService', ['$http', '$rootScope
                 PriceMaxVar = 0;
             }
 
-           // console.log(VehicleTypeVar);
 
             $http.post('http://localhost:9080/client-service/rest/vehicle/search/history/save/'+SaveNameVar, {
                 fin: FINVar,
@@ -210,6 +209,23 @@ angular.module('UVSClientApp').factory('CarSearchService', ['$http', '$rootScope
             }).error(function (response, status, headers, config) {
                 callback(response, status, headers().authorization, config);
             });
+        };
+        
+        service.UpdateSearchFormFunction = function (SearchVar) {
+            // split the string that was delivered from the server
+            var SearchTempArrayVar = SearchVar.split(", "); //split the parameters
+            var SearchArrayVar= [];
+            for(var i=0;i<SearchTempArrayVar.length; i++) //split parameter value from parameter name
+                {
+                    var temp = SearchTempArrayVar[i].split(": ");
+                    SearchArrayVar.push(temp[1]); //get value                    
+                    
+                }
+            console.log(SearchArrayVar);
+            
+            return SearchArrayVar;
+            
+        
         };
         
         
@@ -247,11 +263,7 @@ angular.module('UVSClientApp').factory('EnhancedVehicleService', ['$http', '$roo
             }).error(function (response, status, headers, config) {
                 callback(response, status, headers().authorization, config);
             });
-            
-            
-            
-            
-           
+         
         };
         return service;
     }]);

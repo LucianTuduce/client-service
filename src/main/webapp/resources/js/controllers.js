@@ -118,8 +118,12 @@ angular.module('UVSClientApp')
 
 
 angular.module('UVSClientApp')
-    .controller('SearchHistoryController', ['$http', '$scope', '$rootScope', 'SearchHistoryService', function ($http, $scope, $rootScope, SearchHistoryService) {
+    .controller('SearchHistoryController', ['$http','Scopes', '$scope', '$rootScope', 'CarSearchService', 'SearchHistoryService', function ($http, Scopes, $scope, $rootScope, CarSearchService, SearchHistoryService) {
+        Scopes.store('SearchHistoryController', $scope);
+        
+        
         //get search history on page load
+        
 
         $scope.GetSavedSearch = function () {
             $http.get('http://localhost:9080/client-service/rest/vehicle/search/history/saved')
@@ -151,7 +155,26 @@ angular.module('UVSClientApp')
                 $scope.searches = response.data;
                 console.log(response.data);
             });
-        })
+        });
+        
+         $scope.UpdateSearchForm = function (searchVar) {
+            CarSearchService.UpdateSearchFormFunction(searchVar); 
+                 /*   {
+                 if (status == 200) {
+                    console.log("form update success");
+                    // console.log(response.vehicleEnhanceds);
+                    $scope.VehicleInfo = response.vehicleEnhanceds;
+                    $rootScope.$emit("CarExtraInfo", {}); //trigger function on CarResultController
+                } else {
+                    console.log("form update error");
+                } }*/
+            
+            };
+        
+        
+        
+        
+        
     }]);
 
 
