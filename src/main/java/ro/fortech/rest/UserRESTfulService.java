@@ -14,11 +14,12 @@ import ro.fortech.cache.HistorySearchCache;
 import ro.fortech.cache.UserCache;
 import ro.fortech.constants.Constants;
 import ro.fortech.credentials.LoginCredentials;
+import ro.fortech.model.User;
 import ro.fortech.search.response.SearchResponseService;
 import ro.fortech.validation.AccountValidationService;
 
 /**
- * Rest class used to identify the users that are using the aplication
+ * Rest class used to identify the users that are using the application
  *
  */
 @Path("/user")
@@ -80,5 +81,16 @@ public class UserRESTfulService {
 		historySearchCache.getSearchHistory().remove(decodedAccountToken);
 		userCache.getUserConfirmation().remove(decodedAccountToken);			
 		return Response.status(Response.Status.OK).build();
+	}
+	
+	@POST
+	@Path("/add")
+	public Response addUser(User user){
+		if(!userCache.isUsernamePresent(user)){
+			userCache.getUserCache().put(user.getUsername(), user);
+			return Response.status(Response.Status.CREATED).build();
+		}else{
+			return Response.status(Response.Status.CONFLICT).build();
+		}
 	}
 }

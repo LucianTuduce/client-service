@@ -295,8 +295,8 @@ public class VehicleCompleteBean implements Serializable {
 		return bodyLength;
 	}
 
-	public void setBodyLength(String bodyLenght) {
-		this.bodyLength = bodyLenght;
+	public void setBodyLength(String bodyLength) {
+		this.bodyLength = bodyLength;
 	}
 
 	public String getSuspensionType() {
