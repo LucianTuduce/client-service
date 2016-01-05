@@ -27,7 +27,7 @@ angular.module('UVSClientApp')
         Scopes.store('HeaderController', $scope);
         $scope.VehicleType = "Vehicle Type";
         $scope.CountryLanguage = "Country/Language"
-            //var VehicleTypeVar = "";
+          
         var CountryVar = "";
         var LanguageVar = "";
         $scope.VehicleTypeSelect = function (event) {
