@@ -33,7 +33,6 @@ public class AuthFilter implements Filter {
 			HttpServletResponse res = (HttpServletResponse) response;
 			HttpSession ses = req.getSession(false);
 			String reqURI = req.getRequestURI();
-
 			if (reqURI.indexOf("/loginJSF.xhtml") >= 0 || (ses != null && ses.getAttribute(Constants.AUTHORIZATION) != null)) {
 				chain.doFilter(request, response);
 			} else {

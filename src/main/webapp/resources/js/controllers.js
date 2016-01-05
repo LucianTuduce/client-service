@@ -3,7 +3,7 @@ angular.module('UVSClientApp')
     function ($scope, $rootScope, $location, AuthenticationService) {
             // reset login status
             AuthenticationService.ClearCredentials();
-           // console.log("credentials reset");
+            // console.log("credentials reset");
 
             $scope.login = function () {
                 //$scope.dataLoading = true;
@@ -76,11 +76,15 @@ angular.module('UVSClientApp')
                     console.log("add car success");
                     $scope.AddCarVar = 0;
 
+<<<<<<< HEAD
                 } else if(status === 412){
                     $scope.finAddCarVar = "FIN is not unique";
                 } else if(status === 406){
                    $scope.validAddCarVar = "Fill all textboxes";
                 }
+=======
+                } 
+>>>>>>> branch 'master' of https://github.com/LucianTuduce/client-service.git
                 else {
                     console.log("add car error");
                 }
@@ -99,14 +103,14 @@ angular.module('UVSClientApp')
             CarSearchService.CarSearch($scope.FIN, $scope.model, $scope.FuelType, $scope.CapacityMin, $scope.CapacityMax, $scope.YearMin, $scope.YearMax, $scope.PriceMin, $scope.PriceMax, Scopes.get('HeaderController').Country, Scopes.get('HeaderController').VehicleType, function (response, status, headers, config) {
                 if (status == 200) {
                     console.log("Car Search Result success");
-                    //$scope.carsRetrieved = response.vehicles;
+                    $scope.carsRetrieved = response.vehicles;
                 } else {
                     console.log("Car Search Result could not be retrieved");
                 }
             })
         };
-        
-         $scope.saveSearch = function () {
+
+        $scope.saveSearch = function () {
             CarSearchService.SaveCarSearch($scope.FIN, $scope.model, $scope.FuelType, $scope.CapacityMin, $scope.CapacityMax, $scope.YearMin, $scope.YearMax, $scope.PriceMin, $scope.PriceMax, Scopes.get('HeaderController').Country, Scopes.get('HeaderController').VehicleType, $scope.SaveName, function (response, status, headers, config) {
                 if (status == 200) {
                     console.log("Save Search Result success");
@@ -116,34 +120,35 @@ angular.module('UVSClientApp')
                 }
             })
         };
-        
+
            }]);
 
 
 
 angular.module('UVSClientApp')
-    .controller('SearchHistoryController', ['$http','$scope', '$rootScope', 'SearchHistoryService', function ($http, $scope, $rootScope, SearchHistoryService) {
+    .controller('SearchHistoryController', ['$http', '$scope', '$rootScope', 'SearchHistoryService', function ($http, $scope, $rootScope, SearchHistoryService) {
         //get search history on page load
-        
+
         $scope.GetSavedSearch = function () {
             $http.get('http://localhost:9080/client-service/rest/vehicle/search/history/saved')
                 .success(function (response, status, headers, config) {
-                $scope.savedSearchInfos = response[0];
-                
-                console.log($scope.savedSearchInfos);               
-            }).error(function (response, status, headers, config) {
-                console.log("Search Save could not be loaded")
-                
-            }); };
-        
+                    if (response) {
+                        $scope.savedSearchInfos = response;
+                        console.log($scope.savedSearchInfos);
+                    }
+                console.log(response);                
+                }).error(function (response, status, headers, config) {
+                    console.log("Search Save could not be loaded")
+
+                });
+        };
+
         $rootScope.$on("SaveCarSearch", function () {
-            $scope.GetSavedSearch();
+            $scope.GetSavedSearch();                       
+           
         });
-        
-        
-        
-        
-        
+
+
         SearchHistoryService.GetSearchHistory(function (response) {
             $scope.searches = response.data;
         });
@@ -152,6 +157,7 @@ angular.module('UVSClientApp')
         $rootScope.$on("CarSearchMethod", function () { //Listen for trigger
             SearchHistoryService.GetSearchHistory(function (response) {
                 $scope.searches = response.data;
+                console.log(response.data);
             });
         })
     }]);
@@ -169,7 +175,7 @@ angular.module('UVSClientApp')
             EnhancedVehicleService.GetCarInfo(FIN, function (response, status, headers, config) {
                 if (status == 200) {
                     console.log("Car info success");
-                   // console.log(response.vehicleEnhanceds);
+                    // console.log(response.vehicleEnhanceds);
                     $scope.VehicleInfo = response.vehicleEnhanceds;
                     $rootScope.$emit("CarExtraInfo", {}); //trigger function on CarResultController
                 } else {
@@ -184,14 +190,14 @@ angular.module('UVSClientApp')
 
 angular.module('UVSClientApp')
     .controller('CarExtraInfoController', ['$scope', '$rootScope', 'Scopes', 'EnhancedVehicleService', function ($scope, $rootScope, Scopes, EnhancedVehicleService) {
-         $scope.ExtraInfo = '0';
-        
+        $scope.ExtraInfo = '0';
+
         //load the search results once a new search is made
         $rootScope.$on("CarExtraInfo", function () { //Listen for trigger
             $scope.CarExtraInfo = Scopes.get('CarResultController').VehicleInfo; //get car extra info
-           // $scope.CarStandardInfo = $scope.CarExtraInfo[0].vehicle;
-          //  console.log($scope.CarExtraInfo);
-           // console.log($scope.CarStandardInfo);
+            // $scope.CarStandardInfo = $scope.CarExtraInfo[0].vehicle;
+            //  console.log($scope.CarExtraInfo);
+            // console.log($scope.CarStandardInfo);
             $scope.fin = $scope.CarExtraInfo[0].vehicle.fin;
             $scope.owner = $scope.CarExtraInfo[0].owner;
             $scope.dealer = $scope.CarExtraInfo[0].dealer;
@@ -207,7 +213,7 @@ angular.module('UVSClientApp')
             $scope.year = $scope.CarExtraInfo[0].vehicle.year;
             $scope.location = $scope.CarExtraInfo[0].vehicle.location;
             $scope.price = $scope.CarExtraInfo[0].vehicle.price;
-            
+
             $scope.ExtraInfo = $scope.fin;
         });
     }]);

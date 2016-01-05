@@ -51,4 +51,13 @@ public class UserCache {
 			return true;
 		}
 	}
+	
+	public boolean isUsernamePresent(User user){
+		User userPresent = userCache.get(user.getUsername());
+		if(userPresent == null){
+			return false;
+		}else{
+			return true;
+		}		
+	}
 }

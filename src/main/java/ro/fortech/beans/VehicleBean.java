@@ -57,8 +57,7 @@ public class VehicleBean implements Serializable {
 	}
 
 	public void searchVechicle() throws IOException {
-		httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		String accountToken = (String) httpSession.getAttribute(Constants.AUTHORIZATION);
+		String accountToken = getAccountToken();
 		if(! accountValidation.isUserValid(accountToken)){
 			FacesContext.getCurrentInstance().getExternalContext().redirect("loginJSF.xhtml?faces-redirect=true");
 		}else{
@@ -73,10 +72,8 @@ public class VehicleBean implements Serializable {
 	}
 
 	public List<String> getSearchHistory() throws IOException {
-		httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		String accountToken = (String) httpSession.getAttribute(Constants.AUTHORIZATION);
+		String accountToken = getAccountToken();
 		this.searchHistory = serachResponseService.getUserSearchHistory(accountToken);
-		System.out.println(searchHistory);
 		return searchHistory;
 	}
 
@@ -85,10 +82,15 @@ public class VehicleBean implements Serializable {
 	}
 
 	public List<Vehicle> getSearchedVehicles() {
-		httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		String accountToken = (String) httpSession.getAttribute(Constants.AUTHORIZATION);
+		String accountToken = getAccountToken();
 		this.searchedVehicles = searchedVehicleBean.getSearchedVehicles().get(serachResponseService.decodeUserToken(accountToken));
 		return searchedVehicles;
+	}
+
+	private String getAccountToken() {
+		httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		String accountToken = (String) httpSession.getAttribute(Constants.AUTHORIZATION);
+		return accountToken;
 	}
 
 	public void setSearchedVehicles(List<Vehicle> searchedVehicles) {
