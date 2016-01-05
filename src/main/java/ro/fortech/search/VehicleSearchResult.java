@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 
 import ro.fortech.model.Vehicle;
@@ -14,6 +15,11 @@ import ro.fortech.model.Vehicle;
  */
 @Stateless
 public class VehicleSearchResult {
+	
+	@PostConstruct
+	public void init(){
+		System.out.println("VehicleSearchResult: Stateless");
+	}
 
 	private Map<String ,List<Vehicle>> searchedVehicles = new HashMap<String, List<Vehicle>>();
 
