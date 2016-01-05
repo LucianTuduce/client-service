@@ -162,7 +162,7 @@ angular.module('UVSClientApp')
             $scope.model = $scope.CarExtraInfo[0].vehicle.model;
             $scope.bodyWeight = $scope.CarExtraInfo[0].bodyWeight;
             $scope.bodyHeight = $scope.CarExtraInfo[0].bodyHeight;
-            $scope.bodyLenght = $scope.CarExtraInfo[0].bodyLenght;
+            $scope.bodyLength = $scope.CarExtraInfo[0].bodyLength;
             $scope.suspensionType = $scope.CarExtraInfo[0].suspensionType;
             $scope.tireCondition = $scope.CarExtraInfo[0].tireCondition;
             $scope.fuelType = $scope.CarExtraInfo[0].vehicle.fuelType;

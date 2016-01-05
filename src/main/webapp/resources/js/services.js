@@ -59,7 +59,7 @@ angular.module('UVSClientApp').factory('AddCarService', ['$http', '$rootScope', 
                     dealer: DealerName,
                     bodyHeight: Height,
                     bodyWeight: Weight,
-                    bodyLenght: Length,
+                    bodyLength: Length,
                     suspensionType: Suspension,
                     tireCondition: TireCondition,
                     vehicle: {
