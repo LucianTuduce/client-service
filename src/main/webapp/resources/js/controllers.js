@@ -75,7 +75,10 @@ angular.module('UVSClientApp')
                 if (status == 200) {
                     console.log("add car success");
                     $scope.AddCarVar = 0;
-
+                } else if(status === 412){
+                    $scope.finAddCarVar = "FIN is not unique";
+                } else if(status === 406){
+                   $scope.validAddCarVar = "Fill all textboxes";
                 } 
                 else {
                     console.log("add car error");

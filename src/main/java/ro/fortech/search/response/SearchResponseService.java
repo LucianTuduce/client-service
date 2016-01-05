@@ -76,11 +76,16 @@ public class SearchResponseService {
 			return userSearchHistory;
 		}
 		for(VehicleSearchRequest request: searchHistory){
-			search = "FIN: "+request.getFin() + ", Location: " + request.getLocation() + ", Model: "
-					+ request.getModel() + ", Min_Capacity: " + request.getMinCapacity()
-					+ ", Max_Capacity: " + request.getMaxCapacity() + ", Min_Year: "
-					+ request.getMinYear() + ", Max_Year: " + request.getMaxYear() + ", Min_Price: "
-					+ request.getMinPrice() + ", Max_Price: " + request.getMaxPrice();
+			search = "FIN: " + request.getFin() + ", Location: "
+					+ request.getLocation() + ", Model: " + request.getModel()
+					+ ", Min_Capacity: " + request.getMinCapacity()
+					+ ", Max_Capacity: " + request.getMaxCapacity()
+					+ ", Min_Year: " + request.getMinYear() + ", Max_Year: "
+					+ request.getMaxYear() + ", Min_Price: "
+					+ request.getMinPrice() + ", Max_Price: "
+					+ request.getMaxPrice() + ", Fuel_Type: "
+					+ request.getFuelType() + " , Vehicle_Type: "
+					+ request.getVehicleType();
 			userSearchHistory.add(search);
 		}
 		return userSearchHistory;
@@ -112,9 +117,7 @@ public class SearchResponseService {
 	public List<SearchSave> saveUserSearch(String accountToken, String saveName, VehicleSearchRequest search) {
 		List<SearchSave> searchSaves = null;
 		String decodedToken = decodeUserToken(accountToken);
-		SearchSave searchSave = new SearchSave();
-		searchSave.setName(saveName);
-		searchSave.setRequest(search);
+		SearchSave searchSave = createSearchSave(saveName, search);
 		if (searchCache.getSearchSaveCache().get(decodedToken) == null) {
 			searchSaves = new ArrayList<>();
 			searchSaves.add(searchSave);
@@ -123,6 +126,13 @@ public class SearchResponseService {
 			searchCache.getSearchSaveCache().get(decodedToken).add(searchSave);
 		}
 		return searchCache.getSearchSaveCache().get(decodedToken);
+	}
+
+	private SearchSave createSearchSave(String saveName, VehicleSearchRequest search) {
+		SearchSave searchSave = new SearchSave();
+		searchSave.setName(saveName);
+		searchSave.setRequest(search);
+		return searchSave;
 	}
 
 	/**

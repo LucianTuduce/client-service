@@ -42,6 +42,9 @@ public class VehicleRESTfulService {
 	
 	@EJB(beanName = "fakeVehicleServiceImpl")
 	private VehicleService fakeService;
+	
+	@EJB
+	SaveVehicleValidation validation;
 
 	@PostConstruct
 	public void init() {
@@ -175,24 +178,22 @@ public class VehicleRESTfulService {
 	@Path("/add")
 	@Consumes("application/json")
 	public Response addVehicle(@HeaderParam("Authorization") String accountToken, VehicleEnhanced vehicle){
-		Boolean validationVehicle = SaveVehicleValidation.validationForSaveVehicle(vehicle);
-		Boolean validationFIN = SaveVehicleValidation.validationFINSaveVehicle(vehicle.getVehicle().getFin());
+		Boolean validationVehicle = validation.validationForSaveVehicle(vehicle);
 		if(accountValidation.isUserValid(accountToken)){
-			if(validationFIN){
-				if(validationVehicle){
+			if(validationVehicle){
+				Boolean validationFIN = validation.validationFINSaveVehicle(vehicle.getVehicle().getFin());
+				if(validationFIN){
 					fakeService.saveVehicleEnhanced(vehicle);
 					fakeService.saveVehicle(vehicle.getVehicle());
 					response.setHeader(Constants.AUTHORIZATION, accountToken);
 					return Response.status(Response.Status.OK).build();
 				}
 				else{
-					return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+					return Response.status(Response.Status.PRECONDITION_FAILED).build();
 				}
 			}else{
-				return Response.status(Response.Status.PRECONDITION_FAILED).build();
+				return Response.status(Response.Status.NOT_ACCEPTABLE).build();
 			}
-			
-			
 		}else {
 			return Response.status(Response.Status.UNAUTHORIZED).build();
 		}
