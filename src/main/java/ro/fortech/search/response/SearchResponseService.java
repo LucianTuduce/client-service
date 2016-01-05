@@ -76,11 +76,16 @@ public class SearchResponseService {
 			return userSearchHistory;
 		}
 		for(VehicleSearchRequest request: searchHistory){
-			search = "FIN: "+request.getFin() + ", Location: " + request.getLocation() + ", Model: "
-					+ request.getModel() + ", Min_Capacity: " + request.getMinCapacity()
-					+ ", Max_Capacity: " + request.getMaxCapacity() + ", Min_Year: "
-					+ request.getMinYear() + ", Max_Year: " + request.getMaxYear() + ", Min_Price: "
-					+ request.getMinPrice() + ", Max_Price: " + request.getMaxPrice();
+			search = "FIN: " + request.getFin() + ", Location: "
+					+ request.getLocation() + ", Model: " + request.getModel()
+					+ ", Min_Capacity: " + request.getMinCapacity()
+					+ ", Max_Capacity: " + request.getMaxCapacity()
+					+ ", Min_Year: " + request.getMinYear() + ", Max_Year: "
+					+ request.getMaxYear() + ", Min_Price: "
+					+ request.getMinPrice() + ", Max_Price: "
+					+ request.getMaxPrice() + ", Fuel_Type: "
+					+ request.getFuelType() + " , Vehicle_Type: "
+					+ request.getVehicleType();
 			userSearchHistory.add(search);
 		}
 		return userSearchHistory;
