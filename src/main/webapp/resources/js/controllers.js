@@ -40,7 +40,8 @@ angular.module('UVSClientApp')
         };
 
         $scope.LanguageSelect = function (event) {
-            $scope.CountryLanguage += "/" + event.target.text; //keep the country, add the language          
+            $scope.CountryLanguage += "/" + event.target.text; //keep the country, add the language
+            $scope.Language = event.target.text;
         };
 
         $scope.ShowAddCar = function () {
@@ -58,6 +59,16 @@ angular.module('UVSClientApp')
                 }
             });
         };
+        
+         $rootScope.$on("UpdateSearchForm", function () { //Listen for trigger
+            $scope.SearchCriteriaController = Scopes.get('SearchHistoryController').SearchCriteria;
+            $scope.VehicleType = $scope.SearchCriteriaController[10];
+            $scope.Country = $scope.SearchCriteriaController[1];
+             $scope.CountryLanguage = $scope.Country +"/"+$scope.Language;
+            
+            
+        });
+        
     }]);
 
 
@@ -90,7 +101,7 @@ angular.module('UVSClientApp')
 
 
 angular.module('UVSClientApp')
-    .controller('CarSearchController', ['$scope', 'Scopes', 'CarSearchService', function ($scope, Scopes, CarSearchService) {
+    .controller('CarSearchController', ['$scope','$rootScope', 'Scopes', 'CarSearchService', function ($scope, $rootScope, Scopes, CarSearchService) {
         Scopes.store('CarSearchController', $scope);
         $scope.cars = [];
 
@@ -115,6 +126,21 @@ angular.module('UVSClientApp')
                 }
             })
         };
+        
+        
+        $rootScope.$on("UpdateSearchForm", function () { //Listen for trigger
+            $scope.SearchCriteriaController = Scopes.get('SearchHistoryController').SearchCriteria;
+            $scope.FIN = $scope.SearchCriteriaController[0];
+            $scope.model = $scope.SearchCriteriaController[2];
+            $scope.FuelType  = $scope.SearchCriteriaController[9];
+            $scope.CapacityMin = $scope.SearchCriteriaController[3];
+            $scope.CapacityMax = $scope.SearchCriteriaController[4];
+            $scope.YearMin = $scope.SearchCriteriaController[5];
+            $scope.YearMax = $scope.SearchCriteriaController[6];
+            $scope.PriceMin = $scope.SearchCriteriaController[7];
+            $scope.PriceMax = $scope.SearchCriteriaController[8];
+            
+        });
 
            }]);
 
@@ -161,7 +187,10 @@ angular.module('UVSClientApp')
         });
         
          $scope.UpdateSearchForm = function (searchVar) {
-            CarSearchService.UpdateSearchFormFunction(searchVar); 
+            CarSearchService.UpdateSearchFormFunction(searchVar, function (response) {
+                $scope.SearchCriteria = response;
+                $rootScope.$emit("UpdateSearchForm", {}); //trigger function on CarResultController
+            }); 
                  /*   {
                  if (status == 200) {
                     console.log("form update success");
