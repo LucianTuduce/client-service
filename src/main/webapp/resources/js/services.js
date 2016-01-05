@@ -201,10 +201,7 @@ angular.module('UVSClientApp').factory('CarSearchService', ['$http', '$rootScope
                 maxPrice: PriceMaxVar,
                 vehicleType: VehicleTypeVar,
                 //vehicleType: Scopes.get('HeaderController').vehicleType,
-                pagination: {
-                    pageNumber: 1,
-                    elemetsPerPage: 20
-                }
+                
             }).success(function (response, status, headers, config) {
                 callback(response, status, headers().authorization, config);
                //$rootScope.carsRetrieved = response.vehicles; //store the results
