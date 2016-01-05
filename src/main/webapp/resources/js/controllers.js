@@ -3,17 +3,17 @@ angular.module('UVSClientApp')
     function ($scope, $rootScope, $location, AuthenticationService) {
             // reset login status
             AuthenticationService.ClearCredentials();
-            console.log("credentials reset");
+           // console.log("credentials reset");
 
             $scope.login = function () {
                 //$scope.dataLoading = true;
                 AuthenticationService.Login($scope.username, $scope.password, function (response, status, headers, config) {
                     if (status == 200) {
-                        console.log("controller success");
+                        console.log("authentication controller success");
                         AuthenticationService.SetCredentials(headers); //save token for future requests
                         $location.path('/index'); //go to index page
                     } else {
-                        console.log("controller error");
+                        console.log("authentication controller error");
                         $scope.error = "Username or passwords invalid";
                         // $scope.dataLoading = false;
                     }
@@ -100,13 +100,45 @@ angular.module('UVSClientApp')
                 }
             })
         };
+        
+         $scope.saveSearch = function () {
+            CarSearchService.SaveCarSearch($scope.FIN, $scope.model, $scope.FuelType, $scope.CapacityMin, $scope.CapacityMax, $scope.YearMin, $scope.YearMax, $scope.PriceMin, $scope.PriceMax, Scopes.get('HeaderController').Country, Scopes.get('HeaderController').VehicleType, $scope.SaveName, function (response, status, headers, config) {
+                if (status == 200) {
+                    console.log("Save Search Result success");
+                    //$scope.carsRetrieved = response.vehicles;
+                } else {
+                    console.log("Save Search error");
+                }
+            })
+        };
+        
            }]);
 
 
 
 angular.module('UVSClientApp')
-    .controller('SearchHistoryController', ['$scope', '$rootScope', 'SearchHistoryService', function ($scope, $rootScope, SearchHistoryService) {
+    .controller('SearchHistoryController', ['$http','$scope', '$rootScope', 'SearchHistoryService', function ($http, $scope, $rootScope, SearchHistoryService) {
         //get search history on page load
+        
+        $scope.GetSavedSearch = function () {
+            $http.get('http://localhost:9080/client-service/rest/vehicle/search/history/saved')
+                .success(function (response, status, headers, config) {
+                $scope.savedSearchInfos = response[0];
+                
+                console.log($scope.savedSearchInfos);               
+            }).error(function (response, status, headers, config) {
+                console.log("Search Save could not be loaded")
+                
+            }); };
+        
+        $rootScope.$on("SaveCarSearch", function () {
+            $scope.GetSavedSearch();
+        });
+        
+        
+        
+        
+        
         SearchHistoryService.GetSearchHistory(function (response) {
             $scope.searches = response.data;
         });
@@ -132,7 +164,7 @@ angular.module('UVSClientApp')
             EnhancedVehicleService.GetCarInfo(FIN, function (response, status, headers, config) {
                 if (status == 200) {
                     console.log("Car info success");
-                    console.log(response.vehicleEnhanceds);
+                   // console.log(response.vehicleEnhanceds);
                     $scope.VehicleInfo = response.vehicleEnhanceds;
                     $rootScope.$emit("CarExtraInfo", {}); //trigger function on CarResultController
                 } else {
@@ -152,9 +184,9 @@ angular.module('UVSClientApp')
         //load the search results once a new search is made
         $rootScope.$on("CarExtraInfo", function () { //Listen for trigger
             $scope.CarExtraInfo = Scopes.get('CarResultController').VehicleInfo; //get car extra info
-            $scope.CarStandardInfo = $scope.CarExtraInfo[0].vehicle;
-            console.log($scope.CarExtraInfo);
-            console.log($scope.CarStandardInfo);
+           // $scope.CarStandardInfo = $scope.CarExtraInfo[0].vehicle;
+          //  console.log($scope.CarExtraInfo);
+           // console.log($scope.CarStandardInfo);
             $scope.fin = $scope.CarExtraInfo[0].vehicle.fin;
             $scope.owner = $scope.CarExtraInfo[0].owner;
             $scope.dealer = $scope.CarExtraInfo[0].dealer;
