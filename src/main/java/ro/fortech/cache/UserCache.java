@@ -58,7 +58,6 @@ public class UserCache {
 			return false;
 		}else{
 			return true;
-		}
-		
+		}		
 	}
 }

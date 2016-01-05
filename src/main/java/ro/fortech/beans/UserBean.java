@@ -60,12 +60,8 @@ public class UserBean {
 	 * @throws IOException 
 	 */
 	public String login(String username, String password) throws IOException{
-		System.out.println(username);
-		System.out.println(password);
 		clearFileds();
-		LoginCredentials credentials = new LoginCredentials();
-		credentials.setUsername(username);
-		credentials.setPassword(password);
+		LoginCredentials credentials = createLOginCredentials(username, password);
 		String accountToken = searchResponseService.generateAndGetUserToken(credentials);
 		if(!accountValidation.isUserValid(accountToken)){
 			FacesContext.getCurrentInstance().addMessage("myform:username", new FacesMessage("Invalid", "Invalid Username or password"));
@@ -78,16 +74,32 @@ public class UserBean {
 		}
 	}
 
+	private LoginCredentials createLOginCredentials(String username, String password) {
+		LoginCredentials credentials = new LoginCredentials();
+		credentials.setUsername(username);
+		credentials.setPassword(password);
+		return credentials;
+	}
+
 	public String logout() {
-		HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		String accountToken = (String) httpSession.getAttribute(Constants.AUTHORIZATION);
-		String decodedAccountToken = searchResponseService.decodeUserToken(accountToken);
-		historySearchCache.getSearchHistory().remove(decodedAccountToken);
-		userCache.getUserConfirmation().remove(decodedAccountToken);
-		searchResult.getSearchedVehicles().remove(decodedAccountToken);
+		clearUserTemporaryCache();
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		clearFileds();
 		return "/loginJSF.xhtml?faces-redirect=true";
+	}
+
+	private void clearUserTemporaryCache() {	
+		String decodedAccountToken = obtainUserDecodedToken();
+		historySearchCache.getSearchHistory().remove(decodedAccountToken);
+		userCache.getUserConfirmation().remove(decodedAccountToken);
+		searchResult.getSearchedVehicles().remove(decodedAccountToken);
+	}
+
+	private String obtainUserDecodedToken() {
+		HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		String accountToken = (String) httpSession.getAttribute(Constants.AUTHORIZATION);
+		String decodedAccountToken = searchResponseService.decodeUserToken(accountToken);
+		return decodedAccountToken;
 	}
 	
 	private void clearFileds(){
