@@ -1,7 +1,8 @@
 <div ng-controller="CarExtraInfoController">
-    <div ng-show="ExtraInfo===fin" class="">
+    <div ng-show="ExtraInfo===fin" class="well">
+        <h4>Vehicle Details</h4>
 
-        <strong><div class="col-md-3">
+        <strong><div class="col-xs-6 col-sm-6 col-md-3">
             <div>FIN</div>
             <div>Owner</div>
             <div>Dealer</div>
@@ -12,7 +13,7 @@
             <div>Body Length</div>
         </div></strong>
 
-        <div class="col-md-3">
+        <div class="col-xs-6 col-sm-6 col-md-3">
             <div>{{fin}}</div>
             <div>{{owner}}</div>
             <div>{{dealer}}</div>
@@ -23,7 +24,7 @@
             <div>{{bodyLenght}}</div>
         </div>
 
-       <strong> <div class="col-md-3">
+       <strong> <div class="col-xs-6 col-sm-6 col-md-3">
             <div>Suspension</div>
             <div>Tire Condition</div>
             <div>Fuel Type</div>
@@ -34,7 +35,7 @@
             <div></div>
         </div></strong>
 
-        <div class="col-md-3">
+        <div class="col-xs-6 col-sm-6 col-md-3">
             <div>{{suspensionType}}</div>
             <div>{{tireCondition}}</div>
             <div>{{fuelType}}</div>
@@ -43,8 +44,10 @@
             <div>{{location}}</div>
             <div>{{price}}</div>
             <div></div>
-        </div>
+        </div >
+        <div class="col-xs-12 ">
         <a class="btn btn-primary" ng-click="ExtraInfo='0'">Close</a>
+            </div>
     </div>
 
 </div>

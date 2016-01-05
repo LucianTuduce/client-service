@@ -7,7 +7,13 @@
         </div>
         <h3>Search history</h3>
         <div class="well table-responsive" ng-controller="SearchHistoryController">
-            <table class="table">
+
+            <ul class="list-group">
+                <li class="list-group-item" data-ng-repeat="search in searches"> FIN:{{search.fin}}; Vehicle Type:{{search.vehicleType}}; Model:{{search.model}}; Fuel Type:{{search.fuelType}}; Location:{{search.location}}
+                </li>
+            </ul>
+
+           <!-- <table class="table">
                 <thead>
                     <th>FIN</th>
                     <th>Vehicle Type</th>
@@ -25,7 +31,17 @@
 
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
+        </div>
+        <h3>Search Savings</h3>
+        <div class="well table-responsive" ng-controller="SearchHistoryController">
+            <ul class="list-group" data-ng-init="GetSavedSearch()">
+            <li class="list-group-item" data-ng-repeat="savedSearch in savedSearchInfos"> FIN:{{savedSearch.fin}}; Vehicle Type:{{savedSearch.vehicleType}}; Model:{{savedSearch.model}}; Fuel Type:{{savedSearch.fuelType}}; Location:{{savedSearch.location}}
+
+            </li>
+            </ul>
+
+
         </div>
     </div>
     <div class="col-sm-8">

@@ -23,8 +23,8 @@ angular.module('UVSClientApp').factory('AuthenticationService', ['$http', '$root
             var authdata = authorization;
             $http.defaults.headers.common['Authorization'] = authdata; // here the token is saved for future use
             $rootScope.GlobalAuthorization = authdata;
-            console.log($rootScope.GlobalAuthorization);
-            console.log(authdata);
+           // console.log($rootScope.GlobalAuthorization);
+           // console.log(authdata);
         };
 
 
@@ -85,7 +85,7 @@ angular.module('UVSClientApp').factory('AddCarService', ['$http', '$rootScope', 
                     callback(response, status, headers().authorization, config);
                 });
         };
-        console.log($rootScope.GlobalAuthorization);
+       // console.log($rootScope.GlobalAuthorization);
         return service;
     }]);
 
@@ -124,7 +124,7 @@ angular.module('UVSClientApp').factory('CarSearchService', ['$http', '$rootScope
                 PriceMaxVar = 0;
             }
 
-            console.log(VehicleTypeVar);
+            //console.log(VehicleTypeVar);
 
             $http.post('http://localhost:9080/client-service/rest/vehicle/filtered', {
                 fin: FINVar,
@@ -153,6 +153,69 @@ angular.module('UVSClientApp').factory('CarSearchService', ['$http', '$rootScope
                 callback(response, status, headers().authorization, config);
             });
         };
+        
+        
+        
+        service.SaveCarSearch = function (FINVar, modelVar, FuelTypeVar, CapacityMinVar, CapacityMaxVar, YearMinVar, YearMaxVar, PriceMinVar, PriceMaxVar, CountryVar, VehicleTypeVar,SaveNameVar, callback) {
+            if (FINVar == undefined || FINVar == '') {
+                FINVar = " ";
+            }
+            if (modelVar == undefined) {
+                modelVar = " ";
+            }
+            if (FuelTypeVar == undefined) {
+                FuelTypeVar = "DEFAULT";
+            }
+            if (CapacityMinVar == undefined || CapacityMinVar == '') {
+                CapacityMinVar = 0;
+            }
+            if (CapacityMaxVar == undefined || CapacityMaxVar == '') {
+                CapacityMaxVar = 30000;
+            }
+            if (YearMinVar == undefined || YearMinVar == '') {
+                YearMinVar = 1900;
+            }
+            if (YearMaxVar == undefined || YearMaxVar == '') {
+                YearMaxVar = 2015;
+            }
+            if (PriceMinVar == undefined || PriceMinVar == '') {
+                PriceMinVar = 0;
+            }
+            if (PriceMaxVar == undefined || PriceMaxVar == '') {
+                PriceMaxVar = 0;
+            }
+
+           // console.log(VehicleTypeVar);
+
+            $http.post('http://localhost:9080/client-service/rest/vehicle/search/history/save/'+SaveNameVar, {
+                fin: FINVar,
+                model: modelVar,
+                fuelType: FuelTypeVar,
+                minCapacity: CapacityMinVar,
+                maxCapacity: CapacityMaxVar,
+                minYear: YearMinVar,
+                maxYear: YearMaxVar,
+                location: CountryVar,
+                //location: Scopes.get('HeaderController').Country,
+                minPrice: PriceMinVar,
+                maxPrice: PriceMaxVar,
+                vehicleType: VehicleTypeVar,
+                //vehicleType: Scopes.get('HeaderController').vehicleType,
+                pagination: {
+                    pageNumber: 1,
+                    elemetsPerPage: 20
+                }
+            }).success(function (response, status, headers, config) {
+                callback(response, status, headers().authorization, config);
+               //$rootScope.carsRetrieved = response.vehicles; //store the results
+               $rootScope.$emit("SaveCarSearch", {}); //trigger function on CarResultController
+
+            }).error(function (response, status, headers, config) {
+                callback(response, status, headers().authorization, config);
+            });
+        };
+        
+        
         return service;
                 }]);
 
@@ -178,7 +241,7 @@ angular.module('UVSClientApp').factory('EnhancedVehicleService', ['$http', '$roo
     function ($http, $rootScope, $timeout) {
         var service = {};
 
-        service.GetCarInfo = function (FINVar, callback) {
+      service.GetCarInfo = function (FINVar, callback) {
             $http.get('http://localhost:9080/client-service/rest/vehicle/enhanced/'+FINVar)
                 .success(function (response, status, headers, config) {
                 callback(response, status, headers().authorization, config);                
