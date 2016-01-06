@@ -1,6 +1,6 @@
 <div ng-controller="AddCarController">
 
-    <form ng-show="AddCarVar===1" ng-submit="addCar()">
+    <form name="addCarForm" ng-show="AddCarVar===1" ng-submit="addCar()">
         
             <h3>Add Car</h3>
             <!--First column-->
@@ -8,8 +8,9 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">FIN</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" ng-model="FIN">
+                        <input type="text" name="FIN" class="form-control" ng-model="FIN" required>
                         </input>
+                    <div ng-show="addCarForm.FIN.$invalid && !addCarForm.FIN.$pristine" class="text-danger">FIN is required</div>
                     <span> {{finAddCarVar}} </span>
                     </div>
                 </div>
@@ -17,30 +18,33 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Owner Name</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" ng-model="OwnerName">
+                        <input type="text" class="form-control" name ="OwnerName" ng-model="OwnerName" required>
                         </input>
+                    <div ng-show="addCarForm.OwnerName.$invalid && !addCarForm.OwnerName.$pristine" class="text-danger">Owner name is required</div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Dealer Name</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" ng-model="DealerName" />
+                        <input type="text" class="form-control" ng-model="DealerName" name="DealerName" required/>
+                        <div ng-show="addCarForm.DealerName.$invalid && !addCarForm.DealerName.$pristine" class="text-danger">Dealer name is required</div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Country</label>
                     <div class="col-sm-9">
-                        <select class="form-control" ng-model="Country">
+                        <select class="form-control" ng-model="Country" name="Country" required>
                             <option value=""></option>
                             <option value="Germany">Germany</option>
                             <option value="Romania">Romania</option>
                         </select>
+                        <div ng-show="addCarForm.Country.$invalid && !addCarForm.Country.$pristine" class="text-danger">Country is required</div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Vehicle Type</label>
                     <div class="col-sm-9">
-                        <select class="form-control" ng-model="VehicleType">
+                        <select class="form-control" ng-model="VehicleType" required>
                             <option value=""></option>
                             <option value="" ng-if="false"></option>
                             <option value="CAR">CAR</option>
@@ -52,7 +56,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Model</label>
                     <div class="col-sm-9">
-                        <select class="form-control" ng-model="Model">
+                        <select class="form-control" ng-model="Model" required>
                             <option value=""></option>
                             <option value="Volskwagen Passat">Volskwagen Passat</option>
                             <option value="Mercedes Sprinter">Mercedes Sprinter</option>
@@ -64,16 +68,16 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">Fabrication year</label>
+                    <label class="col-sm-3 control-label">Manufacturing year</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" ng-model="FabricationYear">
+                        <input type="number" class="form-control" ng-model="FabricationYear"  required>
                         </input>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Price</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" ng-model="Price">
+                        <input type="number" class="form-control" ng-model="Price"  required>
                         </input>
                     </div>
                 </div>
@@ -85,7 +89,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Fuel Type</label>
                     <div class="col-sm-9">
-                        <select class="form-control" ng-model="FuelType">
+                        <select class="form-control" ng-model="FuelType"  required>
                             <option value=" "></option>
                             <option value="DIESEL">Diesel</option>
                             <option value="GASOLINE">Gasoline</option>
@@ -95,35 +99,35 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Capacity</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" ng-model="Capacity">
+                        <input type="number" class="form-control" ng-model="Capacity"  required>
                         </input>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Weight</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" ng-model="Weight">
+                        <input type="number" class="form-control" ng-model="Weight"  required>
                         </input>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Height</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" ng-model="Height">
+                        <input type="number" class="form-control" ng-model="Height"  required>
                         </input>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Length</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" ng-model="Length">
+                        <input type="number" class="form-control" ng-model="Length"  required>
                         </input>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Suspension</label>
                     <div class="col-sm-9">
-                        <select class="form-control" ng-model="Suspension">
+                        <select class="form-control" ng-model="Suspension"  required>
                             <option value=" "></option>
                             <option value="SWING_AXLE">SWING_AXLE</option>
                             <option value="TRAILING_LINK">TRAILING_LINK</option>
@@ -134,7 +138,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Tire Condition</label>
                     <div class="col-sm-9">
-                        <select class="form-control" ng-model="TireCondition">
+                        <select class="form-control" ng-model="TireCondition"  required>
                             <option value=" "></option>
                             <option value="USED">USED</option>
                             <option value="NEW">NEW</option>
