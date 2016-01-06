@@ -40,7 +40,8 @@ angular.module('UVSClientApp')
         };
 
         $scope.LanguageSelect = function (event) {
-            $scope.CountryLanguage += "/" + event.target.text; //keep the country, add the language          
+            $scope.CountryLanguage += "/" + event.target.text; //keep the country, add the language
+            $scope.Language = event.target.text;
         };
 
         $scope.ShowAddCar = function () {
@@ -58,6 +59,25 @@ angular.module('UVSClientApp')
                 }
             });
         };
+        
+         $rootScope.$on("UpdateSearchFormHistory", function () { //Listen for trigger
+            $scope.SearchCriteriaController = Scopes.get('SearchHistoryController').SearchCriteria;
+            $scope.VehicleType = $scope.SearchCriteriaController[10];
+            $scope.Country = $scope.SearchCriteriaController[1];
+             $scope.CountryLanguage = $scope.Country +"/"+$scope.Language;
+            
+            
+        });
+        
+           $rootScope.$on("UpdateSearchFormSaved", function () { //Listen for trigger
+            $scope.SearchCriteriaController = Scopes.get('SearchHistoryController').SearchCriteria;
+            $scope.VehicleType = $scope.SearchCriteriaController.request.vehicleType;
+            $scope.Country = $scope.SearchCriteriaController.request.location;
+            $scope.CountryLanguage = $scope.Country +"/"+$scope.Language;
+            
+            
+        });
+        
     }]);
 
 
@@ -106,7 +126,7 @@ angular.module('UVSClientApp')
 
 
 angular.module('UVSClientApp')
-    .controller('CarSearchController', ['$scope', 'Scopes', 'CarSearchService', function ($scope, Scopes, CarSearchService) {
+    .controller('CarSearchController', ['$scope','$rootScope', 'Scopes', 'CarSearchService', function ($scope, $rootScope, Scopes, CarSearchService) {
         Scopes.store('CarSearchController', $scope);
         $scope.cars = [];
 
@@ -131,14 +151,47 @@ angular.module('UVSClientApp')
                 }
             })
         };
+        
+        
+        $rootScope.$on("UpdateSearchFormHistory", function () { //Listen for trigger
+            $scope.SearchCriteriaController = Scopes.get('SearchHistoryController').SearchCriteria;
+            $scope.FIN = $scope.SearchCriteriaController[0];
+            $scope.model = $scope.SearchCriteriaController[2];
+            $scope.FuelType  = $scope.SearchCriteriaController[9];
+            $scope.CapacityMin = $scope.SearchCriteriaController[3];
+            $scope.CapacityMax = $scope.SearchCriteriaController[4];
+            $scope.YearMin = $scope.SearchCriteriaController[5];
+            $scope.YearMax = $scope.SearchCriteriaController[6];
+            $scope.PriceMin = $scope.SearchCriteriaController[7];
+            $scope.PriceMax = $scope.SearchCriteriaController[8];
+            
+        });
+        
+         $rootScope.$on("UpdateSearchFormSaved", function () { //Listen for trigger
+            $scope.SearchCriteriaController = Scopes.get('SearchHistoryController').SearchCriteria;
+            $scope.FIN = $scope.SearchCriteriaController.request.fin;
+            $scope.model = $scope.SearchCriteriaController.request.model;
+            $scope.FuelType  = $scope.SearchCriteriaController.request.fuelType;
+            $scope.CapacityMin = $scope.SearchCriteriaController.request.minCapacity;
+            $scope.CapacityMax = $scope.SearchCriteriaController.request.maxCapacity;
+            $scope.YearMin = $scope.SearchCriteriaController.request.minYear;
+            $scope.YearMax = $scope.SearchCriteriaController.request.maxYear;
+            $scope.PriceMin = $scope.SearchCriteriaController.request.minPrice;
+            $scope.PriceMax = $scope.SearchCriteriaController.request.maxPrice;
+            
+        });
 
            }]);
 
 
 
 angular.module('UVSClientApp')
-    .controller('SearchHistoryController', ['$http', '$scope', '$rootScope', 'SearchHistoryService', function ($http, $scope, $rootScope, SearchHistoryService) {
+    .controller('SearchHistoryController', ['$http','Scopes', '$scope', '$rootScope', 'CarSearchService', 'SearchHistoryService', function ($http, Scopes, $scope, $rootScope, CarSearchService, SearchHistoryService) {
+        Scopes.store('SearchHistoryController', $scope);
+        
+        
         //get search history on page load
+        
 
         $scope.GetSavedSearch = function () {
             $http.get('http://localhost:9080/client-service/rest/vehicle/search/history/saved')
@@ -170,7 +223,24 @@ angular.module('UVSClientApp')
                 $scope.searches = response.data;
                 console.log(response.data);
             });
-        })
+        });
+        
+         $scope.UpdateSearchFormHistory = function (searchVar) {
+            CarSearchService.UpdateSearchFormHistoryFunction(searchVar, function (response) {
+                $scope.SearchCriteria = response;
+                $rootScope.$emit("UpdateSearchFormHistory", {}); //trigger function on CarResultController
+            }); 
+               
+            
+            };
+        
+          $scope.UpdateSearchFormSaved = function (searchVar) {           
+                $scope.SearchCriteria = searchVar;
+              console.log($scope.SearchCriteria);
+                $rootScope.$emit("UpdateSearchFormSaved", {}); //trigger function on CarSearchController and HeaderController   
+            
+            };
+        
     }]);
 
 

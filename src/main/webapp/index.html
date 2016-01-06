@@ -9,7 +9,7 @@
             <h3>Search history</h3>
             <div class="well table-responsive">
                 <ul class="list-group">
-                    <li class="list-group-item" data-ng-repeat="search in searches"> {{search}}
+                    <li class="list-group-item" data-ng-repeat="search in searches track by $index" data-ng-click="UpdateSearchFormHistory(search)"> {{search}}
                     </li>
                 </ul>
 
@@ -36,7 +36,7 @@
             <h3>Search Savings</h3>
             <div class="well table-responsive">
                 <ul class="list-group" ng-init="GetSavedSearch()">
-                    <li class="list-group-item" data-ng-repeat="savedSearch in savedSearchInfos">Name:{{savedSearch.name}} FIN:{{savedSearch.request.fin}}; Vehicle Type:{{savedSearch.request.vehicleType}}; Model:{{savedSearch.request.model}}; Fuel Type:{{savedSearch.request.fuelType}}; Location:{{savedSearch.request.location}}
+                    <li class="list-group-item" data-ng-repeat="savedSearch in savedSearchInfos track by $index" data-ng-click="UpdateSearchFormSaved(savedSearch)">Name:{{savedSearch.name}}; FIN:{{savedSearch.request.fin}}; Vehicle Type:{{savedSearch.request.vehicleType}}; Model:{{savedSearch.request.model}}; Fuel Type:{{savedSearch.request.fuelType}}; Location:{{savedSearch.request.location}}
                     </li>
                 </ul>
             </div>
