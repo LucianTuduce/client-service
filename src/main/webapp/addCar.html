@@ -10,7 +10,7 @@
                     <div class="col-sm-9">
                         <input type="text" class="form-control" ng-model="FIN">
                         </input>
-                    <span ng-bind="finAddCarVar"/>
+                    <span> {{finAddCarVar}} </span>
                     </div>
                 </div>
 
@@ -139,7 +139,10 @@
                             <option value="NEW">NEW</option>
                             <option value="SLIGHTY_USED">SLIGHTY_USED</option>
                         </select>
+                        <span class="bg-danger"> {{validAddCarVar}} </span>
                     </div>
+                    
+                   
                 </div>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-12">
