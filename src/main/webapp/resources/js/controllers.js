@@ -84,6 +84,22 @@ angular.module('UVSClientApp')
 
 angular.module('UVSClientApp')
     .controller('AddCarController', ['$scope', '$rootScope', 'Scopes', 'AddCarService', '$location', function ($scope, $rootScope, Scopes, AddCarService, $location) {
+        
+        $scope.Models = [
+            {"value":"Volskwagen Passat", "display":"Volskwagen Passat", "make":"CAR"},
+            {"value":"Dacia Logan", "display":"Dacia Logan", "make":"CAR"},
+            {"value":"Mercedes Sprinter", "display":"Mercedes Sprinter", "make":"VAN"},
+            {"value":"Volskwagen Transporter", "display":"Volskwagen Transporter", "make":"VAN"},
+            {"value":"Volvo Truck", "display":"Volvo Truck", "make":"TRUCK"},
+            {"value":"Mercedes Truck", "display":"Mercedes Truck", "make":"TRUCK"},
+        ];
+        
+        $scope.VehicleTypes = [
+            {"value":"CAR", "display":"CAR"},
+            {"value":"VAN", "display":"VAN"},
+            {"value":"TRUCK", "display":"TRUCK"},
+        ];
+        
         $rootScope.$on("ShowAddCar", function () { //Listen for trigger
             $scope.AddCarVar = 1;
         });
