@@ -84,7 +84,7 @@ public class SearchResponseService {
 					+ request.getMaxYear() + ", Min_Price: "
 					+ request.getMinPrice() + ", Max_Price: "
 					+ request.getMaxPrice() + ", Fuel_Type: "
-					+ request.getFuelType() + " , Vehicle_Type: "
+					+ request.getFuelType() + ", Vehicle_Type: "
 					+ request.getVehicleType();
 			userSearchHistory.add(search);
 		}
