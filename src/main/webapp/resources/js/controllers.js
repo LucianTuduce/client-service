@@ -60,11 +60,20 @@ angular.module('UVSClientApp')
             });
         };
         
-         $rootScope.$on("UpdateSearchForm", function () { //Listen for trigger
+         $rootScope.$on("UpdateSearchFormHistory", function () { //Listen for trigger
             $scope.SearchCriteriaController = Scopes.get('SearchHistoryController').SearchCriteria;
             $scope.VehicleType = $scope.SearchCriteriaController[10];
             $scope.Country = $scope.SearchCriteriaController[1];
              $scope.CountryLanguage = $scope.Country +"/"+$scope.Language;
+            
+            
+        });
+        
+           $rootScope.$on("UpdateSearchFormSaved", function () { //Listen for trigger
+            $scope.SearchCriteriaController = Scopes.get('SearchHistoryController').SearchCriteria;
+            $scope.VehicleType = $scope.SearchCriteriaController.request.vehicleType;
+            $scope.Country = $scope.SearchCriteriaController.request.location;
+            $scope.CountryLanguage = $scope.Country +"/"+$scope.Language;
             
             
         });
@@ -128,7 +137,7 @@ angular.module('UVSClientApp')
         };
         
         
-        $rootScope.$on("UpdateSearchForm", function () { //Listen for trigger
+        $rootScope.$on("UpdateSearchFormHistory", function () { //Listen for trigger
             $scope.SearchCriteriaController = Scopes.get('SearchHistoryController').SearchCriteria;
             $scope.FIN = $scope.SearchCriteriaController[0];
             $scope.model = $scope.SearchCriteriaController[2];
@@ -139,6 +148,20 @@ angular.module('UVSClientApp')
             $scope.YearMax = $scope.SearchCriteriaController[6];
             $scope.PriceMin = $scope.SearchCriteriaController[7];
             $scope.PriceMax = $scope.SearchCriteriaController[8];
+            
+        });
+        
+         $rootScope.$on("UpdateSearchFormSaved", function () { //Listen for trigger
+            $scope.SearchCriteriaController = Scopes.get('SearchHistoryController').SearchCriteria;
+            $scope.FIN = $scope.SearchCriteriaController.request.fin;
+            $scope.model = $scope.SearchCriteriaController.request.model;
+            $scope.FuelType  = $scope.SearchCriteriaController.request.fuelType;
+            $scope.CapacityMin = $scope.SearchCriteriaController.request.minCapacity;
+            $scope.CapacityMax = $scope.SearchCriteriaController.request.maxCapacity;
+            $scope.YearMin = $scope.SearchCriteriaController.request.minYear;
+            $scope.YearMax = $scope.SearchCriteriaController.request.maxYear;
+            $scope.PriceMin = $scope.SearchCriteriaController.request.minPrice;
+            $scope.PriceMax = $scope.SearchCriteriaController.request.maxPrice;
             
         });
 
@@ -186,26 +209,21 @@ angular.module('UVSClientApp')
             });
         });
         
-         $scope.UpdateSearchForm = function (searchVar) {
-            CarSearchService.UpdateSearchFormFunction(searchVar, function (response) {
+         $scope.UpdateSearchFormHistory = function (searchVar) {
+            CarSearchService.UpdateSearchFormHistoryFunction(searchVar, function (response) {
                 $scope.SearchCriteria = response;
-                $rootScope.$emit("UpdateSearchForm", {}); //trigger function on CarResultController
+                $rootScope.$emit("UpdateSearchFormHistory", {}); //trigger function on CarResultController
             }); 
-                 /*   {
-                 if (status == 200) {
-                    console.log("form update success");
-                    // console.log(response.vehicleEnhanceds);
-                    $scope.VehicleInfo = response.vehicleEnhanceds;
-                    $rootScope.$emit("CarExtraInfo", {}); //trigger function on CarResultController
-                } else {
-                    console.log("form update error");
-                } }*/
+               
             
             };
         
-        
-        
-        
+          $scope.UpdateSearchFormSaved = function (searchVar) {           
+                $scope.SearchCriteria = searchVar;
+              console.log($scope.SearchCriteria);
+                $rootScope.$emit("UpdateSearchFormSaved", {}); //trigger function on CarSearchController and HeaderController   
+            
+            };
         
     }]);
 

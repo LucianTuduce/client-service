@@ -211,7 +211,7 @@ angular.module('UVSClientApp').factory('CarSearchService', ['$http', '$rootScope
             });
         };
         
-        service.UpdateSearchFormFunction = function (SearchVar, callback) {
+        service.UpdateSearchFormHistoryFunction = function (SearchVar, callback) {
             // split the string that was delivered from the server
             var SearchTempArrayVar = SearchVar.split(", "); //split the parameters
             var SearchArrayVar= [];
