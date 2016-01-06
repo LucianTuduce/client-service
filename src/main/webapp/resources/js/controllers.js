@@ -110,7 +110,15 @@ angular.module('UVSClientApp')
             AddCarService.AddCar($scope.FIN, $scope.OwnerName, $scope.DealerName, $scope.Country, $scope.VehicleType, $scope.Model, $scope.FabricationYear, $scope.Price, $scope.FuelType, $scope.Capacity, $scope.Weight, $scope.Height, $scope.Length, $scope.Suspension, $scope.TireCondition, function (response, status, headers, config) {
                 if (status == 200) {
                     console.log("add car success");
+                    $scope.addCarForm.$setPristine(); //reset form
+// Since Angular 1.3, set back to untouched state.
+$scope.addCarForm.$setUntouched();
                     $scope.AddCarVar = 0;
+                    $scope.addCarForm.$setPristine(); //reset form
+// Since Angular 1.3, set back to untouched state.
+$scope.addCarForm.$setUntouched();
+                    
+                    
                 } else if(status === 412){
                     $scope.finAddCarVar = "FIN is not unique";
                 } else if(status === 406){

@@ -26,6 +26,10 @@ input.ng-invalid.ng-dirty {
 }
 
 
+select.ng-invalid.ng-dirty {
+  border :1px solid red !important;
+}
+
 
 /*  Bootstrap Clearfix */
 

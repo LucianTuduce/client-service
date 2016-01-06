@@ -14,6 +14,9 @@
 input.ng-invalid.ng-dirty {
   border: 1px solid red !important; }
 
+select.ng-invalid.ng-dirty {
+  border: 1px solid red !important; }
+
 /*  Bootstrap Clearfix */
 /*  Tablet  */
 @media (min-width: 767px) {
