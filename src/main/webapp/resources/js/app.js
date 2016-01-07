@@ -5,7 +5,7 @@ angular.module('UVSClientApp', []);
 
  
 angular.module('loginApp', [
-    'UVSClientApp', 'ngRoute'
+    'UVSClientApp', 'ngRoute', 'ui.bootstrap'
 ])
   
 .config(['$routeProvider', function ($routeProvider) {

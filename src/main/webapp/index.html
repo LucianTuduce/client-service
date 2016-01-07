@@ -51,6 +51,9 @@
                 <div class="col-sm-12" ng-include="'extraInfo.html'">
                 </div>
             </div>
+            
+            
+            
             <table class="table">
                 <thead>
                     <th></th>
@@ -60,7 +63,7 @@
                     <th>Fuel Type</th>
                     <th>Capacity</th>
                     <th>Year</th>
-                    <th>Location(Country)</th>
+                    <th>Location</th>
                     <th>Price</th>
                 </thead>
                 <tbody>
@@ -77,6 +80,26 @@
                     </tr>
                 </tbody>
             </table>
+            
+            
+            <div class="pagination pull-right">
+                            <ul>
+                                <li>
+                                    <a href ng-click="prevPage()">« Prev</a>
+                                </li>
+                            
+                                <li >
+                                    <a href >{{currentPage}}</a>
+                                </li>
+                             
+                                <li>
+                                    <a href ng-click="nextPage()">Next »</a>
+                                </li>
+                            </ul>
+                        </div>
+            
+            
+            
         </div>
     </div>
 </div>

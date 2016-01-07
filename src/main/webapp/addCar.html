@@ -52,7 +52,7 @@
                 <label class="col-sm-3 control-label">Model</label>
                 <div class="col-sm-9">
                     <select class="form-control" name="Model" ng-model="addCarFormData.Model" ng-options="option.value as option.display for option in Models | filter:{make:addCarFormData.VehicleType}" required>
-                        <option ng-disabled="true" ng-selected="true" value="">Select Vehicle Type</option>
+                        <option ng-disabled="true" ng-selected="true" value="">Select Model</option>
                     </select>
                     <div ng-show="addCarForm.Model.$error.required && addCarForm.Model.$touched" class="text-danger">Model is required</div>
                 </div>

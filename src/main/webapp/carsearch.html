@@ -1,4 +1,4 @@
-<form class="form-horizontal" ng-controller="CarSearchController">
+<form class="form-horizontal" name="CarSearchForm" ng-controller="CarSearchController">
     <div class="form-group">
         <div class="col-sm-3">
             <label class="control-label">FIN</label>
@@ -12,14 +12,14 @@
             <label class="control-label">Model</label>
         </div>
         <div class="col-sm-9">
-            <select class="form-control" ng-model="model" >
-                <option disabled="disabled" selected="selected">Choose option</option>
-                <option value="Volskwagen Passat">Volskwagen Passat</option>
+            <select class="form-control" ng-model="model" ng-options="option.value as option.display for option in Models | filter:{make:VehicleType}">
+                <option ng-disabled="true" ng-selected="true" value="">Choose option</option>
+                <!--<option value="Volskwagen Passat">Volskwagen Passat</option>
                 <option value="Mercedes Sprinter">Mercedes Sprinter</option>
                 <option value="Dacia Logan">Dacia Logan</option>
                 <option value="Volvo Truck">Volvo Truck</option>
                 <option value="Volskwagen Transporter">Volskwagen Transporter</option>
-                <option value="Mercedes Truck">Mercedes Truck</option>
+                <option value="Mercedes Truck">Mercedes Truck</option> -->
             </select>
         </div>
     </div>
@@ -28,8 +28,8 @@
             <label class="control-label">Fuel Type</label>
         </div>
         <div class="col-sm-9">
-            <select class="form-control" ng-model="FuelType"  >
-                <option selected="selected" disabled="disabled">Choose option</option>
+            <select class="form-control" ng-model="FuelType">
+                <option ng-disabled="true" ng-selected="true" value="">Choose option</option>
                 <option value="DIESEL">Diesel</option>
                 <option value="GASOLINE">Gasoline</option>
             </select>
@@ -40,8 +40,10 @@
             <label class="control-label">Capacity</label>
         </div>
         <div class="col-sm-9 ">
-            <input type="text" size="4" class="form-control" placeholder="min" ng-model="CapacityMin" />cm<sup>3</sup>-
-            <input type="text" size="4" class="form-control" placeholder="max" ng-model="CapacityMax" />cm<sup>3</sup>
+            <input type="text" size="4" class="form-control" placeholder="min" name="CapacityMin" ng-model="CapacityMin" ng-pattern="/^\d+$/" /> cm<sup>3</sup> - 
+            <input type="text" size="4" class="form-control" placeholder="max" name="CapacityMax" ng-model="CapacityMax" ng-pattern="/^\d+$/" /> cm<sup>3</sup>
+            <div ng-show="CarSearchForm.CapacityMin.$error.pattern && CarSearchForm.CapacityMin.$touched" class="text-danger">Min Capacity must be a number!</div>
+            <div ng-show="CarSearchForm.CapacityMax.$error.pattern && CarSearchForm.CapacityMax.$touched" class="text-danger">Max Capacity must be a number!</div>
         </div>
     </div>
     <div class="form-group form-inline">
@@ -49,8 +51,10 @@
             <label class=" control-label">Year</label>
         </div>
         <div class="col-sm-9">
-            <input type="number" size="4" class="form-control" placeholder="min" ng-model="YearMin" />-
-            <input type="number" size="4" class="form-control" placeholder="max" ng-model="YearMax" />
+            <input type="text" size="4" class="form-control" placeholder="min" name="YearMin" ng-model="YearMin" ng-pattern="/^\d+$/" />-
+            <input type="text" size="4" class="form-control" placeholder="max" name="YearMax" ng-model="YearMax" ng-pattern="/^\d+$/" />
+            <div ng-show="CarSearchForm.YearMin.$error.pattern && CarSearchForm.YearMin.$touched" class="text-danger">Min Year must be a number!</div>
+            <div ng-show="CarSearchForm.YearMax.$error.pattern && CarSearchForm.YearMax.$touched" class="text-danger">Max Year must be a number!</div>
         </div>
     </div>
     <div class="form-group form-inline">
@@ -58,20 +62,22 @@
             <label class="control-label">Price</label>
         </div>
         <div class="col-sm-9">
-            <input type="number" size="4" class="form-control" placeholder="min" ng-model="PriceMin" />-
-            <input type="number" size="4" class="form-control" placeholder="max" ng-model="PriceMax" />
+            <input type="text" size="4" class="form-control" placeholder="min" name="PriceMin" ng-model="PriceMin" ng-pattern="/^\d+$/" /> &euro; - 
+            <input type="text" size="4" class="form-control" placeholder="max" name="PriceMax" ng-model="PriceMax" ng-pattern="/^\d+$/" /> &euro;
+            <div ng-show="CarSearchForm.PriceMin.$error.pattern && CarSearchForm.PriceMin.$touched" class="text-danger">Min Price must be a number!</div>
+            <div ng-show="CarSearchForm.PriceMax.$error.pattern && CarSearchForm.PriceMax.$touched" class="text-danger">Max Price must be a number!</div>
         </div>
     </div>
     <div class="form-group">
         <div class="col-sm-12">
-            <button class="btn btn-primary" value="Search" ng-click="search()">Search
+            <button class="btn btn-primary" value="Search" ng-disabled="CarSearchForm.$invalid" ng-click="search()">Search
             </button>
         </div>
     </div>
     <div class="form-group form-inline">
         <label class="control-label">Save search as</label>
         <input type="text" size="8" class="form-control" placeholder="" ng-model="SaveName" />
-        <button class="btn btn-primary" value="Save Search" ng-click="saveSearch()">Save Search
+        <button class="btn btn-primary" value="Save Search" ng-click="saveSearch()"  ng-disabled="CarSearchForm.$invalid">Save Search
         </button>
     </div>
 
