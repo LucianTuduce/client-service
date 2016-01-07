@@ -226,7 +226,9 @@ public class SearchResponseService {
 			}
 		}
 		
-		initUserSearchCache(search, accountToken);
+		if(search.getPagination().getPageNumber() == 1){
+			initUserSearchCache(search, accountToken);
+		}
 		return searchResponse;
 	}
 

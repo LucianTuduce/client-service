@@ -91,8 +91,8 @@ angular.module('UVSClientApp').factory('AddCarService', ['$http', '$rootScope', 
 
 
 
-angular.module('UVSClientApp').factory('CarSearchService', ['$http', '$rootScope', '$timeout',
-    function ($http, $rootScope, $timeout) {
+angular.module('UVSClientApp').factory('CarSearchService', ['$http', '$rootScope', '$timeout', 'Scopes',
+    function ($http, $rootScope, $timeout, Scopes) {
         var service = {};
 
         service.CarSearch = function (FINVar, modelVar, FuelTypeVar, CapacityMinVar, CapacityMaxVar, YearMinVar, YearMaxVar, PriceMinVar, PriceMaxVar, CountryVar, VehicleTypeVar, callback) {
@@ -141,7 +141,7 @@ angular.module('UVSClientApp').factory('CarSearchService', ['$http', '$rootScope
                 vehicleType: VehicleTypeVar,
                 //vehicleType: Scopes.get('HeaderController').vehicleType,
                 pagination: {
-                    pageNumber: 1,
+                    pageNumber: Scopes.get('CarResultController').currentPage,
                     elemetsPerPage: 20
                 }
             }).success(function (response, status, headers, config) {

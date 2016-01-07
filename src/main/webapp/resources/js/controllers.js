@@ -25,13 +25,18 @@ angular.module('UVSClientApp')
 angular.module('UVSClientApp')
     .controller('HeaderController', ['$scope', '$rootScope', 'Scopes', 'CarSearchService', 'AuthenticationService', '$location', function ($scope, $rootScope, Scopes, CarSearchService, AuthenticationService, $location) {
         Scopes.store('HeaderController', $scope);
-        $scope.VehicleType = "Vehicle Type";
-        $scope.CountryLanguage = "Country/Language"
+        //default values
+        $scope.VehicleType = "CAR";
+        $scope.Country = "Germany";
+        $scope.Language = "German";
+        $scope.CountryLanguage = $scope.Country + "/" + $scope.Language;
 
         var CountryVar = "";
         var LanguageVar = "";
+
         $scope.VehicleTypeSelect = function (event) {
             $scope.VehicleType = event.target.text;
+            $rootScope.$emit("UpdateVehicleType", {}); //to update vehicle type in car search controller and list of available models
         };
 
         $scope.CountrySelect = function (event) {
@@ -163,8 +168,8 @@ angular.module('UVSClientApp')
             //$scope.dataLoading = true;
             AddCarService.AddCar($scope.addCarFormData.FIN, $scope.addCarFormData.OwnerName, $scope.addCarFormData.DealerName, $scope.addCarFormData.Country, $scope.addCarFormData.VehicleType, $scope.addCarFormData.Model, $scope.addCarFormData.FabricationYear, $scope.addCarFormData.Price, $scope.addCarFormData.FuelType, $scope.addCarFormData.Capacity, $scope.addCarFormData.Weight, $scope.addCarFormData.Height, $scope.addCarFormData.Length, $scope.addCarFormData.Suspension, $scope.addCarFormData.TireCondition, function (response, status, headers, config) {
                 if (status == 200) {
-                    console.log("add car success");                    
-                    
+                    console.log("add car success");
+
                     $scope.reset();
                     $scope.AddCarVar = 0;
 
@@ -177,15 +182,15 @@ angular.module('UVSClientApp')
                 }
             });
         };
-        
-        $scope.reset = function() {
-                    $scope.addCarFormData = angular.copy($scope.originalAddCarFormData); //reset fields on form
 
-                    $scope.addCarForm.$setPristine(); //reset form
-                    // Since Angular 1.3, set back to untouched state.
-                    $scope.addCarForm.$setUntouched();
-                    }
-        
+        $scope.reset = function () {
+            $scope.addCarFormData = angular.copy($scope.originalAddCarFormData); //reset fields on form
+
+            $scope.addCarForm.$setPristine(); //reset form
+            // Since Angular 1.3, set back to untouched state.
+            $scope.addCarForm.$setUntouched();
+        }
+
     }]);
 
 
@@ -195,11 +200,58 @@ angular.module('UVSClientApp')
         Scopes.store('CarSearchController', $scope);
         $scope.cars = [];
 
+        $scope.VehicleType = Scopes.get('HeaderController').VehicleType;
+
+        $rootScope.$on("UpdateVehicleType", function () { //Listen for trigger. Update Vehicle Type if it was changed in header
+            $scope.VehicleType = Scopes.get('HeaderController').VehicleType;
+
+        });
+
+
+        $scope.Models = [
+            {
+                "value": "Volskwagen Passat",
+                "display": "Volskwagen Passat",
+                "make": "CAR"
+            },
+            {
+                "value": "Dacia Logan",
+                "display": "Dacia Logan",
+                "make": "CAR"
+            },
+            {
+                "value": "Mercedes Sprinter",
+                "display": "Mercedes Sprinter",
+                "make": "VAN"
+            },
+            {
+                "value": "Volskwagen Transporter",
+                "display": "Volskwagen Transporter",
+                "make": "VAN"
+            },
+            {
+                "value": "Volvo Truck",
+                "display": "Volvo Truck",
+                "make": "TRUCK"
+            },
+            {
+                "value": "Mercedes Truck",
+                "display": "Mercedes Truck",
+                "make": "TRUCK"
+            },
+        ];
+
+
+
+
         $scope.search = function () {
-            CarSearchService.CarSearch($scope.FIN, $scope.model, $scope.FuelType, $scope.CapacityMin, $scope.CapacityMax, $scope.YearMin, $scope.YearMax, $scope.PriceMin, $scope.PriceMax, Scopes.get('HeaderController').Country, Scopes.get('HeaderController').VehicleType, function (response, status, headers, config) {
+            $rootScope.$emit("ResetPageNumber", {});
+            CarSearchService.CarSearch($scope.FIN, $scope.model, $scope.FuelType, $scope.CapacityMin, $scope.CapacityMax, $scope.YearMin, $scope.YearMax, $scope.PriceMin, $scope.PriceMax, Scopes.get('HeaderController').Country, $scope.VehicleType, function (response, status, headers, config) {
                 if (status == 200) {
                     console.log("Car Search Result success");
-                    $scope.carsRetrieved = response.vehicles;
+                    $scope.carsRetrieved = response.vehicles;  
+                    $rootScope.$emit("CarSearchHistoryMethod", {}); //trigger function on CarResultController
+                    
                 } else {
                     console.log("Car Search Result could not be retrieved");
                 }
@@ -210,7 +262,6 @@ angular.module('UVSClientApp')
             CarSearchService.SaveCarSearch($scope.FIN, $scope.model, $scope.FuelType, $scope.CapacityMin, $scope.CapacityMax, $scope.YearMin, $scope.YearMax, $scope.PriceMin, $scope.PriceMax, Scopes.get('HeaderController').Country, Scopes.get('HeaderController').VehicleType, $scope.SaveName, function (response, status, headers, config) {
                 if (status == 200) {
                     console.log("Save Search Result success");
-                    //$scope.carsRetrieved = response.vehicles;
                 } else {
                     console.log("Save Search error");
                 }
@@ -245,6 +296,21 @@ angular.module('UVSClientApp')
             $scope.PriceMax = $scope.SearchCriteriaController.request.maxPrice;
 
         });
+
+        $rootScope.$on("PaginationModified", function () { //Listen for trigger
+            CarSearchService.CarSearch($scope.FIN, $scope.model, $scope.FuelType, $scope.CapacityMin, $scope.CapacityMax, $scope.YearMin, $scope.YearMax, $scope.PriceMin, $scope.PriceMax, Scopes.get('HeaderController').Country, $scope.VehicleType, function (response, status, headers, config) {
+                if (status == 200) {
+                    console.log("Next page success");
+                    $scope.carsRetrieved = response.vehicles;
+                    $rootScope.$emit("CarSearchMethod", {});
+                } else {
+                    console.log("Next Page could not be retrieved");
+                }
+            });
+
+        });
+
+
 
            }]);
 
@@ -283,10 +349,10 @@ angular.module('UVSClientApp')
         });
 
         //reload the search history once a new search is made
-        $rootScope.$on("CarSearchMethod", function () { //Listen for trigger
+        $rootScope.$on("CarSearchHistoryMethod", function () { //Listen for trigger
             SearchHistoryService.GetSearchHistory(function (response) {
                 $scope.searches = response.data;
-                console.log(response.data);
+                // console.log(response.data);
             });
         });
 
@@ -313,9 +379,36 @@ angular.module('UVSClientApp')
     .controller('CarResultController', ['$scope', 'Scopes', '$rootScope', 'EnhancedVehicleService', function ($scope, Scopes, $rootScope, EnhancedVehicleService) {
         //load the search results once a new search is made
         Scopes.store('CarResultController', $scope);
+
+        $scope.currentPage = 1;
+        $scope.totalItems = 10000;
+
+        $scope.prevPage = function () {
+            if ($scope.currentPage > 1) {
+                $scope.currentPage -= 1;
+                $rootScope.$emit("PaginationModified", {});
+            }
+        };
+
+
+        $scope.nextPage = function () {
+            $scope.currentPage += 1;
+            $rootScope.$emit("PaginationModified", {});
+
+
+        };
+
+
         $rootScope.$on("CarSearchMethod", function () { //Listen for trigger
             $scope.cars = $rootScope.carsRetrieved;
         });
+        
+        $rootScope.$on("ResetPageNumber", function () {
+            $scope.currentPage = 1;
+
+        });
+
+        
 
         $scope.CarInfo = function (FIN) {
             EnhancedVehicleService.GetCarInfo(FIN, function (response, status, headers, config) {
