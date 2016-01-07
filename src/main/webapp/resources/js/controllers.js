@@ -27,7 +27,7 @@ angular.module('UVSClientApp')
         Scopes.store('HeaderController', $scope);
         $scope.VehicleType = "Vehicle Type";
         $scope.CountryLanguage = "Country/Language"
-          
+
         var CountryVar = "";
         var LanguageVar = "";
         $scope.VehicleTypeSelect = function (event) {
@@ -59,47 +59,101 @@ angular.module('UVSClientApp')
                 }
             });
         };
-        
-         $rootScope.$on("UpdateSearchFormHistory", function () { //Listen for trigger
+
+        $rootScope.$on("UpdateSearchFormHistory", function () { //Listen for trigger
             $scope.SearchCriteriaController = Scopes.get('SearchHistoryController').SearchCriteria;
             $scope.VehicleType = $scope.SearchCriteriaController[10];
             $scope.Country = $scope.SearchCriteriaController[1];
-             $scope.CountryLanguage = $scope.Country +"/"+$scope.Language;
-            
-            
+            $scope.CountryLanguage = $scope.Country + "/" + $scope.Language;
+
+
         });
-        
-           $rootScope.$on("UpdateSearchFormSaved", function () { //Listen for trigger
+
+        $rootScope.$on("UpdateSearchFormSaved", function () { //Listen for trigger
             $scope.SearchCriteriaController = Scopes.get('SearchHistoryController').SearchCriteria;
             $scope.VehicleType = $scope.SearchCriteriaController.request.vehicleType;
             $scope.Country = $scope.SearchCriteriaController.request.location;
-            $scope.CountryLanguage = $scope.Country +"/"+$scope.Language;
-            
-            
+            $scope.CountryLanguage = $scope.Country + "/" + $scope.Language;
+
+
         });
-        
+
     }]);
 
 
 
 angular.module('UVSClientApp')
     .controller('AddCarController', ['$scope', '$rootScope', 'Scopes', 'AddCarService', '$location', function ($scope, $rootScope, Scopes, AddCarService, $location) {
-        
+
+        $scope.addCarFormData = {
+            FIN: "",
+            OwnerName: "",
+            DealerName: "",
+            Country: "",
+            VehicleType: "",
+            Model: null,
+            FabricationYear: null,
+            Price: null,
+            FuelType: null,
+            Capacity: null,
+            Weight: null,
+            Height: null,
+            Length: null,
+            Suspension: null,
+            TireCondition: null
+        }
+
+        $scope.originalAddCarFormData = angular.copy($scope.addCarFormData);
+
+
         $scope.Models = [
-            {"value":"Volskwagen Passat", "display":"Volskwagen Passat", "make":"CAR"},
-            {"value":"Dacia Logan", "display":"Dacia Logan", "make":"CAR"},
-            {"value":"Mercedes Sprinter", "display":"Mercedes Sprinter", "make":"VAN"},
-            {"value":"Volskwagen Transporter", "display":"Volskwagen Transporter", "make":"VAN"},
-            {"value":"Volvo Truck", "display":"Volvo Truck", "make":"TRUCK"},
-            {"value":"Mercedes Truck", "display":"Mercedes Truck", "make":"TRUCK"},
+            {
+                "value": "Volskwagen Passat",
+                "display": "Volskwagen Passat",
+                "make": "CAR"
+            },
+            {
+                "value": "Dacia Logan",
+                "display": "Dacia Logan",
+                "make": "CAR"
+            },
+            {
+                "value": "Mercedes Sprinter",
+                "display": "Mercedes Sprinter",
+                "make": "VAN"
+            },
+            {
+                "value": "Volskwagen Transporter",
+                "display": "Volskwagen Transporter",
+                "make": "VAN"
+            },
+            {
+                "value": "Volvo Truck",
+                "display": "Volvo Truck",
+                "make": "TRUCK"
+            },
+            {
+                "value": "Mercedes Truck",
+                "display": "Mercedes Truck",
+                "make": "TRUCK"
+            },
         ];
-        
+
         $scope.VehicleTypes = [
-            {"value":"CAR", "display":"CAR"},
-            {"value":"VAN", "display":"VAN"},
-            {"value":"TRUCK", "display":"TRUCK"},
+            {
+                "value": "CAR",
+                "display": "CAR"
+            },
+            {
+                "value": "VAN",
+                "display": "VAN"
+            },
+            {
+                "value": "TRUCK",
+                "display": "TRUCK"
+            },
         ];
-        
+
         $rootScope.$on("ShowAddCar", function () { //Listen for trigger
             $scope.AddCarVar = 1;
         });
@@ -107,34 +161,37 @@ angular.module('UVSClientApp')
 
         $scope.addCar = function () {
             //$scope.dataLoading = true;
-            AddCarService.AddCar($scope.FIN, $scope.OwnerName, $scope.DealerName, $scope.Country, $scope.VehicleType, $scope.Model, $scope.FabricationYear, $scope.Price, $scope.FuelType, $scope.Capacity, $scope.Weight, $scope.Height, $scope.Length, $scope.Suspension, $scope.TireCondition, function (response, status, headers, config) {
+            AddCarService.AddCar($scope.addCarFormData.FIN, $scope.addCarFormData.OwnerName, $scope.addCarFormData.DealerName, $scope.addCarFormData.Country, $scope.addCarFormData.VehicleType, $scope.addCarFormData.Model, $scope.addCarFormData.FabricationYear, $scope.addCarFormData.Price, $scope.addCarFormData.FuelType, $scope.addCarFormData.Capacity, $scope.addCarFormData.Weight, $scope.addCarFormData.Height, $scope.addCarFormData.Length, $scope.addCarFormData.Suspension, $scope.addCarFormData.TireCondition, function (response, status, headers, config) {
                 if (status == 200) {
-                    console.log("add car success");
-                    $scope.addCarForm.$setPristine(); //reset form
-// Since Angular 1.3, set back to untouched state.
-$scope.addCarForm.$setUntouched();
+                    console.log("add car success");                    
+                    
+                    $scope.reset();
                     $scope.AddCarVar = 0;
-                    $scope.addCarForm.$setPristine(); //reset form
-// Since Angular 1.3, set back to untouched state.
-$scope.addCarForm.$setUntouched();
-                    
-                    
-                } else if(status === 412){
+
+                } else if (status === 412) {
                     $scope.finAddCarVar = "FIN is not unique";
-                } else if(status === 406){
-                   $scope.validAddCarVar = "Fill all textboxes";
-                } 
-                else {
+                } else if (status === 406) {
+                    $scope.validAddCarVar = "Fill all textboxes";
+                } else {
                     console.log("add car error");
                 }
             });
         };
+        
+        $scope.reset = function() {
+                    $scope.addCarFormData = angular.copy($scope.originalAddCarFormData); //reset fields on form
+
+                    $scope.addCarForm.$setPristine(); //reset form
+                    // Since Angular 1.3, set back to untouched state.
+                    $scope.addCarForm.$setUntouched();
+                    }
+        
     }]);
 
 
 
 angular.module('UVSClientApp')
-    .controller('CarSearchController', ['$scope','$rootScope', 'Scopes', 'CarSearchService', function ($scope, $rootScope, Scopes, CarSearchService) {
+    .controller('CarSearchController', ['$scope', '$rootScope', 'Scopes', 'CarSearchService', function ($scope, $rootScope, Scopes, CarSearchService) {
         Scopes.store('CarSearchController', $scope);
         $scope.cars = [];
 
@@ -159,34 +216,34 @@ angular.module('UVSClientApp')
                 }
             })
         };
-        
-        
+
+
         $rootScope.$on("UpdateSearchFormHistory", function () { //Listen for trigger
             $scope.SearchCriteriaController = Scopes.get('SearchHistoryController').SearchCriteria;
             $scope.FIN = $scope.SearchCriteriaController[0];
             $scope.model = $scope.SearchCriteriaController[2];
-            $scope.FuelType  = $scope.SearchCriteriaController[9];
+            $scope.FuelType = $scope.SearchCriteriaController[9];
             $scope.CapacityMin = $scope.SearchCriteriaController[3];
             $scope.CapacityMax = $scope.SearchCriteriaController[4];
             $scope.YearMin = $scope.SearchCriteriaController[5];
             $scope.YearMax = $scope.SearchCriteriaController[6];
             $scope.PriceMin = $scope.SearchCriteriaController[7];
             $scope.PriceMax = $scope.SearchCriteriaController[8];
-            
+
         });
-        
-         $rootScope.$on("UpdateSearchFormSaved", function () { //Listen for trigger
+
+        $rootScope.$on("UpdateSearchFormSaved", function () { //Listen for trigger
             $scope.SearchCriteriaController = Scopes.get('SearchHistoryController').SearchCriteria;
             $scope.FIN = $scope.SearchCriteriaController.request.fin;
             $scope.model = $scope.SearchCriteriaController.request.model;
-            $scope.FuelType  = $scope.SearchCriteriaController.request.fuelType;
+            $scope.FuelType = $scope.SearchCriteriaController.request.fuelType;
             $scope.CapacityMin = $scope.SearchCriteriaController.request.minCapacity;
             $scope.CapacityMax = $scope.SearchCriteriaController.request.maxCapacity;
             $scope.YearMin = $scope.SearchCriteriaController.request.minYear;
             $scope.YearMax = $scope.SearchCriteriaController.request.maxYear;
             $scope.PriceMin = $scope.SearchCriteriaController.request.minPrice;
             $scope.PriceMax = $scope.SearchCriteriaController.request.maxPrice;
-            
+
         });
 
            }]);
@@ -194,12 +251,12 @@ angular.module('UVSClientApp')
 
 
 angular.module('UVSClientApp')
-    .controller('SearchHistoryController', ['$http','Scopes', '$scope', '$rootScope', 'CarSearchService', 'SearchHistoryService', function ($http, Scopes, $scope, $rootScope, CarSearchService, SearchHistoryService) {
+    .controller('SearchHistoryController', ['$http', 'Scopes', '$scope', '$rootScope', 'CarSearchService', 'SearchHistoryService', function ($http, Scopes, $scope, $rootScope, CarSearchService, SearchHistoryService) {
         Scopes.store('SearchHistoryController', $scope);
-        
-        
+
+
         //get search history on page load
-        
+
 
         $scope.GetSavedSearch = function () {
             $http.get('http://localhost:9080/client-service/rest/vehicle/search/history/saved')
@@ -208,7 +265,7 @@ angular.module('UVSClientApp')
                         $scope.savedSearchInfos = response;
                         console.log($scope.savedSearchInfos);
                     }
-                console.log(response);                
+                    console.log(response);
                 }).error(function (response, status, headers, config) {
                     console.log("Search Save could not be loaded")
 
@@ -216,8 +273,8 @@ angular.module('UVSClientApp')
         };
 
         $rootScope.$on("SaveCarSearch", function () {
-            $scope.GetSavedSearch();                       
-           
+            $scope.GetSavedSearch();
+
         });
 
 
@@ -232,23 +289,23 @@ angular.module('UVSClientApp')
                 console.log(response.data);
             });
         });
-        
-         $scope.UpdateSearchFormHistory = function (searchVar) {
+
+        $scope.UpdateSearchFormHistory = function (searchVar) {
             CarSearchService.UpdateSearchFormHistoryFunction(searchVar, function (response) {
                 $scope.SearchCriteria = response;
                 $rootScope.$emit("UpdateSearchFormHistory", {}); //trigger function on CarResultController
-            }); 
-               
-            
-            };
-        
-          $scope.UpdateSearchFormSaved = function (searchVar) {           
-                $scope.SearchCriteria = searchVar;
-              console.log($scope.SearchCriteria);
-                $rootScope.$emit("UpdateSearchFormSaved", {}); //trigger function on CarSearchController and HeaderController   
-            
-            };
-        
+            });
+
+
+        };
+
+        $scope.UpdateSearchFormSaved = function (searchVar) {
+            $scope.SearchCriteria = searchVar;
+            console.log($scope.SearchCriteria);
+            $rootScope.$emit("UpdateSearchFormSaved", {}); //trigger function on CarSearchController and HeaderController   
+
+        };
+
     }]);
 
 

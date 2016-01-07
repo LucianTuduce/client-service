@@ -1,16 +1,14 @@
 <div ng-controller="AddCarController">
-
     <form name="addCarForm" ng-show="AddCarVar===1" ng-submit="addCar()">
-
         <h3>Add Car</h3>
         <!--First column-->
         <div class="col-sm-6 form-horizontal">
             <div class="form-group">
                 <label class="col-sm-3 control-label">FIN</label>
                 <div class="col-sm-9">
-                    <input type="text" name="FIN" class="form-control" ng-model="FIN" required>
+                    <input type="text" name="FIN" class="form-control" ng-model="addCarFormData.FIN" required>
                     </input>
-                    <div ng-show="addCarForm.FIN.$invalid && !addCarForm.FIN.$pristine" class="text-danger">FIN is required</div>
+                    <div ng-show="addCarForm.FIN.$error.required && addCarForm.FIN.$touched" class="text-danger">FIN is required</div>
                     <span> {{finAddCarVar}} </span>
                 </div>
             </div>
@@ -18,62 +16,63 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">Owner Name</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" name="OwnerName" ng-model="OwnerName" required>
+                    <input type="text" class="form-control" name="OwnerName" ng-model="addCarFormData.OwnerName" required>
                     </input>
-                    <div ng-show="addCarForm.OwnerName.$invalid && !addCarForm.OwnerName.$pristine" class="text-danger">Owner name is required</div>
+                    <div ng-show="addCarForm.OwnerName.$error.required && addCarForm.OwnerName.$touched" class="text-danger">Owner name is required</div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Dealer Name</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" ng-model="DealerName" name="DealerName" required/>
-                    <div ng-show="addCarForm.DealerName.$invalid && !addCarForm.DealerName.$pristine" class="text-danger">Dealer name is required</div>
+                    <input type="text" class="form-control" ng-model="addCarFormData.DealerName" name="DealerName" required/>
+                    <div ng-show="addCarForm.DealerName.$error.required && addCarForm.DealerName.$touched" class="text-danger">Dealer name is required</div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Country</label>
                 <div class="col-sm-9">
-                    <select class="form-control" ng-model="Country" name="Country" required>
-                        <option value=""></option>
+                    <select class="form-control" ng-model="addCarFormData.Country" name="Country" required>
+                        <option ng-disabled="true" ng-selected="true" value="">Select Country</option>
                         <option value="Germany">Germany</option>
                         <option value="Romania">Romania</option>
                     </select>
-                    <div ng-show="addCarForm.Country.$invalid && !addCarForm.Country.$pristine" class="text-danger">Country is required</div>
+                    <div ng-show="addCarForm.Country.$error.required && addCarForm.Country.$touched" class="text-danger">Country is required</div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Vehicle Type</label>
                 <div class="col-sm-9">
-                    <select class="form-control" name="VehicleType" ng-model="VehicleType" ng-options="option.value as option.display for option in VehicleTypes">
-                        <option ng-disabled="true" ng-selected="true" value="">Select a vehicle type</option>
+                    <select class="form-control" name="VehicleType" ng-model="addCarFormData.VehicleType" ng-options="option.value as option.display for option in VehicleTypes" required>
+                        <option ng-disabled="true" ng-selected="true" value="">Select Vehicle Type</option>
                     </select>
-                    <div ng-show="addCarForm.VehicleType.$invalid && !addCarForm.VehicleType.$pristine" class="text-danger">Vehicle Type is required</div>
+                    <div ng-show="addCarForm.VehicleType.$error.required && addCarForm.VehicleType.$touched" class="text-danger">Vehicle Type is required</div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Model</label>
                 <div class="col-sm-9">
-                    <select class="form-control" name="Model" ng-model="Model" ng-options="option.value as option.display for option in Models | filter:{make:VehicleType}">
-                        <option ng-disabled="true" ng-selected="true" value="">Select a model</option>
+                    <select class="form-control" name="Model" ng-model="addCarFormData.Model" ng-options="option.value as option.display for option in Models | filter:{make:addCarFormData.VehicleType}" required>
+                        <option ng-disabled="true" ng-selected="true" value="">Select Vehicle Type</option>
                     </select>
-                    <div ng-show="addCarForm.Model.$invalid && !addCarForm.Model.$pristine" class="text-danger">Model is required</div>
+                    <div ng-show="addCarForm.Model.$error.required && addCarForm.Model.$touched" class="text-danger">Model is required</div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Manufacturing year</label>
                 <div class="col-sm-9">
-                    <input type="text" name="ManufacturingYear" class="form-control" ng-model="FabricationYear" ng-pattern="/^\d+$/" required>
+                    <input type="text" name="ManufacturingYear" class="form-control" ng-model="addCarFormData.FabricationYear" ng-pattern="/^\d+$/" required>
                     </input>
-                    <div ng-show="addCarForm.ManufacturingYear.$invalid && !addCarForm.ManufacturingYear.$pristine" class="text-danger">Manufacturing Year is required</div>
-                    <div ng-show="addCarForm.ManufacturingYear.$error.pattern && !addCarForm.ManufacturingYear.$pristine" class="text-danger">Manufacturing Year must be a number!</div>
+                    <div ng-show="addCarForm.ManufacturingYear.$error.required && addCarForm.ManufacturingYear.$touched" class="text-danger">Manufacturing Year is required</div>
+                    <div ng-show="addCarForm.ManufacturingYear.$error.pattern && addCarForm.ManufacturingYear.$touched" class="text-danger">Manufacturing Year must be a number!</div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Price</label>
                 <div class="col-sm-9">
-                    <input type="text" name="Price" class="form-control" ng-model="Price" ng-pattern="/^\d+$/" required>
+                    <input type="text" name="Price" class="form-control" ng-model="addCarFormData.Price" ng-pattern="/^\d+$/" required>
                     </input>
-                    <div ng-show="addCarForm.Price.$invalid && !addCarForm.Price.$pristine" class="text-danger">Price is required</div>
+                    <div ng-show="addCarForm.Price.$error.required && addCarForm.Price.$touched" class="text-danger">Price is required</div>
+                    <div ng-show="addCarForm.Price.$error.pattern && addCarForm.Price.$touched" class="text-danger">Price must be a number!</div>
                 </div>
             </div>
 
@@ -84,83 +83,88 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">Fuel Type</label>
                 <div class="col-sm-9">
-                    <select name="FuelType" class="form-control" ng-model="FuelType" required>
-                        <option value=" "></option>
+                    <select name="FuelType" class="form-control" ng-model="addCarFormData.FuelType" required>
+                        <option ng-disabled="true" ng-selected="true" value=" ">Select fuel type</option>
                         <option value="DIESEL">Diesel</option>
                         <option value="GASOLINE">Gasoline</option>
                     </select>
-                    <div ng-show="addCarForm.FuelType.$invalid && !addCarForm.FuelType.$pristine" class="text-danger">Fuel Type is required</div>
+                    <div ng-show="addCarForm.FuelType.$error.required && addCarForm.FuelType.$touched" class="text-danger">Fuel Type is required</div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Capacity</label>
                 <div class="col-sm-9">
-                    <input type="text" name="Capacity" class="form-control" ng-model="Capacity" ng-pattern="/^\d+$/" required>
+                    <input type="text" name="Capacity" class="form-control" ng-model="addCarFormData.Capacity" ng-pattern="/^\d+$/" required>
                     </input>
-                    <div ng-show="addCarForm.Capacity.$invalid && !addCarForm.Capacity.$pristine" class="text-danger">Capacity is required</div>
+                    <div ng-show="addCarForm.Capacity.$error.required && addCarForm.Capacity.$touched" class="text-danger">Capacity is required</div>
+                    <div ng-show="addCarForm.Capacity.$error.pattern && addCarForm.Capacity.$touched" class="text-danger">Capacity must be a number!</div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Weight</label>
                 <div class="col-sm-9">
-                    <input name="Weight" type="text" class="form-control" ng-model="Weight" ng-pattern="/^\d+$/" required>
+                    <input name="Weight" type="text" class="form-control" ng-model="addCarFormData.Weight" ng-pattern="/^\d+$/" required>
                     </input>
-                    <div ng-show="addCarForm.Weight.$invalid && !addCarForm.Weight.$pristine" class="text-danger">Weight is required</div>
+                    <div ng-show="addCarForm.Weight.$error.required && addCarForm.Weight.$touched" class="text-danger">Weight is required</div>
+                    <div ng-show="addCarForm.Weight.$error.pattern && addCarForm.Weight.$touched" class="text-danger">Capacity must be a number!</div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Height</label>
                 <div class="col-sm-9">
-                    <input type="text" name="Height" class="form-control" ng-model="Height" ng-pattern="/^\d+$/" required>
+                    <input type="text" name="Height" class="form-control" ng-model="addCarFormData.Height" ng-pattern="/^\d+$/" required>
                     </input>
-                    <div ng-show="addCarForm.Height.$invalid && !addCarForm.Height.$pristine" class="text-danger">Height is required</div>
+                    <div ng-show="addCarForm.Height.$error.required && addCarForm.Height.$touched" class="text-danger">Height is required</div>
+                    <div ng-show="addCarForm.Height.$error.pattern && addCarForm.Height.$touched" class="text-danger">Height must be a number!</div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Length</label>
                 <div class="col-sm-9">
-                    <input type="text" name="Length" class="form-control" ng-model="Length" ng-pattern="/^\d+$/" required>
+                    <input type="text" name="Length" class="form-control" ng-model="addCarFormData.Length" ng-pattern="/^\d+$/" required>
                     </input>
-                    <div ng-show="addCarForm.Length.$invalid && !addCarForm.Length.$pristine" class="text-danger">Length is required</div>
+                    <div ng-show="addCarForm.Length.$error.required && addCarForm.Length.$touched" class="text-danger">Length is required</div>
+                    <div ng-show="addCarForm.Length.$error.pattern && addCarForm.Length.$touched" class="text-danger">Capacity must be a number!</div>
                 </div>
             </div>
-        
-        <div class="form-group">
-            <label class="col-sm-3 control-label">Suspension</label>
-            <div class="col-sm-9">
-                <select name="Suspension" class="form-control" ng-model="Suspension" required>
-                    <option value=""></option>
-                    <option value="SWING_AXLE">SWING_AXLE</option>
-                    <option value="TRAILING_LINK">TRAILING_LINK</option>
-                    <option value="MAC_PHERSON">MAC_PHERSON</option>
-                </select>
-                <div ng-show="addCarForm.Suspension.$invalid && !addCarForm.Suspension.$pristine" class="text-danger">Suspension is required</div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Suspension</label>
+                <div class="col-sm-9">
+                    <select name="Suspension" class="form-control" ng-model="addCarFormData.Suspension" required>
+                        <option ng-disabled="true" ng-selected="true" value="">Select suspension</option>
+                        <option value="SWING_AXLE">SWING_AXLE</option>
+                        <option value="TRAILING_LINK">TRAILING_LINK</option>
+                        <option value="MAC_PHERSON">MAC_PHERSON</option>
+                    </select>
+                    <div ng-show="addCarForm.Suspension.$error.required && addCarForm.Suspension.$touched" class="text-danger">Suspension is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Tire Condition</label>
+                <div class="col-sm-9">
+                    <select class="form-control" name="TireCondition" ng-model="addCarFormData.TireCondition" required>
+                        <option ng-disabled="true" ng-selected="true" value="">Select tire condition</option>
+                        <option value="USED">USED</option>
+                        <option value="NEW">NEW</option>
+                        <option value="SLIGHTY_USED">SLIGHTY_USED</option>
+                    </select>
+                    <div ng-show="addCarForm.TireCondition.$error.required && addCarForm.TireCondition.$touched" class="text-danger">Tire Condition is required</div>
+
+                </div>
+                <span class="bg-danger"> {{validAddCarVar}} </span>
+
+
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">Tire Condition</label>
-            <div class="col-sm-9">
-                <select class="form-control" name="TireCondition" ng-model="TireCondition" required>
-                    <option value=""></option>
-                    <option value="USED">USED</option>
-                    <option value="NEW">NEW</option>
-                    <option value="SLIGHTY_USED">SLIGHTY_USED</option>
-                </select>
-                <div ng-show="addCarForm.TireCondition.$invalid && !addCarForm.TireCondition.$pristine" class="text-danger">Tire Condition is required</div>
-
-            </div>
-            <span class="bg-danger"> {{validAddCarVar}} </span>
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <button type="submit" class="btn btn-primary" ng-disabled="addCarForm.$invalid "> Add Car</button>
+            <a class="btn btn-primary" ng-click="reset(); AddCarVar=0">Close</a>
 
 
         </div>
-</div>
-<div class="col-sm-12 col-md-12 col-lg-12">
-    <button type="submit" class="btn btn-primary"> Add Car</button>
-    <a class="btn btn-primary" ng-click="AddCarVar=0">Close</a>
-
-</div>
 
 
-</form>
+    </form>
 
 </div>

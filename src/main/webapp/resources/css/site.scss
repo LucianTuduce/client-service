@@ -21,12 +21,12 @@
 }
 
 
-input.ng-invalid.ng-dirty {
+input.ng-invalid.ng-touched {
   border :1px solid red !important;
 }
 
 
-select.ng-invalid.ng-dirty {
+select.ng-invalid.ng-touched {
   border :1px solid red !important;
 }
 
