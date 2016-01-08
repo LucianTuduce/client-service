@@ -53,11 +53,9 @@ public class SearchRequestService implements Serializable {
 		}
 
 		if (StringUtils.isBlank(searchVehicleType)) {
-			searchRequest.setVehicleType(VehicleType
-					.getEnum(DefaultValues.VEHICLE_TYPE_DEFAULT.getDef()));
+			searchRequest.setVehicleType(VehicleType.getEnum(DefaultValues.VEHICLE_TYPE_DEFAULT.getDef()));
 		} else {
-			searchRequest
-					.setVehicleType(VehicleType.getEnum(searchVehicleType));
+			searchRequest.setVehicleType(VehicleType.getEnum(searchVehicleType));
 		}
 
 		if (StringUtils.isBlank(searchFin)) {
@@ -79,43 +77,37 @@ public class SearchRequestService implements Serializable {
 		}
 
 		if (searchMaxCapacity == 0) {
-			searchRequest.setMaxCapacity(DefaultValues.MAX_CAPACITY_DEFAULT
-					.getDefValue());
+			searchRequest.setMaxCapacity(DefaultValues.MAX_CAPACITY_DEFAULT.getDefValue());
 		} else {
 			searchRequest.setMaxCapacity(searchMaxCapacity);
 		}
 
 		if (searchMinCapacity == 0) {
-			searchRequest.setMinCapacity(DefaultValues.MIN_CAPACITY_DEFAULT
-					.getDefValue());
+			searchRequest.setMinCapacity(DefaultValues.MIN_CAPACITY_DEFAULT.getDefValue());
 		} else {
 			searchRequest.setMinCapacity(searchMinCapacity);
 		}
 
 		if (searchMinYear == 0) {
-			searchRequest.setMinYear(DefaultValues.MIN_YEAR_DEFAULT
-					.getDefValue());
+			searchRequest.setMinYear(DefaultValues.MIN_YEAR_DEFAULT.getDefValue());
 		} else {
 			searchRequest.setMinYear(searchMinYear);
 		}
 
 		if (searchMaxYear == 0) {
-			searchRequest.setMaxYear(DefaultValues.MAX_YEAR_DEFAULT
-					.getDefValue());
+			searchRequest.setMaxYear(DefaultValues.MAX_YEAR_DEFAULT.getDefValue());
 		} else {
 			searchRequest.setMaxYear(searchMaxYear);
 		}
 
 		if (searchMaxPrice == 0) {
-			searchRequest.setMaxPrice(DefaultValues.MAX_PRICE_DEFAULT
-					.getDefValue());
+			searchRequest.setMaxPrice(DefaultValues.MAX_PRICE_DEFAULT.getDefValue());
 		} else {
 			searchRequest.setMaxPrice(searchMaxPrice);
 		}
 
 		if (searchMinPrice == 0) {
-			searchRequest.setMinPrice(DefaultValues.MIN_PRICE_DEFAULT
-					.getDefValue());
+			searchRequest.setMinPrice(DefaultValues.MIN_PRICE_DEFAULT.getDefValue());
 		} else {
 			searchRequest.setMinPrice(searchMinPrice);
 		}
