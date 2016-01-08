@@ -12,26 +12,6 @@
                     <li class="list-group-item" data-ng-repeat="search in searches track by $index" data-ng-click="UpdateSearchFormHistory(search)"> {{search}}
                     </li>
                 </ul>
-
-                <!-- <table class="table">
-                <thead>
-                    <th>FIN</th>
-                    <th>Vehicle Type</th>
-                    <th>Model</th>
-                    <th>Fuel Type</th>
-                    <th>Location(Country)</th>
-                </thead>
-                <tbody>
-                    <tr data-ng-repeat="search in searches">
-                        <td>{{search.fin}}</td>
-                        <td>{{search.vehicleType}}</td>
-                        <td>{{search.model}}</td>
-                        <td>{{search.fuelType}}</td>
-                        <td>{{search.location}}</td>
-
-                    </tr>
-                </tbody>
-            </table> -->
             </div>
             <h3>Search Savings</h3>
             <div class="well table-responsive">
@@ -51,9 +31,6 @@
                 <div class="col-sm-12" ng-include="'extraInfo.html'">
                 </div>
             </div>
-            
-            
-            
             <table class="table">
                 <thead>
                     <th></th>
@@ -80,26 +57,20 @@
                     </tr>
                 </tbody>
             </table>
-            
-            
+
             <div class="pagination pull-right">
-                            <ul>
-                                <li>
-                                    <a href ng-click="prevPage()">« Prev</a>
-                                </li>
-                            
-                                <li >
-                                    <a href >{{currentPage}}</a>
-                                </li>
-                             
-                                <li>
-                                    <a href ng-click="nextPage()">Next »</a>
-                                </li>
-                            </ul>
-                        </div>
-            
-            
-            
+                <ul class="pagination">
+                    <li>
+                        <a href ng-click="prevPage()">« Prev</a>
+                    </li>
+                    <li>
+                        <a href>{{currentPage}}</a>
+                    </li>
+                    <li>
+                        <a href ng-click="nextPage()">Next »</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

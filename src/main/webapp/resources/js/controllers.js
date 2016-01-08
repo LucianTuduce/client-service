@@ -245,7 +245,7 @@ angular.module('UVSClientApp')
 
 
         $scope.search = function () {
-            $rootScope.$emit("ResetPageNumber", {});
+            $rootScope.$emit("ResetPageNumber", {}); //reset page number to 1 before request is sent to server
             CarSearchService.CarSearch($scope.FIN, $scope.model, $scope.FuelType, $scope.CapacityMin, $scope.CapacityMax, $scope.YearMin, $scope.YearMax, $scope.PriceMin, $scope.PriceMax, Scopes.get('HeaderController').Country, $scope.VehicleType, function (response, status, headers, config) {
                 if (status == 200) {
                     console.log("Car Search Result success");
