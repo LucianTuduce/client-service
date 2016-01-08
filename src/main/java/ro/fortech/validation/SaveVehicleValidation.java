@@ -71,7 +71,7 @@ public class SaveVehicleValidation {
 
 	public boolean validationFINSaveVehicle(String value) {
 
-		Boolean unicity = true;
+		boolean unicity = true;
 
 		for (Vehicle vehicle : cache.getVehicles()) {
 			if (vehicle.getFin().equals(value)) {
@@ -80,5 +80,4 @@ public class SaveVehicleValidation {
 		}
 		return unicity;
 	}
-
 }

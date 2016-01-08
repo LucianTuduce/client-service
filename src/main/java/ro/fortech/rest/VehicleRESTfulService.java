@@ -181,7 +181,7 @@ public class VehicleRESTfulService {
 		Boolean validationVehicle = validation.validationForSaveVehicle(vehicle);
 		if(accountValidation.isUserValid(accountToken)){
 			if(validationVehicle){
-				Boolean validationFIN = validation.validationFINSaveVehicle(vehicle.getVehicle().getFin());
+				boolean validationFIN = validation.validationFINSaveVehicle(vehicle.getVehicle().getFin());
 				if(validationFIN){
 					fakeService.saveVehicleEnhanced(vehicle);
 					fakeService.saveVehicle(vehicle.getVehicle());
