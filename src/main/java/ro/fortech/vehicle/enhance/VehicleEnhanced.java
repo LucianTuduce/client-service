@@ -67,7 +67,5 @@ public class VehicleEnhanced {
 	}
 	public void setVehicle(Vehicle vehicle) {
 		this.vehicle = vehicle;
-	}
-	
-	
+	}	
 }
