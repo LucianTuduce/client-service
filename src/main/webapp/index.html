@@ -16,19 +16,19 @@
             <h3>Search Savings</h3>
             <div class="well table-responsive">
                 <ul class="list-group" ng-init="GetSavedSearch()">
-                    <li class="list-group-item" data-ng-repeat="savedSearch in savedSearchInfos track by $index" data-ng-click="UpdateSearchFormSaved(savedSearch)">Name:{{savedSearch.name}}; FIN:{{savedSearch.request.fin}}; Vehicle Type:{{savedSearch.request.vehicleType}}; Model:{{savedSearch.request.model}}; Fuel Type:{{savedSearch.request.fuelType}}; Location:{{savedSearch.request.location}}
+                    <li class="list-group-item" data-ng-repeat="savedSearch in savedSearchInfos track by $index" data-ng-click="UpdateSearchFormSaved(savedSearch)">Name:{{savedSearch.name}};
                     </li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="col-sm-8">
-        <div class="col-sm-12" ng-include="'addCar.html'">
+        <div class="col-xs-12 col-sm-12 col-md-12" ng-include="'addCar.html'">
         </div>
-        <div class="table-responsive col-sm-12" ng-controller="CarResultController">
+        <div class="table-responsive col-xs-12 col-sm-12 col-md-12" ng-controller="CarResultController">
             <h3>Search results</h3>
             <div>
-                <div class="col-sm-12" ng-include="'extraInfo.html'">
+                <div class="col-xs-12 col-sm-12 col-md-12" ng-include="'extraInfo.html'">
                 </div>
             </div>
             <table class="table">

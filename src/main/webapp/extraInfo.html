@@ -1,52 +1,97 @@
 <div ng-controller="CarExtraInfoController">
-    <div ng-show="ExtraInfo===fin" class="well">
+    <div ng-show="ExtraInfo===fin" class="well table-responsive"> 
+       
         <h4>Vehicle Details</h4>
-        
-        <strong><div class="col-xs-6 col-sm-6 col-md-3">
-            <div>FIN</div>
-            <div>Owner</div>
-            <div>Dealer</div>
-            <div>Vehicle Type</div>
-            <div>Model</div>
-            <div>Body Weight</div>
-            <div>Body Height</div>
-            <div>Body Length</div>
-        </div></strong>
 
-        <div class="col-xs-6 col-sm-6 col-md-3">
-            <div>{{fin}}</div>
-            <div>{{owner}}</div>
-            <div>{{dealer}}</div>
-            <div>{{vehicleType}}</div>
-            <div>{{model}}</div>
-            <div>{{bodyWeight}}</div>
-            <div>{{bodyHeight}}</div>
-            <div>{{bodyLength}}</div>
+        <div class="col-xs-6 col-sm-6 form-horizontal">
+            <div class="form-group ">
+                <label class="col-sm-5 font-bold">FIN</label>
+                <label class="col-sm-7 font-bold-light">{{fin}}</label>
+            </div>
+
+            <div class="form-group ">
+                <label class="col-sm-5 font-bold">Owner</label>
+                <label class="col-sm-7 font-bold-light">{{owner}}
+                </label>
+            </div>
+
+            <div class="form-group ">
+                <label class="col-sm-5 font-bold">Dealer</label>
+                <label class="col-sm-7 font-bold-light">{{dealer}}
+                </label>
+            </div>
+
+            <div class="form-group ">
+                <label class="col-sm-5 font-bold">Vehicle Type</label>
+                <label class="col-sm-7 font-bold-light">{{vehicleType}}
+                </label>
+            </div>
+
+            <div class="form-group ">
+                <label class="col-sm-5 font-bold">Model</label>
+                <label class="col-sm-7 font-bold-light">{{model}}
+                </label>
+            </div>
+
+            <div class="form-group ">
+                <label class="col-sm-5 font-bold">Body Weight</label>
+                <label class="col-sm-7 font-bold-light">{{bodyWeight}}
+                </label>
+            </div>
+
+            <div class="form-group ">
+                <label class="col-sm-5 font-bold">Body Height</label>
+                <label class="col-sm-5 font-bold-light">{{bodyHeight}}
+                </label>
+            </div>
+
+            <div class="form-group ">
+                <label class="col-sm-5 font-bold">Body Length</label>
+                <label class="col-sm-7 font-bold-light">{{bodyLength}}
+                </label>
+            </div>
         </div>
 
-       <strong> <div class="col-xs-6 col-sm-6 col-md-3">
-            <div>Suspension</div>
-            <div>Tire Condition</div>
-            <div>Fuel Type</div>
-            <div>Capacity</div>
-            <div>Year</div>
-            <div>Location(Country)</div>
-            <div>Price</div>
-            <div></div>
-        </div></strong>
 
-        <div class="col-xs-6 col-sm-6 col-md-3">
-            <div>{{suspensionType}}</div>
-            <div>{{tireCondition}}</div>
-            <div>{{fuelType}}</div>
-            <div>{{engineCapacity}}</div>
-            <div>{{year}}</div>
-            <div>{{location}}</div>
-            <div>{{price}}</div>
-            <div></div>
-        </div >
-        <div class="col-xs-12 ">
-        <a class="btn btn-primary" ng-click="ExtraInfo='0'">Close</a>
+        <div class="col-xs-6 col-sm-6 form-horizontal">
+            
+            <div class="form-group">
+                <label class="col-sm-5 font-bold">Suspension</label>
+                <label class="col-sm-7 font-bold-light">{{suspensionType}}</label>
             </div>
+            <div class="form-group ">
+                <label class="col-sm-5 font-bold">Tire Condition</label>
+                <label class="col-sm-7 font-bold-light">{{tireCondition}}
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-5 font-bold">Capacity</label>
+                <label class="col-sm-7 font-bold-light">{{engineCapacity}}
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-5 font-bold">Year</label>
+                <label class="col-sm-7 font-bold-light">{{year}}
+                </label>
+            </div>
+            <div class="form-group ">
+                <label class="col-sm-5 font-bold">Location (Country)</label>
+                <label class="col-sm-7 font-bold-light">{{location}}
+                </label>
+            </div>
+            <div class="form-group ">
+                <label class="col-sm-5 font-bold">Price</label>
+                <label class="col-sm-7 font-bold-light">{{price}} &euro;
+                </label>
+            </div>
+                                   
+            <div></div>
+            <div></div>
+        </div>
+
+
+        <div class="col-xs-12 ">
+            <a class="btn btn-primary" ng-click="ExtraInfo='0'">Close</a>
+        </div>
     </div>
 </div>

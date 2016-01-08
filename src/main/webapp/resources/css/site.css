@@ -11,16 +11,27 @@
 @media (max-width: 767px) {
   .navbar-nav > li > a {
     padding-top: 5px; } }
+.form-horizontal .font-bold {
+  text-align: left;
+  font-weight: bold; }
+
+.form-horizontal .font-bold-light {
+  text-align: left;
+  font-weight: normal; }
+
 input.ng-invalid.ng-touched {
   border: 1px solid red !important; }
 
 select.ng-invalid.ng-touched {
   border: 1px solid red !important; }
 
-/*  Bootstrap Clearfix */
-/*  Tablet  */
-@media (min-width: 767px) {
-  /* Column clear fix */
+/*
+//  Bootstrap Clearfix 
+
+//  Tablet  
+@media (min-width:767px){
+
+ 
   .col-lg-1:nth-child(12n+1),
   .col-lg-2:nth-child(6n+1),
   .col-lg-3:nth-child(4n+1),
@@ -30,18 +41,23 @@ select.ng-invalid.ng-touched {
   .col-md-2:nth-child(6n+1),
   .col-md-3:nth-child(4n+1),
   .col-md-4:nth-child(3n+1),
-  .col-md-6:nth-child(2n+1) {
-    clear: none; }
-
+  .col-md-6:nth-child(2n+1){
+    clear: none;
+  }
   .col-sm-1:nth-child(12n+1),
   .col-sm-2:nth-child(6n+1),
   .col-sm-3:nth-child(4n+1),
   .col-sm-4:nth-child(3n+1),
-  .col-sm-6:nth-child(2n+1) {
-    clear: left; } }
-/*  Medium Desktop  */
-@media (min-width: 992px) {
-  /* Column clear fix */
+  .col-sm-6:nth-child(2n+1){
+    clear: left;
+  }
+}
+
+
+//  
+@media (min-width:992px){
+
+  
   .col-lg-1:nth-child(12n+1),
   .col-lg-2:nth-child(6n+1),
   .col-lg-3:nth-child(4n+1),
@@ -51,18 +67,23 @@ select.ng-invalid.ng-touched {
   .col-sm-2:nth-child(6n+1),
   .col-sm-3:nth-child(4n+1),
   .col-sm-4:nth-child(3n+1),
-  .col-sm-6:nth-child(2n+1) {
-    clear: none; }
-
+  .col-sm-6:nth-child(2n+1){
+    clear: none;
+  }
   .col-md-1:nth-child(12n+1),
   .col-md-2:nth-child(6n+1),
   .col-md-3:nth-child(4n+1),
   .col-md-4:nth-child(3n+1),
-  .col-md-6:nth-child(2n+1) {
-    clear: left; } }
-/*  Large Desktop  */
-@media (min-width: 1200px) {
-  /* Column clear fix */
+  .col-md-6:nth-child(2n+1){
+    clear: left;
+  }
+}
+
+
+//  Large Desktop  
+@media (min-width:1200px){
+
+  
   .col-md-1:nth-child(12n+1),
   .col-md-2:nth-child(6n+1),
   .col-md-3:nth-child(4n+1),
@@ -72,15 +93,17 @@ select.ng-invalid.ng-touched {
   .col-sm-2:nth-child(6n+1),
   .col-sm-3:nth-child(4n+1),
   .col-sm-4:nth-child(3n+1),
-  .col-sm-6:nth-child(2n+1) {
-    clear: none; }
-
+  .col-sm-6:nth-child(2n+1){
+    clear: none;
+  }
   .col-lg-1:nth-child(12n+1),
   .col-lg-2:nth-child(6n+1),
   .col-lg-3:nth-child(4n+1),
   .col-lg-4:nth-child(3n+1),
-  .col-lg-6:nth-child(2n+1) {
-    clear: left; } }
+  .col-lg-6:nth-child(2n+1){
+    clear: left;
+  }
+}   */
 /* Text align  for screen sizes*/
 @media (max-width: 767px) {
   .text-left-xs {
